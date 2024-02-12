@@ -1,0 +1,3 @@
+Toyota,,hilux,,blanco,,gasolina,,20000
+Peugeot,,308,,blanco,,diesel,,120000
+Yamaha,,tenere 700 wr,,azul,,gasolina,,40000

@@ -1,0 +1,11 @@
+Toyota,,hilux,,blanco,,gasolina,,20000
+Peugeot,,308,,blanco,,diesel,,120000
+Yamaha,,tenere 700 wr,,azul,,gasolina,,40000
+SUBARU,,IMPREZA,,AZUL,,GASOLINA,,123456
+Renault,,R25,,AZUL,,GASOLINA,,12345
+CITROEN,,C5,,ROJO,,GASOLINA,,123
+a,,a,,a,,a,,a
+b,,b,,b,,b,,b
+as,,as,,as,,as,,as
+11,,11,,11,,11,,11
+x,,x,,x,,x,,x
