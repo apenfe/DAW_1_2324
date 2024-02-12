@@ -4,6 +4,7 @@ public class Palabra{
 	
 	private String word;
 	private int nivel;
+	private char[] letras = new char[0];
 	
 	public Palabra(String word, String nivel) {
 		
@@ -17,7 +18,15 @@ public class Palabra{
 			this.nivel=3;
 		}else {
 			this.nivel=0;
-		}	
+		}
+		
+		letras = new char[word.length()];
+		
+		for (int i = 0; i < word.length(); i++) {
+			
+			letras[i]='_';
+			
+		}
 		
 	}
 
@@ -36,5 +45,15 @@ public class Palabra{
 	public void setNivel(int nivel) {
 		this.nivel = nivel;
 	}
+
+	public char[] getLetras() {
+		return letras;
+	}
+
+	public void setLetras(char[] letras) {
+		this.letras = letras;
+	}
+	
+	
 		
 }

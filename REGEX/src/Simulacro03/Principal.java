@@ -1,8 +1,5 @@
 package Simulacro03;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Scanner;
 
 /*
@@ -46,39 +43,24 @@ public class Principal{
 				do {
 					
 					System.out.print("Selecciona dificultad (facil, normal y dificil): ");
-					dificultad = teclado.nextLine().trim();
+					dificultad = teclado.nextLine().trim().toLowerCase();
 					
-					if(!dificultad.equalsIgnoreCase("facil")||!dificultad.equalsIgnoreCase("normal")||!dificultad.equalsIgnoreCase("dificil")) {
-						System.out.println("Seleccione una opcion valida.");
-					}else {
+					if(dificultad.equals("facil")||dificultad.equals("normal")||dificultad.equals("dificil")) {
+						currentGame = new Ahorcado(nick,dificultad);
 						break;
+					}else {
+						
+						System.out.println("Seleccione una opcion valida.");
+			
 					}
 					
 				}while(true);
 				
-				currentGame = new Ahorcado(nick,dificultad);
-				
-				do {
-					
-					currentGame.play();
-					
-				}while(true);
-				
-				/*
- * El programa mostrará los "huecos" de cada letra y pedirá al usuario que introduzca una letra, mostrando 
- * además, los intentos disponibles (5 al inicio). Después de que el usuario introduzca una letra, actualizará 
- * los huecos revelando las letras si ha acertado. El programa podrá considerar que el usuario ha ganado si:
- * 
- * Acierta todas las letras y queda completamente descubierta
- * O después de cada intento, se le pregunta al usuario si quiere intentar acertar la palabra completa, pidiendo 
- * al usuario que introduzca la palabra completa. Esta opción gastará un intento.
- * Una vez finalizada la partida, el programa deberán guardar en un fichero ranking.txt el resultado de la partida, 
- * guardando en cada línea nombre de usuario, la palabra, la dificultad, intentos fallidos y la fecha.
-				 */
+				currentGame.play();
 				
 			}else if(opcion == 2) {
 				
-				ranking();
+				currentGame.ranking();
 				
 			}else if(opcion == 0) {
 				
@@ -114,59 +96,6 @@ public class Principal{
 			
 		} while (true);
 		
-	}
-	
-	public static void ranking() {
-		
-		ArrayList<Ranking> jugadas = new ArrayList<Ranking>();
-		
-		try {
-			
-			File archivo = new File(".\\src\\Simulacro03\\ranking.txt");
-			Scanner lector = new Scanner(archivo);
-			
-			while(lector.hasNextLine()) {
-				
-				String[] linea = lector.nextLine().split("#");
-				jugadas.add(new Ranking(linea));
-				
-			}
-			
-			lector.close();
-			
-		} catch (Exception e) {
-			
-			System.out.println("Error al leer fichero.");
-			
-		}
-		
-		Ranking[] ranking = new Ranking[jugadas.size()];
-		
-		for (int i = 0; i < ranking.length; i++) {
-
-			ranking[i] = jugadas.get(i);
-
-		}
-
-		for (int i = 0; i < ranking.length; i++) {
-
-			for (int j = 0; j < ranking.length-i; j++) {
-				
-				if() {
-					
-				}
-
-			}
-			
-		}
-		
-		/*
-		 *  los mostrará, ordenando primero por los más difíciles 
-		 * a los más fáciles, y dentro de cada dificultad ordenando por menor cantidad de intentos fallidos, y dentro la cantidad 
-		 * de fallos, ordenados por fecha de más antiguo a más reciente.
-		 */
-		
-				
 	}
 		
 }
