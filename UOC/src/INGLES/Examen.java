@@ -5,8 +5,6 @@ import java.util.Scanner;
 public class Examen{
 	
 	private String nombre;
-	private int puntos;
-	private final int APROBADO = 160;
 	private double[] porcentajes = new double[5];
 	private Scanner teclado = new Scanner(System.in);
 	
@@ -19,8 +17,8 @@ public class Examen{
 	
 	public void calculoSpeaking() {
 		
+		System.out.println();
 		int puntos = pedirInt("Nota del Speaking: ");
-		this.puntos+=puntos;
 		this.porcentajes[0]=((double)puntos/60)*100;
 		System.out.println("Porcentaje: "+porcentajes[0]);
 		if(puntos>=36) {
@@ -38,7 +36,6 @@ public class Examen{
 	public void calculoWriting() {
 		
 		int puntos = pedirWriting();
-		this.puntos+=puntos;
 		this.porcentajes[1]=((double)puntos/40)*100;
 		System.out.println("Porcentaje: "+porcentajes[1]);
 		if(puntos>=24) {
@@ -55,6 +52,7 @@ public class Examen{
 	
 	private int pedirWriting() {
 		
+		System.out.println();
 		System.out.println("WRITING:");
 		
 		int puntos=0;
@@ -69,8 +67,6 @@ public class Examen{
 	public void calculoListening() {
 		
 		int puntos = pedirListening();
-		
-		this.puntos+=puntos;
 		
 		this.porcentajes[2]=((double)puntos/30)*100;
 		System.out.println("Porcentaje: "+porcentajes[2]);
@@ -88,6 +84,7 @@ public class Examen{
 	
 	private int pedirListening() {
 		
+		System.out.println();
 		System.out.println("LISTENING:");
 		int puntos=0;
 		
@@ -103,7 +100,7 @@ public class Examen{
 	public void calculoReading() {
 		
 		int puntos = pedirReading();
-		this.puntos+=puntos;
+
 		this.porcentajes[3]=((double)puntos/42)*100;
 		System.out.println("Porcentaje: "+porcentajes[3]);
 		if(puntos>=24) {
@@ -120,6 +117,7 @@ public class Examen{
 	
 	private int pedirReading() {
 		
+		System.out.println();
 		System.out.println("READING:");
 		
 		int[] puntos= new int[4];
@@ -143,7 +141,7 @@ public class Examen{
 	public void calculoUseOfEnglish() {
 		
 		int puntos = pedirUseOfEnglish();
-		this.puntos+=puntos;
+	
 		this.porcentajes[4]=((double)puntos/28)*100;
 		System.out.println("Porcentaje: "+porcentajes[4]);
 		if(puntos>=18) {
@@ -160,6 +158,7 @@ public class Examen{
 	
 	private int pedirUseOfEnglish() {
 		
+		System.out.println();
 		System.out.println("USE OF ENGLISH:");
 
 		
