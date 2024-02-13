@@ -4,40 +4,21 @@ import java.util.Arrays;
 import java.util.List;
 
 public class EjercicioArrays {
+	
+	public static final int NUM_ALUMNOS = 40;
     
     public static void main(String[] args) {
-        int numAlumnos = 40;
+    	
         //vector con las notas generadas
-        Integer[] control = new Integer[numAlumnos];
-        int maxNota = 0;
-        int minNota = 0;
+        Integer[] control = crearNotasAleatorias(NUM_ALUMNOS);
         int indMaxNota, indMinNota;
-        int postEval;
-        //Genera notas random entre 1 y 10
-        for(int i=0; i < control.length; i++){
-            control[i] = (int)(Math.random()*11);
-        }
-        //buscamos al mayor
-        postEval = 11;
-        for(int i=0; i<control.length; i++){
-            int preEval = control[i];
-            if (preEval < postEval){
-                minNota = preEval;
-                postEval = control[i];
-            }
-        }
-        //buscamos al menor
-        postEval = 0;
-        for(int i=0; i<control.length; i++){
-            int preEval = control[i];
-            if (preEval > postEval){
-                maxNota = preEval;
-                postEval = control[i];
-            }
-        }
+        
+        int minNota = buscarMaxMin(true,11,control);
+        int maxNota = buscarMaxMin(false,0,control);
+        
         //creamos una lista de los alumnos de la clase
-        int[] listaClase = new int[numAlumnos];
-        for (int i = 0; i < numAlumnos; i++){
+        int[] listaClase = new int[NUM_ALUMNOS];
+        for (int i = 0; i < NUM_ALUMNOS; i++){
             listaClase[i] = i+1;
         }
         //Empezamos el uso de listas para facilitar la tarea de índices.
@@ -54,12 +35,10 @@ public class EjercicioArrays {
         System.out.println("Array de Notas :" + notas);
         
         //creamos el array de notas "practicas"
-        int[] practicas = new int[numAlumnos];
-        for(int i=0; i < practicas.length; i++){
-            practicas[i] = (int)(Math.random()*11);
-        }
+        Integer[] practicas = crearNotasAleatorias(NUM_ALUMNOS);
+        
         //Creamos el vector calificaciones
-        float[] calificaciones = new float[numAlumnos];
+        float[] calificaciones = new float[NUM_ALUMNOS];
         for(int i = 0; i<control.length; i++){
             calificaciones[i] = 
                     (((float) control[i] 
@@ -75,15 +54,15 @@ public class EjercicioArrays {
       
         for (int i=0; i<10; i++){
             float count = 0;
-            float sum = 0;
+         
             for (int j=0; j<control.length; j++){
                 if ((i < calificaciones[j]) && ((i+1) >= calificaciones[j] )) {
-                    sum += calificaciones[j];
+             
                     count += 1;
                 }
             }
             if (count != 0){
-                estadistica[i] = ( (float)count / numAlumnos);
+                estadistica[i] = ( (float)count / NUM_ALUMNOS);
             }else{ estadistica[i] = 0;}
             double sol = (Math.round(estadistica[i] * 10000.0)) / 100.0;
             System.out.println("Estadística nota tramo <=" 
@@ -91,11 +70,11 @@ public class EjercicioArrays {
                 + sol + "%");
         }
         //Aprobados y suspensos
-        int[] aprobados = new int[numAlumnos];
-        int[] suspensos = new int[numAlumnos];
+        int[] aprobados = new int[NUM_ALUMNOS];
+        int[] suspensos = new int[NUM_ALUMNOS];
         int countAprobados = 0;
         int countSuspensos = 0;
-        for (int i=0; i<numAlumnos; i++){
+        for (int i=0; i<NUM_ALUMNOS; i++){
             if (calificaciones[i] < 5){
                 aprobados[i] = i;
                 countAprobados += 1;
@@ -147,4 +126,35 @@ public class EjercicioArrays {
         calif[3] = 6;
         System.out.println("Nota nueva   alumno nº4: " + calif[3]);
     }
+    
+	public static Integer[] crearNotasAleatorias(int num) {
+
+		Integer[] salida = new Integer[num];
+		
+		for (int i = 0; i < salida.length; i++) {
+			
+			salida[i] = (int) (Math.random() * 11);
+			
+		}
+		
+		return salida;
+
+	}
+	
+	public static int buscarMaxMin(boolean maximo, int postEval, Integer[] control) {
+	    
+		int nota=0;
+		
+        for(int i=0; i<control.length; i++){
+            int preEval = control[i];
+            if ((preEval < postEval)&&maximo||(preEval > postEval)&&!maximo){
+                nota = preEval;
+                postEval = control[i];
+            }
+        }
+        
+        return nota;
+
+    }
+	
 }
