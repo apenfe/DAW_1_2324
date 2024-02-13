@@ -17,7 +17,7 @@ public class Main{
 	public static void main(String[] args) {
 		
 		String texto = "Este se trata de un texto largo para borrar todos los verbos en infinito como comer, beber y dormir";
-		texto= texto.replaceAll("[A-Za-z]+([aAeEiI][rR])\\b", "[verbo] ");
+		texto= texto.replaceAll("[A-Za-z]+(AR|ER|IR|ar|er|ir)[ \\.,]", "[verbo] ");
 		
 		System.out.println("El texto es finalmente: "+texto);
 		String nombre =""+ System.currentTimeMillis();
