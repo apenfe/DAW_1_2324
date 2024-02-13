@@ -1,19 +1,12 @@
 package Simulacro03;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /*
  * Simulacro 3 Juego ahorcado
- * 
- * Consiste en crear un juego del ahorcado en el que se acceda a un fichero de texto (palabras.txt) 
- * con palabras y el programa seleccione una de ellas aleatoriamente para mostrar por pantalla tantos 
- * caracteres "_" como carateres tenga la palabra. El programa irá pidiendo al usuario que introduzca 
- * caracteres de forma individual para intentar adivinar la palabra. Si acumula 5 intentos fallidos, 
- * el usuario perderá la partida.
- * 
- * Al comprobar si la letra está en la palabra, deberá ignorar mayúsculas y minúsculas.
  * 
  * Adicionales: En cada intento de resolver, que muestre un muñequito formado por caracteres mostrando la cabeza y extremidades 
  * del muñeco dependiendo de la cantidad de fallos cometidos.´
@@ -38,81 +31,118 @@ public class Ahorcado{
 		this.dificultad=dificultad;
 		
 		leerPalabras(dificultad);
-		System.out.println("Palabras leidas");
 		
 		this.palabra= palabraRandom();
-		System.out.println("Palabra aleatoria ok");
 		
 	}
 	
 	public void play() {
 		
-		/*
-* El programa mostrará los "huecos" de cada letra y pedirá al usuario que introduzca una letra, mostrando 
-* además, los intentos disponibles (5 al inicio). Después de que el usuario introduzca una letra, actualizará 
-* los huecos revelando las letras si ha acertado. El programa podrá considerar que el usuario ha ganado si:
-* 
-* Acierta todas las letras y queda completamente descubierta
-* O después de cada intento, se le pregunta al usuario si quiere intentar acertar la palabra completa, pidiendo 
-* al usuario que introduzca la palabra completa. Esta opción gastará un intento.
-* Una vez finalizada la partida, el programa deberán guardar en un fichero ranking.txt el resultado de la partida, 
-* guardando en cada línea nombre de usuario, la palabra, la dificultad, intentos fallidos y la fecha.
-		 */
-		
-		System.out.println("La palabra a adivinar es: ");
+		System.out.println("\nLa palabra a adivinar es: ");
 		int intentos = 5;
 		
 		do {
+			
+			boolean error=true;
 	
-			for (int i = 0; i < palabra.getWord().length(); i++) {
+			mostrarHuecos(intentos);
+			
+			if(intentos==0) {
 				
-				System.out.print(palabra.getLetras()[i]+" ");
+				System.out.println("\nFin del juego, se han acabdo los intento");
+				break;
+				
+			}else if(intentos>0 && win()) {
+				
+				System.out.println("\n¡Ha ganado el juego!");
+				break;
 				
 			}
 			
 			System.out.println();
-			System.out.println("Intentos: "+intentos);
-			System.out.print("Inserte una letra: ");
+			System.out.println("\nIntentos: "+intentos);
+			System.out.print("\nInserte una letra: ");
 			String letra = teclado.nextLine().trim().toLowerCase();
 			
 			for (int i = 0; i < palabra.getWord().length(); i++) {
 				
 				if((""+palabra.getWord().charAt(i)).equals(letra) && palabra.getLetras()[i]=='_') {
-					//palabra.setLetras()[i]='_';
-					//intentos++;
+					palabra.setLetra(i);
+					error=false;
+					System.out.println("\nMuy bien, letra correcta.");
+					mostrarHuecos(intentos);
 				}
 				
 			}
 			
-			intentos--;
+			if(error) {
+				System.out.println("\nMal, letra incorrecta.");
+				intentos--;
+				error=false;
+			}else {
+				
+				System.out.print("\n¿Desea acertar la palabra entera? (s - si)");
+				String respuesta = teclado.nextLine().trim().toLowerCase();
+				
+				if(respuesta.equalsIgnoreCase("s")) {
+					
+					System.out.print("\nIntroduzca la palabra entera: ");
+					String palabraEntera = teclado.nextLine().trim().toLowerCase();
+					
+					if(palabraEntera.equals(palabra.getWord())) {
+						System.out.println("\n¡Ha ganado el juego!");
+						break;
+					}else {
+						intentos--;
+						error=false;
+					}
+					
+				}	
+				
+			}
 			
 		}while(true);
+		
+		System.out.println("\nLa palabra era: "+palabra.getWord());
+		
+		save(5-intentos);
+		
+	}
+	
+	private boolean win() {
+		
+		for (int i = 0; i < palabra.getWord().length(); i++) {
+			
+			if(palabra.getWord().charAt(i)!=palabra.getLetras()[i]) {
+				return false;
+			}
+			
+		}
+		
+		return true;
+		
+	}
+	
+	private void mostrarHuecos(int intentos) {
+		
+		dibujo(intentos);
+		
+		for (int i = 0; i < palabra.getWord().length(); i++) {
+			
+			System.out.print(palabra.getLetras()[i]+" ");
+			
+		}
 		
 	}
 	
 	private Palabra palabraRandom() {
-		
-		do {
-			
-			float inicial = System.currentTimeMillis();
-			int indice =(int)(inicial-(inicial-1));
-			
-			for (int i = 0; i < palabras.length; i++) {
-				
-				if(i==indice) {
-					
-					return palabras[i];
-					
-				}
-				
-			}
-			
-			return palabras[0];
-			
-		}while(true);
-		
+
+		long tiempoActual = System.currentTimeMillis();
+		int indice = (int) (tiempoActual % palabras.length);
+		return palabras[indice];
+
 	}
-	
+
 	private void leerPalabras(String dificultad) {
 		
 		ArrayList<Palabra> entradas = new ArrayList<Palabra>();
@@ -182,23 +212,138 @@ public class Ahorcado{
 
 		}
 
-		for (int i = 0; i < ranking.length; i++) {
-
-			for (int j = 0; j < ranking.length-i; j++) {
-				
-				
-
-			}
-			
-		}
+		ranking=ordenar(ranking,"fecha");
+		ranking=ordenar(ranking,"intentos");
+		ranking=ordenar(ranking,"dificultad");
+		mostrarRanking(ranking);
 		
 		/*
-		 *  los mostrará, ordenando primero por los más difíciles 
-		 * a los más fáciles, y dentro de cada dificultad ordenando por menor cantidad de intentos fallidos, y dentro la cantidad 
-		 * de fallos, ordenados por fecha de más antiguo a más reciente.
+		 *  y dentro de cada dificultad ordenando por menor cantidad de intentos fallidos,
+		 *   ordenados por fecha de más antiguo a más reciente.
 		 */
 		
 				
 	}
+	
+	private Ranking[] ordenar(Ranking[] lectura, String modo) {
+		
+		for (int i = 1; i < lectura.length; i++) {
+			
+			for (int j = 0; j < lectura.length-i; j++) {
+				
+				if((lectura[j].getDificultad()<=lectura[j+1].getDificultad())&&modo.equals("dificultad")||
+						(lectura[j].getIntentosFallidos()<=lectura[j+1].getIntentosFallidos())&&modo.equals("intentos")||
+						(lectura[j].getFecha()>lectura[j+1].getFecha())&&modo.equals("fecha")) {
+					
+					Ranking aux = lectura[j];
+					lectura[j]=lectura[j+1];
+					lectura[j+1]=aux;
+					
+				}
+				
+			}
+			
+		}
+		
+		return lectura;
+		
+	}
+	
+	private void mostrarRanking(Ranking[] lectura) {
+		
+		System.out.println("\nRanking --->");
+		System.out.println();
+		
+		for (int i = 0; i < lectura.length; i++) {
+			
+			System.out.println(lectura[i].toString());
+			
+		}
+		
+	}
+	
+	private void save(int intentos) {
+		
+		long milis = System.currentTimeMillis();
+		
+		try {
+			
+			FileWriter escritor = new FileWriter(".\\src\\Simulacro03\\ranking.txt",true);
+			
+			escritor.write("\n"+usuario+"#"+palabra.getWord()+"#"+dificultad+"#"+intentos+"#"+milis);
+			escritor.close();
+			System.out.println("\nPartida guardada.");
+			
+		} catch (Exception e) {
+			
+			System.err.println("\nERROR AL GUARDAR PARTIDA");
+			
+		}
+		
+	}
+	
+	private void dibujo(int intentos) {
+		
+		if(intentos==5) {
+			
+			System.out.println("\n _________");
+			System.out.println(" |        ");
+			System.out.println(" |        ");
+			System.out.println(" |       ");
+			System.out.println(" |       ");
+			System.out.println("_|_");
+			
+		}else if(intentos==4) {
+			
+			System.out.println("\n _________");
+			System.out.println(" |        |");
+			System.out.println(" |        ");
+			System.out.println(" |       ");
+			System.out.println(" |       ");
+			System.out.println("_|_");
+			
+		}else if(intentos==3) {
+			
+			System.out.println("\n _________");
+			System.out.println(" |        |");
+			System.out.println(" |        O");
+			System.out.println(" |    ");
+			System.out.println(" |      ");
+			System.out.println("_|_");
+			
+		}else if(intentos==2) {
+			
+			System.out.println("\n _________");
+			System.out.println(" |        |");
+			System.out.println(" |        O");
+			System.out.println(" |       / \\");
+			System.out.println(" |      ");
+			System.out.println("_|_");
+			
+		}else if(intentos==1) {
+			
+			System.out.println("\n _________");
+			System.out.println(" |        |");
+			System.out.println(" |        O");
+			System.out.println(" |       /|\\");
+			System.out.println(" |        ");
+			System.out.println("_|_");
+			
+		}else if(intentos==0) {
+			
+			System.out.println("\n _________");
+			System.out.println(" |        |");
+			System.out.println(" |        O");
+			System.out.println(" |       /|\\");
+			System.out.println(" |       / \\");
+			System.out.println("_|_");
+
+		}
+		
+		System.out.println();
+		
+	}
+	
+	
 		
 }

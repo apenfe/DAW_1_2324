@@ -50,8 +50,8 @@ public class Palabra{
 		return letras;
 	}
 
-	public void setLetras(char[] letras) {
-		this.letras = letras;
+	public void setLetra(int i) {
+		this.letras[i] = word.charAt(i);
 	}
 	
 	

@@ -27,7 +27,7 @@ public class Principal{
 		
 		do {
 			
-			System.out.println("--- MENU ---");
+			System.out.println("\n--- MENU ---");
 			System.out.println("1 - NUEVO JUEGO");
 			System.out.println("2 - VER RANKING");
 			System.out.println("0 - FINALIZAR");
@@ -36,13 +36,13 @@ public class Principal{
 			
 			if(opcion==1) {
 				
-				System.out.print("Introduzca un nombre de usuario: ");
+				System.out.print("\nIntroduzca un nombre de usuario: ");
 				String nick = teclado.nextLine().trim();
 				String dificultad="";
 				
 				do {
 					
-					System.out.print("Selecciona dificultad (facil, normal y dificil): ");
+					System.out.print("\nSelecciona dificultad (facil, normal y dificil): ");
 					dificultad = teclado.nextLine().trim().toLowerCase();
 					
 					if(dificultad.equals("facil")||dificultad.equals("normal")||dificultad.equals("dificil")) {
@@ -50,7 +50,7 @@ public class Principal{
 						break;
 					}else {
 						
-						System.out.println("Seleccione una opcion valida.");
+						System.out.println("\nSeleccione una opcion valida.");
 			
 					}
 					
@@ -64,12 +64,12 @@ public class Principal{
 				
 			}else if(opcion == 0) {
 				
-				System.out.println("Saliendo del programa...");
+				System.out.println("\nSaliendo del programa...");
 				break;
 				
 			}else {
 				
-				System.out.println("Selecciona una opcion entre 0 y 2.");
+				System.out.println("\nSelecciona una opcion entre 0 y 2.");
 				
 			}	
 			
