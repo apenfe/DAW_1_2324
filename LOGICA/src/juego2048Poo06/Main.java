@@ -5,14 +5,13 @@ import java.util.Scanner;
 public class Main{
 	
 	public static Scanner teclado = new Scanner(System.in);
+	public static Tablero actual = new Tablero();
 	
 	public static void main(String[] args){
 		
-		Tablero actual = new Tablero();
-		
 		do {
 			
-			System.out.println("--- MENU ---");
+			System.out.println("\n--- MENU ---");
 			System.out.println("1 - INICIAR PARTIDA");
 			System.out.println("2 - CONTINUAR PARTIDA");
 			System.out.println("3 - SALIR");
@@ -20,38 +19,18 @@ public class Main{
 			
 			if(opcion==3) {
 				
-				System.out.println("Fin del programa.");
+				System.err.println("\nFin del programa.");
 				break;
 				
 			}else if(opcion==2) {
 				
 				if(!actual.isInit()) {
 					
-					System.out.println("Primero debe de iniciar una partida.");
+					System.err.println("\nPrimero debe de iniciar una partida.");
 					
 				}else {
 					
-					do {
-						
-						actual.mostrar();
-						
-						System.out.print("Intriduce un movimiento (a,d,w,s) (m - menu): ");
-						String movimiento = teclado.nextLine().trim().toLowerCase();
-						
-						if(movimiento.equals("m")) {
-							
-							System.out.println("Volviendo al menu principal.");
-							break;
-							
-						}else if(movimiento.equals("a")||movimiento.equals("d")||movimiento.equals("w")||movimiento.equals("s")) {
-							
-						}else {
-							
-							System.out.println("Inserte un movimeinto valido.");
-							
-						}
-						
-					}while(true);
+					actual.jugar();
 					
 				}
 				
@@ -59,31 +38,11 @@ public class Main{
 				
 				actual = new Tablero(true);
 				
-				do {
-					
-					actual.mostrar();
-					
-					System.out.print("Intriduce un movimiento (a,d,w,s) (m - menu): ");
-					String movimiento = teclado.nextLine().trim().toLowerCase();
-					
-					if(movimiento.equals("m")) {
-						
-						System.out.println("Volviendo al menu principal.");
-						break;
-						
-					}else if(movimiento.equals("a")||movimiento.equals("d")||movimiento.equals("w")||movimiento.equals("s")) {
-						
-					}else {
-						
-						System.out.println("Inserte un movimeinto valido.");
-						
-					}
-					
-				}while(true);
+				actual.jugar();
 				
 			}else {
 				
-				System.out.println("Seleccione una opcion valida entre 1 y 3.");
+				System.err.println("\nSeleccione una opcion valida entre 1 y 3.");
 				
 			}
 			
@@ -113,5 +72,6 @@ public class Main{
 		} while (true);
 		
 	}
+	
 	
 }

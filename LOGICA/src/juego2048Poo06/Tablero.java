@@ -1,11 +1,15 @@
 package juego2048Poo06;
 
+import java.util.Scanner;
+
 public class Tablero{
 	
 	private final int FIL = 4;
 	private final int COL = 4;
 	private int[][] tablero = new int[FIL][COL];
 	private boolean init;
+	private static Scanner teclado = new Scanner(System.in);
+
 	
 	public Tablero() {
 		
@@ -19,21 +23,28 @@ public class Tablero{
 			}
 		}
 		
-		int i1, j1, i2, j2;
-		
-		do {
-			
-			i1=(int)(Math.random()*FIL);
-			j1=(int)(Math.random()*COL);
-			i2=(int)(Math.random()*FIL);
-			j2=(int)(Math.random()*COL);	
-			
-		}while(i1==i2 && j1==j2);
-		
-		tablero[i1][j1]=2;
-		tablero[i2][j2]=2;
+		fichaAleatoria(2);
 		
 		this.init=true;
+		
+	}
+	
+	private void fichaAleatoria(int veces) {
+		
+		for (int k = 0; k < veces; k++) {
+			
+			int i, j;
+			
+			do {
+				
+				i=(int)(Math.random()*FIL);
+				j=(int)(Math.random()*COL);	
+				
+			}while(tablero[i][j]!=0);
+			
+			tablero[i][j]=2;
+			
+		}
 		
 	}
 	
@@ -42,6 +53,8 @@ public class Tablero{
 		System.out.println();
 		
 		for (int i = 0; i < FIL; i++) {
+			
+			System.out.print("\t");
 			
 			for (int j = 0; j < COL; j++) {
 				
@@ -58,19 +71,105 @@ public class Tablero{
 	}
 	
 	public void mover(String direccion) {
-		
-		for (int i = 0; i < FIL; i++) {
-			
-			for (int j = 0; j < COL; j++) {
+
+		if (direccion.equals("d")) {
+
+			for (int i = 0; i < FIL; i++) {
 				
-				System.out.print(tablero[i][j]+" ");
+				for (int j = COL - 2; j >= 0; j--) {
+					
+					for (int k = j; k < FIL - 1 && tablero[i][k] != 0; k++) {
+						
+						if (tablero[i][k + 1] == 0) {
+							tablero[i][k + 1] = tablero[i][k];
+							tablero[i][k] = 0;
+							
+						} else if (tablero[i][k + 1] == tablero[i][k]) {
+							tablero[i][k + 1] *= 2;
+							tablero[i][k] = 0;
+
+						}
+						
+					}
+					
+				}
 				
 			}
+
+		} else if (direccion.equals("a")) {
 			
-			System.out.println();
+			for (int i = 0; i < FIL; i++) {
+
+				for (int j = COL - 2; j >= 0; j--) { // VER
+
+					for (int k = j; k < FIL - 1 && tablero[i][k] != 0; k++) {
+
+						if (tablero[i][k + 1] == 0) {
+							tablero[i][k + 1] = tablero[i][k];
+							tablero[i][k] = 0;
+
+						} else if (tablero[i][k + 1] == tablero[i][k]) {
+							tablero[i][k + 1] *= 2;
+							tablero[i][k] = 0;
+
+						}
+
+					}
+
+				}
+
+			}
+
+		} else if (direccion.equals("w")) {
+			
+			for (int i = 0; i < FIL; i++) {
+
+				for (int j = COL - 2; j >= 0; j--) { // VER
+
+					for (int k = j; k < FIL - 1 && tablero[i][k] != 0; k++) {
+
+						if (tablero[i][k + 1] == 0) {
+							tablero[i][k + 1] = tablero[i][k];
+							tablero[i][k] = 0;
+
+						} else if (tablero[i][k + 1] == tablero[i][k]) {
+							tablero[i][k + 1] *= 2;
+							tablero[i][k] = 0;
+
+						}
+
+					}
+
+				}
+
+			}	
+
+		} else if (direccion.equals("s")) {
+			
+			for (int i = 0; i < FIL; i++) {
+
+				for (int j = COL - 2; j >= 0; j--) { // VER
+
+					for (int k = j; k < FIL - 1 && tablero[i][k] != 0; k++) {
+
+						if (tablero[i][k + 1] == 0) {
+							tablero[i][k + 1] = tablero[i][k];
+							tablero[i][k] = 0;
+
+						} else if (tablero[i][k + 1] == tablero[i][k]) {
+							tablero[i][k + 1] *= 2;
+							tablero[i][k] = 0;
+
+						}
+
+					}
+
+				}
+
+			}
 
 		}
-		
+
 	}
 	
 	private boolean ganador() {
@@ -114,7 +213,8 @@ public class Tablero{
 			
 		}
 		
-		return false;
+		System.out.println("JUEGO TERMINADO.");
+		return true;
 		
 	}
 
@@ -126,6 +226,38 @@ public class Tablero{
 		this.init = init;
 	}
 	
-	
+	public void jugar() {
+		
+		do {
+			
+			mostrar();
+			
+			System.out.print("Introduce un movimiento (a,d,w,s) (m - menu): ");
+			String movimiento = teclado.nextLine().trim().toLowerCase();
+			
+			if(movimiento.equals("m")) {
+				
+				System.err.println("\nVolviendo al menu principal.");
+				return;
+				
+			}else if(movimiento.equals("a")||movimiento.equals("d")||movimiento.equals("w")||movimiento.equals("s")) {
+				
+				mover(movimiento);
+				
+			}else {
+				
+				System.err.println("\nInserte un movimeinto valido.");
+				
+			}
+			
+			if(finPartida()) {
+				break;
+			}else {
+				fichaAleatoria(1);
+			}
+			
+		}while(true);
+		
+	}
 	
 }
