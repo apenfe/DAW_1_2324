@@ -1,9 +1,8 @@
-APENFE#sol#facil#5#20240213
-apenfe#sol#facil#0#20240213
-apenfe#sol#facil#1#20240216
-adrian#piedra#normal#3#20240213
-adrian#bravo#facil#5#20240213
-apenfe#ultimo#facil#5#20240214
-adrian#hoja#facil#5#20240215
-adrrrr#perro#facil#5#1707819354846
-a#pensamiento#dificil#3#1707819515492
+apenfe#mesa#facil#5#1707898474313
+adrian#tren#facil#5#1707898508688
+lucia#sincero#normal#5#1707898568390
+#incandescente#dificil#5#1707898614220
+sin nombre#trascendental#dificil#5#1707898825774
+ahoramismo#sol#facil#3#1707898928756
+otro mas#oscuro#facil#5#1707899143849
+prueba letras#trascendental#dificil#5#1707899447939

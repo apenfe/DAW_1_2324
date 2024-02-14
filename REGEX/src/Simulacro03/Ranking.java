@@ -17,7 +17,7 @@ public class Ranking{
 			this.dificultad = 1;
 		}else if(datos[2].equals("normal")) {
 			this.dificultad = 2;
-		}if(datos[2].equals("dificl")) {
+		}if(datos[2].equals("dificil")) {
 			this.dificultad = 3;
 		}
 		

@@ -5,13 +5,6 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/*
- * Simulacro 3 Juego ahorcado
- * 
- * Adicionales: En cada intento de resolver, que muestre un muñequito formado por caracteres mostrando la cabeza y extremidades 
- * del muñeco dependiendo de la cantidad de fallos cometidos.´
- * 
- */
 
 public class Ahorcado{
 	
@@ -47,18 +40,6 @@ public class Ahorcado{
 	
 			mostrarHuecos(intentos);
 			
-			if(intentos==0) {
-				
-				System.out.println("\nFin del juego, se han acabdo los intento");
-				break;
-				
-			}else if(intentos>0 && win()) {
-				
-				System.out.println("\n¡Ha ganado el juego!");
-				break;
-				
-			}
-			
 			System.out.println();
 			System.out.println("\nIntentos: "+intentos);
 			System.out.print("\nInserte una letra: ");
@@ -71,6 +52,7 @@ public class Ahorcado{
 					error=false;
 					System.out.println("\nMuy bien, letra correcta.");
 					mostrarHuecos(intentos);
+					break;
 				}
 				
 			}
@@ -81,7 +63,7 @@ public class Ahorcado{
 				error=false;
 			}else {
 				
-				System.out.print("\n¿Desea acertar la palabra entera? (s - si)");
+				System.out.print("\n\n¿Desea acertar la palabra entera? (s - si)");
 				String respuesta = teclado.nextLine().trim().toLowerCase();
 				
 				if(respuesta.equalsIgnoreCase("s")) {
@@ -101,9 +83,21 @@ public class Ahorcado{
 				
 			}
 			
+			if(intentos==0) {
+				
+				System.out.println("\nFin del juego, se han acabdo los intento");
+				break;
+				
+			}else if(intentos>0 && win()) {
+				
+				System.out.println("\n¡Ha ganado el juego!");
+				break;
+				
+			}
+			
 		}while(true);
 		
-		System.out.println("\nLa palabra era: "+palabra.getWord());
+		System.err.println("\nLa palabra era: "+palabra.getWord().toLowerCase());
 		
 		save(5-intentos);
 		
@@ -212,16 +206,10 @@ public class Ahorcado{
 
 		}
 
-		ranking=ordenar(ranking,"fecha");
 		ranking=ordenar(ranking,"intentos");
 		ranking=ordenar(ranking,"dificultad");
+		ranking=ordenar(ranking,"fecha");
 		mostrarRanking(ranking);
-		
-		/*
-		 *  y dentro de cada dificultad ordenando por menor cantidad de intentos fallidos,
-		 *   ordenados por fecha de más antiguo a más reciente.
-		 */
-		
 				
 	}
 	
@@ -233,7 +221,8 @@ public class Ahorcado{
 				
 				if((lectura[j].getDificultad()<=lectura[j+1].getDificultad())&&modo.equals("dificultad")||
 						(lectura[j].getIntentosFallidos()<=lectura[j+1].getIntentosFallidos())&&modo.equals("intentos")||
-						(lectura[j].getFecha()>lectura[j+1].getFecha())&&modo.equals("fecha")) {
+						(lectura[j].getFecha()>lectura[j+1].getFecha())&&modo.equals("fecha")&&
+						(lectura[j].getIntentosFallidos()==lectura[j+1].getIntentosFallidos())&&(lectura[j].getDificultad()==lectura[j+1].getDificultad())) {
 					
 					Ranking aux = lectura[j];
 					lectura[j]=lectura[j+1];
