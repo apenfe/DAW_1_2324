@@ -5,45 +5,22 @@ import java.util.List;
 
 public class EjercicioArrays {
 	
-	public static final int NUM_ALUMNOS = 40;
+	public static final int NUM_ALUMNOS = 10;
+	public static Integer[] control = crearNotasAleatorias(true); //vector con las notas generadas
+	public static Integer[] listaClase = crearNotasAleatorias(false); //creamos una lista de los alumnos de la clase
+	public static Integer[] practicas = crearNotasAleatorias(true); //creamos el array de notas "practicas"
     
     public static void main(String[] args) {
-    	
-        //vector con las notas generadas
-        Integer[] control = crearNotasAleatorias(NUM_ALUMNOS);
-        int indMaxNota, indMinNota;
         
-        int minNota = buscarMaxMin(true,11,control);
-        int maxNota = buscarMaxMin(false,0,control);
-        
-        //creamos una lista de los alumnos de la clase
-        int[] listaClase = new int[NUM_ALUMNOS];
-        for (int i = 0; i < NUM_ALUMNOS; i++){
-            listaClase[i] = i+1;
-        }
-        //Empezamos el uso de listas para facilitar la tarea de índices.
-        List notas = Arrays.asList(control);
-        indMinNota = notas.indexOf(minNota) + 1;
-        indMaxNota = notas.indexOf(maxNota) + 1;
-
         //Comprobamos el resultado del ejercicio   
-        System.out.println("Mínimo es: " + minNota);
-        System.out.println("Máximo es: " + maxNota);
-        System.out.println("Indice del mínimo es : " + indMinNota);
-        System.out.println("Indice del máximo es : " + indMaxNota);
+        buscarPeorMejor(buscarMaxMin(false,0),buscarMaxMin(true,11)); //Empezamos el uso de listas para facilitar la tarea de índices.
         System.out.println("Lista de clase :" + Arrays.toString(listaClase));
-        System.out.println("Array de Notas :" + notas);
-        
-        //creamos el array de notas "practicas"
-        Integer[] practicas = crearNotasAleatorias(NUM_ALUMNOS);
+        System.out.println("Array de Notas :" + Arrays.toString(control)+"\n");
         
         //Creamos el vector calificaciones
         float[] calificaciones = new float[NUM_ALUMNOS];
         for(int i = 0; i<control.length; i++){
-            calificaciones[i] = 
-                    (((float) control[i] 
-                    + (float) practicas[i]) 
-                    / 2);
+            calificaciones[i] = (((float) control[i] + (float) practicas[i]) / 2);
         }
         System.out.println("Prácticas      :" + Arrays.toString(practicas));
         System.out.println("Calificaciones :" + Arrays.toString(calificaciones));
@@ -126,21 +103,24 @@ public class EjercicioArrays {
         System.out.println("Nota nueva   alumno nº4: " + calif[3]);
     }
     
-	public static Integer[] crearNotasAleatorias(int num) {
+	public static Integer[] crearNotasAleatorias(boolean aleatorio) {
 
-		Integer[] salida = new Integer[num];
+		Integer[] salida = new Integer[NUM_ALUMNOS];
 		
 		for (int i = 0; i < salida.length; i++) {
 			
-			salida[i] = (int) (Math.random() * 11);
+			if(aleatorio) {
+				salida[i] = (int) (Math.random() * 11);
+			}else {
+				salida[i] = i+1;
+			}
 			
 		}
-		
 		return salida;
 
 	}
 	
-	public static int buscarMaxMin(boolean maximo, int postEval, Integer[] control) {
+	public static int buscarMaxMin(boolean maximo, int postEval) {
 	    
 		int nota=0;
 		
@@ -152,8 +132,22 @@ public class EjercicioArrays {
             }
         }
         
+        if(maximo) {
+        	System.out.println("Minimo es: " + nota);
+        }else {
+        	System.out.println("Maximo es: " + nota);
+        }
+        
         return nota;
 
     }
-	
+
+	public static void buscarPeorMejor(int minNota, int maxNota) {
+		
+		List notas = Arrays.asList(control);
+		System.out.println("Indice del máximo es : " + (notas.indexOf(minNota) + 1));
+        System.out.println("Indice del minimo es : " + (notas.indexOf(maxNota) + 1));
+
+	}
+
 }
