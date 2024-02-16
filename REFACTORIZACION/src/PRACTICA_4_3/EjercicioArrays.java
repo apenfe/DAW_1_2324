@@ -9,43 +9,17 @@ public class EjercicioArrays {
 	public static Integer[] control = crearNotasAleatorias(true); //vector con las notas generadas
 	public static Integer[] listaClase = crearNotasAleatorias(false); //creamos una lista de los alumnos de la clase
 	public static Integer[] practicas = crearNotasAleatorias(true); //creamos el array de notas "practicas"
+	public static float[] calificaciones = new float[NUM_ALUMNOS];
+	public static float[] estadistica = new float[NUM_ALUMNOS]; //hacemos un array de 10 para la estadística.
     
     public static void main(String[] args) {
         
-        //Comprobamos el resultado del ejercicio   
-        buscarPeorMejor(buscarMaxMin(false,0),buscarMaxMin(true,11)); //Empezamos el uso de listas para facilitar la tarea de índices.
-        System.out.println("Lista de clase :" + Arrays.toString(listaClase));
-        System.out.println("Array de Notas :" + Arrays.toString(control)+"\n");
+    	resultadoEjercicio();
+    	
+    	resultadoPracticas();
+    	
+    	estadistica();
         
-        //Creamos el vector calificaciones
-        float[] calificaciones = new float[NUM_ALUMNOS];
-        for(int i = 0; i<control.length; i++){
-            calificaciones[i] = (((float) control[i] + (float) practicas[i]) / 2);
-        }
-        System.out.println("Prácticas      :" + Arrays.toString(practicas));
-        System.out.println("Calificaciones :" + Arrays.toString(calificaciones));
-        
-        //Sacamos la estadística de calificaciones
-        //hacemos un array de 10 para la estadística.
-        float[] estadistica = new float[10];
-      
-        for (int i=0; i<10; i++){
-            float count = 0;
-         
-            for (int j=0; j<control.length; j++){
-                if ((i < calificaciones[j]) && ((i+1) >= calificaciones[j] )) {
-             
-                    count += 1;
-                }
-            }
-            if (count != 0){
-                estadistica[i] = ( (float)count / NUM_ALUMNOS);
-            }else{ estadistica[i] = 0;}
-            double sol = (Math.round(estadistica[i] * 10000.0)) / 100.0;
-            System.out.println("Estadística nota tramo <=" 
-                + (i+1) + " = " 
-                + sol + "%");
-        }
         //Aprobados y suspensos
         int[] aprobados = new int[NUM_ALUMNOS];
         int[] suspensos = new int[NUM_ALUMNOS];
@@ -120,6 +94,21 @@ public class EjercicioArrays {
 
 	}
 	
+	public static void crearNotas(String comando) {
+		
+		for (int i = 0; i < NUM_ALUMNOS; i++) {
+			
+			if(comando.equals("calificaciones")) {
+				calificaciones[i] = (((float) control[i] + (float) practicas[i]) / 2);
+			}else if(comando.equals("")){
+				//salida[i] = i+1;
+			}
+			
+		}
+
+	}
+
+	
 	public static int buscarMaxMin(boolean maximo, int postEval) {
 	    
 		int nota=0;
@@ -148,6 +137,56 @@ public class EjercicioArrays {
 		System.out.println("Indice del máximo es : " + (notas.indexOf(minNota) + 1));
         System.out.println("Indice del minimo es : " + (notas.indexOf(maxNota) + 1));
 
+	}
+	
+	public static void resultadoEjercicio() {
+		
+		 //Comprobamos el resultado del ejercicio   
+        buscarPeorMejor(buscarMaxMin(false,0),buscarMaxMin(true,11)); //Empezamos el uso de listas para facilitar la tarea de índices.
+        System.out.println("Lista de clase :" + Arrays.toString(listaClase));
+        System.out.println("Array de Notas :" + Arrays.toString(control)+"\n");	
+
+	}
+	
+	public static void resultadoPracticas() {
+		
+        crearNotas("calificaciones"); //Creamos el vector calificaciones
+        System.out.println("Prácticas      :" + Arrays.toString(practicas));
+        System.out.println("Calificaciones :" + Arrays.toString(calificaciones)+"\n");
+
+	}
+	
+	public static void estadistica() {
+      
+        for (int i=0; i<10; i++){ //Sacamos la estadística de calificaciones
+        	
+            float count = 0;
+         
+            for (int j=0; j<control.length; j++){
+            	
+                if ((i < calificaciones[j]) && ((i+1) >= calificaciones[j] )) {
+             
+                    count += 1;
+                }
+                
+            }
+            
+            if (count != 0){
+            	
+                estadistica[i] = ( (float)count / NUM_ALUMNOS);
+                
+            }else{
+            	
+            	estadistica[i] = 0;
+            	
+            }
+            
+            double sol = (Math.round(estadistica[i] * 10000.0)) / 100.0;
+            System.out.println("Estadística nota tramo <=" + (i+1) + " = " + sol + "%");
+        }
+        
+        System.out.println();
+        
 	}
 
 }
