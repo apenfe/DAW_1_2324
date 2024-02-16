@@ -1,80 +1,30 @@
 package PRACTICA_4_3;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class EjercicioArrays {
 	
 	public static final int NUM_ALUMNOS = 10;
+	
 	public static Integer[] control = crearNotasAleatorias(true); //vector con las notas generadas
 	public static Integer[] listaClase = crearNotasAleatorias(false); //creamos una lista de los alumnos de la clase
 	public static Integer[] practicas = crearNotasAleatorias(true); //creamos el array de notas "practicas"
 	public static float[] calificaciones = new float[NUM_ALUMNOS];
 	public static float[] estadistica = new float[NUM_ALUMNOS]; //hacemos un array de 10 para la estadística.
+	public static int[] aprobados = new int[NUM_ALUMNOS];
+    public static int[] suspensos = new int[NUM_ALUMNOS];
+    public static double[] calif = new double[40];
     
     public static void main(String[] args) {
         
     	resultadoEjercicio();
-    	
     	resultadoPracticas();
-    	
     	estadistica();
+    	aprobadosYSuspensos();
+    	cambiarNota(3,6);
         
-        //Aprobados y suspensos
-        int[] aprobados = new int[NUM_ALUMNOS];
-        int[] suspensos = new int[NUM_ALUMNOS];
-        int countAprobados = 0;
-        int countSuspensos = 0;
-        for (int i=0; i<NUM_ALUMNOS; i++){
-            if (calificaciones[i] < 5){
-                aprobados[i] = i;
-                countAprobados += 1;
-            }else{ 
-                suspensos[i] = i;
-                countSuspensos += 1;
-            }
-        }        
-        System.out.println("Relación de aprobados por nº de lista: " 
-                + Arrays.toString(aprobados));
-        System.out.println("Relación de suspensos por nº de lista: " 
-                + Arrays.toString(suspensos));
-        //Resumen de aprobados y suspensos
-        int i = 0, x = 0;
-        int[] a = new int[countAprobados];
-        int[] s = new int[countSuspensos];
-        while(i < aprobados.length){
-            if(aprobados[i] != 0){
-                a[x] = aprobados[i];
-                i++;
-                x++;
-            }else{ i++; }
-        }
-        
-        i = x = 0;
-        while(i < suspensos.length){
-            if(suspensos[i] != 0){
-                s[x] = suspensos[i];
-                i++;
-                x++;
-            }else{ i++; }
-        }
-        System.out.println("Resumen  de aprobados por nº de lista: " 
-                + Arrays.toString(a));
-        System.out.println("Resumen  de aprobados por nº de lista: " 
-                + Arrays.toString(s));
-    
-        /*6. Suponer un vector de Calificaciones de tamaño 40 
-        (máximo de alumnos por clase), pero que solo almacena las
-        notas de 31 alumnos. Realizar un programa que permita insertar en
-        la posición 4 del vector la calificación de un nuevo 
-        alumno en clase al que supuestamente le corresponde como nota un 6.*/
-        double[] calif = new double[40];
-        for (int j=0; j<31; j++){
-            calif[j] = (int)(Math.random()*11);
-        }
-        System.out.println("Nota antigua alumno nº4: " + calif[3]); 
-        calif[3] = 6;
-        System.out.println("Nota nueva   alumno nº4: " + calif[3]);
     }
     
 	public static Integer[] crearNotasAleatorias(boolean aleatorio) {
@@ -96,12 +46,18 @@ public class EjercicioArrays {
 	
 	public static void crearNotas(String comando) {
 		
-		for (int i = 0; i < NUM_ALUMNOS; i++) {
+		int x = NUM_ALUMNOS;
+		
+		if(comando.equals("calif")) {
+			x= 31;
+		}
+		
+		for (int i = 0; i < x; i++) {
 			
 			if(comando.equals("calificaciones")) {
 				calificaciones[i] = (((float) control[i] + (float) practicas[i]) / 2);
-			}else if(comando.equals("")){
-				//salida[i] = i+1;
+			}else if(comando.equals("calif")){
+				calif[i] = (int)(Math.random()*11);
 			}
 			
 		}
@@ -187,6 +143,101 @@ public class EjercicioArrays {
         
         System.out.println();
         
+	}
+	
+	public static void aprobadosYSuspensos() {
+	      
+        int[] contador = new int[2];
+        
+        for (int i=0; i<NUM_ALUMNOS; i++){
+        	
+            if (calificaciones[i] < 5){
+                suspensos[i] = i;
+                contador[1] += 1;
+            }else{ 
+                aprobados[i] = i;
+                contador[0] += 1;
+            }
+        }        
+        System.out.println("Relación de aprobados por nº de lista: " + Arrays.toString(aprobados));
+        System.out.println("Relación de suspensos por nº de lista: " + Arrays.toString(suspensos));
+        
+        resumenAprobadosYSuspensos(contador);
+        
+	}
+	
+	public static void resumenAprobadosYSuspensos(int[] contador) {
+	      
+		 //Resumen de aprobados y suspensos
+        int i = 0, x = 0;
+        int[] a = new int[contador[0]], s = new int[contador[1]] ;
+        
+        while(i < aprobados.length){
+        	
+            if(aprobados[i] != 0){
+                a[x] = aprobados[i];
+                i++;
+                x++;
+            }else{
+            	
+            	i++;
+            
+            }
+        }
+        
+        i = x = 0;
+        
+        while(i < suspensos.length){
+        	
+            if(suspensos[i] != 0){
+            	
+                s[x] = suspensos[i];
+                i++;
+                x++;
+            }else{
+            	
+            	i++;
+
+            }
+        }
+        System.out.println("Resumen  de aprobados por nº de lista: " + Arrays.toString(a));
+        System.out.println("Resumen  de suspensos por nº de lista: " + Arrays.toString(s));
+       
+        
+	}
+	
+	public static Integer[] resumen(int[] vector) {
+	      
+       int i = 0;
+       ArrayList<Integer> numeros = new ArrayList<Integer>();
+       
+       while(i < vector.length){
+       	
+           if(vector[i] != 0){
+               numeros.add(vector[i]);
+           }
+           	
+           	i++;
+           
+       }
+       
+       return numeros.toArray(new Integer[0]); 
+       
+	}
+	
+	public static void cambiarNota(int alumno, double nota) {
+	      
+		  /*6. Suponer un vector de Calificaciones de tamaño 40 
+        (máximo de alumnos por clase), pero que solo almacena las
+        notas de 31 alumnos. Realizar un programa que permita insertar en
+        la posición 4 del vector la calificación de un nuevo 
+        alumno en clase al que supuestamente le corresponde como nota un 6.*/
+		
+		crearNotas("calif");
+        System.out.println("Nota antigua alumno nº"+(alumno+1)+": " + calif[alumno]); 
+        calif[alumno] = nota;
+        System.out.println("Nota nueva   alumno nº"+(alumno+1)+": " + calif[alumno]);
+       
 	}
 
 }
