@@ -8,15 +8,15 @@ public class RepasoGlobal {
 
 	public static void main(String[] args) {
 
-		//nick01();
-		//DNINIE02();
-		//IPV403();
-		//FECHA04();
-		//NOMBREYAPELLIDOS05();
-		//UUID06();
-		//TELEFONO07();
-		//IBAN08();
-		//MATRICULA09();
+		nick01();
+		DNINIE02();
+		IPV403();
+		FECHA04();
+		NOMBREYAPELLIDOS05();
+		UUID06();
+		TELEFONO07();
+		IBAN08();
+		MATRICULA09();
 
 	}
 
@@ -84,8 +84,22 @@ El último carácter es una letra, mayúscula o minúscula, la cual solo puede s
 
 	public static void IPV403() {
 		
+		/*
+		 * Crea un programa que pida una dirección IPv4 e indique si es válida de acuerdo al siguiente formato:
+		 * 
+		 * Se compone de cuatro grupos de números separados por el carácter punto "."; ejemplo: 192.168.1.15
+		 * 
+		 * Cada grupo de números puede tener entre 1 y 3 caracteres ya que el rango numérico de cada grupo va 
+		 * desde el 0 al 255.
+		 * 
+		 * Opcionalmente, se podría hacer mediante un split y comprobar cada grupo individualmente, pero se 
+		 * recomienda dejar esta opción para cuando se haya probado la expresión regular que abarca todas las 
+		 * posibilidades de cada grupo.
+		 * 
+		 */
+		
 		String texto = pedirTexto("Inserte una IP: ");
-		String regex = "";
+		String regex = "^((2[0-5]{2}|2[0-4]{1}[0-9]{1}|1[0-9]{2}|[0-9]{2}|[0-9]{1})\\.){3}(2[0-5]{2}|2[0-4]{1}[0-9]{1}|1[0-9]{2}|[0-9]{2}|[0-9]{1}){1}$";
 		
 		if(texto.matches(regex)) {
 			System.out.println("CORRECTO");
@@ -97,8 +111,23 @@ El último carácter es una letra, mayúscula o minúscula, la cual solo puede s
 
 	public static void FECHA04() {
 		
+		/*
+		 * Ejercicio 4
+		 * 
+		 * Crea un programa que pida una fecha en formato dd/mm/aaaa e indique si el 
+		 * formato es válido de acuerdo a las siguientes consideraciones:
+		 * 
+		 * Tanto los días como los meses pueden tener 1 o 2 caracteres.
+		 * Para los días hay que tener en cuenta que, si tiene dos caracteres y el 
+		 * primero de ellos es un "3", el segundo solo puede tener un "0" o un "1".
+		 * Para los meses hay que tener en cuenta que, si tiene dos caracteres y el 
+		 * primero de ellos es un "1", el segundo solo puede tener un "0", un "1" o 
+		 * un "2".
+		 * 
+		 */
+		
 		String texto = pedirTexto("Inserte una fecha: ");
-		String regex = "";
+		String regex = "^(0?[1-9]{1}|[12]{1}[0-9]{1}|3[01]{1}){1}/(0?[1-9]{1}|1[0-2]{1}){1}/([12]{1}[\\d]{3}){1}$";
 		
 		if(texto.matches(regex)) {
 			System.out.println("CORRECTO");
@@ -110,8 +139,27 @@ El último carácter es una letra, mayúscula o minúscula, la cual solo puede s
 
 	public static void NOMBREYAPELLIDOS05() {
 		
+		/*
+		 * Crea un programa que pida un nombre completo (nombre y apellidos) de persona e indique 
+		 * si es válido de acuerdo al siguiente formato:
+		 * 
+		 * Un nombre completo (nombre y apellidos) debe empezar y terminar por un carácter alfabético, 
+		 * de la "a" a la "z". No importa si son mayúsculas o minúsculas.
+		 * Entre medias de la cadena puede contener espacios en blanco, para separar nombre y apellidos.
+		 * Pueden haber tildes en cualquier posición, incluyendo las tildes invertidas "àèìòù", tanto 
+		 * mayúsculas como minúsculas.
+		 * 
+		 * La Ñ debe estar contemplada.
+		 * La diéresis en la Ü también debe tenerse en cuenta.
+		 * Dado que existen apellidos compuestos, se admite el carácter guion "-" siempre y cuando tenga 
+		 * caracteres alfabéticos a sus lados.
+		 * Se admite el carácter apóstrofe ' ya que existen nombre de origen no castellano que pueden tenerlos.
+		 * Se admite el carácter ç.
+		 * 
+		 */
+		
 		String texto = pedirTexto("Inserte un nombre y apellidos: ");
-		String regex = "";
+		String regex = "^([a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÜÈÌÙÒñÑ]{1}[a-záéíóúàèìòùñüç']+){1}( [a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÙÜÒñÑ]{1}[a-záéíóúàèìòùñüç']+(-[a-záéíóúàèìòùñüç']+)?){2}$";
 		
 		if(texto.matches(regex)) {
 			System.out.println("CORRECTO");
