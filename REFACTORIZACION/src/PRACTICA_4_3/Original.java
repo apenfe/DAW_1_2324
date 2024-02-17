@@ -6,7 +6,7 @@ import java.util.List;
 public class Original {
     
     public static void main(String[] args) {
-        int numAlumnos = 40;
+        int numAlumnos = 10;
         //vector con las notas generadas
         Integer[] control = new Integer[numAlumnos];
         int maxNota = 0;
