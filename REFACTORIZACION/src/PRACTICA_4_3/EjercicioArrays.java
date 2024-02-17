@@ -6,7 +6,7 @@ import java.util.List;
 
 public class EjercicioArrays {
 	
-	public static final int NUM_ALUMNOS = 10;
+	public static final int NUM_ALUMNOS = 40;
 	public static Integer[] control = new Integer[NUM_ALUMNOS]; //vector con las notas generadas
 	public static Integer[] listaClase = new Integer[NUM_ALUMNOS]; //creamos una lista de los alumnos de la clase
 	public static Integer[] practicas = new Integer[NUM_ALUMNOS]; //creamos el array de notas "practicas"
@@ -126,14 +126,14 @@ public class EjercicioArrays {
 	
 	public static void aprobadosYSuspensos() {
 		
-		int[] aprobados = new int[NUM_ALUMNOS], suspensos = new int[NUM_ALUMNOS];;
+		int[] aprobados = new int[NUM_ALUMNOS], suspensos = new int[NUM_ALUMNOS];
 	    
         for (int i=0; i<NUM_ALUMNOS; i++){
         	
             if (calificaciones[i] < 5){
-                suspensos[i] = i;
+                suspensos[i] = i+1;
             }else{ 
-                aprobados[i] = i;
+                aprobados[i] = i+1;
             }
         }        
         System.out.println("Relación de aprobados por nº de lista: " + Arrays.toString(aprobados));
