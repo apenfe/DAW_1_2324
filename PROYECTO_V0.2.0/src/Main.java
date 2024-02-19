@@ -1,7 +1,7 @@
-import Classes.Config;
-import Classes.Input;
-import Classes.Maze;
-import Classes.Session;
+import classes.Config;
+import classes.Input;
+import classes.Maze;
+import classes.Session;
 
 /*
  * Main.java

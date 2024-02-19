@@ -1,4 +1,4 @@
-package Classes;
+package classes;
 
 /* 
  * Session.java
@@ -72,8 +72,8 @@ public class Session{
 	
 	private User currentUser;
 	private boolean logged;
-	private final String FILE_PATH = ".\\assets\\files\\"; // EN WINDOWS SE DEBE DE PONER .\ AL INICIO Y EN EL RESTO DE LA RUTA \
-	private final String USER_FILE = "users.txt"; // NOMBRE DEL ARCHIVO
+	private static final String FILE_PATH = ".\\assets\\files\\"; // EN WINDOWS SE DEBE DE PONER .\ AL INICIO Y EN EL RESTO DE LA RUTA \
+	private static final String USER_FILE = "users.txt"; // NOMBRE DEL ARCHIVO
 	
 	/* LISTADO DE MÉTODOS DE LA CLASE */
 	
@@ -149,7 +149,7 @@ public class Session{
 			
 		while(follow){ // MIENTRAS NO SE CREA UN USUARIO O HASTA QUE USUARIO DESISTA
 				
-			if(secondaryKey(userdata)) { // SI DATOS SECUNDARIOS SON CORRECTOS if(secondaryKey2(userdata)) {
+			if(secondaryKey(userdata)) { // SI DATOS SECUNDARIOS SON CORRECTOS
 				
 				createUser(FILE_PATH+USER_FILE,"#",userdata); // SE CREA UN NUEVO USUARIO EN EL FICHERO
 				break;
@@ -216,7 +216,6 @@ public class Session{
 			  } catch (IOException e) {
 			    	
 			      System.out.println("\tHa ocurrido un error al crear el usuario en el archivo.");
-			      //e.printStackTrace();
 			      
 			  }
 		

@@ -1,4 +1,4 @@
-package Classes;
+package classes;
 
 /*
  * Maze.java
@@ -66,13 +66,13 @@ public class Maze{
 	
 	/* ATRIBUTOS DE LA CLASE MAZE */
 	
-	public char[][] map = new char[0][0];
-	public String fileName;
-	public boolean loaded;
-	public int startI;
-	public int startJ;
-	public int endI;
-	public int endJ;
+	private char[][] map = new char[0][0];
+	private String fileName;
+	private boolean loaded;
+	private int startI;
+	private int startJ;
+	private int endI;
+	private int endJ;
 	
 	/* CONSTRUCTOR DE LA CLASE MAZE */
 	
@@ -94,7 +94,7 @@ public class Maze{
 	
 	private void deleteMaze(boolean total) {
 		
-		if(total) { // SI QUEIRO RESETEARLOS TODOS
+		if(total) { /* SI QUEIRO RESETEARLOS TODOS */
 			
 			this.fileName = "";
 			this.loaded = false;
@@ -103,7 +103,7 @@ public class Maze{
 			this.endI=0;
 			this.endJ=0;
 			
-		}else { // SI SOLO QUIERO RESETEAR LA ENTRADA Y SALIDA
+		}else { /* SI SOLO QUIERO RESETEAR LA ENTRADA Y SALIDA */
 			
 			this.startI=0;
 			this.startJ=0;
@@ -168,7 +168,7 @@ public class Maze{
 	
 	private ArrayList<String> obtainTxtNames(String path) {
 		
-        ArrayList<String> namesFiles = new ArrayList<String>();
+        ArrayList<String> namesFiles = new ArrayList<>();
         File[] files = new File[0];
         
         try {
@@ -199,7 +199,7 @@ public class Maze{
 	
 	private boolean readMaze(String fullPath) {
 		
-		ArrayList<String> lines = new ArrayList<String>();
+		ArrayList<String> lines = new ArrayList<>();
 		
         try {
         	
@@ -219,6 +219,7 @@ public class Maze{
         	
         	System.out.println("Pongase en contacto con el soporte técnico.");
         	return false;
+        
         }
         
         this.map = new char[lines.size()][lines.get(0).length()];
@@ -285,7 +286,9 @@ public class Maze{
 			
 			System.out.print("\n\t\t");
 			
-			for (int j = 0; j < map[0].length; j++) { // SE RECORRE TODO EL TAMAÑO DE LAS COLUMNAS DE LA MATRIZ
+			/* SE RECORRE TODO EL TAMAÑO DE LAS COLUMNAS DE LA MATRIZ */
+			
+			for (int j = 0; j < map[0].length; j++) {
 				
 				int jFigure = maxFigure(j); // SE CALCULAN LAS CIFRAS DE LA COLUMNA ACTUAL
 				
@@ -463,9 +466,10 @@ public class Maze{
 		
 		if((startI==endI && endJ==startJ) && (startI!=0 && startJ!=0 )) {
 			return true;
+		}else {
+			return false;
 		}
 		
-		return false;
 	}
 	
 }
