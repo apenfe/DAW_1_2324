@@ -58,35 +58,21 @@ package Classes;
  * 
  */
 
-/*
- * Maze.java
- * 
- * Modificaciones de la clase Maze
- * Se debe crear un atributo privado el cual será una lista dinámica que contendrá objetos 
- * Coordinate (la clase creada para guardar las coordenadas y dirección), donde se guardará la 
- * colección de objetos con las coordenadas de cada casilla por la que pasar para completar el 
- * camino que se está buscando. Se recomienda que sea un Stack (pila) o un ArrayList ya que el 
- * camino a buscar cambiará de tamaño en función de las dimensiones del laberinto, su distribución 
- * y las posiciones de inicio y fin. Si se quiere utilizar otro tipo de array o lista, se permite 
- * siempre que cumpla con la funcionalidad.
- * 
- * path: Stack, ArrayList o array de tipo "Coordinate" que utilizará el algoritmo para guardar las 
- * coordenadas y dirección del camino a buscar para luego mostrarlo.
- * 
- * APF - 19-02-2024
- * VERSION: 1.0.0
- * 
- */
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Stack;
 
-public class Maze{
+public class MazeOld{
 	
 	/* ATRIBUTOS DE LA CLASE MAZE */
-	private Stack<Coordinate> path = new Stack<Coordinate>(); 
+	
+	private ArrayList<ArrayList<Integer>> soluciones = new ArrayList<ArrayList<Integer>>();
+	private ArrayList<Integer> temporales = new ArrayList<Integer>();
+	private ArrayList<Coordinate> path_1 = new ArrayList<Coordinate>();
+	
+	private int[] path = new int[0];  // creado nuevo
+	private char[][] mapControl = new char[0][0];  // creado nuevo
+	
 	private char[][] map = new char[0][0];
 	private String fileName;
 	private boolean loaded;
@@ -97,7 +83,7 @@ public class Maze{
 	
 	/* CONSTRUCTOR DE LA CLASE MAZE */
 	
-	public Maze() {
+	public MazeOld() {
 		
 		this.loaded=false;
 		
@@ -243,6 +229,7 @@ public class Maze{
         }
         
         this.map = new char[lines.size()][lines.get(0).length()];
+        this.mapControl = new char[lines.size()][lines.get(0).length()]; // nuevo
         
         for (int i = 0; i < lines.size(); i++) {
         	
@@ -251,6 +238,7 @@ public class Maze{
         	for (int j = 0; j < lines.get(0).length(); j++) {
         		
         		this.map[i][j]=currentLine.charAt(j);
+        		this.mapControl[i][j]=currentLine.charAt(j); // nuevo
     			
     		}
         	
@@ -287,14 +275,14 @@ public class Maze{
 					
 					boolean camino = false;
 					
-					//********************************* AQUI TENGO QUE REVISAR
+					//*********************************
 					
-					for (int k = 0; k < path.size(); k++) {
+					for (int k = 0; k < path.length; k+=2) {
 						
-						if(i==path.get(k).getX() && j==path.get(k).getY()) {
+						if(i==path[k] && j==path[k+1]) {
 							
 							// metodo carcater
-							System.out.print(symbolPath(path.get(k))+" ");
+							System.out.print(symbolPath(i,j)+" ");
 							camino=true;
 							
 						}
@@ -314,44 +302,72 @@ public class Maze{
 		}
 
 	}
-	
-	private char symbolPath(Coordinate coordenada) {
+	/*
+	public void showMaze(char[][] solucion) {
+		
+		System.out.println("\n\tLaberinto: " + fileName); // SE INDICA EL NOMBRE
+		
+		numberVertically(); // SE MUESTRAN LOS NUMEROS DE COLUMNA EN VERTICAL
 
-		if (coordenada.getDirection()==1) {
-			return '^';
-		}
-		
-		if (coordenada.getDirection()==2) {
-			return '>';
-		}
-		
-		if (coordenada.getDirection()==3) {
-			return 'V';
-		}
-		
-		if (coordenada.getDirection()==4) {
-			return '<';
-		}
-		
-		return '*';
-		
-	}
-	
-	private void setDirections() {
+		for (int i = 0; i < solucion.length; i++) {
 
-		for (int i = 0; i < path.size()-1; i++) {
-			
-			if(path.get(i+1).) { // si esta por arriba abajo
-				
-			}else if(path.get(i+1)) { // si esta por abajo arriba
-				
-			}else if(path.get(i+1)) { // si esta por derecha abajo
-				
-			}else if(path.get(i+1)) { // si esta por izquierda abajo
-				
+			System.out.print("\t" + i + " - \t");
+
+			for (int j = 0; j < solucion[0].length; j++) {
+
+				boolean check = true;
+
+				if ((i == startI && j == startJ) && (startI != 0 && startJ != 0)) {
+					System.out.print("I ");
+					check = false;
+				} else if ((i == endI && j == endJ) && (endI != 0 && endJ != 0)) {
+					System.out.print("F ");
+					check = false;
+				}
+
+				if (check) {
+						
+					System.out.print(map[i][j]+" ");
+					
+				}
+
 			}
-			
+
+			System.out.println();
 		}
+
+	}*/
+	
+	private char symbolPath(int i, int j) {
+
+		char[] symbol = { '═', '║', '╗', '╔', '╝', '╚' };
+		int x = 0;
+
+		if (mapControl[i][j-1] == '*' && mapControl[i][j+1] == '*') {
+			x=0;
+		}
+
+		if (mapControl[i + 1][j] == '*' && mapControl[i - 1][j] == '*') {
+			x=1;
+		}
+
+		if (mapControl[i][j-1] == '*' && mapControl[i + 1][j] == '*') {
+			x=2;
+		}
+
+		if (mapControl[i + 1][j] == '*' && mapControl[i][j+1] == '*') {
+			x=3;
+		}
+		
+		if (mapControl[i][j-1] == '*' && mapControl[i - 1][j] == '*') {
+			x=4;
+		}
+		
+		if (mapControl[i][j+1] == '*' && mapControl[i - 1][j] == '*') {
+			x=5;
+		}
+
+		return symbol[x];
 		
 	}
 	
@@ -558,39 +574,156 @@ public class Maze{
 		
 		return true;
 	}
-
-	/*
-	 * #######################################################################################################################################
-	 */
-
-	/* METODO PARA BUSCAR EL PRIMER CAMINO POSIBLE */
-
-	public void firstWay() {
-
-		if (goAheadIntelligent(startI, startJ)) {
-
-			showMaze();
-
-		} else {
-			System.out.println("\n\tEl laberinto no tiene solución.");
-		}
-
-		Input.toContinue();
-
-	}
 	
-	private boolean checkPath(int i, int j) {
+	/* ####################################################################################################################################### */
+	
+	/* METODO PARA BUSCAR EL PRIMER CAMINO POSIBLE */
+	
+	public void firstWay() {
 		
-		for (int k = 0; k < path.size(); k++) {
+		resetControl();
+		//debug();
+		
+		int min =0;
+		
+		min=countWhites();
+		
+		do {
 			
-			if(path.get(k).getX()==i&&path.get(k).getY()==j) {
-				return true;
+			noExit();
+			int whites = countWhites();
+			
+			if(whites<min) {
+				min=whites;
+			}else {
+				break;
+			}	
+			debug();
+		}while(true);
+		
+		
+		if(countNodes()>0) {
+			debug();
+			System.out.println("\n\tEl laberinto tiene mas de un camino.");
+			
+			if(goAheadIntelligent(startI,startJ)) {
+				
+				path = createPath();
+				showMaze();
+				path = new int[0];
+				
+			}else {
+				System.out.println("\n\tEl laberinto no tiene solución.");
+			}
+			
+			
+		}else {
+			debug();
+			if(goAheadIntelligent(startI,startJ)) {
+				
+				System.out.println("\n\tEl laberinto solo tiene un camino posible.");
+				path = createPath();
+				showMaze();
+				path = new int[0];
+				
+			}else {
+				//debug();
+				System.out.println("\n\tEl laberinto no tiene solución.");
 			}
 			
 		}
 		
-		return false;
+		Input.toContinue();
+	
+	}
+	
+	private void resetControl() {
 		
+		for (int i = 0; i < map.length; i++) {
+			
+			for (int j = 0; j < map.length; j++) {
+				
+				mapControl[i][j] = map[i][j];
+				
+			}
+	
+		}
+		
+	}
+	
+	public void firstWay_V2() {
+		
+		simplifyMaze();
+		//debug();
+			
+		if(goAheadIntelligent(startI,startJ)) {
+				
+			path = createPath();
+			showMaze();
+			path = new int[0];
+				
+		}else {
+			System.out.println("\n\tEl laberinto no tiene solución.");
+		}
+
+		Input.toContinue();
+	
+	}
+	
+	private void debug() {
+		
+		System.out.println("ESTOY SIMPLIFICANDO EL LABERINTO");
+		
+		for (int i = 0; i < mapControl.length; i++) {
+			for (int j = 0; j < mapControl[0].length; j++) {
+				
+				System.out.print(mapControl[i][j]+" ");
+				
+			}
+			
+			System.out.println();
+		}
+		
+		System.out.println();
+		
+	}
+	
+	private boolean goAhead(int i, int j) {
+
+		if (i == endI && j == endJ) {
+			return true;
+		}
+		
+		if (mapControl[i][j] == '#' || mapControl[i][j] == '*') {
+			return false; 
+		}
+		
+		mapControl[i][j] = '*';
+								
+		boolean result;
+		
+		result = goAhead(i, j+1);
+		if (result) {
+			return true;
+		}
+		
+		result = goAhead(i-1, j);
+		if (result) {
+			return true;
+		}
+		
+		result = goAhead(i, j-1);
+		if (result) {
+			return true;
+		}
+		
+		result = goAhead(i+1, j);
+		if (result) {
+			return true;
+		}
+		
+		mapControl[i][j] = ' ';
+		return false;
 	}
 	
 	private boolean goAheadIntelligent(int i, int j) {
@@ -656,18 +789,18 @@ public class Maze{
 			movements[3][0] = i; // derecha
 			movements[3][1] = j+1; // derecha
 
+			
 		}
 
 		if (i == endI && j == endJ) {
 			return true;
 		}
 		
-		if (map[i][j] == '#' || checkPath(i,j)) {
+		if (mapControl[i][j] == '#' || mapControl[i][j] == '*') {
 			return false; 
 		}
 		
-		path.push(new Coordinate(i,j));
-		//map[i][j] = '*';
+		mapControl[i][j] = '*';
 								
 		boolean result;
 		
@@ -691,31 +824,231 @@ public class Maze{
 			return true;
 		}
 		
-		path.pop();
-		//map[i][j] = ' ';
+		mapControl[i][j] = ' ';
 		return false;
+	}
+	
+	private int countWhites() {
+		
+		int exit=0;
+		
+		for (int i = 0; i < mapControl.length; i++) {
+			
+			for (int j = 0; j < mapControl[0].length; j++) {
+				
+				if(mapControl[i][j]==' ') {
+					exit++;
+					
+				}
+				
+			}
+			
+		}
+		
+		return exit;	
+		
+	}
+	
+	private int[] createPath() {
+		
+		ArrayList<Integer> position = new ArrayList<Integer>();
+		
+		for (int i = 0; i < mapControl.length; i++) {
+			
+			for (int j = 0; j < mapControl[0].length; j++) {
+				
+				if(mapControl[i][j]=='*') {
+					
+					position.add(i);
+					position.add(j);
+
+				}
+				
+			}
+			
+		}
+		
+		int[] exit=new int[position.size()];
+		
+		for (int i = 0; i < exit.length; i++) {
+			
+			exit[i]=position.get(i);
+			
+		}
+		
+		return exit;	
+		
+	}
+	
+	private int[] createPathNew(ArrayList<Integer> lista) {
+		
+		int[] exit=new int[lista.size()];
+		
+		for (int i = 0; i < exit.length; i++) {
+			
+			exit[i]=lista.get(i);
+			
+		}
+		
+		return exit;	
+		
+	}
+	
+	private int countNodes() {
+		
+		int exit=0;
+		
+		for (int i = 0; i < mapControl.length; i++) {
+			
+			for (int j = 0; j < mapControl[0].length; j++) {
+				
+				if(isNode(i,j)) {
+					
+					exit++;
+					
+				}
+				
+			}
+			
+		}
+		
+		return exit;	
+		
+	}
+	
+	private boolean isNode(int i, int j) { // si es casilla devuelve false, si es nodo devuelve true
+		
+		if(mapControl[i][j]==' ') {
+			
+			int cont =0;
+			
+			if(mapControl[i-1][j]==' ') {
+				cont ++;
+			}
+			
+			if(mapControl[i+1][j]==' ') {
+				cont ++;
+			}
+			
+			if(mapControl[i][j-1]==' ') {
+				cont ++;
+			}
+			
+			if(mapControl[i][j+1]==' ') {
+				cont ++;
+			}
+			
+			if(cont>=3) {
+				
+				return true;
+				
+			}else {
+				return false;
+			}
+			
+		}
+		
+		return false;
+			
+	}
+	
+	private void noExit() {
+		
+		for (int i = 1; i < mapControl.length-1; i++) {
+			
+			for (int j = 1; j < mapControl[0].length-1; j++) {
+				
+				if(mapControl[i][j]==' ') {
+					
+					int cont =0;
+					
+					if(mapControl[i-1][j]==' ') {
+						cont ++;
+					}
+					
+					if(mapControl[i+1][j]==' ') {
+						cont ++;
+					}
+					
+					if(mapControl[i][j-1]==' ') {
+						cont ++;
+					}
+					
+					if(mapControl[i][j+1]==' ') {
+						cont ++;
+					}
+					
+					if(cont<=1) {
+						
+						if(isInOrOut(i, j)) {
+							continue;
+						}else {
+							mapControl[i][j]='#';
+						}
+						
+					}else {
+						
+						continue;
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+	}
+	
+	private boolean isInOrOut(int i, int j) {
+		
+		if(i==startI && j==startJ) {
+			return true;
+		}
+		
+		if(i==endI && j==endJ) {
+			return true;
+		}
+		
+		return false;
+		
+	}
+	
+	private void simplifyMaze() {
+		
+		resetControl();
+		//debug();
+		
+		int min =0;
+		
+		min=countWhites();
+		
+		do {
+			
+			noExit();
+			int whites = countWhites();
+			
+			if(whites<min) {
+				min=whites;
+			}else {
+				break;
+			}	
+			debug();
+		}while(true);
+		
 	}
 	
 	/* METODO PARA BUSCAR EL CAMINO MAS CORTO */
 	
 	public void shorterWay() {
 		
-	/*	if (goAheadAllWays(startI, startJ)) {
-
-			showMaze();
-
-		} else {
-			System.out.println("\n\tEl laberinto no tiene solución.");
-		}
-
-		Input.toContinue();*/
 		
 	}
 	
 	/* METODO PARA BUSCAR TODOS LOS CAMINOS POSIBLES */
-	/*
+	
 	public void allWay() {
 		
+		simplifyMaze();
 		soluciones = new ArrayList<ArrayList<Integer>>();
 		temporales = new ArrayList<Integer>();
 		
@@ -751,7 +1084,7 @@ public class Maze{
 			
 			
 		}else {
-		
+			debug();
 			if(goAheadIntelligent(startI,startJ)) {
 				
 				System.out.println("\n\tEl laberinto solo tiene un camino posible.");
@@ -770,8 +1103,8 @@ public class Maze{
 		
 		
 	}
-	*/
-	/*private boolean goAheadAllWays(int i, int j) {
+	
+	private boolean goAheadAllWays(int i, int j, ArrayList<Integer> casillas) {
 
 		if (i == endI && j == endJ) { // aqui debo devolver el array list completo como un array y añadirlo
 			
@@ -782,11 +1115,11 @@ public class Maze{
 			return false;
 		}
 		
-		if (map[i][j] == '#' || map[i][j] == '*') {
+		if (mapControl[i][j] == '#' || mapControl[i][j] == '*') {
 			return false; 
 		}
 		
-		map[i][j] = '*';
+		mapControl[i][j] = '*';
 		casillas.add(i);
 		casillas.add(j);
 							
@@ -813,10 +1146,10 @@ public class Maze{
 //			return true;
 	//	}
 		
-		map[i][j] = ' ';
+		mapControl[i][j] = ' ';
 		//casillas.remove(casillas.size() - 1); // Remove the last added j
         //casillas.remove(casillas.size() - 1); 
 		return false;
 	}
-	*/
+	
 }

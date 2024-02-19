@@ -61,7 +61,7 @@ public class Config{
 	
 	/* LISTADO DE ATRIBUTOS ESTATICOS */
 	
-	public static final String VERSION = "✅ -- Version: 0.3.0 --";
+	public static final String VERSION = "✅ -- Version Estable: 1.0.0 --";
 	public static final String PATH = ".\\assets\\mazes\\";
 	public static final String WELCOME ="\n          \\r                                        BIENVENIDO A ARIADNE-SOFT.\n"
 			+ "      %@@,...#@@.\n   (@            #@\n  &*     @.        @.\n ,&     *@. &,     ,@\n  @      @  &,     /&                                       .#&@@@%*\n  *@              /&                                     &@          #@.\n    %@.         #@  %@(       *@@&&&@@&.               /&     @@@&     /@\n        (&@@&#.         #@((@           ,@.           .@      @@@*      (%\n                          @.      /@/     (&          ,@         (*     *&           &@@@@@@@#\n                         @/      @ #/      %@#/.       @*               @@@.      @*           @@\n                         &/     ...#/      %*           /@            %@     ,@@@%     #,@       @.\n                          @,              #%               #@&(,,*&@&.          @        @       .@\n                           *@.          /@.                       @             @        @       ,@\n                              .%@@@@@@#                           #@            /@               @\n                                    ,@                             @,             @%          .@(\n                                     @/                            .@           @#   *@@@@@@%.\n                                      @                          /@&/. .*&@( /@.\n                                      /%                       @.            @,\n                                   /@&      ,@@              /@        *#     #%\n                                 @(             @,           @        .@       @\n                                @         #*     @/  ./%@@@@@@.     &/         @\n                               ,@         &*     .@           @.              @\n                                @     *%#%@      #%            ,@(         *@*\n                                 @.             &%                 ,#@@@#*\n                                   @&.       *@(\n                                        ,*.\n ";                                                                                                                                                                                
@@ -86,9 +86,8 @@ public class Config{
 	public static final String SOLVE_MAZE_MENU = "\n\t------------------- MUENU -------------------\n"
 			+"\t[1] - BUSCAR UN CAMINO\n"
 			+"\t[2] - BUSCAR LA RUTA MAS CORTA\n"
-			+"\t[3] - MOSTRAR POSIBLES SOLUCIONES\n"
 			+"\t[0] - SALIR\n"
-			+"\tSeleccione una opcion [0-3]: ";
+			+"\tSeleccione una opcion [0-2]: ";
 	
 	public static final String LOGIN = "  __        ______     _______  __  .__   __.\n"
 									 + " |  |      /  __  \\   /  _____||  | |  \\ |  |\n"
