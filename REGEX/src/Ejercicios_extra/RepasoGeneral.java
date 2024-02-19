@@ -10,26 +10,26 @@ public class RepasoGeneral {
 
 		//Binario();
 		//Dni();
-		Email();
+		//Email();
 		//EnteroNegativo();
 		//EnteroPositivo();
-		Fecha();
+		//Fecha();
 		//Hexadecimal();
-		Instagram();
-		IP();
-		ISBN();
-		Matricula();
-		NombresCompuestos();
-		NuemeroEntero();
+		//Instagram();
+		//IP();
+		//ISBN();
+		//Matricula();
+		//NombresCompuestos();
+		//NuemeroEntero();
 		//Octal();
-		PasswordCompleja();
-		PasswordSimple();
-		Real();
-		RealConXDecimales();
-		RealNegativo();
-		RealNegativoConXDecimales();
-		RealPositivo();
-		RealPositivoConXDecimales();
+		//PasswordCompleja();
+		//PasswordSimple();
+		//Real();
+		//RealConXDecimales(4);
+		//RealNegativo();
+		//RealNegativoConXDecimales(2);
+		//RealPositivo();
+		//RealPositivoConXDecimales();
 
 	}
 
@@ -140,10 +140,10 @@ public class RepasoGeneral {
 
 	public static void Instagram() {
 		
-		System.out.print("Inserte numero binario: ");
+		System.out.print("Inserte un instagram: ");
 		String texto = teclado.nextLine().trim();
 		
-		String regex="";
+		String regex="^@[\\w-]+$";
 		
 		if(texto.matches(regex)) {
 			System.out.println("Coincide");
@@ -170,10 +170,14 @@ public class RepasoGeneral {
 
 	public static void ISBN() {
 		
-		System.out.print("Inserte numero binario: ");
+		/*
+		 * Validar ISBN de 13 digitos, siempre empieza en 978 o 979
+		 */
+		
+		System.out.print("Inserte un ISBN: ");
 		String texto = teclado.nextLine().trim();
 		
-		String regex="";
+		String regex="^(978|979)-(\\d{1})-(\\d{3})-(\\d{5})-(\\d{1})";
 		
 		if(texto.matches(regex)) {
 			System.out.println("Coincide");
@@ -185,10 +189,21 @@ public class RepasoGeneral {
 
 	public static void Matricula() {
 		
-		System.out.print("Inserte numero binario: ");
+		System.out.print("Inserte una matricula moderna: ");
 		String texto = teclado.nextLine().trim();
 		
-		String regex="";
+		String regex="^(\\d{4})([BCDEFGHJKLMNPRSTVWXYZ]{3})$";
+		
+		if(texto.matches(regex)) {
+			System.out.println("Coincide");
+		}else {
+			System.err.println("ERROR");
+		}
+		
+		System.out.print("Inserte una matricula antigua: ");
+		texto = teclado.nextLine().trim();
+		
+		regex="^(MU|MA|A|AL)-(\\d{4})-([BCDEFGHJKLMNPRSTVWXYZ]{2,3})$";
 		
 		if(texto.matches(regex)) {
 			System.out.println("Coincide");
@@ -275,10 +290,10 @@ public class RepasoGeneral {
 
 	public static void Real() {
 		
-		System.out.print("Inserte numero binario: ");
+		System.out.print("Inserte numero real: ");
 		String texto = teclado.nextLine().trim();
 		
-		String regex="";
+		String regex="^-?\\d+[\\.,]{1}\\d+$";
 		
 		if(texto.matches(regex)) {
 			System.out.println("Coincide");
@@ -288,12 +303,12 @@ public class RepasoGeneral {
 
 	}
 
-	public static void RealConXDecimales() {
+	public static void RealConXDecimales(int num) {
 		
-		System.out.print("Inserte numero binario: ");
+		System.out.print("Inserte numero real con "+num+" decimales: ");
 		String texto = teclado.nextLine().trim();
 		
-		String regex="";
+		String regex="^-?\\d+[\\.,]{1}\\d{"+num+"}$";
 		
 		if(texto.matches(regex)) {
 			System.out.println("Coincide");
@@ -305,10 +320,10 @@ public class RepasoGeneral {
 
 	public static void RealNegativo() {
 		
-		System.out.print("Inserte numero binario: ");
+		System.out.print("Inserte numero real negativo: ");
 		String texto = teclado.nextLine().trim();
 		
-		String regex="";
+		String regex="^-\\d+[\\.,]{1}\\d+$";
 		
 		if(texto.matches(regex)) {
 			System.out.println("Coincide");
@@ -318,12 +333,12 @@ public class RepasoGeneral {
 
 	}
 
-	public static void RealNegativoConXDecimales() {
+	public static void RealNegativoConXDecimales(int num) {
 		
-		System.out.print("Inserte numero binario: ");
+		System.out.print("Inserte numero real negativo con "+num+" decimales: ");
 		String texto = teclado.nextLine().trim();
 		
-		String regex="";
+		String regex="^-\\d+[\\.,]{1}\\d{"+num+"}$";
 		
 		if(texto.matches(regex)) {
 			System.out.println("Coincide");
@@ -335,10 +350,10 @@ public class RepasoGeneral {
 
 	public static void RealPositivo() {
 		
-		System.out.print("Inserte numero binario: ");
+		System.out.print("Inserte numero real positivo: ");
 		String texto = teclado.nextLine().trim();
 		
-		String regex="";
+		String regex="^\\d+[\\.,]{1}\\d+$";
 		
 		if(texto.matches(regex)) {
 			System.out.println("Coincide");
@@ -348,12 +363,12 @@ public class RepasoGeneral {
 
 	}
 
-	public static void RealPositivoConXDecimales() {
+	public static void RealPositivoConXDecimales(int num) {
 		
-		System.out.print("Inserte numero binario: ");
+		System.out.print("Inserte numero real positivo con "+num+" decimales: ");
 		String texto = teclado.nextLine().trim();
 		
-		String regex="";
+		String regex="^\\d+[\\.,]{1}\\d{"+num+"}$";
 		
 		if(texto.matches(regex)) {
 			System.out.println("Coincide");
