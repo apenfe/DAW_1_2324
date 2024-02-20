@@ -1,5 +1,8 @@
 package RepasoGlobalArrays;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /* Array08.java
  * 
  * Escribe un método que se llame separarURL() que recibe una cadena de caracteres de una URL
@@ -33,6 +36,31 @@ package RepasoGlobalArrays;
 
 public class Array08{
 	
+	public static void main(String[] args) {
+		
+		String url = "http://www.devbg.org/forum/index.php";
+		
+		String[] web = separarUrl(url);
+		
+		for (int i = 0; i < web.length; i++) {
+			System.out.println(web[i]);
+		}
+		
+	}
 	
+	public static String[] separarUrl(String url) {
+		
+		String regex = "://|/";
+		String[] trozos = url.split(regex,3);
+		
+		if (trozos.length==3) {
+			
+			trozos[2]="/"+trozos[2];
+			
+		}
+
+		return trozos;
+		
+	}
 
 }

@@ -18,6 +18,22 @@ import java.text.SimpleDateFormat;
 
 public class Array11{
 	
+	public static void main(String[] args) {
+		
+		System.out.println(horaActual());
+		
+	}
+	
+	public static String horaActual() {
+		
+		Date fecha = new Date(System.currentTimeMillis());
+		SimpleDateFormat formato = new SimpleDateFormat("hh:mm:ss");
+		return formato.format(fecha);
+		
+	}
+	
+	
+	
 	
 
 }

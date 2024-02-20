@@ -35,6 +35,35 @@ package RepasoGlobalArrays;
 
 public class Array07{
 	
+	public static void main(String[] args) {
 	
+		String texto = "Oracle ha anunciado hoy su nueva generación de compilador Java hoy. "
+				+ "Utiliza analizador avanzado y optimizador especial para la JVM de Oracle";
+		
+		String coincidencias = "JVM,Java,Oracle";
+		
+		reemplazaPalabras(texto,coincidencias);
+		
+	}
+	
+	public static void reemplazaPalabras(String texto, String coincidencias) {
+		
+		String[] censura = coincidencias.split(",");
+		
+		for (int i = 0; i < censura.length; i++) {
+			
+			String simbolos = "";
+			
+			for (int j = 0; j < censura[i].length(); j++) {
+				simbolos+="*";
+			}
+			
+			texto=texto.replaceAll(censura[i], simbolos);
+			
+		}
+		
+		System.out.println(texto);
+		
+	}
 
 }

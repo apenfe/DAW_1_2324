@@ -20,6 +20,33 @@ package RepasoGlobalArrays;
 
 public class Array13{
 	
+	public static void main(String[] args) {
+		
+		if(fechaValida(11,05,1995)) {
+			System.out.println("Fecha valida");
+		}else {
+			System.err.println("Fecha NO valida");
+		}
+	
+	}
+	
+	public static boolean fechaValida(int dia, int mes, int year) {
+		
+		String fecha = ""+dia+"/"+mes+"/"+year;
+		String regex = "^(0?[1-9]{1}|[12]{1}[0-9]{1}|3[01]{1})/(0?[1-9]{1}|1[0-2]{1})/([12]{1}[0-9]{3})$";
+		
+		if(fecha.matches(regex)) {
+			
+			
+			
+		}else {
+			
+			return false;
+			
+		}
+		
+	}
+	
 	
 
 }

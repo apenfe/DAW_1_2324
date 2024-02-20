@@ -286,7 +286,7 @@ public class Maze{
 			
 			System.out.print("\n\t\t");
 			
-			/* SE RECORRE TODO EL TAMAÑO DE LAS COLUMNAS DE LA MATRIZ */
+			/* SE RECORRE TOD EL TAMAÑO DE LAS COLUMNAS DE LA MATRIZ */
 			
 			for (int j = 0; j < map[0].length; j++) {
 				

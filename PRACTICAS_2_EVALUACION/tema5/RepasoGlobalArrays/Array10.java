@@ -18,6 +18,21 @@ import java.text.SimpleDateFormat;
 
 public class Array10{
 	
+	public static void main(String[] args) {
+		
+		System.out.println(fechaActual());
+		fechaActual();
+		
+	}
+	
+	public static String fechaActual() {
+		
+		Date fecha = new Date(System.currentTimeMillis());
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		return formato.format(fecha);
+		
+	}
+	
 	
 
 }

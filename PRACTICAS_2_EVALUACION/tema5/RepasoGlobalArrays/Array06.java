@@ -24,6 +24,34 @@ package RepasoGlobalArrays;
 
 public class Array06{
 	
+	public static void main(String[] args) {
+		
+		padRight("Introduccion",'*',20);
+		
+	}
 	
-
+	public static void padRight(String texto, char caracter, int numero) {
+		
+		String salida = "";
+		
+		if(texto.length()>=numero) {
+			
+			System.out.println("No es posible formatear, el texto debe ser inferior al numero.");
+			
+		}else {
+			
+			salida = texto;
+			
+			for (int i = 0; i < numero-texto.length(); i++) {		
+				
+					salida+=caracter;
+	
+			}
+			
+		}
+		
+		System.out.println(salida);
+		
+	}
+	
 }
