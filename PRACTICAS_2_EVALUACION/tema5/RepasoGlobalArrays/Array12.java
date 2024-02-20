@@ -46,12 +46,7 @@ public class Array12{
 		SimpleDateFormat horas = new SimpleDateFormat("hh:mm:ss");
 		
 		return fechas.format(fecha)+" >>> "+horas.format(fecha);
-
-		
-	
 		
 	}
 	
-	
-
 }

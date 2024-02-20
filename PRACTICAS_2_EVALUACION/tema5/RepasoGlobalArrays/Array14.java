@@ -21,6 +21,94 @@ package RepasoGlobalArrays;
 
 public class Array14{
 	
+	public static void main(String[] args) {
+		
+		if(fechaValida("11/5/1995")) {
+			System.out.println("Fecha valida");
+		}else {
+			System.err.println("Fecha NO valida");
+		}
+	
+	}
+	
+	public static boolean fechaValida(String fecha) {
+		
+		String[] date = fecha.split("/");
+		int dia = Integer.parseInt(date[0]);
+		int mes = Integer.parseInt(date[1]);
+		int year = Integer.parseInt(date[2]);
+
+		String regex = "^(0?[1-9]{1}|[12]{1}[0-9]{1}|3[01]{1})/(0?[1-9]{1}|1[0-2]{1})/([12]{1}[0-9]{3})$";
+		boolean bisiesto = esBisiesto(year);
+		
+		if(fecha.matches(regex)) {
+			
+			if(dia<=0||dia>31||mes<=0||mes>12) {
+				return false;
+			}
+			
+			if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12) {
+				
+				if (dia > 31) {
+					return false;
+				}
+
+			} else if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
+				
+				if (dia > 30) {
+					return false;
+				}
+
+			} else {
+
+				if (bisiesto) {
+					if (dia > 29) {
+						
+						return false;
+
+					}
+				} else {
+
+					if (dia > 28) {
+						
+						return false;
+
+
+					}
+
+				}
+
+			}
+			
+			
+			
+		}else {
+			
+			return false;
+			
+		}
+		
+		return true;
+		
+	}
+	
+	public static boolean esBisiesto(int year) {
+		
+		/*
+		 * Todos los años bisiestos son divisibles entre 4. Aquellos años que son divisibles entre 4, 
+		 * pero no entre 100, son bisiestos. Los años que son divisibles entre 100, pero no entre 400, 
+		 * no son bisiestos.
+		 */
+		
+		if((year%4==0&& year%100!=0)||(year%400==0)) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
+	
+	
 	
 
 }
