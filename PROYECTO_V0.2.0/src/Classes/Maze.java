@@ -119,7 +119,7 @@ public class Maze{
 	public void loadMaze() {
 		
 		int num = 0;
-		String file = ""; 
+		StringBuilder file = new StringBuilder();
 				
 		ArrayList<String> mazeNames = obtainTxtNames(Config.PATH); // OBTIENE LOS NOMBRES DE LOS LABERINTOS
 		
@@ -141,7 +141,7 @@ public class Maze{
 				System.out.println("\tVOLVIENDO AL MENU...");
 				return;
 			}else if(num>=1 && num<=mazeNames.size()) {
-				file+=mazeNames.get(num-1);
+				file.append(mazeNames.get(num-1));
 				break;
 			}else {
 				System.out.println("\tDebe Seleccionar una opcion entre [0-"+mazeNames.size()+"]: ");
@@ -153,13 +153,13 @@ public class Maze{
 			deleteMaze(true); // SE RESETEAN LOS VALORES COMPLETOS
 		}
 		
-		if(readMaze(Config.PATH+file)) { // SI EL LABERINTO SE LEE CORRECTAMENTE
-			System.out.println("\n\tEL ARCHIVO "+file+" HA SIDO CARGADO EXITOSAMENTE.");
-			this.fileName=file; // SE LE DA NOMBRE
+		if(readMaze(Config.PATH+file.toString())) { // SI EL LABERINTO SE LEE CORRECTAMENTE
+			System.out.println("\n\tEL ARCHIVO "+file.toString()+" HA SIDO CARGADO EXITOSAMENTE.");
+			this.fileName=file.toString(); // SE LE DA NOMBRE
 			this.loaded=true; // SE VUELVE A INDICAR QUE ESTÁ CARGADO
 			
 		}else {
-			System.out.println("\n\tERROR AL LEER EL ARCHIVO "+file);
+			System.out.println("\n\tERROR AL LEER EL ARCHIVO "+file.toString());
 		}
 		
 	}
@@ -200,11 +200,11 @@ public class Maze{
 	private boolean readMaze(String fullPath) {
 		
 		ArrayList<String> lines = new ArrayList<>();
+		File userMaze = new File(fullPath);
 		
-        try {
+        try( Scanner reader = new Scanner(userMaze)) {
         	
-        	File userMaze = new File(fullPath);
-        	Scanner reader = new Scanner(userMaze);
+     
         	
         	while(reader.hasNextLine()) {
         		
@@ -212,8 +212,6 @@ public class Maze{
         		lines.add(line);
         		
         	}
-        	
-        	reader.close();
         	
         }catch(Exception e) {
         	
@@ -411,8 +409,6 @@ public class Maze{
 				endI=num;
 			}
 			
-			num=0;
-			
 			do { // ESTABLECE Y COMPRUEBA LA COLUMNA
 				
 				num=Input.getInt("\r\tIntroduzca la columna de "+casilla+": ", true);
@@ -464,11 +460,7 @@ public class Maze{
 	
 	private boolean sameInOut() {
 		
-		if((startI==endI && endJ==startJ) && (startI!=0 && startJ!=0 )) {
-			return true;
-		}else {
-			return false;
-		}
+		return (startI==endI && endJ==startJ) && (startI!=0 && startJ!=0 );
 		
 	}
 	

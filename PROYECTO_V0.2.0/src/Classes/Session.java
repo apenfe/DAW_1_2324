@@ -74,6 +74,7 @@ public class Session{
 	private boolean logged;
 	private static final String FILE_PATH = ".\\assets\\files\\"; // EN WINDOWS SE DEBE DE PONER .\ AL INICIO Y EN EL RESTO DE LA RUTA \
 	private static final String USER_FILE = "users.txt"; // NOMBRE DEL ARCHIVO
+	private static final String QUESTION = "\n\t¿Desea volver a intentarlo? Si - s: ";
 	
 	/* LISTADO DE MÉTODOS DE LA CLASE */
 	
@@ -124,7 +125,7 @@ public class Session{
 					
 					/* EN CASO NEGATIVO PREGUNTA SI DESEA VOLVER A INTENTARLO */
 					
-					if(!Config.confirmExit("\n\t¿Desea volver a intentarlo? Si - s: ","s")) {
+					if(!Config.confirmExit(QUESTION,"s")) {
 						follow=false;
 						break;
 					}
@@ -152,14 +153,11 @@ public class Session{
 			if(secondaryKey(userdata)) { // SI DATOS SECUNDARIOS SON CORRECTOS
 				
 				createUser(FILE_PATH+USER_FILE,"#",userdata); // SE CREA UN NUEVO USUARIO EN EL FICHERO
-				break;
 				
-			}else { // SI EL USUARIO DESISTE, EL PROGRAMA TERMINA Y NO SE CREA NINGÚN USUARIO
-					
-				break;
-					
 			}
-				
+			
+			break;
+			
 		}
 				
 	}
@@ -200,16 +198,17 @@ public class Session{
 	private void createUser(String file, String symbol, String[] data) {
 		
 		/* ESTE METODO RECIBE UN ARRAY CON TODOS LOS DATOS CORRECTOS DEL USUARIO */
+		File dataBase = new File(file);
 		
-		 try {
+		 try( BufferedWriter dataIn = new BufferedWriter(new FileWriter(dataBase, true));) {
 		    	
-			    File dataBase = new File(file);
-	            BufferedWriter dataIn = new BufferedWriter(new FileWriter(dataBase, true));
+			   
+	       
 			    
 	            /* CONCATENA LA INFO CON EL CARACTER DESEADO Y LO ESCRIBE EN EL FICHERO */
 	            
 	            dataIn.write("\n"+data[0]+symbol+data[1]+symbol+data[2]+symbol+data[3]+symbol+data[4]+symbol+data[5]+symbol+data[6]+symbol+"user");
-			    dataIn.close();
+			
 			    
 			    System.out.println("\n\tProceso finalizado, el usuario \""+data[0]+"\" ha quedado correctamente registrado.");
 			      
@@ -308,7 +307,7 @@ public class Session{
 					System.out.println("\t\tFormato de Nickname incorrecto.");
 					System.out.println("\tPor favor, corrija los campos indicados antes de continuar con el registro.");
 					
-					if(!Config.confirmExit("\n\t¿Desea volver a intentarlo? Si - s: ","s")) { // SI NO DESEA SEGUIR SE DEVUELVE FALSE
+					if(!Config.confirmExit(QUESTION,"s")) { // SI NO DESEA SEGUIR SE DEVUELVE FALSE
 						return false;
 					}
 					
@@ -382,7 +381,7 @@ public class Session{
 				
 				System.out.println("\n\tPor favor, corrija los campos indicados antes de continuar con el registro.");
 				
-				if(!Config.confirmExit("\n\t¿Desea volver a intentarlo? Si - s: ","s")) {
+				if(!Config.confirmExit(QUESTION,"s")) {
 					return false;
 				}
 			}
