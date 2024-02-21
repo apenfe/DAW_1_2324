@@ -276,10 +276,10 @@ public class Maze{
 				boolean check = true;
 
 				if ((i == startI && j == startJ) && (startI != 0 && startJ != 0)) {
-					System.out.print("I ");
+					System.out.print(Config.ROJO+"I "+Config.RESET);
 					check = false;
 				} else if ((i == endI && j == endJ) && (endI != 0 && endJ != 0)) {
-					System.out.print("F ");
+					System.out.print(Config.ROJO+"F "+Config.RESET);
 					check = false;
 				}
 
@@ -294,7 +294,7 @@ public class Maze{
 						if(i==path.get(k).getX() && j==path.get(k).getY()) {
 							
 							// metodo carcater
-							System.out.print(symbolPath(path.get(k))+" ");
+							System.out.print(Config.VERDE+symbolPath(path.get(k))+" "+Config.RESET);
 							camino=true;
 							
 						}
@@ -337,7 +337,7 @@ public class Maze{
 		
 	}
 	
-	private void setDirections() {
+/*	private void setDirections() {
 
 		for (int i = 0; i < path.size()-1; i++) {
 			
@@ -353,7 +353,7 @@ public class Maze{
 			
 		}
 		
-	}
+	}*/
 	
 	/* METODO PARA MOSTRAR LOS NUMEROS DE COLUMNA EN VERTICAL */
 	
@@ -567,19 +567,26 @@ public class Maze{
 
 	public void firstWay() {
 
+		long inicio = System.currentTimeMillis();
+		
 		if (goAheadIntelligent(startI, startJ)) {
 
 			showMaze();
 
+			long fin = System.currentTimeMillis();
+			
+			double time = ((double)fin-(double)inicio)/1000.0;
+			System.out.println("\n\tTiempo acumulado: "+time+" (s).");
+
 		} else {
 			System.out.println("\n\tEl laberinto no tiene solución.");
 		}
-
+		path.clear();
 		Input.toContinue();
 
 	}
 	
-	private boolean checkPath(int i, int j) {
+	private boolean checkPath(int i, int j, Stack<Coordinate> path) {
 		
 		for (int k = 0; k < path.size(); k++) {
 			
@@ -662,7 +669,7 @@ public class Maze{
 			return true;
 		}
 		
-		if (map[i][j] == '#' || checkPath(i,j)) {
+		if (map[i][j] == '#' || checkPath(i,j,path)) {
 			return false; 
 		}
 		
@@ -695,128 +702,75 @@ public class Maze{
 		//map[i][j] = ' ';
 		return false;
 	}
-	
+
 	/* METODO PARA BUSCAR EL CAMINO MAS CORTO */
-	
+
 	public void shorterWay() {
+
+		long inicio = System.currentTimeMillis();
+		Stack<Coordinate> path2 = new Stack<Coordinate>();
+
+		path.clear();
 		
-	/*	if (goAheadAllWays(startI, startJ)) {
-
-			showMaze();
-
-		} else {
-			System.out.println("\n\tEl laberinto no tiene solución.");
+		int size = (map.length)+(map[0].length)*10;
+		
+		for (int i = 0; i < size; i++) {
+			
+			path.push(new Coordinate(0,i));
+			
 		}
-
-		Input.toContinue();*/
 		
+		goAheadAllWays(startI, startJ, path2);
+
+		showMaze();
+		path.clear();
+		
+		long fin = System.currentTimeMillis();
+		
+		double time = ((double)fin-(double)inicio)/1000.0;
+		System.out.println("\n\tTiempo acumulado: "+time+" (s).");
+		Input.toContinue();
+
 	}
 	
-	/* METODO PARA BUSCAR TODOS LOS CAMINOS POSIBLES */
-	/*
-	public void allWay() {
-		
-		soluciones = new ArrayList<ArrayList<Integer>>();
-		temporales = new ArrayList<Integer>();
-		
-		if(countNodes()>0) {
-			//debug();
-			System.out.println("\n\tEl laberinto tiene mas de un camino.");
-			
-			if(!goAheadAllWays(startI,startJ,temporales )) {
-				System.out.println("\n\tEl laberinto tiene "+soluciones.size()+" soluciones.");
-
-				 for (ArrayList<Integer> solution : soluciones) {
-			            System.out.print("Solution: ");
-			            for (int i = 0; i < solution.size(); i += 2) {
-			                int x = solution.get(i);
-			                int y = solution.get(i + 1);
-			                System.out.print("(" + x + ", " + y + ") ");
-			      
-			            }
-			            
-			          path = createPathNew(solution);
-					  showMaze();
-					  path = new int[0];
-			            System.out.println();
-			        }
-				
-				//path = createPath();
-				//showMaze();
-				//path = new int[0];
-				
-			}else {
-				System.out.println("\n\tEl laberinto no tiene solución.");
-			}
-			
-			
-		}else {
-		
-			if(goAheadIntelligent(startI,startJ)) {
-				
-				System.out.println("\n\tEl laberinto solo tiene un camino posible.");
-				path = createPath();
-				showMaze();
-				path = new int[0];
-				
-			}else {
-				//debug();
-				System.out.println("\n\tEl laberinto no tiene solución.");
-			}
-			
-		}
-		
-		Input.toContinue();
-		
-		
-	}
-	*/
-	/*private boolean goAheadAllWays(int i, int j) {
+	private boolean goAheadAllWays(int i, int j, Stack<Coordinate> path2 ) { // DEBO CREAR UNA LISTA INTERNA Y SOLO SI SE CUMPLE CONDICION AÑADIR LA A LA GENERAL
 
 		if (i == endI && j == endJ) { // aqui debo devolver el array list completo como un array y añadirlo
 			
-			System.out.println("SOLUCION");
-			soluciones.add(new ArrayList<>(casillas)); // Add a copy of casillas to soluciones
-			//soluciones.add(casillas);
-			//showMaze(mapControl);
+			//System.out.println("SOLUCION ENCONTRADA...");
+			
+		//	System.out.println("Tamaño path: "+path.size());
+		//	System.out.println("Tamaño path2: "+path2.size());
+
+			
+			if(path2.size()<path.size()) {
+				
+				System.out.println("\t SOLUCION MAS CORTA");
+				path.clear();
+				path.addAll(path2);
+				
+			}
+			
 			return false;
 		}
 		
-		if (map[i][j] == '#' || map[i][j] == '*') {
+		if (map[i][j] == '#' || checkPath(i,j,path2)) {
 			return false; 
 		}
 		
-		map[i][j] = '*';
-		casillas.add(i);
-		casillas.add(j);
-							
-		//boolean result;
+		path2.push(new Coordinate(i,j));
 		
-		goAheadAllWays(i, j+1,casillas);
-		//result = goAheadAllWays(i, j+1);
-		//if (result) {
-	//		return true;
-	//	}
-		goAheadAllWays(i-1, j,casillas);
-		//result = goAheadAllWays(i-1, j);
-//		if (result) {
-	//		return true;
-	//	}
-		goAheadAllWays(i, j-1,casillas);
-		//result = goAheadAllWays(i, j-1);
-//		if (result) {
-	//		return true;
-	//	}
-		goAheadAllWays(i+1, j,casillas);
-		//result = goAheadAllWays(i+1, j);
-	//	if (result) {
-//			return true;
-	//	}
+		goAheadAllWays(i, j+1, path2);
+
+		goAheadAllWays(i-1, j, path2);
+
+		goAheadAllWays(i, j-1, path2);
+
+		goAheadAllWays(i+1, j, path2);
 		
-		map[i][j] = ' ';
-		//casillas.remove(casillas.size() - 1); // Remove the last added j
-        //casillas.remove(casillas.size() - 1); 
+		path2.pop();
 		return false;
+		
 	}
-	*/
+	
 }
