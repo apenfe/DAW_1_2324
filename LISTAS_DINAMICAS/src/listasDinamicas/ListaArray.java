@@ -133,6 +133,41 @@ public class ListaArray {
 		return arrayElementos[indice];
 	}
 
+	/**
+	 * Elimina el elemento especificado en el índice.
+	 * @param indice - del elemento a eliminar.
+	 * @return - el elemento eliminado.
+	* @exception IndexOutOfBoundsException - índice no está entre 0 y numElementos-1.
+	 */
+	public Object remove(int indice) {
+	// El índice debe ser válido para la lista.
+	if (indice >= numElementos || indice < 0) {
+	throw new IndexOutOfBoundsException("Índice incorrecto: " + indice);
+	}
+	// Elimina desplazando uno hacia la izquierda, sobre la posición a borrar.
+	Object elem = arrayElementos[indice];
+	System.arraycopy(arrayElementos, indice+1, arrayElementos, indice, numElementos - (indice+1));
+
+	// Ajusta el último elemento.
+	arrayElementos[numElementos-1] = null;
+	numElementos--;
+	return elem;
+	}
+	 
+	/**
+	 * Elimina el elemento especificado.
+	 * @param elemento - elemento a eliminar.
+	 * @return - el índice del elemento eliminado o -1 si no existe.
+	 */
+	public int remove(Object elem) {
+	int indice = indexOf(elem);
+
+	if (indice != -1) {
+	 remove(indice);
+	   	 }		 
+	return indice;
+	}
+
 
 
 	// ...
