@@ -674,7 +674,6 @@ public class Maze{
 		}
 		
 		path.push(new Coordinate(i,j));
-		//map[i][j] = '*';
 								
 		boolean result;
 		
@@ -699,7 +698,6 @@ public class Maze{
 		}
 		
 		path.pop();
-		//map[i][j] = ' ';
 		return false;
 	}
 
@@ -733,19 +731,12 @@ public class Maze{
 
 	}
 	
-	private boolean goAheadAllWays(int i, int j, Stack<Coordinate> path2 ) { // DEBO CREAR UNA LISTA INTERNA Y SOLO SI SE CUMPLE CONDICION AÑADIR LA A LA GENERAL
+	private boolean goAheadAllWays(int i, int j, Stack<Coordinate> path2 ) {
 
-		if (i == endI && j == endJ) { // aqui debo devolver el array list completo como un array y añadirlo
-			
-			//System.out.println("SOLUCION ENCONTRADA...");
-			
-		//	System.out.println("Tamaño path: "+path.size());
-		//	System.out.println("Tamaño path2: "+path2.size());
-
+		if (i == endI && j == endJ) {
 			
 			if(path2.size()<path.size()) {
 				
-				System.out.println("\t SOLUCION MAS CORTA");
 				path.clear();
 				path.addAll(path2);
 				
@@ -761,11 +752,8 @@ public class Maze{
 		path2.push(new Coordinate(i,j));
 		
 		goAheadAllWays(i, j+1, path2);
-
 		goAheadAllWays(i-1, j, path2);
-
 		goAheadAllWays(i, j-1, path2);
-
 		goAheadAllWays(i+1, j, path2);
 		
 		path2.pop();
