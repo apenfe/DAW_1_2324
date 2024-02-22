@@ -30,13 +30,14 @@ Debe empezar por un carácter alfabético, mayúscula o minúscula
 A partir del segundo carácter puede contener mayúsculas, minúsculas, números, y caracteres especiales como _ # $ % ? = + -
 		 */
 		
-		String texto = pedirTexto("Inserte un nick: ");
-		String regex = "^[A-Za-z]{1}[A-Za-z\\d_#$%?=+-]{2,19}$";
+		System.out.print("Inserte un nick: ");
+		String texto = teclado.nextLine();
+		String regex = "^[A-Za-z][A-Za-z0-9_#$%?=+-]{1,19}$";
 		
 		if(texto.matches(regex)) {
-			System.out.println("CORRECTO");
+			System.out.println("Correcto");
 		}else {
-			System.err.println("INCORRECTO");
+			System.err.println("Incorrecto");
 		}
 
 	}
@@ -63,10 +64,11 @@ El último carácter es una letra, mayúscula o minúscula, la cual solo puede s
 		letrasFin+=letrasFin.toLowerCase();
 		String letrasInicio = "XYZ";
 		letrasInicio+=letrasInicio.toLowerCase();
+		
 		String texto = pedirTexto("Inserte un DNI: ");
-		String regex = "^\\d{8}["+letrasFin+"]$";
+		String regex = "^[0-9]{8}["+letrasFin+"]{1}$";
 		String texto1 = pedirTexto("Inserte un NIE: ");
-		String regex1 = "^["+letrasInicio+"]\\d{7}["+letrasFin+"]$";
+		String regex1 = "^["+letrasInicio+"]{1}[0-9]{7}["+letrasFin+"]{1}$";
 		
 		if(texto.matches(regex)) {
 			System.out.println("CORRECTO");
@@ -92,6 +94,8 @@ El último carácter es una letra, mayúscula o minúscula, la cual solo puede s
 		 * Cada grupo de números puede tener entre 1 y 3 caracteres ya que el rango numérico de cada grupo va 
 		 * desde el 0 al 255.
 		 * 
+		 * 	String regex = "^((2[0-5]{2}|2[0-4]{1}[0-9]{1}|1[0-9]{2}|[0-9]{2}|[0-9]{1})\\.){3}(2[0-5]{2}|2[0-4]{1}[0-9]{1}|1[0-9]{2}|[0-9]{2}|[0-9]{1}){1}$";
+		 * 
 		 * Opcionalmente, se podría hacer mediante un split y comprobar cada grupo individualmente, pero se 
 		 * recomienda dejar esta opción para cuando se haya probado la expresión regular que abarca todas las 
 		 * posibilidades de cada grupo.
@@ -99,7 +103,7 @@ El último carácter es una letra, mayúscula o minúscula, la cual solo puede s
 		 */
 		
 		String texto = pedirTexto("Inserte una IP: ");
-		String regex = "^((2[0-5]{2}|2[0-4]{1}[0-9]{1}|1[0-9]{2}|[0-9]{2}|[0-9]{1})\\.){3}(2[0-5]{2}|2[0-4]{1}[0-9]{1}|1[0-9]{2}|[0-9]{2}|[0-9]{1}){1}$";
+		String regex = "^(([0-9]{1}|[1-9]{1}[0-9]{1}|1[0-9]{2}|2[0-4]{1}[0-9]{1}|2[0-5]{2})\\.){3}([0-9]{1}|[1-9]{1}[0-9]{1}|1[0-9]{2}|2[0-4]{1}[0-9]{1}|2[0-5]{2})$";
 		
 		if(texto.matches(regex)) {
 			System.out.println("CORRECTO");
@@ -117,6 +121,8 @@ El último carácter es una letra, mayúscula o minúscula, la cual solo puede s
 		 * Crea un programa que pida una fecha en formato dd/mm/aaaa e indique si el 
 		 * formato es válido de acuerdo a las siguientes consideraciones:
 		 * 
+		 * String regex = "^(0?[1-9]{1}|[12]{1}[0-9]{1}|3[01]{1}){1}/(0?[1-9]{1}|1[0-2]{1}){1}/([12]{1}[\\d]{3}){1}$";
+		 * 
 		 * Tanto los días como los meses pueden tener 1 o 2 caracteres.
 		 * Para los días hay que tener en cuenta que, si tiene dos caracteres y el 
 		 * primero de ellos es un "3", el segundo solo puede tener un "0" o un "1".
@@ -127,7 +133,7 @@ El último carácter es una letra, mayúscula o minúscula, la cual solo puede s
 		 */
 		
 		String texto = pedirTexto("Inserte una fecha: ");
-		String regex = "^(0?[1-9]{1}|[12]{1}[0-9]{1}|3[01]{1}){1}/(0?[1-9]{1}|1[0-2]{1}){1}/([12]{1}[\\d]{3}){1}$";
+		String regex = "^(0?[1-9]{1}|[12]{1}[0-9]{1}|3[0-1]{1})/(0?[1-9]{1}|1[0-2]{1})/([12]{1}[0-9]{3})$";
 		
 		if(texto.matches(regex)) {
 			System.out.println("CORRECTO");
@@ -148,6 +154,8 @@ El último carácter es una letra, mayúscula o minúscula, la cual solo puede s
 		 * Entre medias de la cadena puede contener espacios en blanco, para separar nombre y apellidos.
 		 * Pueden haber tildes en cualquier posición, incluyendo las tildes invertidas "àèìòù", tanto 
 		 * mayúsculas como minúsculas.
+		 * 
+		 * String regex = "^([a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÜÈÌÙÒñÑ]{1}[a-záéíóúàèìòùñüç']+){1}( [a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÙÜÒñÑ]{1}[a-záéíóúàèìòùñüç']+(-[a-záéíóúàèìòùñüç']+)?){2}$";
 		 * 
 		 * La Ñ debe estar contemplada.
 		 * La diéresis en la Ü también debe tenerse en cuenta.
