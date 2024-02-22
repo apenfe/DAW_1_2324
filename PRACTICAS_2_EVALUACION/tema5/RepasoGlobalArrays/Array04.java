@@ -44,18 +44,20 @@ public class Array04{
 	
 	public static int numeroVecesSubCadena(String texto, String coincidencia) {
 		
-		int cont = 0;
+		int contador =0;
 		texto=texto.toLowerCase();
 		
 		Pattern patron = Pattern.compile(coincidencia);
 		Matcher busqueda = patron.matcher(texto);
 		
-		while(busqueda.find()) {
-			cont++;
+		while (busqueda.find()) {
+			
+			contador++;
+			
 		}
 		
-		return cont;
-	
+		return contador;
+		
 	}
 	
 	

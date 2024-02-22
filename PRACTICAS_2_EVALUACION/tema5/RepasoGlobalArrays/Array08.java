@@ -50,16 +50,15 @@ public class Array08{
 	
 	public static String[] separarUrl(String url) {
 		
-		String regex = "://|/";
-		String[] trozos = url.split(regex,3);
+		String[] salida = url.split("(://|/)",3);
 		
-		if (trozos.length==3) {
+		if(salida.length==3) {
 			
-			trozos[2]="/"+trozos[2];
+			salida[2]="/"+salida[2];
 			
 		}
-
-		return trozos;
+		
+		return salida;
 		
 	}
 

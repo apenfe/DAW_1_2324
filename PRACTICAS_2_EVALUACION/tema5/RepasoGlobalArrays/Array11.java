@@ -28,7 +28,10 @@ public class Array11{
 		
 		Date fecha = new Date(System.currentTimeMillis());
 		SimpleDateFormat formato = new SimpleDateFormat("hh:mm:ss");
-		return formato.format(fecha);
+		
+		String hora = formato.format(fecha);
+		
+		return hora;
 		
 	}
 	

@@ -46,19 +46,24 @@ public class Array02{
 		for (int i = 0; i < texto.length(); i++) {
 			
 			if(texto.charAt(i)=='(') {
+				
 				cont++;
+				
 			}else if(texto.charAt(i)==')') {
+				
 				cont--;
+				
 			}
 			
 		}
 		
 		if(cont==0) {
-			System.out.println("correcta");
+			System.out.println("Bien");
 		}else {
-			System.err.println("incorrecta");
+			System.out.println("Mal");
+
 		}
-	
+		
 	}
 	
 }

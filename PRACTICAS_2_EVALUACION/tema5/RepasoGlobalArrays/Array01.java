@@ -27,13 +27,9 @@ public class Array01{
 	
 	public static void reverse(String texto) {
 		
-		String salida = "";
-		
-		for (int i = texto.length()-1; i >= 0; i--) {
-			
-			salida+=texto.charAt(i);
-			
-		}
+		StringBuilder salida = new StringBuilder();
+		salida.append(texto);
+		salida.reverse();
 		
 		System.out.println(salida);
 		

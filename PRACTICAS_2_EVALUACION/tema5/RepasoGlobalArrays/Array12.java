@@ -21,31 +21,32 @@ import java.text.SimpleDateFormat;
 public class Array12{
 	
 	public static void main(String[] args) {
-	
+		
 		do {
 			
 			try {
 				
-				System.out.println(fechaHoraActual());
 				Thread.sleep(1000);
-				
+				System.out.println(fechaHoraActual());
+
 			} catch (Exception e) {
 				
 				System.err.println("ERROR");
-				
+				break;
 			}
 			
 		} while (true);
-	
+		
 	}
 	
 	public static String fechaHoraActual() {
 		
 		Date fecha = new Date(System.currentTimeMillis());
-		SimpleDateFormat fechas = new SimpleDateFormat("dd/MM/yyyy");
-		SimpleDateFormat horas = new SimpleDateFormat("hh:mm:ss");
 		
-		return fechas.format(fecha)+" >>> "+horas.format(fecha);
+		SimpleDateFormat dia = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat hora = new SimpleDateFormat("hh:mm:ss");
+
+		return dia.format(fecha)+" ---> "+hora.format(fecha);
 		
 	}
 	

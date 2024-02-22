@@ -41,22 +41,16 @@ public class Array05{
 	
 	public static void pasarMayusculaSubCadena(String texto) {
 		
-		String regex = "(<mayus>).+?(</mayus>)";
-		
-		Pattern patron = Pattern.compile(regex);
+		Pattern patron = Pattern.compile("(<mayus>)(.+?)(</mayus>)");
 		Matcher busqueda = patron.matcher(texto);
 		
-		while(busqueda.find()) {
+		while (busqueda.find()) {
 			
-			String coincidencia = busqueda.group().toString();
-			coincidencia=coincidencia.replaceAll("(<mayus>|</mayus>)","");
-			coincidencia=coincidencia.toUpperCase();
-			System.out.println(coincidencia);
-			
-			texto=texto.replaceAll(busqueda.group(), coincidencia);
+			String bloque = busqueda.group().toString().toUpperCase().replaceAll("<MAYUS>|</MAYUS>", "");
+			texto=texto.replaceAll(busqueda.group(), bloque);
 			
 		}
-
+		
 		System.out.println(texto);
 			
 	}
