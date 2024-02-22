@@ -5,3 +5,4 @@
 *.sonarlint
 bin/
 assets/
+.sonarlint/
