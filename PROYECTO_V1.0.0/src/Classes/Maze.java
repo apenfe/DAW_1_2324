@@ -548,10 +548,12 @@ public class Maze{
 	/* METODO PARA BUSCAR EL PRIMER CAMINO POSIBLE */
 
 	public void firstWay() {
+		
+		char[][] maze = simplifyMaze();
 
 		long inicio = System.currentTimeMillis();
 		
-		if (goAheadIntelligent(startI, startJ)) {
+		if (goAheadIntelligent(startI, startJ,maze)) {
 
 			showMaze();
 
@@ -587,7 +589,7 @@ public class Maze{
 	
 	/* COMPRUEBA TODAS LAS COMBINACIONES HASTA ENCONTRAR UNA SOLUCION */
 	
-	private boolean goAheadIntelligent(int i, int j) {
+	private boolean goAheadIntelligent(int i, int j, char[][] maze) {
 		
 		int distI = i-endI;
 		int distJ = j-endJ;
@@ -656,25 +658,25 @@ public class Maze{
 			return true;
 		}
 		
-		if (map[i][j] == '#' || checkPath(i,j,path)) {
+		if (maze[i][j] == '#' || checkPath(i,j,path)) {
 			return false; 
 		}
 		
 		path.push(new Coordinate(i,j));
 		
-		if (goAheadIntelligent(movements[0][0],movements[0][1])) {
+		if (goAheadIntelligent(movements[0][0],movements[0][1],maze)) {
 			return true;
 		}
 		
-		if (goAheadIntelligent(movements[1][0], movements[1][1])) {
+		if (goAheadIntelligent(movements[1][0], movements[1][1],maze)) {
 			return true;
 		}
 		
-		if (goAheadIntelligent(movements[2][0], movements[2][1])) {
+		if (goAheadIntelligent(movements[2][0], movements[2][1],maze)) {
 			return true;
 		}
 		
-		if (goAheadIntelligent(movements[3][0], movements[3][1])) {
+		if (goAheadIntelligent(movements[3][0], movements[3][1],maze)) {
 			return true;
 		}
 		
@@ -685,6 +687,8 @@ public class Maze{
 	/* METODO PARA BUSCAR EL CAMINO MAS CORTO */
 
 	public void shorterWay() {
+		
+		char[][] maze = simplifyMaze();
 
 		long inicio = System.currentTimeMillis();
 		Stack<Coordinate> path2 = new Stack<Coordinate>();
@@ -699,12 +703,13 @@ public class Maze{
 			
 		}
 		
-		goAheadAllWays(startI, startJ, path2);
-		
-		if(path.size()==0) {
-			System.out.println("No hay ninguna solución posible.");
-		}else {
+		if(goAheadIntelligent(startI,startJ,maze)) {
+			
+			goAheadAllWays(startI, startJ, path2,maze);
 			showMaze();
+			
+		}else {
+			System.out.println("No hay ninguna solución posible.");
 		}
 		
 		path.clear();
@@ -719,7 +724,7 @@ public class Maze{
 	
 	/* BUSCA TODOS LOS CAMINOS Y SE QUEDA CON EL MAS CORTO DE TODOS ELLOS */
 	
-	private boolean goAheadAllWays(int i, int j, Stack<Coordinate> path2 ) {
+	private boolean goAheadAllWays(int i, int j, Stack<Coordinate> path2, char[][] maze ) {
 
 		if (i == endI && j == endJ) {
 			
@@ -730,21 +735,140 @@ public class Maze{
 				
 			}
 			
-			return false;
+			return true;
 		}
 		
-		if (map[i][j] == '#' || checkPath(i,j,path2)) {
+		if (maze[i][j] == '#' || checkPath(i,j,path2)) {
+			return false; 
+		}
+		
+		if (path2.size()>path.size()) { // para 
 			return false; 
 		}
 		
 		path2.push(new Coordinate(i,j));
 		
-		goAheadAllWays(i, j+1, path2);
-		goAheadAllWays(i-1, j, path2);
-		goAheadAllWays(i, j-1, path2);
-		goAheadAllWays(i+1, j, path2);
+		goAheadAllWays(i, j+1, path2,maze);
+		goAheadAllWays(i-1, j, path2,maze);
+		goAheadAllWays(i, j-1, path2,maze);
+		goAheadAllWays(i+1, j, path2,maze);
 		
 		path2.pop();
+		return false;
+		
+	}
+	
+	private char[][] simplifyMaze() {
+		
+		char[][] copyMap = new char[map.length][map[0].length];
+
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[i].length; j++) {
+                copyMap[i][j] = map[i][j];
+            }
+        }
+		
+		int min =0;
+		
+		min=countWhites(copyMap);
+		
+		do {
+			
+			copyMap=noExit(copyMap);
+			int whites = countWhites(copyMap);
+			
+			if(whites<min) {
+				min=whites;
+			}else {
+				break;
+			}	
+			
+		}while(true);
+		
+		return copyMap;
+		
+	}
+	
+	private int countWhites(char[][] copyMap) {
+		
+		int exit=0;
+		
+		for (int i = 0; i < copyMap.length; i++) {
+			
+			for (int j = 0; j < copyMap[0].length; j++) {
+				
+				if(copyMap[i][j]==' ') {
+					exit++;
+					
+				}
+				
+			}
+			
+		}
+		
+		return exit;	
+		
+	}
+	
+	private char[][] noExit(char[][] copyMap) {
+		
+		for (int i = 1; i < copyMap.length-1; i++) {
+			
+			for (int j = 1; j < copyMap[0].length-1; j++) {
+				
+				if(copyMap[i][j]==' ') {
+					
+					int cont =0;
+					
+					if(copyMap[i-1][j]==' ') {
+						cont ++;
+					}
+					
+					if(copyMap[i+1][j]==' ') {
+						cont ++;
+					}
+					
+					if(copyMap[i][j-1]==' ') {
+						cont ++;
+					}
+					
+					if(copyMap[i][j+1]==' ') {
+						cont ++;
+					}
+					
+					if(cont<=1) {
+						
+						if(isInOrOut(i, j)) {
+							continue;
+						}else {
+							copyMap[i][j]='#';
+						}
+						
+					}else {
+						
+						continue;
+					}
+					
+				}
+				
+			}
+			
+		}
+		
+		return copyMap;
+		
+	}
+	
+	private boolean isInOrOut(int i, int j) {
+		
+		if(i==startI && j==startJ) {
+			return true;
+		}
+		
+		if(i==endI && j==endJ) {
+			return true;
+		}
+		
 		return false;
 		
 	}
