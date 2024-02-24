@@ -20,9 +20,9 @@ public class Input {
 	/* CONSTANTES */
 	
 	private static Scanner keyboard = new Scanner(System.in);
-	private static final String INT_ERROR = "\n\n\t❗ El valor introducido no es un numero ❗";
+	private static final String INT_ERROR = Config.ROJO+"\n\n\t❗ El valor introducido no es un numero ❗"+Config.RESET;
 	private static final String CONTINUE = "\nPulse 'enter' para continuar...";
-	private static final String GENERIC_ERROR = "Algo ocurrió.";
+	private static final String GENERIC_ERROR = Config.ROJO+"Algo ocurrió."+Config.RESET;
 	
 	/* MÉTODO PARA OBTENER UN NUMERO ENTERO, NO ACEPTA NINGUN PARAMETRO */
 	

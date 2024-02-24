@@ -100,7 +100,7 @@ public class Session{
 		if (trowQuery(userdata, FILE_PATH + USER_FILE, "#", "login")) { // BUSCA UNA COOINCIDENCIA EN EL FICHERO
 
 		} else {
-			System.out.println("\t\tNombre de usuario y/o contraseña incorrectos.");
+			System.out.println(Config.ROJO+"\t\tNombre de usuario y/o contraseña incorrectos."+Config.RESET);
 		}
 
 	}
@@ -133,7 +133,7 @@ public class Session{
 					
 					/* EN CASO AFIRMATIVO SE DA UN AVISO Y SE COMIENZA A COMPROBAR EL RESTO DE DATOS */
 					
-					System.out.println("\tTodos los datos son correctos y únicos en la base de datos.");
+					System.out.println(Config.VERDE+"\tTodos los datos son correctos y únicos en la base de datos."+Config.RESET);
 					break;
 				}
 				
@@ -211,12 +211,11 @@ public class Session{
 	            dataIn.write("\n"+data[0]+symbol+data[1]+symbol+data[2]+symbol+data[3]+symbol+data[4]+symbol+data[5]+symbol+data[6]+symbol+"user");
 			    dataIn.close();
 			    
-			    System.out.println("\n\tProceso finalizado, el usuario \""+data[0]+"\" ha quedado correctamente registrado.");
+			    System.out.println(Config.VERDE+"\n\tProceso finalizado, el usuario \""+data[0]+"\" ha quedado correctamente registrado."+Config.RESET);
 			      
 			  } catch (IOException e) {
 			    	
-			      System.out.println("\tHa ocurrido un error al crear el usuario en el archivo.");
-			      //e.printStackTrace();
+			      System.out.println(Config.ROJO+"\tHa ocurrido un error al crear el usuario en el archivo."+Config.RESET);
 			      
 			  }
 		
@@ -243,8 +242,8 @@ public class Session{
 						if(data.length<8||data.length>8) { // EN CASO DE QUE EL FICHERO SE MANIPULE DE FORMA ANORMAL
 							
 							/* ERROR */
-							System.out.println("\n\tERROR --> EL ARCHIVO PUEDE ESTAR DAÑADO.\n");
-							System.out.println("\tPONGASE EN CONTACTO CON EL SERVICIO TÉCNICO.\n");
+							System.out.println(Config.ROJO+"\n\tERROR --> EL ARCHIVO PUEDE ESTAR DAÑADO.\n"+Config.RESET);
+							System.out.println(Config.ROJO+"\tPONGASE EN CONTACTO CON EL SERVICIO TÉCNICO.\n"+Config.RESET);
 							break; 
 						}
 						
@@ -252,7 +251,7 @@ public class Session{
 							
 							/* EN CASO AFIRMATIVO */
 							
-							System.out.println("\tLogin Correcto: Bienvenido "+userdata[0]+".");
+							System.out.println(Config.VERDE+"\tLogin Correcto: Bienvenido "+userdata[0]+"."+Config.RESET);
 							this.logged=true;
 							this.currentUser= new User(data[0], data[2], data[3], data[4], data[5], data[6], data[7]);
 							check=true;
@@ -264,8 +263,8 @@ public class Session{
 						if(data.length<8||data.length>8) { // EN CASO DE QUE EL FICHERO SE MANIPULE DE FORMA ANORMAL
 							
 							/* ERROR */
-							System.out.println("\n\tERROR --> EL ARCHIVO PUEDE ESTAR DAÑADO.\n");
-							System.out.println("\tPONGASE EN CONTACTO CON EL SERVICIO TÉCNICO.\n");
+							System.out.println(Config.ROJO+"\n\tERROR --> EL ARCHIVO PUEDE ESTAR DAÑADO.\n"+Config.RESET);
+							System.out.println(Config.ROJO+"\tPONGASE EN CONTACTO CON EL SERVICIO TÉCNICO.\n"+Config.RESET);
 							check =true;
 							break;
 						}
@@ -273,8 +272,8 @@ public class Session{
 						if(data[0].equals(userdata[0]) ) { // SI HAY ALGUNA COINCIDENCIA DE PK
 							
 							/* SE INDICAN LAS COINCIDENCIAS */
-							System.out.println("\n\t\tRegistro incorrecto (ERROR):");
-							System.out.println("\t\t- Nombre de usuario en uso.");
+							System.out.println(Config.ROJO+"\n\t\tRegistro incorrecto (ERROR):"+Config.RESET);
+							System.out.println(Config.ROJO+"\t\t- Nombre de usuario en uso."+Config.RESET);
 							
 							check = true;
 					
@@ -288,7 +287,7 @@ public class Session{
 				
 			}catch(FileNotFoundException e) {
 				
-				System.out.println("\t--- Ha ocurrido un error durante la lectura del archivo ---\n");
+				System.out.println(Config.ROJO+"\t--- Ha ocurrido un error durante la lectura del archivo ---\n"+Config.RESET);
 			    
 			}
 			
@@ -306,8 +305,8 @@ public class Session{
 				
 				if(!Config.checkMaxLong(userdata[0],25)||!Config.checkSymbols(userdata[0])||!Config.checkName(userdata[0])) {
 					
-					System.out.println("\t\tFormato de Nickname incorrecto.");
-					System.out.println("\tPor favor, corrija los campos indicados antes de continuar con el registro.");
+					System.out.println(Config.ROJO+"\t\tFormato de Nickname incorrecto."+Config.RESET);
+					System.out.println(Config.ROJO+"\tPor favor, corrija los campos indicados antes de continuar con el registro."+Config.RESET);
 					
 					if(!Config.confirmExit("\n\t¿Desea volver a intentarlo? Si - s: ","s")) { // SI NO DESEA SEGUIR SE DEVUELVE FALSE
 						return false;
@@ -338,14 +337,14 @@ public class Session{
 			
 			if(!Config.checkNif(userdata[3])) {
 				cont --;
-				System.out.println("\t\tFormato de NIF incorrecto.");
+				System.out.println(Config.ROJO+"\t\tFormato de NIF incorrecto."+Config.RESET);
 			}
 			
 			userdata[4] = Input.getString("\tIntroduzca su dirección de correo electronico: ");
 			
 			if(!Config.checkEmail(userdata[4])) {
 				cont --;
-				System.out.println("\t\tFormato de Email incorrecto.");
+				System.out.println(Config.ROJO+"\t\tFormato de Email incorrecto."+Config.RESET);
 			}
 			
 			//------------------------------------------------------
@@ -353,25 +352,25 @@ public class Session{
 			userdata[1] = Input.getString("\tIntroduzca una contraseña: ");
 			if(!Config.checkMaxLong(userdata[1],25)) {
 				cont--;
-				System.out.println("\t\tContraseña demasiado larga. (MAX 25)");
+				System.out.println(Config.ROJO+"\t\tContraseña demasiado larga. (MAX 25)"+Config.RESET);
 			}
 			
 			userdata[2] = Input.getString("\tIntroduzca su nombre completo: ");
 			if(!Config.checkName(userdata[2])) {
 				cont--;
-				System.out.println("\t\tFormato de nombre no valido.");
+				System.out.println(Config.ROJO+"\t\tFormato de nombre no valido."+Config.RESET);
 			}
 			
 			userdata[5] = Input.getString("\tIntroduzca una dirección postal: ");
 			if(!Config.checkMaxLong(userdata[5],100)) {
 				cont--;
-				System.out.println("\t\tDireccion demasiado larga. (MAX 100)");
+				System.out.println(Config.ROJO+"\t\tDireccion demasiado larga. (MAX 100)"+Config.RESET);
 			}
 			
 			userdata[6] = Input.getString("\tIntroduzca su fecha de nacimiento (DD/MM/AA): "); 
 			if(!Config.checkBirthdate(userdata[6],2023)) {
 				cont--;
-				System.out.println("\t\tFormato de fecha no valido.");
+				System.out.println(Config.ROJO+"\t\tFormato de fecha no valido."+Config.RESET);
 			}
 			
 			if(cont==6) { // SI NO HAY ERROR DEVUELVE TRUE
@@ -381,7 +380,7 @@ public class Session{
 				
 			}else if(cont<6) { // SI HAY ALGUN ERROR PREGUNTA SI DESEA SEGUIR
 				
-				System.out.println("\n\tPor favor, corrija los campos indicados antes de continuar con el registro.");
+				System.out.println(Config.ROJO+"\n\tPor favor, corrija los campos indicados antes de continuar con el registro."+Config.RESET);
 				
 				if(!Config.confirmExit("\n\t¿Desea volver a intentarlo? Si - s: ","s")) {
 					return false;

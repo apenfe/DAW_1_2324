@@ -4,7 +4,7 @@ public class Coordinate{
 	
 	private int x;
 	private int y;
-	private int direction;
+	private char direction;
 	
 	public Coordinate(int x, int y) {
 		
@@ -29,11 +29,11 @@ public class Coordinate{
 		this.y = y;
 	}
 
-	public int getDirection() {
+	public char getDirection() {
 		return direction;
 	}
 
-	public void setDirection(int direction) {
+	public void setDirection(char direction) {
 		this.direction = direction;
 	}
 	

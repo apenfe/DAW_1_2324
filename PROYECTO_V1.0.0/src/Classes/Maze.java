@@ -165,7 +165,7 @@ public class Maze{
 				file+=mazeNames.get(num-1);
 				break;
 			}else {
-				System.out.println("\tDebe Seleccionar una opcion entre [0-"+mazeNames.size()+"]: ");
+				System.out.println(Config.ROJO+"\tDebe Seleccionar una opcion entre [0-"+mazeNames.size()+"]: "+Config.RESET);
 			}
 			
 		}while(true);
@@ -175,12 +175,12 @@ public class Maze{
 		}
 		
 		if(readMaze(Config.PATH+file)) { // SI EL LABERINTO SE LEE CORRECTAMENTE
-			System.out.println("\n\tEL ARCHIVO "+file+" HA SIDO CARGADO EXITOSAMENTE.");
+			System.out.println(Config.VERDE+"\n\tEL ARCHIVO "+file+" HA SIDO CARGADO EXITOSAMENTE."+Config.RESET);
 			this.fileName=file; // SE LE DA NOMBRE
 			this.loaded=true; // SE VUELVE A INDICAR QUE ESTÁ CARGADO
 			
 		}else {
-			System.out.println("\n\tERROR AL LEER EL ARCHIVO "+file);
+			System.out.println(Config.ROJO+"\n\tERROR AL LEER EL ARCHIVO "+file+Config.RESET);
 		}
 		
 	}
@@ -199,7 +199,7 @@ public class Maze{
 			
 		} catch (Exception e) {
 			
-			System.out.println("\n\tERROR - CONTACTAR SERVICIO TECNICO.");
+			System.out.println(Config.ROJO+"\n\tERROR - CONTACTAR SERVICIO TECNICO."+Config.RESET);
 		}
 
         if (files != null) {
@@ -238,7 +238,7 @@ public class Maze{
         	
         }catch(Exception e) {
         	
-        	System.out.println("Pongase en contacto con el soporte técnico.");
+        	System.out.println(Config.ROJO+"Error. Pongase en contacto con el soporte técnico."+Config.RESET);
         	return false;
         }
         
@@ -262,6 +262,10 @@ public class Maze{
 	/* METODO PARA VISUALIZAR EL LABERINTO */
 	
 	public void showMaze() {
+		
+		if(path.size()>0) {
+			setDirections();
+		}
 		
 		System.out.println("\n\tLaberinto: " + fileName); // SE INDICA EL NOMBRE
 		
@@ -287,21 +291,17 @@ public class Maze{
 					
 					boolean camino = false;
 					
-					//********************************* AQUI TENGO QUE REVISAR
-					
 					for (int k = 0; k < path.size(); k++) {
 						
 						if(i==path.get(k).getX() && j==path.get(k).getY()) {
 							
-							// metodo carcater
-							System.out.print(Config.VERDE+symbolPath(path.get(k))+" "+Config.RESET);
+							System.out.print(Config.VERDE+path.get(k).getDirection()+" "+Config.RESET);
 							camino=true;
 							
 						}
 						
 					}
 					
-					//*********************************
 					if(!camino) {
 						System.out.print(map[i][j]+" ");
 					}
@@ -315,45 +315,31 @@ public class Maze{
 
 	}
 	
-	private char symbolPath(Coordinate coordenada) {
+	private void setDirections() {
 
-		if (coordenada.getDirection()==1) {
-			return '^';
-		}
-		
-		if (coordenada.getDirection()==2) {
-			return '>';
-		}
-		
-		if (coordenada.getDirection()==3) {
-			return 'V';
-		}
-		
-		if (coordenada.getDirection()==4) {
-			return '<';
-		}
-		
-		return '*';
-		
-	}
-	
-/*	private void setDirections() {
-
-		for (int i = 0; i < path.size()-1; i++) {
+		for (int i = 1; i < path.size(); i++) {
 			
-			if(path.get(i+1).) { // si esta por arriba abajo
+			if(path.get(i-1).getX() > path.get(i).getX()) { // si esta por arriba abajo
 				
-			}else if(path.get(i+1)) { // si esta por abajo arriba
+				path.get(i).setDirection('^');
 				
-			}else if(path.get(i+1)) { // si esta por derecha abajo
+			}else if(path.get(i-1).getX() < path.get(i).getX()) { // si esta por abajo arriba
 				
-			}else if(path.get(i+1)) { // si esta por izquierda abajo
+				path.get(i).setDirection('V');
+				
+			}else if(path.get(i-1).getY() < path.get(i).getY()) { // si esta por derecha abajo
+				
+				path.get(i).setDirection('>');
+				
+			}else if(path.get(i-1).getY() > path.get(i).getY()) { // si esta por izquierda abajo
+				
+				path.get(i).setDirection('<');
 				
 			}
 			
 		}
 		
-	}*/
+	}
 	
 	/* METODO PARA MOSTRAR LOS NUMEROS DE COLUMNA EN VERTICAL */
 	
@@ -439,18 +425,18 @@ public class Maze{
 		showMaze();
 		
 		if(setIJ(true)) { // SI LA CASILLA DE ENTRADA SE ESTABLECE
-			System.out.println("\r\tCASILLA DE ENTRADA FIJADA.");
+			System.out.println(Config.VERDE+"\r\tCASILLA DE ENTRADA FIJADA."+Config.RESET);
 		}else { // EN OTRO CASO, SI EL USUARIO DESISTE SE TERMINA EL PROGRAMA.
-			System.out.println("\r\tNO SE HA PODIDO FIJAR LA CASILLA DE ENTRADA.");
+			System.out.println(Config.ROJO+"\r\tNO SE HA PODIDO FIJAR LA CASILLA DE ENTRADA."+Config.RESET);
 			return;
 		}
 		
 		showMaze();
 		
 		if(setIJ(false)) { // SI LA CASILLA DE SALIDA SE ESTABLECE
-			System.out.println("\r\tCASILLA DE SALIDA FIJADA.");
+			System.out.println(Config.VERDE+"\r\tCASILLA DE SALIDA FIJADA."+Config.RESET);
 		}else { // EN OTRO CASO, SI EL USUARIO DESISTE SE TERMINA EL PROGRAMA.
-			System.out.println("\r\tNO SE HA PODIDO FIJAR LA CASILLA DE SALIDA.");
+			System.out.println(Config.ROJO+"\r\tNO SE HA PODIDO FIJAR LA CASILLA DE SALIDA."+Config.RESET);
 		}
 		
 		showMaze();
@@ -559,10 +545,6 @@ public class Maze{
 		return true;
 	}
 
-	/*
-	 * #######################################################################################################################################
-	 */
-
 	/* METODO PARA BUSCAR EL PRIMER CAMINO POSIBLE */
 
 	public void firstWay() {
@@ -581,10 +563,13 @@ public class Maze{
 		} else {
 			System.out.println("\n\tEl laberinto no tiene solución.");
 		}
+		
 		path.clear();
 		Input.toContinue();
 
 	}
+	
+	/* COMPRUEBA SI LA CASILLA YA ESTÁ EN LAS VISITADAS */
 	
 	private boolean checkPath(int i, int j, Stack<Coordinate> path) {
 		
@@ -599,6 +584,8 @@ public class Maze{
 		return false;
 		
 	}
+	
+	/* COMPRUEBA TODAS LAS COMBINACIONES HASTA ENCONTRAR UNA SOLUCION */
 	
 	private boolean goAheadIntelligent(int i, int j) {
 		
@@ -674,26 +661,20 @@ public class Maze{
 		}
 		
 		path.push(new Coordinate(i,j));
-								
-		boolean result;
 		
-		result = goAheadIntelligent(movements[0][0],movements[0][1]);
-		if (result) {
+		if (goAheadIntelligent(movements[0][0],movements[0][1])) {
 			return true;
 		}
 		
-		result = goAheadIntelligent(movements[1][0], movements[1][1]);
-		if (result) {
+		if (goAheadIntelligent(movements[1][0], movements[1][1])) {
 			return true;
 		}
 		
-		result = goAheadIntelligent(movements[2][0], movements[2][1]);
-		if (result) {
+		if (goAheadIntelligent(movements[2][0], movements[2][1])) {
 			return true;
 		}
 		
-		result = goAheadIntelligent(movements[3][0], movements[3][1]);
-		if (result) {
+		if (goAheadIntelligent(movements[3][0], movements[3][1])) {
 			return true;
 		}
 		
@@ -719,8 +700,13 @@ public class Maze{
 		}
 		
 		goAheadAllWays(startI, startJ, path2);
-
-		showMaze();
+		
+		if(path.size()==0) {
+			System.out.println("No hay ninguna solución posible.");
+		}else {
+			showMaze();
+		}
+		
 		path.clear();
 		
 		long fin = System.currentTimeMillis();
@@ -730,6 +716,8 @@ public class Maze{
 		Input.toContinue();
 
 	}
+	
+	/* BUSCA TODOS LOS CAMINOS Y SE QUEDA CON EL MAS CORTO DE TODOS ELLOS */
 	
 	private boolean goAheadAllWays(int i, int j, Stack<Coordinate> path2 ) {
 
