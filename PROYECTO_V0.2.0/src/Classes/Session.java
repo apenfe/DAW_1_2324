@@ -113,50 +113,25 @@ public class Session{
 		System.out.println(Config.SIGNUP);
 		
 		String[] userdata = new String[7]; 
-		boolean follow=true;
+		boolean follow=false;
 		
-		do { /* PEDIRÁ DATOS PK HASTA QUE SEAN UNICOS Y CORRECTOS */
+		/* PEDIRÁ DATOS PK HASTA QUE SEAN UNICOS Y CORRECTOS */
 			
-			if(primaryKey(userdata)) { // COMPRUEBA QUE SEAN VALORES VALIDOS PARA PK
+		if(primaryKey(userdata) && !trowQuery(userdata,FILE_PATH+USER_FILE,"#","signup")) { // COMPRUEBA QUE SEAN VALORES VALIDOS PARA PK
+					
+			/* EN CASO AFIRMATIVO SE DA UN AVISO Y SE COMIENZA A COMPROBAR EL RESTO DE DATOS */
+					
+			System.out.println("\tTodos los datos son correctos y únicos en la base de datos.");
+			follow=true;		
 				
-				/* EN CASO AFIRMATIVO */
-				
-				if(trowQuery(userdata,FILE_PATH+USER_FILE,"#","signup")) { // COMPRUEBA QUE SEAN UNICOS
-					
-					/* EN CASO NEGATIVO PREGUNTA SI DESEA VOLVER A INTENTARLO */
-					
-					if(!Config.confirmExit(QUESTION,"s")) {
-						follow=false;
-						break;
-					}
-					
-				}else {
-					
-					/* EN CASO AFIRMATIVO SE DA UN AVISO Y SE COMIENZA A COMPROBAR EL RESTO DE DATOS */
-					
-					System.out.println("\tTodos los datos son correctos y únicos en la base de datos.");
-					break;
-				}
-				
-			}else {
-				follow=false;
-				break;
-			}
-			
-		}while(true);	
+		}
 		
 		/* SI EL USUARIO HA DESISTIDO ESTE PASO SE SALTA */
 		/* SI NO DESISTE Y LOS PK SON UNICOS Y CORRECTOS */
 			
-		while(follow){ // MIENTRAS NO SE CREA UN USUARIO O HASTA QUE USUARIO DESISTA
+		if(follow && secondaryKey(userdata)){ // MIENTRAS NO SE CREA UN USUARIO O HASTA QUE USUARIO DESISTA
 				
-			if(secondaryKey(userdata)) { // SI DATOS SECUNDARIOS SON CORRECTOS
-				
-				createUser(FILE_PATH+USER_FILE,"#",userdata); // SE CREA UN NUEVO USUARIO EN EL FICHERO
-				
-			}
-			
-			break;
+			createUser(FILE_PATH+USER_FILE,"#",userdata); // SE CREA UN NUEVO USUARIO EN EL FICHERO
 			
 		}
 				
@@ -238,14 +213,6 @@ public class Session{
 					
 					if(option.equals("login")) { /* SI HEMOS ELEGIDO LA OPCION LOGIN */
 						
-						if(data.length<8||data.length>8) { // EN CASO DE QUE EL FICHERO SE MANIPULE DE FORMA ANORMAL
-							
-							/* ERROR */
-							System.out.println("\n\tERROR --> EL ARCHIVO PUEDE ESTAR DAÑADO.\n");
-							System.out.println("\tPONGASE EN CONTACTO CON EL SERVICIO TÉCNICO.\n");
-							break; 
-						}
-						
 						if(data[0].equals(userdata[0]) && data[1].equals(userdata[1])) { // COMPRUEBA SI USUARIO Y CONTRASEÑA COINCIDEN
 							
 							/* EN CASO AFIRMATIVO */
@@ -257,26 +224,12 @@ public class Session{
 							break;
 						}
 						
-					}else if(option.equals("signup")) { /* SI HEMOS ELEGIDO LA OPCION SIGNUP */
+					}else if(option.equals("signup") && data[0].equals(userdata[0])) { /* SI HEMOS ELEGIDO LA OPCION SIGNUP */
 						
-						if(data.length<8||data.length>8) { // EN CASO DE QUE EL FICHERO SE MANIPULE DE FORMA ANORMAL
-							
-							/* ERROR */
-							System.out.println("\n\tERROR --> EL ARCHIVO PUEDE ESTAR DAÑADO.\n");
-							System.out.println("\tPONGASE EN CONTACTO CON EL SERVICIO TÉCNICO.\n");
-							check =true;
-							break;
-						}
-						
-						if(data[0].equals(userdata[0]) ) { // SI HAY ALGUNA COINCIDENCIA DE PK
-							
-							/* SE INDICAN LAS COINCIDENCIAS */
-							System.out.println("\n\t\tRegistro incorrecto (ERROR):");
-							System.out.println("\t\t- Nombre de usuario en uso.");
-							
-							check = true;
-					
-						}
+						/* SE INDICAN LAS COINCIDENCIAS SI HAY ALGUNA COINCIDENCIA DE PK*/
+						System.out.println("\n\t\tRegistro incorrecto (ERROR):");
+						System.out.println("\t\t- Nombre de usuario en uso.");
+						check = true;		
 						
 					}
 
@@ -325,69 +278,48 @@ public class Session{
 	/* SE UTILIZA EN EL METODO signUp() */
 	
 	private boolean secondaryKey(String[] userdata) {
+
+		userdata[3] = Input.getString("\tIntroduzca su NIF (12345678X): ");
+
+		if (!Config.checkNif(userdata[3])) {
+			System.out.println("\t\tFormato de NIF incorrecto.");
+			return false;
+		}
+
+		userdata[4] = Input.getString("\tIntroduzca su dirección de correo electronico: ");
+
+		if (!Config.checkEmail(userdata[4])) {
+			System.out.println("\t\tFormato de Email incorrecto.");
+			return false;
+		}
+
+		userdata[1] = Input.getString("\tIntroduzca una contraseña: ");
+		if (!Config.checkMaxLong(userdata[1], 25)) {
+			System.out.println("\t\tContraseña demasiado larga. (MAX 25)");
+			return false;
+		}
+
+		userdata[2] = Input.getString("\tIntroduzca su nombre completo: ");
+		if (!Config.checkName(userdata[2])) {
+			System.out.println("\t\tFormato de nombre no valido.");
+			return false;
+		}
+
+		userdata[5] = Input.getString("\tIntroduzca una dirección postal: ");
+		if (!Config.checkMaxLong(userdata[5], 100)) {
+			System.out.println("\t\tDireccion demasiado larga. (MAX 100)");
+			return false;
+		}
+
+		userdata[6] = Input.getString("\tIntroduzca su fecha de nacimiento (DD/MM/AA): ");
+		if (!Config.checkBirthdate(userdata[6], 2023)) {
+			System.out.println("\t\tFormato de fecha no valido.");
+			return false;
+		}
 		
-		do { /* MIENTRAS NO SEAN DATOS VALIDOS O EL USUARIO PERSISTA */
-			
-			int cont =6; // UTILIZADO PARA SABER SI HAY ALGUN ERROR   /*
-			
-			//----------------------------------------------------------
-			
-			userdata[3] = Input.getString("\tIntroduzca su NIF (12345678X): ");
-			
-			if(!Config.checkNif(userdata[3])) {
-				cont --;
-				System.out.println("\t\tFormato de NIF incorrecto.");
-			}
-			
-			userdata[4] = Input.getString("\tIntroduzca su dirección de correo electronico: ");
-			
-			if(!Config.checkEmail(userdata[4])) {
-				cont --;
-				System.out.println("\t\tFormato de Email incorrecto.");
-			}
-			
-			//------------------------------------------------------
-			
-			userdata[1] = Input.getString("\tIntroduzca una contraseña: ");
-			if(!Config.checkMaxLong(userdata[1],25)) {
-				cont--;
-				System.out.println("\t\tContraseña demasiado larga. (MAX 25)");
-			}
-			
-			userdata[2] = Input.getString("\tIntroduzca su nombre completo: ");
-			if(!Config.checkName(userdata[2])) {
-				cont--;
-				System.out.println("\t\tFormato de nombre no valido.");
-			}
-			
-			userdata[5] = Input.getString("\tIntroduzca una dirección postal: ");
-			if(!Config.checkMaxLong(userdata[5],100)) {
-				cont--;
-				System.out.println("\t\tDireccion demasiado larga. (MAX 100)");
-			}
-			
-			userdata[6] = Input.getString("\tIntroduzca su fecha de nacimiento (DD/MM/AA): "); 
-			if(!Config.checkBirthdate(userdata[6],2023)) {
-				cont--;
-				System.out.println("\t\tFormato de fecha no valido.");
-			}
-			
-			if(cont==6) { // SI NO HAY ERROR DEVUELVE TRUE
-				
-				System.out.println("\n\tCreando usuario, por favor espere...");
-				return true;
-				
-			}else if(cont<6) { // SI HAY ALGUN ERROR PREGUNTA SI DESEA SEGUIR
-				
-				System.out.println("\n\tPor favor, corrija los campos indicados antes de continuar con el registro.");
-				
-				if(!Config.confirmExit(QUESTION,"s")) {
-					return false;
-				}
-			}
-			
-		}while(true);
-	
+		System.out.println("\n\tCreando usuario, por favor espere...");
+		return true;
+
 	}
-	
+
 }

@@ -278,9 +278,7 @@ public class Maze{
 	
 	private void numberVertically() {
 		
-		int figure = maxFigure(map[0].length); // SE BUSCAN LAS CIFRAS DEL NUMERO MAS GRANDE
-		
-		for (int i = 0; i < figure; i++) { // SE RECORREN PRIMERO LAS ALTURAS POR EL NUMERO MAXIMO DE CIFRAS
+		for (int i = 0; i < maxFigure(map[0].length); i++) { // SE RECORREN PRIMERO LAS ALTURAS POR EL NUMERO MAXIMO DE CIFRAS
 			
 			System.out.print("\n\t\t");
 			
@@ -288,47 +286,58 @@ public class Maze{
 			
 			for (int j = 0; j < map[0].length; j++) {
 				
-				int jFigure = maxFigure(j); // SE CALCULAN LAS CIFRAS DE LA COLUMNA ACTUAL
-				
-				if(jFigure < (i+1)) { // SI LAS CIFRAS DE LA COLMNA SON MENORES QUE EL Nº DE FILA
-					
-					if(jFigure==1 && i==0) { // SI LAS CIFRAS SON 1 Y LA FILA ES LA PRIMERA ENTONCES PINTA EL NUMERO
-						System.out.print(j+" ");
-					}else { // EN OTRO CASO, PONE UN SIMBOLO INDICADOR
-						System.out.print("| ");
-					}
-				
-				}else if(jFigure >= (i+1)) { // SI LAS CIFRAS DE LA COLUMNA SON MAYOR O IGUAL QUE EL Nº DE FILA
-					
-					String number =""+j; // CREAMOS UN STRING CON EL NUMERO DE LA COLUMNA
-					int index =0;
-					
-					if(i<number.length()) { // SI LA FILA ES MENOR QUE LAS CIFRAS DEL NUMERO... 
-						index=i; // EL INDICE SERÁ EL DE LA FILA
-					}else {
-						index=number.length()-1; // EN OTRO CASO SERÁ EL ULTIMO NUMERO.
-					}
-					
-					System.out.print(number.charAt(index)+" "); // IMPRIME LA CIFRA CORRESPONDIENTE
-					
-				}
+				numbers(i,j);
 				
 			}
 			
 		}
 		
+		lines();
+
+	}
+	
+	private void numbers(int i, int j) {
+		
+		String number ="";
+		int jFigure = maxFigure(j); // SE CALCULAN LAS CIFRAS DE LA COLUMNA ACTUAL
+		
+		if(jFigure < (i+1)) { // SI LAS CIFRAS DE LA COLMNA SON MENORES QUE EL Nº DE FILA
+			
+			number =j+" ";
+			if(jFigure==1 && i!=0) { // SI LAS CIFRAS SON 1 Y LA FILA ES LA PRIMERA ENTONCES PINTA EL NUMERO
+	
+				number ="| ";
+				
+			}
+			
+			System.out.print(number);
+		}else { // SI LAS CIFRAS DE LA COLUMNA SON MAYOR O IGUAL QUE EL Nº DE FILA
+			
+			number =""+j; // CREAMOS UN STRING CON EL NUMERO DE LA COLUMNA
+			
+			int index=number.length()-1; // EN OTRO CASO SERÁ EL ULTIMO NUMERO.
+			if(i<number.length()) { // SI LA FILA ES MENOR QUE LAS CIFRAS DEL NUMERO... 
+				index=i; // EL INDICE SERÁ EL DE LA FILA
+			}
+			
+			System.out.print(number.charAt(index)+" "); // IMPRIME LA CIFRA CORRESPONDIENTE
+			
+		}
+		
+	}
+	
+	private void lines() {
+		
 		System.out.print("\n\t\t");
 		
 		for (int i = 0; i < map[0].length; i++) {
 			
-			String linea = "| ";
-			
-			System.out.print(linea);
+			System.out.print("| ");
 			
 		}
 		
 		System.out.println("\n");
-
+		
 	}
 	
 	/* METODO PARA CALCULAR LAS CIFRAS DE UN NUMERO */
@@ -381,78 +390,69 @@ public class Maze{
 	/* METODO PARA ESTABLECER CASILLA */
 	
 	private boolean setIJ(boolean entrada) { // SI ES TRUE SE ESTABLECE ENTRADA, SI ES FALSE LA SALIDA
-		
+
 		int num = 0;
-		String casilla ="";
-		
-		if(entrada) {
-			casilla="entrada";
-		}else {
-			casilla="salida";
+		String casilla = "salida";
+
+		if (entrada) {
+			casilla = "entrada";
 		}
+
+		num = checkLenght(casilla, true);
+		if (entrada) {
+			startI = num;
+		} else {
+			endI = num;
+		}
+
+		num = checkLenght(casilla, false);
+
+		if (entrada) {
+			startJ = num;
+		} else {
+			endJ = num;
+		}
+
+		if (sameInOut()) { // SI LAS CASILLAS DE ENTRADA Y SALIDA SON LAS MISMAS
+
+			System.out.println("\r\tLas casillas de entrada y salida coinciden.");
+			deleteMaze(false); // SE RESETEAN ENTRADA Y SALIDA
+			return false;
+		} else if (entrada && (map[startI][startJ] == ' ') || (!entrada && (map[endI][endJ] == ' '))) {
+
+			return true;
+		} else { // EN OTRO CASO...
+
+			System.out.println("\r\tLa casilla coincide con una pared.");
+			deleteMaze(false); // SE RESETEAN ENTRADA Y SALIDA
+			return false;
+
+		}
+
+	}
+
+	private int checkLenght(String casilla, boolean fila) {
+
+		int num = 0;
+		int largo = 0;
 		
-		do { 
-			
-			do { // ESTABLECE Y COMPRUEBA LA FILA
-				
-				num=Input.getInt("\r\tIntroduzca la fila de "+casilla+": ", true);
-				
-				if(num<0 || num>map.length-1) {
-					System.out.println("\r\tEl número debe de ser mayor o igual que 0 y menor que"+(map.length-1));
-				}
-				
-			}while(num<0 || num>map.length-1);
-			
-			if(entrada) {
-				startI=num;
-			}else {
-				endI=num;
-			}
-			
-			do { // ESTABLECE Y COMPRUEBA LA COLUMNA
-				
-				num=Input.getInt("\r\tIntroduzca la columna de "+casilla+": ", true);
-				
-				if(num<0 || num>map[0].length-1) {
-					System.out.println("\r\tEl número debe de ser mayor o igual que 0 y menor que"+(map[0].length-1));
-				}
-				
-			}while(num<0 || num>map[0].length-1);
-			
-			if(entrada) {
-				startJ=num;
-			}else {
-				endJ=num;
-			}
-			
-			if(sameInOut()) { // SI LAS CASILLAS DE ENTRADA Y SALIDA SON LAS MISMAS
-				
-				System.out.println("\r\tLas casillas de entrada y salida coinciden.");
-				
-				if(Config.confirmExit("\r\t¿Desea ingresar otra casilla de "+casilla+"? SI-S NO-N ", "N")) {
-					deleteMaze(false); // SE RESETEAN ENTRADA Y SALIDA
-					return false;
-				}
-				
-			} else {
+		if(fila) {
+			largo=map.length - 1;
+		}else {
+			largo=map[0].length - 1;
+		}
 
-				if (entrada && (map[startI][startJ] == ' ')) { // SI LA CASILLA ES VALIDA...
-					return true;
-				} else if (!entrada && (map[endI][endJ] == ' ')) { // SI LA CASILLA ES VALIDA...
-					return true;
-				} else { // EN OTRO CASO...
-					
-					System.out.println("\r\tLa casilla coincide con una pared.");
-					
-					if (Config.confirmExit("\r\t¿Desea ingresar otra casilla de " + casilla + "? SI-S NO-N ", "N")) {
-						deleteMaze(false); // SE RESETEAN ENTRADA Y SALIDA
-						return false;
-					}
-				}
+		do { // ESTABLECE Y COMPRUEBA LA FILA
 
+			num = Input.getInt("\r\tIntroduzca la fila de " + casilla + ": ", true);
+
+			if (num < 0 || num > largo) {
+				System.out.println("\r\tEl número debe de ser mayor o igual que 0 y menor que" + (largo));
+			}else {
+				return num;
 			}
-			
-		}while(true);
+
+		} while (true);
 		
 	}
 	
