@@ -176,10 +176,38 @@ import Classes.Session;
  * 
  */
 
+/**
+ * 
+ * Clase principal del proyecto Maze.
+ * 
+ * Compuesto por varios metodos estaticos que facilitan la navegación del usuario entre las diferentes opciones.
+ * 
+ * @author Adrian Penalver Fernandez
+ * @version 1.0.0
+ * 
+ */
+
 public class Main {
 	
+	/**
+	 * Esta es una variable pública y estática que representa si el usuario ha iniciado o no la sesion.
+	 */
+	
 	public static Session currentSession = new Session();
+	
+	/**
+	 * Esta es una variable pública y estática que representa el laberinto cargado, con el se puede decidir
+	 * si estan disponibles todas las opciones o no.
+	 */
+	
 	public static Maze currentMaze = new Maze();
+	
+	/**
+	 * Este metodo principal, da la bienvenida al usuario y le presenta un menu inicial
+	 * con opciones de no loggeado.
+	 * 
+	 * Tras el loggin este metodo muestra el menu con las opciones correspondientes al inicio de sesion.
+	 */
 	
 	public static void main(String[] args) {
 		
@@ -211,6 +239,10 @@ public class Main {
 	/* METODOS USADOS EN LA CLASE MAIN */
 	
 	/* OPCIONES PARA USUARIOS REGISTRADOS */
+	
+	/**
+	 * Este metodo se encarga de mostrar al usuario las opciones disponibles una vez iniciada la sesion.
+	 */
 	
 	public static void loggedOptions(int option) {
 		
@@ -293,6 +325,10 @@ public class Main {
 	
 	/* OPCIONES PARA USUARIOS NO REGISTRADOS */
 	
+	/**
+	 * Este metodo se encarga de mostrar al usuario las opciones disponibles antes del inicio de sesion.
+	 */
+	
 	public static void unloggedOptions(int option) {
 		
 		if(option==0) { // METODO SALIR
@@ -317,6 +353,12 @@ public class Main {
 	}
 	
 	/* OPCIONES PARA LA RESOLUCION DE LABERINTOS */
+	
+	/**
+	 * Este metodo se encarga de complementar el menu de opciones de usuario logueados.
+	 * 
+	 * Permite al usuario seleccionar las diferentes formas de resolver el laberinto.
+	 */
 	
 	public static void solveMazeOptions() {
 		

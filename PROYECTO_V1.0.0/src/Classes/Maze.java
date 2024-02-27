@@ -261,10 +261,6 @@ public class Maze{
 	
 	public void showMaze() {
 		
-	//	if(path.size()>0) {
-		//	setDirections();
-	//	}
-		
 		System.out.println("\n\tLaberinto: " + fileName); // SE INDICA EL NOMBRE
 		
 		numberVertically(); // SE MUESTRAN LOS NUMEROS DE COLUMNA EN VERTICAL
@@ -312,6 +308,8 @@ public class Maze{
 		}
 
 	}
+	
+	/* METODO PARA ASIGNAR DIRECCIONES SEGUN LA CASILLA ANTERIOR */
 	
 	private void setDirections() {
 
@@ -616,6 +614,8 @@ public class Maze{
 		return false;
 	}
 	
+	/* METODO PARA IMPRIMIR LAS CASILLAS Y EL TOTAL DE PASOS */
+	
 	private void printPath() {
 		
 		setDirections();
@@ -663,6 +663,8 @@ public class Maze{
 		time(inicio);
 
 	}
+	
+	/* METODO PARA CALCULAR EL TIEMPO DE SOLUCION */
 	
 	private void time(long inicio) {
 		
@@ -712,6 +714,8 @@ public class Maze{
 		
 	}
 	
+	/* METODO PARA SIMPLIFICAR EL LABERINTO, ELIMINANDO TODOS LOS CAMINOS SIN SALIDA */
+	
 	private char[][] simplifyMaze() {
 		
 		char[][] copyMap = new char[map.length][map[0].length];
@@ -745,6 +749,8 @@ public class Maze{
 		
 	}
 	
+	/* METODO PARA CONTAR CUANTAS CASILLAS LIBRES QUEDAN EN LABERINTO */
+	
 	private int countWhites(char[][] copyMap) {
 		
 		int exit=0;
@@ -764,6 +770,8 @@ public class Maze{
 		return exit;	
 		
 	}
+	
+	/* METODO PARA CERRAR CASILLAS SIN SALIDA */
 	
 	private char[][] noExit(char[][] copyMap) {
 		
@@ -806,6 +814,8 @@ public class Maze{
 		return copyMap;
 		
 	}
+	
+	/* METODO PARA SABER SI SE TRATA DE LA CASILLA DE SALIDA O ENTRADA */
 	
 	private boolean isInOrOut(int i, int j) {
 		

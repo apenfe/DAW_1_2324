@@ -9,12 +9,6 @@ package ejercicios;
  */
 
 /*
- * void add(Object) 		- Añade un elemento al final de la lista.
- * void add(int, Object) 		- Inserta un elemento en la posición indicada por un índice.
- * void clear() 			- Elimina todos los elementos de la lista.
- * boolean contains(Object) 	- Comprueba si el elemento está incluido en la lista.
- * Object get(int) 			- Obtiene el elemento de la posición indicada por índice.
- * int indexOf(Object) 		- Devuelve la posición del elemento.
  * boolean isEmpty() 		- Comprueba si la lista está vacía.
  * boolean remove(Object) 	- Elimina el elemento correspondiente.
  * Object remove(int) 		- Elimina el elemento de la posición indicada por índice.
@@ -36,7 +30,32 @@ public class Ejercicio1 {
 	
 	public void add(Object objeto) {
 		
+		if(numElementos==0) {
+			
+			arrayElementos[0]=objeto;
+			numElementos ++;
+			
+		}else {
+			
+			comprobarLlenado();
+			arrayElementos[numElementos]=objeto;
+			numElementos ++;
+			
+		}
 		
+	}
+	
+	private void comprobarLlenado() {
+		
+		if(arrayElementos.length == numElementos+1) {
+			
+			Object[] arrayAmpliado = new Object[arrayElementos.length*2];
+			
+			System.arraycopy(arrayElementos, 0, arrayAmpliado, 0, numElementos);
+			
+			arrayElementos=arrayAmpliado;
+			
+		}
 		
 	}
 	
@@ -46,12 +65,89 @@ public class Ejercicio1 {
 				
 	}
 	
-	public void clear() {
+	private int indexOf(Object objeto) {
+		
+		if(objeto == null) {
+			
+			for (int i = 0; i < arrayElementos.length; i++) {
+				if(arrayElementos[i]==null) {
+					return i;
+				}
+			}
+			
+		}else {
+			
+			for (int i = 0; i < arrayElementos.length; i++) {
+				if(arrayElementos[i].equals(objeto)) {
+					return i;
+				}
+			}
+			
+		}
+		
+		return -1;
 		
 	}
 	
+	public void clear() {
+		
+		arrayElementos = new Object[NUM_INICIAL];
+		numElementos=0;
+		
+	}
 	
+	public boolean contains(Object objeto) {
+		
+		if(indexOf(objeto)>=0) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
 	
+	public Object get(int indice) {
+		
+		if(indice<0||indice>=numElementos) {
+			
+			throw new IndexOutOfBoundsException("Índice incorrecto: "+ indice);
+			
+		}
+		
+		return arrayElementos[indice];
+		
+	}
 	
+	public Object remove(int indice) {
+		
+		if(indice<0||indice>=numElementos) {
+			
+			throw new IndexOutOfBoundsException("Índice incorrecto: "+ indice);
+			
+		}
+		
+		// Elimina desplazando uno hacia la izquierda, sobre la posición a borrar.
+		Object elemento = arrayElementos[indice];
+		System.arraycopy(arrayElementos, indice+1, arrayElementos, indice, numElementos - (indice+1));
 
+		// Ajusta el último elemento.
+		arrayElementos[numElementos-1] = null;
+		numElementos--;
+		return elemento;
+		
+		
+	}
+	
+	public int remove(Object objeto) {
+		
+		int indice = indexOf(objeto);
+		
+		if(indice!=-1) {
+			remove(indice);
+		}
+		
+		return indice;
+		
+	}
+	
 }
