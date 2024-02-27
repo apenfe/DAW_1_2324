@@ -242,6 +242,7 @@ public class Main {
 	
 	/**
 	 * Este metodo se encarga de mostrar al usuario las opciones disponibles una vez iniciada la sesion.
+	 * @param option entrada seleccionada por el usuario.
 	 */
 	
 	public static void loggedOptions(int option) {
@@ -327,6 +328,8 @@ public class Main {
 	
 	/**
 	 * Este metodo se encarga de mostrar al usuario las opciones disponibles antes del inicio de sesion.
+	 * 
+	 * @param option entrada seleccionada por el usuario.
 	 */
 	
 	public static void unloggedOptions(int option) {

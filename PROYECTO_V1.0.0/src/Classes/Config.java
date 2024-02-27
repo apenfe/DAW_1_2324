@@ -246,6 +246,8 @@ public class Config{
 	
 	/**
 	 * Metodo estatico que permite mostar un mensaje para pedir al usuario si quiere salir del programa.
+	 * 
+	 * @return Boolean confirmacion de salida.
 	 */
 	
 	public static boolean confirmExit() {
@@ -261,6 +263,10 @@ public class Config{
 	
 	/**
 	 * Metodo estatico que sobrecargado, permite mostar un mensaje y tambien recibe un mensaje de aceptacion.
+	 * 
+	 *  @param enunciado Enunciado que se desea introducir.
+	 *  @param respuesta Respuesta deseada para ser afirmativa.
+	 *  @return boolean confirmacion de ununciado.
 	 */
 	
 	public static boolean confirmExit(String enunciado, String respuesta) { 
@@ -273,6 +279,13 @@ public class Config{
 	}
 	
 	/* METODO PARA COMPROBAR FORMATO DE EMAIL */
+	
+	/**
+	 * Metodo estatico que compruba si un email tiene formato correcto.
+	 * 
+	 *  @param email Email a comprobar.
+	 *  @return boolean check del email.
+	 */
 	
 	public static boolean checkEmail(String email) {
 		
@@ -297,6 +310,13 @@ public class Config{
 	
 	/* METODO PARA COMPROBAR FORMATO DE NIF */
 	
+	/**
+	 * Metodo estatico que compruba si un DNI tiene formato correcto.
+	 * 
+	 *  @param nif DNI a comprobar.
+	 *  @return boolean check del nif.
+	 */
+	
 	public static boolean checkNif(String nif) {
 		
 		Pattern pattern = Pattern.compile("[0-9]{7,8}[A-Z a-z]");
@@ -315,6 +335,15 @@ public class Config{
 	}
 	
 	/* METODO PARA COMPROBAR FORMATO DE FECHA */
+	
+	/**
+	 * Metodo estatico que compruba si una fecha tiene formato correcto y es valida.
+	 * Además comprueba si la fecha no va más allá del año actual.
+	 * 
+	 *  @param birthdate Fecha a comprobar.
+	 *  @param currentYear Año actual.
+	 *  @return boolean check de la fecha de nacimiento.
+	 */
 	
 	public static boolean checkBirthdate(String birthdate, int currentyear) {
 		
@@ -379,6 +408,14 @@ public class Config{
 	
 	/* METODO PARA COMPROBAR LA LONGITUD DE UN STRING DADO UN ENTERO */
 	
+	/**
+	 * Metodo estatico que compruba si un String tiene una longitud indicada.
+	 * 
+	 *  @param text texto a comprobar.
+	 *  @param lenght Longitud a determinar.
+	 *  @return boolean check de la comprobacion de la longitud.
+	 */
+	
 	public static boolean checkLong(String text, int length) {
 		
 		if(text.length()==length) {
@@ -389,6 +426,13 @@ public class Config{
 	}
 	
 	/* METODO PARA COMPROBAR SI ES UN NOMBRE VÁLIDO */
+	
+	/**
+	 * Metodo estatico que compruba si un nombre tienen un formato valido.
+	 * 
+	 *  @param text texto a comprobar.
+	 *  @return boolean check de la comprobacion del nombre.
+	 */
 	
 	public static boolean checkName(String text) {
 		
@@ -408,6 +452,14 @@ public class Config{
 	
 	/* METODO PARA COMPROBAR UNA CADENA SUPERA UNA LONGITUD DETERMINADA */
 	
+	/**
+	 * Metodo estatico que comprubar si un texto supera una longitud determinada.
+	 * 
+	 *  @param text texto a comprobar.
+	 *  @param max Longitud maxima establecida.
+	 *  @return boolean check de la longitud.
+	 */
+	
 	public static boolean checkMaxLong(String text, int max) {
 		
 		if(text.length()<=max) {
@@ -418,6 +470,13 @@ public class Config{
 	}
 	
 	/* METODO PARA COMPROBAR SI HAY SIMBOLOS QUE NO SEAN ALFANUMERICOS */
+	
+	/**
+	 * Metodo estatico que comprubar si un texto tiene simbolos.
+	 * 
+	 *  @param text texto a comprobar.
+	 *  @return boolean check de la existencia de simbolos.
+	 */
 	
 	public static boolean checkSymbols(String text) {
 		
