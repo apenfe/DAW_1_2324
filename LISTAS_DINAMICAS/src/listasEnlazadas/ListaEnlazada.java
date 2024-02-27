@@ -54,7 +54,7 @@ public class ListaEnlazada {
 	 */
 	private Nodo obtenerNodo(int indice) {
 
-		if (indice >= 0 && indice < numElementos) {
+		if (indice < 0 && indice >= numElementos) {
 			throw new IndexOutOfBoundsException("Índice incorrecto: " + indice);
 		}
 
@@ -83,7 +83,7 @@ public class ListaEnlazada {
 	public Object remove(int indice) {
 
 		// Lanza excepción si el índice no es válido.
-		if (indice >= numElementos || indice < 0) {
+		if (indice >= numElementos || indice < 0) { 
 			throw new IndexOutOfBoundsException("Índice incorrecto: " + indice);
 		}
 		

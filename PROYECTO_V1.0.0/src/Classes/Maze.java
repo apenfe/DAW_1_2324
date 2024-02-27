@@ -94,12 +94,14 @@ public class Maze{
 	private int startJ;
 	private int endI;
 	private int endJ;
+	private boolean find;
 	
 	/* CONSTRUCTOR DE LA CLASE MAZE */
 	
 	public Maze() {
 		
 		this.loaded=false;
+		this.find=false;
 		
 	}
 	
@@ -220,12 +222,10 @@ public class Maze{
 	
 	private boolean readMaze(String fullPath) {
 		
-		ArrayList<String> lines = new ArrayList<String>();
+		ArrayList<String> lines = new ArrayList<>();
+		File userMaze = new File(fullPath);
 		
-        try {
-        	
-        	File userMaze = new File(fullPath);
-        	Scanner reader = new Scanner(userMaze);
+        try(Scanner reader = new Scanner(userMaze)) {
         	
         	while(reader.hasNextLine()) {
         		
@@ -233,8 +233,6 @@ public class Maze{
         		lines.add(line);
         		
         	}
-        	
-        	reader.close();
         	
         }catch(Exception e) {
         	
@@ -263,9 +261,9 @@ public class Maze{
 	
 	public void showMaze() {
 		
-		if(path.size()>0) {
-			setDirections();
-		}
+	//	if(path.size()>0) {
+		//	setDirections();
+	//	}
 		
 		System.out.println("\n\tLaberinto: " + fileName); // SE INDICA EL NOMBRE
 		
@@ -351,7 +349,7 @@ public class Maze{
 			
 			System.out.print("\n\t\t");
 			
-			for (int j = 0; j < map[0].length; j++) { // SE RECORRE TODO EL TAMAÑO DE LAS COLUMNAS DE LA MATRIZ
+			for (int j = 0; j < map[0].length; j++) { // SE RECORRE EL TAMAÑO DE LAS COLUMNAS DE LA MATRIZ
 				
 				int jFigure = maxFigure(j); // SE CALCULAN LAS CIFRAS DE LA COLUMNA ACTUAL
 				
@@ -474,8 +472,6 @@ public class Maze{
 				endI=num;
 			}
 			
-			num=0;
-			
 			do { // ESTABLECE Y COMPRUEBA LA COLUMNA
 				
 				num=Input.getInt("\tIntroduzca la columna de "+casilla+": ", true);
@@ -549,25 +545,24 @@ public class Maze{
 
 	public void firstWay() {
 		
+		path.clear();
+		
 		char[][] maze = simplifyMaze();
 
 		long inicio = System.currentTimeMillis();
 		
-		if (goAheadIntelligent(startI, startJ,maze)) {
-
+		if (goAhead(startI, startJ,maze)) {
+			
+			printPath();
 			showMaze();
 
-			long fin = System.currentTimeMillis();
-			
-			double time = ((double)fin-(double)inicio)/1000.0;
-			System.out.println("\n\tTiempo acumulado: "+time+" (s).");
-
 		} else {
+			
 			System.out.println("\n\tEl laberinto no tiene solución.");
+			
 		}
 		
-		path.clear();
-		Input.toContinue();
+		time(inicio);
 
 	}
 	
@@ -589,70 +584,7 @@ public class Maze{
 	
 	/* COMPRUEBA TODAS LAS COMBINACIONES HASTA ENCONTRAR UNA SOLUCION */
 	
-	private boolean goAheadIntelligent(int i, int j, char[][] maze) {
-		
-		int distI = i-endI;
-		int distJ = j-endJ;
-		int[][] movements = new int[4][2];
-		
-		if(distI>=0 && distJ<=0) { // si esta arriba y derecha
-			
-			movements[0][0] = i-1; // arriba
-			movements[0][1] = j; // arriba
-			
-			movements[1][0] = i; // derecha
-			movements[1][1] = j+1; // derecha
-			
-			movements[2][0] = i+1; // abajo
-			movements[2][1] = j; // abajo
-			
-			movements[3][0] = i; // izquierda
-			movements[3][1] = j-1; // izquierda
-			
-		}else if(distI>=0 && distJ>=0) { // si esta arriba e izquierda
-			
-			movements[0][0] = i-1; // arriba
-			movements[0][1] = j; // arriba
-			
-			movements[1][0] = i; // izquierda
-			movements[1][1] = j-1; // izquierda
-			
-			movements[2][0] = i+1; // abajo
-			movements[2][1] = j; // abajo
-			
-			movements[3][0] = i; // derecha
-			movements[3][1] = j+1; // derecha
-			
-		}else if(distI<=0 && distJ<=0) { // si esta abajo y derecha
-			
-			movements[0][0] = i+1; // abajo
-			movements[0][1] = j; // abajo
-
-			movements[1][0] = i; // derecha
-			movements[1][1] = j+1; // derecha
-
-			movements[2][0] = i-1; // arriba
-			movements[2][1] = j; // arriba
-
-			movements[3][0] = i; // izquierda
-			movements[3][1] = j-1; // izquierda
-
-			
-		}else if(distI<=0 && distJ>=0) { // si esta abajo e izquierda
-			
-			movements[0][0] = i+1; // abajo
-			movements[0][1] = j; // abajo
-
-			movements[1][0] = i; // izquierda
-			movements[1][1] = j-1; // izquierda
-
-			movements[2][0] = i-1; // arriba
-			movements[2][1] = j; // arriba
-
-			movements[3][0] = i; // derecha
-			movements[3][1] = j+1; // derecha
-
-		}
+	private boolean goAhead(int i, int j, char[][] maze) {
 
 		if (i == endI && j == endJ) {
 			return true;
@@ -664,36 +596,50 @@ public class Maze{
 		
 		path.push(new Coordinate(i,j));
 		
-		if (goAheadIntelligent(movements[0][0],movements[0][1],maze)) {
+		if (goAhead(i, j+1,maze)) {
 			return true;
 		}
 		
-		if (goAheadIntelligent(movements[1][0], movements[1][1],maze)) {
+		if (goAhead(i-1, j,maze)) {
 			return true;
 		}
 		
-		if (goAheadIntelligent(movements[2][0], movements[2][1],maze)) {
+		if (goAhead(i, j-1,maze)) {
 			return true;
 		}
 		
-		if (goAheadIntelligent(movements[3][0], movements[3][1],maze)) {
+		if (goAhead(i+1, j,maze)) {
 			return true;
 		}
 		
 		path.pop();
 		return false;
 	}
+	
+	private void printPath() {
+		
+		setDirections();
+		int pasos = path.size();
+		
+		System.out.println("\n\tPasos: "+pasos);
+		
+		for (int i = 1; i < pasos; i++) {
+			
+			System.out.println("\t("+path.get(i).getX()+", "+path.get(i).getY()+") ---> "+path.get(i).getDirection());
+			
+		}
+		
+	}
 
 	/* METODO PARA BUSCAR EL CAMINO MAS CORTO */
 
 	public void shorterWay() {
 		
+		path.clear();
 		char[][] maze = simplifyMaze();
 
 		long inicio = System.currentTimeMillis();
-		Stack<Coordinate> path2 = new Stack<Coordinate>();
-
-		path.clear();
+		Stack<Coordinate> path2 = new Stack<>();
 		
 		int size = (map.length)+(map[0].length)*10;
 		
@@ -703,23 +649,31 @@ public class Maze{
 			
 		}
 		
-		if(goAheadIntelligent(startI,startJ,maze)) {
+		goAheadAllWays(startI, startJ, path2,maze);
+		
+		if(this.find) { 
 			
-			goAheadAllWays(startI, startJ, path2,maze);
+			printPath();
 			showMaze();
 			
 		}else {
 			System.out.println("No hay ninguna solución posible.");
 		}
 		
-		path.clear();
+		time(inicio);
+
+	}
+	
+	private void time(long inicio) {
 		
 		long fin = System.currentTimeMillis();
 		
 		double time = ((double)fin-(double)inicio)/1000.0;
 		System.out.println("\n\tTiempo acumulado: "+time+" (s).");
+		this.find=false;
+		path.clear();
 		Input.toContinue();
-
+		
 	}
 	
 	/* BUSCA TODOS LOS CAMINOS Y SE QUEDA CON EL MAS CORTO DE TODOS ELLOS */
@@ -732,7 +686,7 @@ public class Maze{
 				
 				path.clear();
 				path.addAll(path2);
-				
+				find=true;
 			}
 			
 			return true;
@@ -742,7 +696,7 @@ public class Maze{
 			return false; 
 		}
 		
-		if (path2.size()>path.size()) { // para 
+		if (path2.size()>path.size()) { 
 			return false; 
 		}
 		
@@ -763,14 +717,16 @@ public class Maze{
 		char[][] copyMap = new char[map.length][map[0].length];
 
         for (int i = 0; i < map.length; i++) {
+        	
             for (int j = 0; j < map[i].length; j++) {
+            	
                 copyMap[i][j] = map[i][j];
+                
             }
+            
         }
 		
-		int min =0;
-		
-		min=countWhites(copyMap);
+		int min=countWhites(copyMap);
 		
 		do {
 			
@@ -798,8 +754,7 @@ public class Maze{
 			for (int j = 0; j < copyMap[0].length; j++) {
 				
 				if(copyMap[i][j]==' ') {
-					exit++;
-					
+					exit++;	
 				}
 				
 			}
@@ -836,17 +791,10 @@ public class Maze{
 						cont ++;
 					}
 					
-					if(cont<=1) {
+					if(cont<=1 && !isInOrOut(i, j)) {
 						
-						if(isInOrOut(i, j)) {
-							continue;
-						}else {
-							copyMap[i][j]='#';
-						}
+						copyMap[i][j]='#';	
 						
-					}else {
-						
-						continue;
 					}
 					
 				}
@@ -861,15 +809,7 @@ public class Maze{
 	
 	private boolean isInOrOut(int i, int j) {
 		
-		if(i==startI && j==startJ) {
-			return true;
-		}
-		
-		if(i==endI && j==endJ) {
-			return true;
-		}
-		
-		return false;
+		return (i==startI && j==startJ) || (i==endI && j==endJ);
 		
 	}
 	
