@@ -57,6 +57,95 @@ public class Ejercicio2 {
 		return actual;
 		
 	}
+	
+	public Object remove(int indice) {
+		
+		if(indice < 0 && indice >= numElementos) {
+			throw new IndexOutOfBoundsException("Índice incorrecto: "+ indice);
+		}
+		
+		if(indice==0) {
+			
+			return removePrimero();
+			
+		}
+		
+		if(indice>0) {
+			
+			return removeIntermedio(indice);
+			
+		}
+		
+		return null;
+		
+	}
+	
+	private Object removePrimero() {
+		
+		Nodo actual = primero;			
+		primero = primero.siguiente;	   
+		numElementos--;
+		return actual.dato;
+
+	}
+	
+	private Object removeIntermedio(int indice) {
+		
+		Nodo anterior = obtenerNodo(indice-1);
+		Nodo actual = obtenerNodo(indice);
+		anterior.siguiente=actual.siguiente;   
+		numElementos--;
+		return actual.dato;
+		
+	}
+	
+	public int indexOf(Object objeto) {
+		
+		Nodo actual = primero;
+		
+		for (int i = 0; actual !=null; i++) {
+			
+			if((actual.dato != null && actual.dato.equals(objeto)) || actual.dato == objeto) {
+				return i;
+			}
+			
+			actual=actual.siguiente;
+			
+		}
+		
+		return -1;
+		
+	}
+	
+	public int remove(Object objeto) {
+		
+		int indice = indexOf(objeto);
+		
+		if(indice>=0) {
+			remove(indice);
+		}
+		
+		return indice;
+		
+	}
+	
+	public Object get(int indice) {
+		
+		 if (indice >= numElementos || indice < 0) {
+	   		 throw new IndexOutOfBoundsException("índice incorrecto: " + indice);
+	   	 }
+		 
+		 Nodo aux = obtenerNodo(indice);
+		 
+		 return aux.dato;
+		
+	}
+	
+	public int size() {
+		
+		return numElementos;
+		
+	}
 		
 }
 
