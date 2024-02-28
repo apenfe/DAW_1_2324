@@ -66,11 +66,27 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.BufferedWriter;
 
+/**
+ * Clase Session utilizada para realizar todas las acciones del usuario durante una sesión,
+ * asi como permitir que el usuario pueda registrarse o autenticarse.
+ * 
+ * @author Adrián Peñalver Fernández
+ * @version 1.0.0
+ * 
+ */
+
 public class Session{
 	
 	/* ATRIBUTOS PRIVADOS DE LA CLASE */
 	
+	/**
+	 * Usuario asignado a la sesión actual.
+	 */
 	private User currentUser;
+	
+	/**
+	 * boolean que nos permite conocer si el usuario se ha podido autenticar o no.
+	 */
 	private boolean logged;
 	private final String FILE_PATH = ".\\assets\\files\\"; // EN WINDOWS SE DEBE DE PONER .\ AL INICIO Y EN EL RESTO DE LA RUTA \
 	private final String USER_FILE = "users.txt"; // NOMBRE DEL ARCHIVO
@@ -78,6 +94,11 @@ public class Session{
 	/* LISTADO DE MÉTODOS DE LA CLASE */
 	
 	/* CONSTRUCTOR DE LA CLASE */
+	
+	/**
+	 * Constructor de la clase, el cual inicia la sesión con una autenticación en false
+	 * y crea un usuario vacio.
+	 */
 	
 	public Session() {
 		
@@ -87,6 +108,12 @@ public class Session{
 	}
 	
 	/* METODO LOGIN PARA EL ACCESO DE USUARIOS */
+	
+	/**
+	 * Este método pregunata al ususuario su contraseña y nombre de usuario.
+	 * En caso de encontrar coincidencia en el archivo, se establece el usuario
+	 * y se especifica la autenticación a true.
+	 */
 	
 	public void login() {
 
@@ -106,6 +133,15 @@ public class Session{
 	}
 	
 	/* METODO SIGNUP PARA REGISTRAR NUEVOS USUARIOS */
+	
+	/**
+	 * Este método permite crear un nuevo usuario.
+	 * Primero se pregunta por un nombre de usuario único y en caso afirmativo,
+	 * se preguntan el resto de datos.
+	 * 
+	 * Si todos los datos son correctos, el usuario se guarda en el fichero y ya podrá
+	 * utilizar el método login().
+	 */
 	
 	public void signup() {
 		
@@ -166,6 +202,10 @@ public class Session{
 	
 	/* METODO PARA VER LA INFORMACÓN COMPLETA DEL USUARIO */
 	
+	/**
+	 * Este método se utiliza para mostrar toda la información referente al usuario logueado.
+	 */
+	
 	public void showUser() {
 		
 		System.out.println(Config.USER);
@@ -173,6 +213,11 @@ public class Session{
 	}
 	
 	/* METODO PARA CERRAR LA SESION DEL USUARIO */
+	
+	/**
+	 * Este método permite cerrar la sesión del actual usuario.
+	 * Cambia la autenticación a false y pone el usuario a null.
+	 */
 	
 	public void logOut() {
 		
@@ -188,6 +233,12 @@ public class Session{
 	}
 	
 	/* METODO PARA COMPROBAR SI EL USUARIO HA INICIADO O NO LA SESIÓN */
+	
+	/**
+	 * Este método permite conocer el estado de autenticación del usuario de la sesión.
+	 * 
+	 * @return boolean True si está autenticado y false en caso de no estarlo.
+	 */
 	
 	public boolean isLogged() {
 		

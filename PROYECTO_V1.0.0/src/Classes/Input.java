@@ -13,7 +13,17 @@ package Classes; /* SE PONE PARA INDICAR EN QUE CARPETA ESTÁ, SI ES EN LA CARPE
  * 
  */
 
-import java.util.Scanner; /* import Classes.Input; o import Classes.*; para todo lo de la carpeta */
+import java.util.Scanner;
+
+/**
+ * Clase Input utilizada para recibir datos por entrada de teclado.
+ * 
+ * Compuesta por varios métodos públicos y estatáticos.
+ * 
+ * @author dmunuera
+ * @version 1.0.0
+ * 
+ */
 
 public class Input {
 	
@@ -25,6 +35,12 @@ public class Input {
 	private static final String GENERIC_ERROR = Config.ROJO+"Algo ocurrió."+Config.RESET;
 	
 	/* MÉTODO PARA OBTENER UN NUMERO ENTERO, NO ACEPTA NINGUN PARAMETRO */
+	
+	/**
+	 * Método estático que permite recibir un entero introducido por el usuario.
+	 * 
+	 *  @return int Entero introducido por el usuario.
+	 */
 	
 	public static int getInt() {
 		
@@ -41,6 +57,13 @@ public class Input {
 
 	/* MÉTODO PARA OBTENER UN NUMERO ENTERO, USA UN STRING COMO ENUNCIADO */
 	
+	/**
+	 * Método estático que permite recibir un entero introducido por el usuario y se le muestra un enunciado.
+	 * 
+	 * @param text Enunciado
+	 * @return int Entero introducido por el usuario.
+	 */
+	
 	public static int getInt(String text) {
 		
 		int number = -1;
@@ -56,6 +79,15 @@ public class Input {
 	}
 	
 	/* MÉTODO PARA OBTENER UN NUMERO ENTERO CON ENUNCIADO, RECIBE UN BOLEANO PARA REPETIR O NO HASTA QUE SEA VALIDO */
+	
+	/**
+	 * Método estático que permite recibir un entero introducido por el usuario y se le muestra un enunciado.
+	 * Además puede especificarse que se insista o no en caso de excepción.
+	 * 
+	 * @param text Enunciado
+	 * @param repeat True para no insistir y false para insistir.
+	 *  @return int Entero introducido por el usuario.
+	 */
 
 	public static int getInt(String text, boolean repeat) {
 		
@@ -85,6 +117,12 @@ public class Input {
 
 	/* MÉTODO PARA OBTENER UN STRING, SIN ENUNCIADO */
 	
+	/**
+	 * Método estático que permite recibir un texto introducido por el usuario.
+	 * 
+	 *  @return String Texto introducido por el usuario.
+	 */
+	
 	public static String getString() {
 		
 		String value = keyboard.nextLine().trim();
@@ -94,6 +132,13 @@ public class Input {
 
 	/* MÉTODO PARA OBTENER UN STRING, CON ENUNCIADO */
 	
+	/**
+	 * Método estático que permite recibir un texto introducido por el usuario y se le muestra un enunciado.
+	 * 
+	 * @param text Enunciado
+	 *  @return String Texto introducido por el usuario.
+	 */
+	
 	public static String getString(String text) {
 		
 		System.out.print(text);
@@ -102,6 +147,10 @@ public class Input {
 	}
 
 	/* MÉTODO QUE PIDE PULSAR ENTER PARA CONTINUAR */
+	
+	/**
+	 * Método estático que permite parar la ejecución del programa hasta que el usuario pulse enter
+	 */
 	
 	public static void toContinue() {
 		

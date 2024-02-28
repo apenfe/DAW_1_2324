@@ -83,6 +83,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Stack;
 
+/**
+ * Clase Maze utilizada para cragar un laberinto desde un fichero y realizar varias acciones con él.
+ * 
+ * @author Adrián Peñalver Fernández
+ * @version 1.0.0
+ * 
+ */
+
 public class Maze{
 	
 	/* ATRIBUTOS DE LA CLASE MAZE */
@@ -98,6 +106,12 @@ public class Maze{
 	
 	/* CONSTRUCTOR DE LA CLASE MAZE */
 	
+	/**
+	 * Constructor de la clase Maze, el cual especifica que el laberinto no ha sido cargado ni se ha encontrado ninguna solución
+	 * para este.
+	 * 
+	 */
+	
 	public Maze() {
 		
 		this.loaded=false;
@@ -108,6 +122,13 @@ public class Maze{
 	/* METODOS DE LA CLASE MAZE */
 	
 	/* METODO PARA SABER SI ESTA CARGADO EL LABERINTO */
+	
+	/**
+	 * Método que permite conocer el estado de carga del laberinto.
+	 * 
+	 * @return boolean True si se ha cargado y false en caso contrario.
+	 * 
+	 */
 	
 	public boolean isLoaded() {
 		return loaded;
@@ -138,6 +159,16 @@ public class Maze{
 	}
 	
 	/* METODO PARA CARGAR EL LABERINTO DESEADO */
+	
+	/**
+	 * Método que permite cargar un laberinto.
+	 * 
+	 * Le muestra al usuario todos los laberintos disponibles y le permite seleccionar uno de ellos.
+	 * 
+	 * En caso de que el proceso se realice bien, se pone el boolean loaded a true
+	 * y se resetean todos los valores del laberinto.
+	 * 
+	 */
 
 	public void loadMaze() {
 		
@@ -258,6 +289,14 @@ public class Maze{
     }
 	
 	/* METODO PARA VISUALIZAR EL LABERINTO */
+	
+	/**
+	 * Método que permite visualizar el laberinto cargado.
+	 * 
+	 * Le muestra al usuario el laberinto con las casillas de entrada y salida, asi como la solución en caso
+	 * de existir una y si ha sido calculada.
+	 * 
+	 */
 	
 	public void showMaze() {
 		
@@ -414,6 +453,14 @@ public class Maze{
 	
 	/* METODO PARA ESTABLECER CASILLAS DE ENTRADA Y SALIDA DEL LABERINTO */
 	
+	/**
+	 * Método que permite al usuario establecer las casillas de entrada y salida para 
+	 * el laberinto en uso.
+	 * 
+	 * Las casillas no podrán ser paredes, estar fuera del laberinto o ser la misma casilla.
+	 * 
+	 */
+	
 	public void setStartEnd() {
 		
 		deleteMaze(false); // SE RESETEAN LAS CASILLAS ANTERIORES
@@ -530,6 +577,12 @@ public class Maze{
 	
 	/* METODO PARA COMPROBAR SI ENTRADA Y SALIDA NO SE HAN CREADO*/
 	
+	/**
+	 * Método para comprobar si la entrada y salida aun no han sido establecidas por el usuario.
+	 * 
+	 * @return boolean True si han sido establecidas y false en caso de no estar establecidas.
+	 */
+	
 	public boolean inOutNotZero() {
 		
 		if((startI==endI && endJ==startJ) && (startI==0 && startJ==0 )) {
@@ -540,6 +593,14 @@ public class Maze{
 	}
 
 	/* METODO PARA BUSCAR EL PRIMER CAMINO POSIBLE */
+	
+	/**
+	 * Método que permite buscar una solución cualquiera para el laberinto.
+	 * 
+	 * En caso de encontrarla se muestra el laberinto con la solución y en caso de no 
+	 * encontrar la solución, se indica al usuario.
+	 * 
+	 */
 
 	public void firstWay() {
 		
@@ -632,6 +693,14 @@ public class Maze{
 	}
 
 	/* METODO PARA BUSCAR EL CAMINO MAS CORTO */
+	
+	/**
+	 * Método que permite buscar la solución que represente el camino más corto posible.
+	 * 
+	 * En caso de encontrarla se muestra el laberinto con la solución y en caso de no 
+	 * encontrar la solución, se indica al usuario.
+	 * 
+	 */
 
 	public void shorterWay() {
 		

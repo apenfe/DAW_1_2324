@@ -16,11 +16,28 @@ package Classes;
  * 27/02/2024
  */
 
+/**
+ * Clase Coordinate utilizada para almacenar las casillas de la solución.
+ * 
+ * Incluye getters y setters
+ * 
+ * @author Adrián Peñalver Fernández
+ * @version 1.0.0
+ * 
+ */
+
 public class Coordinate{
 	
 	private int x;
 	private int y;
 	private char direction;
+	
+	/**
+	 * Constructor de la clase.
+	 * 
+	 *  @param x Fila de la casilla.
+	 *  @param y Columna de la casilla.
+	 */
 	
 	public Coordinate(int x, int y) {
 		
@@ -44,10 +61,26 @@ public class Coordinate{
 	public void setY(int y) {
 		this.y = y;
 	}
+	
+	/**
+	 * Get de Dirección.
+	 * 
+	 * Devuelve un char que corresponde a la dirección del camino.
+	 * 
+	 * @return char Dirección del camino.
+	 */
 
 	public char getDirection() {
 		return direction;
 	}
+	
+	/**
+	 * Set de Dirección.
+	 * 
+	 * Recibe un char que corresponde a la dirección del camino.
+	 * 
+	 * @param char Dirección del camino.
+	 */
 
 	public void setDirection(char direction) {
 		this.direction = direction;

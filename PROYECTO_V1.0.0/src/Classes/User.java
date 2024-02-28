@@ -21,6 +21,14 @@ package Classes;
  * 
  */
 
+/**
+ * Clase User utilizada para crear un usuario y posteriormente poder usarlo en una sesión.
+ * 
+ * @author Adrián Peñalver Fernández
+ * @version 1.0.0
+ * 
+ */
+
 public class User{
 	
 	/* DECLARACIÓN DE LOS PARAMETROS */
@@ -31,15 +39,32 @@ public class User{
 	public String email;
 	public String addres;
 	public String birthdate;
-	public String role; // EN LA VERSION 0.1.0 SERÁ SIEMPRE "user"
+	public String role;
 	
 	/* CONSTRUCTOR VACIO */
+	
+	/**
+	 * Constructor de la clase vacío.
+	 */
 	
 	public User() { 
 		
 	}
 	
 	/* CONSTRUCTOR QUE RECIBE TODOS LOS DATOS, EN EL ORDEN QUE SE ESCRIBEN EN EL ARCHIVO */
+	
+	/**
+	 * Constructor de la clase que recibe todos los datos del usuario.
+	 * 
+	 * @param username Nombre del usuario
+	 * @param name Nombre real de usuario y apellidos
+	 * @param nif DNI del usuario
+	 * @param email Correo electrónico del usuario
+	 * @param addres Dirección postal del usuario
+	 * @param birthdate Fecha de nacimiento del usuario
+	 * @param role Rol del usuario
+	 * 
+	 */
 	
 	public User(String username, String name, String nif, String email, String addres, String birthdate, String role) {
 		
@@ -111,6 +136,10 @@ public class User{
 	}
 	
 	/* METODO PUBLICO QUE DEVUELVE TODA LA INFORMACIÓN RELATIVA A UN USUARIO */
+	
+	/**
+	 * Método info que muestra la información completa del usuario.
+	 */
 
 	public void info() {
 		

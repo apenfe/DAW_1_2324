@@ -58,11 +58,11 @@ import java.util.regex.Pattern;
  */
 
 /**
- * Clase que contiene metodos y campos estaticos para usar en varias partes del programa.
+ * Clase que contiene métodos y campos estáticos para usar en varias partes del programa.
  * 
- * Incluye comprobacion de expresiones regulares, menus, formatos de letras, cabeceras de menu, etc...
+ * Incluye comprobación de expresiones regulares, menus, formatos de letras, cabeceras de menu, etc...
  * 
- * @author Adrian Penalver Fernandez
+ * @author Adrián Peñalver Fernández
  * @version 1.0.0
  * 
  */
@@ -72,45 +72,70 @@ public class Config{
 	/* LISTADO DE ATRIBUTOS ESTATICOS */
 	
 	/**
-	 * Campos estaticos que permiten cambiar el color del texto en la consola.
+	 * Campos estáticos que permiten cambiar el color del texto en la consola.
 	 * 
-	 * @see RESET permite resetear el color establecido previamente.
+	 * @see RESET Permite resetear el color establecido previamente.
 	 * 
 	 */
     public static final String RESET = "\033[0m";  // Restablecer el color
+    
+    /**
+	 * Color negro de texto en consola.
+	 */
     public static final String NEGRO = "\033[0;30m";   // Negro
+    /**
+	 * Color rojo de texto en consola.
+	 */
     public static final String ROJO = "\033[0;31m";     // Rojo
+    /**
+	 * Color verde de texto en consola.
+	 */
     public static final String VERDE = "\033[0;32m";   // Verde
+    /**
+	 * Color amarillo de texto en consola.
+	 */
     public static final String AMARILLO = "\033[0;33m";// Amarillo
+    /**
+	 * Color azul de texto en consola.
+	 */
     public static final String AZUL = "\033[0;34m";    // Azul
+    /**
+	 * Color purpura de texto en consola.
+	 */
     public static final String PURPURA = "\033[0;35m"; // Púrpura
+    /**
+	 * Color cian de texto en consola.
+	 */
     public static final String CIAN = "\033[0;36m";     // Cian
+    /**
+	 * Color blanco de texto en consola.
+	 */
     public static final String BLANCO = "\033[0;37m";   // Blanco
     
     /**
-	 * Campo estatico que permite conocer la versión actual del software.
+	 * Campo estático que permite conocer la versión actual del software.
 	 */
 	
 	public static final String VERSION = AZUL+"✅ -- Version Estable: 1.0.0 --"+RESET;
 	
 	/**
-	 * Campo estatico que permite acceder al directorio donde se almacenan los laberintos.
+	 * Campo estático que permite acceder al directorio donde se almacenan los laberintos.
 	 */
 	public static final String PATH = ".\\assets\\mazes\\";
 	
 	/**
-	 * Campo estatico que permite dar la bienvenida al usuario.
+	 * Campo estático que permite dar la bienvenida al usuario.
 	 */
 	public static final String WELCOME =CIAN+"\n          \\r                                        BIENVENIDO A ARIADNE-SOFT.\n"
 			+ "      %@@,...#@@.\n   (@            #@\n  &*     @.        @.\n ,&     *@. &,     ,@\n  @      @  &,     /&                                       .#&@@@%*\n  *@              /&                                     &@          #@.\n    %@.         #@  %@(       *@@&&&@@&.               /&     @@@&     /@\n        (&@@&#.         #@((@           ,@.           .@      @@@*      (%\n                          @.      /@/     (&          ,@         (*     *&           &@@@@@@@#\n                         @/      @ #/      %@#/.       @*               @@@.      @*           @@\n                         &/     ...#/      %*           /@            %@     ,@@@%     #,@       @.\n                          @,              #%               #@&(,,*&@&.          @        @       .@\n                           *@.          /@.                       @             @        @       ,@\n                              .%@@@@@@#                           #@            /@               @\n                                    ,@                             @,             @%          .@(\n                                     @/                            .@           @#   *@@@@@@%.\n                                      @                          /@&/. .*&@( /@.\n                                      /%                       @.            @,\n                                   /@&      ,@@              /@        *#     #%\n                                 @(             @,           @        .@       @\n                                @         #*     @/  ./%@@@@@@.     &/         @\n                               ,@         &*     .@           @.              @\n                                @     *%#%@      #%            ,@(         *@*\n                                 @.             &%                 ,#@@@#*\n                                   @&.       *@(\n                                        ,*.\n "+RESET;                                                                                                                                                                                
 	
 	/**
-	 * Campo estatico que permite despedir al usuario al final del programa.
+	 * Campo estático que permite despedir al usuario al final del programa.
 	 */
 	public static final String GOODBYE = " _   ___   ___   ___   ___   ___   ___   ___   ___   ___   ___\n _| |_  |_|  _| |_  |_|  _| |_  |_|  _| |_  |_|  _| |_  |_|  _|\n|  _  |  _  |_   _|  _  |  _  |  _  |_   _|  _  |  _  |  _  |_\n|_| |_| | |___| |___| | |_| |_| | |___| |___| | |_| |_| | |___|\n _   _  |  ___   ___  |  _   _  |_   _____   _|  _   _  |  ___\n| |_| | |_|  _| |_  |_| | |_| |  _| |_   _| |_  | |_| | |_|  _|\n|_   _|  _  |_   _|  _  |_   _| |  _  | |  _  | |_   _|  _  |_\n _| |___| |___| |___| |___| |_  |_| |_| |_| |_|  _| |___| |___|\n|  ___   ___   _   ___   ___  |  _   _   _   _  |_   ___   ___\n|_|  _| |_  |_| |_|  _| |_  |_| | |_| | | |_| |  _| |_  |_|  _|\n _  |_   _|   GOOD  |_   _|  _  |_   _| |_   _| |  _  |  _  |_\n| |___| |___| | | |___| |___| |  _| |__BYE| |_  |_| |_| | |___|\n|_   _____   _| |_   _____   _| |  ___   ___  |  _   _  |  ___\n _| |_   _| |_   _| |_   _| |_  |_|  _| |_  |_| | |_| | |_|  _|\n|  _  | |  _  | |  _  | |  _  |  _  |_   _|  _  |_   _|  _  |_\n|_| |_| |_| |_| |_| |_| |_| |_| | |___| |___| |___| |___| |___|\n _   _   _   _   _   _   _   _  |  ___ * *_* * *_* * *_* * *_*\n| |_| | | |_| | | |_| | | |_| | |_|  _|*|_  |_|  _| |_  |_|  _|\n|_   _| |_   _| |_   _| |_   _|  _  |_ * _|  _  |  _  |  _  |_\n _| |_____| |_   _| |_____| |_  | |___|*|___| | |_| |_| | |___|\n|  ___   ___  | |  ___ * *_* * * * *_* * _|  _   _  |  ___    \n |_|  _| |_  |_| |_|  _|*|_  |_|  _| |_   _| |_  | |_| | |_|  _|\n _  |_   _|  _   _  |_ * _|  _  |  _  | |  _  | |_   _|  _  |_\n| |___| |___| |_| |___|*|___| | |_| |_| |_| |_|  _| |___| |___|\n|_   ___   ___ * *_* * *__   _|  _   _   _   _  |_   ___   ___\n _| |_  |_|  _|*|_  |_|  _| |_  | |_| | | |_| |  _| |_  |_|  _|\n|  _  |  _  |_ * _|  _  |  _  | |_   _| |_   _| |  _  |  _  |_\n|_| |_| | |___|*|___| | |_| |_|  _| |_____| |_  |_| |_| | |___|\n _   _  |  ___ * ___  |  _   _  |  ___   ___  |  _   _  |  ___\n| |_| | |_|  _|*|_  |_| | |_| | |_|  _| |_  |_| | |_| | |_|  _|\n|_   _|  _  |_ * _|  _  |_   _|  _  |_   _|  _  |_   _|  _  |_\n _| |___| |___|*|___| |___| |___| |___| |___| |___| |___| |___\n    ";
 	
 	/**
-	 * Campo estatico que permite mostrar el menu de opciones de usuarios no logueados.
+	 * Campo estático que permite mostrar el menu de opciones de usuarios no logueados.
 	 */
 	public static final String UNLOGGED_MENU = "\n------- MUENU -------\n"
 											  +"[1] - INICIAR SESIÓN\n"
@@ -119,7 +144,7 @@ public class Config{
 											  +"Seleccione una opcion [0-2]: ";
 	
 	/**
-	 * Campo estatico que permite mostrar el menu de opciones de usuarios logueados.
+	 * Campo estático que permite mostrar el menu de opciones de usuarios logueados.
 	 */
 	public static final String LOGGED_MENU = "\n------------------- MUENU -------------------\n"
 											+"[1] - CARGAR LABERINTO\n"
@@ -132,7 +157,7 @@ public class Config{
 											+"Seleccione una opcion [0-6]: ";
 	
 	/**
-	 * Campo estatico que permite mostrar el menu de opciones de resolucion de laberintos.
+	 * Campo estático que permite mostrar el menu de opciones de resolución de laberintos.
 	 */
 	public static final String SOLVE_MAZE_MENU = "\n\t------------------- MUENU -------------------\n"
 			+"\t[1] - BUSCAR UN CAMINO\n"
@@ -141,7 +166,7 @@ public class Config{
 			+"\tSeleccione una opcion [0-2]: ";
 	
 	/**
-	 * Campo estatico que permite mostrar la cabecera del metodo login.
+	 * Campo estático que permite mostrar la cabecera del método login.
 	 */
 	public static final String LOGIN = AMARILLO+"  __        ______     _______  __  .__   __.\n"
 									 + " |  |      /  __  \\   /  _____||  | |  \\ |  |\n"
@@ -151,7 +176,7 @@ public class Config{
 			                         + " |_______| \\______/   \\______| |__| |__| \\__|"+RESET;
 	
 	/**
-	 * Campo estatico que permite mostrar la cabecera del metodo signup.
+	 * Campo estático que permite mostrar la cabecera del método signup.
 	 */
 	public static final String SIGNUP = AMARILLO+"      _______. __    _______ .__   __.  __    __  .______ \n"
 									  + "     /       ||  |  /  _____||  \\ |  | |  |  |  | |   _  \\ \n"
@@ -161,7 +186,7 @@ public class Config{
 						              + " |_______/    |__|  \\______| |__| \\__|  \\______/  | _|  "+RESET;
 	
 	/**
-	 * Campo estatico que permite mostrar la cabecera del metodo user.
+	 * Campo estático que permite mostrar la cabecera del método user.
 	 */
 	public static final String USER = AMARILLO+"  __    __       _______. _______ .______  \n"
 			                        + " |  |  |  |     /       ||   ____||   _  \\\n"
@@ -171,7 +196,7 @@ public class Config{
 						            + "  \\______/  |_______/    |_______|| _| `._____|"+RESET;
 	
 	/**
-	 * Campo estatico que permite mostrar la cabecera del metodo logout.
+	 * Campo estático que permite mostrar la cabecera del método logout.
 	 */
 	public static final String LOGOUT = AMARILLO+"  __        ______     _______   ______    __    __  .___________.\n"
 							          + " |  |      /  __  \\   /  _____| /  __  \\  |  |  |  | |           |\n"
@@ -181,7 +206,7 @@ public class Config{
 							          + " |_______| \\______/   \\______|  \\______/   \\______/      |__|"+RESET;
 	
 	/**
-	 * Campo estatico que permite mostrar la cabecera del metodo exit.
+	 * Campo estático que permite mostrar la cabecera del método exit.
 	 */
 	public static final String EXIT = AMARILLO+"  _______ ___   ___  __  .___________.\n"
 						            + " |   ____|\\  \\ /  / |  | |           |\n"
@@ -191,7 +216,7 @@ public class Config{
 						            + " |_______|/__/ \\__\\ |__|     |__| "+RESET;
 	
 	/**
-	 * Campo estatico que permite mostrar la cabecera proximamente para secciones del programa en desarrollo.
+	 * Campo estático que permite mostrar la cabecera proximamente para secciones del programa en desarrollo.
 	 */
 	public static final String SOON = AMARILLO+" .______   .______        ______   ___   ___  __  .___  ___.      ___      .___  ___.  _______ .__   __. .___________. _______ \n"
 								            + " |   _  \\  |   _  \\      /  __  \\  \\  \\ /  / |  | |   \\/   |     /   \\     |   \\/   | |   ____||  \\ |  | |           ||   ____|\n"
@@ -201,7 +226,7 @@ public class Config{
 								            + " | _|      | _| `._____| \\______/  /__/ \\__\\ |__| |__|  |__| /__/     \\__\\ |__|  |__| |_______||__| \\__|     |__|     |_______|"+RESET;
 	
 	/**
-	 * Campo estatico que permite mostrar la cabecera del metodo cargar laberinto.
+	 * Campo estático que permite mostrar la cabecera del método cargar laberinto.
 	 */
 	public static final String LOAD_MAZE = AMARILLO+"\n  __        ______        ___       _______     .___  ___.      ___       ________   _______ \n"
 			+ " |  |      /  __  \\      /   \\     |       \\    |   \\/   |     /   \\     |       /  |   ____|\n"
@@ -211,7 +236,7 @@ public class Config{
 			+ " |_______| \\______/  /__/     \\__\\ |_______/    |__|  |__| /__/     \\__\\  /________||_______|\n"+RESET;
 	
 	/**
-	 * Campo estatico que permite mostrar la cabecera del metodo showmaze.
+	 * Campo estático que permite mostrar la cabecera del método showmaze.
 	 */
 	public static final String MAZE = AMARILLO+"\n .___  ___.      ___       ________   _______ \r\n"
 			+ " |   \\/   |     /   \\     |       /  |   ____|\r\n"
@@ -221,7 +246,7 @@ public class Config{
 			+ " |__|  |__| /__/     \\__\\  /________||_______|\n"+RESET;
 	
 	/**
-	 * Campo estatico que permite mostrar la cabecera del metodo establecer casillas de entrada y salida.
+	 * Campo estático que permite mostrar la cabecera del método establecer casillas de entrada y salida.
 	 */
 	public static final String SET_IN_OUT = AMARILLO+"\n      _______. _______ .___________.    __  .__   __.      ______    __    __  .___________.\r\n"
 			+ "     /       ||   ____||           |   |  | |  \\ |  |     /  __  \\  |  |  |  | |           |\r\n"
@@ -231,7 +256,7 @@ public class Config{
 			+ " |_______/    |_______|    |__|        |__| |__| \\__|     \\______/   \\______/      |__|    \n"+RESET;
 	
 	/**
-	 * Campo estatico que permite mostrar la cabecera del metodo resolver laberinto.
+	 * Campo estático que permite mostrar la cabecera del método resolver laberinto.
 	 */
 	public static final String SOLVE_MAZE = AMARILLO+"\n      _______.  ______    __      ____    ____  _______    .___  ___.      ___       ________   _______ \r\n"
 			+ "     /       | /  __  \\  |  |     \\   \\  /   / |   ____|   |   \\/   |     /   \\     |       /  |   ____|\r\n"
@@ -245,9 +270,9 @@ public class Config{
 	/* METODO PARA CONFIRMAR LA SALIDA CON UNA S u s */
 	
 	/**
-	 * Metodo estatico que permite mostar un mensaje para pedir al usuario si quiere salir del programa.
+	 * Método estático que permite mostar un mensaje para pedir al usuario si quiere salir del programa.
 	 * 
-	 * @return Boolean confirmacion de salida.
+	 * @return Boolean confirmación de salida.
 	 */
 	
 	public static boolean confirmExit() {
@@ -262,11 +287,11 @@ public class Config{
 	/* METODO PARA CONFIRMAR UN MENSAJE CON UNA LETRA A ELEGIR */
 	
 	/**
-	 * Metodo estatico que sobrecargado, permite mostar un mensaje y tambien recibe un mensaje de aceptacion.
+	 * Método estático que sobrecargado, permite mostar un mensaje y también recibe un mensaje de aceptación.
 	 * 
 	 *  @param enunciado Enunciado que se desea introducir.
 	 *  @param respuesta Respuesta deseada para ser afirmativa.
-	 *  @return boolean confirmacion de ununciado.
+	 *  @return boolean Confirmación de ununciado.
 	 */
 	
 	public static boolean confirmExit(String enunciado, String respuesta) { 
@@ -281,10 +306,10 @@ public class Config{
 	/* METODO PARA COMPROBAR FORMATO DE EMAIL */
 	
 	/**
-	 * Metodo estatico que compruba si un email tiene formato correcto.
+	 * Método estático que comprueba si un email tiene formato correcto.
 	 * 
 	 *  @param email Email a comprobar.
-	 *  @return boolean check del email.
+	 *  @return boolean Check del email.
 	 */
 	
 	public static boolean checkEmail(String email) {
@@ -311,10 +336,10 @@ public class Config{
 	/* METODO PARA COMPROBAR FORMATO DE NIF */
 	
 	/**
-	 * Metodo estatico que compruba si un DNI tiene formato correcto.
+	 * Método estático que compruba si un DNI tiene formato correcto.
 	 * 
 	 *  @param nif DNI a comprobar.
-	 *  @return boolean check del nif.
+	 *  @return boolean Check del nif.
 	 */
 	
 	public static boolean checkNif(String nif) {
@@ -337,12 +362,12 @@ public class Config{
 	/* METODO PARA COMPROBAR FORMATO DE FECHA */
 	
 	/**
-	 * Metodo estatico que compruba si una fecha tiene formato correcto y es valida.
+	 * Método estático que compruba si una fecha tiene formato correcto y es válida.
 	 * Además comprueba si la fecha no va más allá del año actual.
 	 * 
 	 *  @param birthdate Fecha a comprobar.
 	 *  @param currentYear Año actual.
-	 *  @return boolean check de la fecha de nacimiento.
+	 *  @return boolean Check de la fecha de nacimiento.
 	 */
 	
 	public static boolean checkBirthdate(String birthdate, int currentyear) {
@@ -409,11 +434,11 @@ public class Config{
 	/* METODO PARA COMPROBAR LA LONGITUD DE UN STRING DADO UN ENTERO */
 	
 	/**
-	 * Metodo estatico que compruba si un String tiene una longitud indicada.
+	 * Método estático que compruba si un String tiene una longitud indicada.
 	 * 
-	 *  @param text texto a comprobar.
+	 *  @param text Texto a comprobar.
 	 *  @param lenght Longitud a determinar.
-	 *  @return boolean check de la comprobacion de la longitud.
+	 *  @return boolean Check de la comprobación de la longitud.
 	 */
 	
 	public static boolean checkLong(String text, int length) {
@@ -428,10 +453,10 @@ public class Config{
 	/* METODO PARA COMPROBAR SI ES UN NOMBRE VÁLIDO */
 	
 	/**
-	 * Metodo estatico que compruba si un nombre tienen un formato valido.
+	 * Método estático que compruba si un nombre tienen un formato válido.
 	 * 
-	 *  @param text texto a comprobar.
-	 *  @return boolean check de la comprobacion del nombre.
+	 *  @param text Texto a comprobar.
+	 *  @return boolean Check de la comprobación del nombre.
 	 */
 	
 	public static boolean checkName(String text) {
@@ -453,11 +478,11 @@ public class Config{
 	/* METODO PARA COMPROBAR UNA CADENA SUPERA UNA LONGITUD DETERMINADA */
 	
 	/**
-	 * Metodo estatico que comprubar si un texto supera una longitud determinada.
+	 * Método estático que comprubar si un texto supera una longitud determinada.
 	 * 
-	 *  @param text texto a comprobar.
-	 *  @param max Longitud maxima establecida.
-	 *  @return boolean check de la longitud.
+	 *  @param text Texto a comprobar.
+	 *  @param max Longitud máxima establecida.
+	 *  @return boolean Check de la longitud.
 	 */
 	
 	public static boolean checkMaxLong(String text, int max) {
@@ -472,10 +497,10 @@ public class Config{
 	/* METODO PARA COMPROBAR SI HAY SIMBOLOS QUE NO SEAN ALFANUMERICOS */
 	
 	/**
-	 * Metodo estatico que comprubar si un texto tiene simbolos.
+	 * Método estático que compruba si un texto tiene símbolos.
 	 * 
-	 *  @param text texto a comprobar.
-	 *  @return boolean check de la existencia de simbolos.
+	 *  @param text Texto a comprobar.
+	 *  @return boolean Check de la existencia de símbolos.
 	 */
 	
 	public static boolean checkSymbols(String text) {
