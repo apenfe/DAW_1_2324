@@ -146,6 +146,38 @@ public class Ejercicio2 {
 		return numElementos;
 		
 	}
+	
+	/////////////////
+	
+	public void add(int indice, Object dato) {
+		
+		if (indice >= numElementos || indice < 0) {
+	   		 throw new IndexOutOfBoundsException("índice incorrecto: " + indice);
+	   	}
+		
+		Nodo nuevo = new Nodo(dato);
+		
+		if (indice==0) {
+			
+			nuevo.siguiente=this.primero;
+			this.primero=nuevo;
+			
+		}else {
+			
+			Nodo anterior = obtenerNodo(indice-1);
+			Nodo actual = anterior.siguiente;
+
+			anterior.siguiente=nuevo;
+			nuevo.siguiente=actual;
+			
+		}
+		
+		numElementos++;
+		
+	}
+	
+	/////////////////
+
 		
 }
 

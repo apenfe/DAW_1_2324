@@ -148,7 +148,7 @@ public class Ejercicio4 {
 		
 	}
 	
-	public void removeAll(Ejercicio4 datosAborrar) {
+	public void removeAll(Ejercicio4 datosAborrar) { // en la lista enlazada seria igual
 		
 		for (int i = 0; i < datosAborrar.size(); i++) {
 			
