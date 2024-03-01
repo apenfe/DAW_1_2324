@@ -1,6 +1,6 @@
 package ejercicios;
 
-public class Ejercicio6_nodo{
+public class Ejercicio6_nodo<E>{
 	
 	private Nodo inicial;
 	private int numElementos;
@@ -19,7 +19,7 @@ public class Ejercicio6_nodo{
 		
 	}
 	
-	public boolean contains(Object objeto) {
+	public boolean contains(E objeto) {
 		
 		if(indexOf(objeto)!=-1) {
 			return true;
@@ -28,7 +28,7 @@ public class Ejercicio6_nodo{
 		
 	}
 	
-	public int indexOf(Object objeto) {
+	public int indexOf(E objeto) {
 		
 		Nodo actual = inicial;
 		
@@ -112,7 +112,33 @@ void push(Object) 		- Añade un elemento en la cima de la pila.
 	
 	public Object pop() {
 		
-		Nodo actual = inicial;
+		Nodo anterior = inicial;
+			
+			for (int i = 0; i < numElementos-1; i++) {
+				
+				anterior=anterior.siguiente;
+				
+			}
+			
+			Object salida = anterior.dato;
+			anterior.siguiente=null;
+			numElementos--;
+			return salida;
+		
+	}
+	
+	public void push(E objeto) {
+		
+		Nodo nuevo = new Nodo(objeto);
+
+		if(numElementos==0) {
+			
+			inicial=nuevo;
+			numElementos++;
+			
+		}else {
+			
+			Nodo actual = inicial;
 			
 			for (int i = 0; i < numElementos-1; i++) {
 				
@@ -120,26 +146,10 @@ void push(Object) 		- Añade un elemento en la cima de la pila.
 				
 			}
 			
-			Object salida = actual.siguiente.dato;
-			actual.siguiente=null;
-			numElementos--;
-			return salida;
-		
-	}
-	
-	public void push(Object objeto) {
-		
-		Nodo actual = inicial;
-		
-		for (int i = 0; i < numElementos; i++) {
-			
-			actual=actual.siguiente;
+			actual.siguiente=nuevo;
+			numElementos++;
 			
 		}
-		
-		Nodo nuevo = new Nodo(objeto);
-		actual.siguiente=nuevo;
-		numElementos++;
 		
 	}
 	

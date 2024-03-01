@@ -1,6 +1,6 @@
 package ejercicios;
 
-public class Ejercicio6{
+public class Ejercicio6<E>{
 	
 	private final int NUM_INICIAL = 4;
 	private int numElementos;
@@ -20,7 +20,7 @@ public class Ejercicio6{
 		
 	}
 	
-	public boolean contains(Object objeto) {
+	public boolean contains(E objeto) {
 		
 		if(indexOf(objeto)!=-1) {
 			return true;
@@ -29,7 +29,7 @@ public class Ejercicio6{
 		
 	}
 	
-	public int indexOf(Object objeto) {
+	public int indexOf(E objeto) {
 		
 		if(objeto==null) {
 			
@@ -116,7 +116,7 @@ void push(Object) 		- Añade un elemento en la cima de la pila.
 		
 	}
 	
-	public void push(Object objeto) {
+	public void push(E objeto) {
 		
 		if(numElementos==0) {
 			
@@ -136,7 +136,15 @@ void push(Object) 		- Añade un elemento en la cima de la pila.
 	
 	public Object[] toArray() {
 		
-		return arrayElementos;
+		Object[] salida = new Object[numElementos];
+		
+		for (int i = 0; i < numElementos; i++) {
+			
+			salida[i]=arrayElementos[i];
+			
+		}
+		
+		return salida;
 		
 	}
 	
