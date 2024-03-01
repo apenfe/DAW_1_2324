@@ -15,9 +15,9 @@ package ejercicios;
  * 
  */
 
-public class Ejercicio1 {
+public class Ejercicio1<E> {
 	
-	private final int NUM_INICIAL = 4;
+	private static final int NUM_INICIAL = 4;
 	private int numElementos;
 	private Object[] arrayElementos;
 	
@@ -28,7 +28,7 @@ public class Ejercicio1 {
 		
 	}
 	
-	public void add(Object objeto) {
+	public void add(E objeto) {
 		
 		if(numElementos==0) {
 			
@@ -65,7 +65,7 @@ public class Ejercicio1 {
 				
 	}
 	
-	private int indexOf(Object objeto) {
+	private int indexOf(E objeto) {
 		
 		if(objeto == null) {
 			
@@ -96,7 +96,7 @@ public class Ejercicio1 {
 		
 	}
 	
-	public boolean contains(Object objeto) {
+	public boolean contains(E objeto) {
 		
 		if(indexOf(objeto)>=0) {
 			return true;
@@ -138,7 +138,7 @@ public class Ejercicio1 {
 		
 	}
 	
-	public int remove(Object objeto) {
+	public int remove(E objeto) {
 		
 		int indice = indexOf(objeto);
 		

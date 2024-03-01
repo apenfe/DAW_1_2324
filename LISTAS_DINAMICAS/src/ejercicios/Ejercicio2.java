@@ -9,7 +9,7 @@ package ejercicios;
  * Deben seguirse los principios y estilo del código limpio.
  */
 
-public class Ejercicio2 {
+public class Ejercicio2<E> {
 	
 	public Nodo primero;
 	public int numElementos;
@@ -21,7 +21,7 @@ public class Ejercicio2 {
 		
 	}
 	
-	public void add(Object objeto) {
+	public void add(E objeto) {
 		
 		Nodo nuevo = new Nodo(objeto);
 		
@@ -99,7 +99,7 @@ public class Ejercicio2 {
 		
 	}
 	
-	public int indexOf(Object objeto) {
+	public int indexOf(E objeto) {
 		
 		Nodo actual = primero;
 		
@@ -117,7 +117,7 @@ public class Ejercicio2 {
 		
 	}
 	
-	public int remove(Object objeto) {
+	public int remove(E objeto) {
 		
 		int indice = indexOf(objeto);
 		
@@ -149,7 +149,7 @@ public class Ejercicio2 {
 	
 	/////////////////
 	
-	public void add(int indice, Object dato) {
+	public void add(int indice, E dato) {
 		
 		if (indice >= numElementos || indice < 0) {
 	   		 throw new IndexOutOfBoundsException("índice incorrecto: " + indice);
@@ -177,8 +177,7 @@ public class Ejercicio2 {
 	}
 	
 	/////////////////
-
-		
+	
 }
 
 class Nodo{

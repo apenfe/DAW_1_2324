@@ -5,7 +5,7 @@ package listasEnlazadas;
  * simple con acceso sólo al principio de la serie de nodos.
  */
 
-public class ListaEnlazada {
+public class ListaEnlazada<E> {
 
 // Atributos
 
@@ -28,7 +28,7 @@ public class ListaEnlazada {
 	 * 
 	 * @param elem - el elemento a añadir. Admite que el elemento a añadir sea null.
 	 */
-	public void add(Object dato) {
+	public void add(E dato) {
 
 		// variables auxiliares
 		Nodo nuevo = new Nodo(dato);
@@ -133,7 +133,7 @@ public class ListaEnlazada {
 	 * @param dato – a eliminar.
 	 * @return - el índice del elemento eliminado o -1 si no existe.
 	 */
-	public int remove(Object dato) {
+	public int remove(E dato) {
 		// Obtiene el índice del elemento especificado.
 		int actual = indexOf(dato);
 		
@@ -149,7 +149,7 @@ public class ListaEnlazada {
 	 * @param dato- el objeto elemento a buscar.
 	 */
 	
-	public int indexOf(Object dato) {
+	public int indexOf(E dato) {
 
 		Nodo actual = primero;
 
