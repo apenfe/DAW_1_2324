@@ -22,11 +22,17 @@ public class Ejercicio6<E>{
 	
 	public boolean contains(E objeto) {
 		
-		if(indexOf(objeto)!=-1) {
-			return true;
-		}
-		return false;
+		return indexOf(objeto)!=-1;
 		
+	}
+	
+	public Object get(int indice) {
+		
+		if(indice<0||indice>=numElementos) {
+			throw new IndexOutOfBoundsException("error");
+		}
+		
+		return this.arrayElementos[indice];
 	}
 	
 	public int indexOf(E objeto) {
@@ -108,13 +114,13 @@ void push(Object) 		- Añade un elemento en la cima de la pila.
 		if(numElementos+1==arrayElementos.length) {
 			
 			Object[] arrayAmpliado = new Object[arrayElementos.length*2];
-			System.arraycopy(arrayElementos, 0, arrayAmpliado, 0, arrayElementos.length);
-			
+			System.arraycopy(arrayElementos, 0, arrayAmpliado, 0, arrayElementos.length);	
 			arrayElementos=arrayAmpliado;
 			
 		}
 		
 	}
+	
 	
 	public void push(E objeto) {
 		
@@ -133,6 +139,7 @@ void push(Object) 		- Añade un elemento en la cima de la pila.
 		}
 		
 	}
+	
 	
 	public Object[] toArray() {
 		

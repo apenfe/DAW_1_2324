@@ -1,5 +1,7 @@
 package ejercicios;
 
+import listasEnlazadas.Nodo;
+
 public class Ejercicio6_nodo<E>{
 	
 	private Nodo inicial;
@@ -36,7 +38,7 @@ public class Ejercicio6_nodo<E>{
 			
 			for (int i = 0; i < numElementos; i++) {
 				
-				if(actual.dato==null) {
+				if(actual.elemento==null) {
 					return i;
 				}
 				
@@ -48,7 +50,7 @@ public class Ejercicio6_nodo<E>{
 			
 			for (int i = 0; i < numElementos; i++) {
 				
-				if(actual.dato.equals(objeto)) {
+				if(actual.elemento.equals(objeto)) {
 					return i;
 				}
 				
@@ -62,25 +64,30 @@ public class Ejercicio6_nodo<E>{
 		
 	}
 	
+	public Object get(int indice) {
+		
+		if(indice<0||indice>=numElementos) {
+			throw new IndexOutOfBoundsException("error");
+		}
+		
+		Nodo actual = this.inicial;
+		
+		for (int i = 0; i < indice; i++) {
+			actual=actual.siguiente;
+		}
+		
+		return actual.elemento;
+	}
+	
 	public boolean isEmpty() {
 		
-		if(size()>0) {
-			return false;
-		}
-		return true;
+		return size()<=0;
 		
 	}
 	
 	public int size() {
 		return numElementos;
 	}
-	
-	/*Object peek() 			- Obtiene el elemento de la cima de la pila sin quitarlo.
-Object pop() 			- Extrae el elemento situado en la cima de la pila.
-void push(Object) 		- Añade un elemento en la cima de la pila.
-
-	 * 
-	 */
 	
 	public Object peek() {
 		
@@ -94,7 +101,7 @@ void push(Object) 		- Añade un elemento en la cima de la pila.
 				
 			}
 			
-			return actual.dato;
+			return actual.elemento;
 			
 		}
 
@@ -102,15 +109,11 @@ void push(Object) 		- Añade un elemento en la cima de la pila.
 		
 	}
 	
-	/*Object peek() 			- Obtiene el elemento de la cima de la pila sin quitarlo.
-Object pop() 			- Extrae el elemento situado en la cima de la pila.
-void push(Object) 		- Añade un elemento en la cima de la pila.
-
-	 * 
-	 */
-	
-	
 	public Object pop() {
+		
+		if(numElementos==0) {
+			return null;
+		}
 		
 		Nodo anterior = inicial;
 			
@@ -120,7 +123,7 @@ void push(Object) 		- Añade un elemento en la cima de la pila.
 				
 			}
 			
-			Object salida = anterior.dato;
+			Object salida = anterior.elemento;
 			anterior.siguiente=null;
 			numElementos--;
 			return salida;
@@ -160,7 +163,7 @@ void push(Object) 		- Añade un elemento en la cima de la pila.
 		
 		for (int i = 0; i < numElementos; i++) {
 			
-			salida[i]=actual.dato;
+			salida[i]=actual.elemento;
 			actual=actual.siguiente;
 			
 		}

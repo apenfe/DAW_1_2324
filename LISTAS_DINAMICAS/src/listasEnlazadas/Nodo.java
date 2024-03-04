@@ -2,8 +2,8 @@ package listasEnlazadas;
 
 public class Nodo {
 //Atributos
-	Object elemento;
-	Nodo siguiente;
+	public Object elemento;
+	public Nodo siguiente;
 
 	/**
 	 * Constructor que inicializa atributos por defecto.
