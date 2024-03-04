@@ -4,6 +4,7 @@ public class Nodo {
 //Atributos
 	public Object elemento;
 	public Nodo siguiente;
+	public Nodo anterior;
 
 	/**
 	 * Constructor que inicializa atributos por defecto.
@@ -12,7 +13,9 @@ public class Nodo {
 	 */
 	public Nodo(Object elemento) {
 		this.elemento = elemento;
-		siguiente = null;
+		this.siguiente = null;
+		this.anterior=null;
+	
 	}
 
 } // class

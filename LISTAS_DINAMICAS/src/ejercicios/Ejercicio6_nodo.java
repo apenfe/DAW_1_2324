@@ -112,21 +112,31 @@ public class Ejercicio6_nodo<E>{
 	public Object pop() {
 		
 		if(numElementos==0) {
-			return null;
-		}
-		
-		Nodo anterior = inicial;
 			
-			for (int i = 0; i < numElementos-1; i++) {
-				
+			return null;
+			
+		}else if(this.numElementos==1) {
+			
+			Object dato = inicial.elemento;
+			this.inicial=null;
+			this.numElementos--;
+			return dato;
+			
+		}else {
+		
+			Nodo anterior = inicial;
+			int contador = 0;
+			
+			while(contador<this.numElementos-2) {
 				anterior=anterior.siguiente;
-				
+				contador++;
 			}
 			
 			Object salida = anterior.elemento;
 			anterior.siguiente=null;
 			numElementos--;
 			return salida;
+		}
 		
 	}
 	
