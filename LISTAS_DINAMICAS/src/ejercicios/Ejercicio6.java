@@ -114,7 +114,7 @@ void push(Object) 		- Añade un elemento en la cima de la pila.
 		if(numElementos+1==arrayElementos.length) {
 			
 			Object[] arrayAmpliado = new Object[arrayElementos.length*2];
-			System.arraycopy(arrayElementos, 0, arrayAmpliado, 0, arrayElementos.length);	
+			System.arraycopy(arrayElementos, 0, arrayAmpliado, 0, numElementos);	
 			arrayElementos=arrayAmpliado;
 			
 		}

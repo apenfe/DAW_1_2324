@@ -2,10 +2,9 @@ package repasos;
 
 /*
  * ADD INDICE
- * REMOVE INDICE
  */
 
-public class ListaDinamica3<E>{
+public class ListaDinamica3{
 	
 	private int numElementos;
 	private static final int NUM_INICIAL = 4;
@@ -18,7 +17,41 @@ public class ListaDinamica3<E>{
 		
 	}
 	
-	public int remove(E object) {
+	public void add(int indice, Object objeto) {
+		
+		if(indice<0|| indice<=numElementos) {
+			throw new IndexOutOfBoundsException("ERROR");
+		}
+		
+		comprobarLlenado();
+		
+		if(indice<numElementos) {
+			
+			System.arraycopy(arrayElementos, indice, arrayElementos, indice+1, numElementos-(indice));
+			
+		}
+		
+		arrayElementos[indice]=objeto;
+		numElementos++;
+		
+	}
+	
+	public Object remove(int indice) {
+		
+		if(indice<0|| indice<=numElementos) {
+			throw new IndexOutOfBoundsException("ERROR");
+		}
+		
+		Object salida = arrayElementos[indice];
+		
+		System.arraycopy(arrayElementos, indice+1, arrayElementos, indice, numElementos-(indice+1));
+		arrayElementos[numElementos-1]=null;
+		numElementos--;
+		
+		return salida;
+	}
+	
+	public int remove(Object object) {
 		
 		int indice = indexOf(object);
 		
@@ -30,7 +63,7 @@ public class ListaDinamica3<E>{
 		
 	}
 	
-	public void add(E object) {
+	public void add(Object object) {
 		
 		if(numElementos==0) {
 			
@@ -79,7 +112,7 @@ public class ListaDinamica3<E>{
 		
 	}
 	
-	public boolean contains(E object) {
+	public boolean contains(Object object) {
 		
 		int indice = indexOf(object);
 		
@@ -91,7 +124,7 @@ public class ListaDinamica3<E>{
 		
 	}
 	
-	public int indexOf(E object) {
+	public int indexOf(Object object) {
 		
 		if(object==null) {
 			
@@ -116,6 +149,16 @@ public class ListaDinamica3<E>{
 		}
 		
 		return -1;
+		
+	}
+	
+	public void removeAll(ListaDinamica3 lista) {
+		
+		for (int i = 0; i < lista.size(); i++) {
+			
+			remove(lista.get(i));
+			
+		}
 		
 	}
 	

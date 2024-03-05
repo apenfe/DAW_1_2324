@@ -2,14 +2,13 @@ package dobleEnlazada;
 
 import listasEnlazadas.Nodo;
 
-public class ListaDobleEnlazada {
+public class ListaDobleEnlazada<E> {
 
 	private Nodo primero;
 	private Nodo ultimo;
 	private int numElementos;
 	
-	
-	public int remove(Object dato) {
+	public int remove(E dato) {
 		
 		int indice = indexOf(dato);
 		
@@ -42,49 +41,36 @@ public class ListaDobleEnlazada {
 		}	
 		
 	}
-	
-	private Object removePrimero() { // ver
 
-		if (numElementos == 0) {
-			
-			primero = null;
-			ultimo = null;
-			return null;
-			
-		} else {
-			
-			Nodo actual = primero;
-			Nodo segundo = primero.siguiente;
-			
-			primero=segundo;
-			segundo.anterior=ultimo;
-			this.numElementos--;
+	private Object removePrimero() {
+
+		Nodo actual = primero;
+		Nodo siguiente = actual.siguiente;
+
+		if (siguiente == null) {
+			this.primero = null;
+			this.ultimo = null;
+			numElementos = 0;
 			return actual.elemento;
-			
 		}
-		
+
+		siguiente.anterior = null;
+		this.primero = siguiente;
+		this.numElementos--;
+		return actual.elemento;
+
 	}
-	
-	private Object removeUltimo() {  // ver 
-		
-		if (numElementos == 0) {
-			
-			primero = null;
-			ultimo = null;
-			return null;
-			
-		} else {
-			
-			Nodo actual = ultimo;
-			Nodo anterior = ultimo.anterior;
-			
-			ultimo=anterior;
-			anterior.siguiente=primero;
-			this.numElementos--;
-			return actual.elemento;
-			
-		}
-		
+
+	private Object removeUltimo() {
+
+		Nodo actual = ultimo;
+		Nodo anterior = actual.anterior;
+
+		anterior.siguiente = null;
+		this.ultimo = anterior;
+		this.numElementos--;
+		return actual.elemento;
+
 	}
 	
 	private Object removeIntermedio(int indice) {
@@ -95,15 +81,13 @@ public class ListaDobleEnlazada {
 		
 		anterior.siguiente = sig;
 		sig.anterior=anterior;
-		actual.anterior = null;
-		actual.siguiente = null;
 		
 		numElementos--;
 		return actual.elemento;
 		
 	}
 	
-	public int indexOf(Object objeto) {
+	public int indexOf(E objeto) {
 		
 		Nodo actual = primero;
 		
@@ -168,11 +152,11 @@ public class ListaDobleEnlazada {
 
 	}
 
-	public void add(Object dato) {
+	public void add(E dato) {
 		addUltimo(dato);
 	}
 
-	public void add(int indice, Object dato) {
+	public void add(int indice, E dato) {
 
 		if (indice < 0 || indice >= numElementos) {
 			throw new IndexOutOfBoundsException("Índice incorrecto: " + indice);
@@ -188,7 +172,7 @@ public class ListaDobleEnlazada {
 		
 	}
 
-	private void insertarIntermedio(int indice, Object dato) {
+	private void insertarIntermedio(int indice, E dato) {
 		
 		if(indice<0||indice>=numElementos) {
 			throw new IndexOutOfBoundsException("error");
@@ -207,7 +191,7 @@ public class ListaDobleEnlazada {
 		
 	}
 
-	private void insertarPrimero(Object dato) {
+	private void insertarPrimero(E dato) {
 		
 		Nodo nuevo = new Nodo(dato);
 
@@ -230,7 +214,8 @@ public class ListaDobleEnlazada {
 		
 	}
 
-	private void addUltimo(Object dato) {
+	private void addUltimo(E dato) {
+		
 		Nodo nuevo = new Nodo(dato);
 		// La lista está vacía; el nuevo nodo es último y primero.
 		if (numElementos == 0) {
@@ -259,12 +244,33 @@ public class ListaDobleEnlazada {
 			throw new IndexOutOfBoundsException("error");
 		}
 		
-		Nodo actual = primero;
+		Nodo actual = null;
+		
+		actual = primero;
 		
 		for (int i = 0; i < indice; i++) {
 			actual = actual.siguiente;
 		}
-		
+		/*
+		if(indice<numElementos/2) {
+			System.out.println("buscando desde el primero\n");
+			actual = primero;
+			
+			for (int i = 0; i <= indice; i++) {
+				actual = actual.siguiente;
+			}
+			
+		}else {
+			System.out.println("buscando desde el ultimo\n");
+
+			actual = ultimo;
+			
+			for (int i = numElementos-1; i >= indice; i--) {
+				actual = actual.anterior;
+			}
+			
+		}
+		*/
 		return actual;
 		
 	}

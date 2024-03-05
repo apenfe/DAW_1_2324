@@ -757,7 +757,7 @@ public class Maze{
 				
 				path.clear();
 				path.addAll(path2);
-				find=true;
+				find = true;
 			}
 			
 			return true;

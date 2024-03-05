@@ -1,13 +1,9 @@
 package repasos;
 
-public class ListaEnlazada2<E>{
+public class ListaEnlazada2{
 	
 	private int numElementos;
 	private Node primero;
-	
-	/*
-	 * remove objeto
-	 */
 	
 	public ListaEnlazada2() {
 		
@@ -38,7 +34,7 @@ public class ListaEnlazada2<E>{
 		
 	}
 	
-	public int remove(E object) {
+	public int remove(Object object) {
 		
 		int indice = indexOf(object);
 		
@@ -106,7 +102,7 @@ public class ListaEnlazada2<E>{
 		
 	}
 	
-	public void add(E objeto) {
+	public void add(Object objeto) {
 		
 		Node nuevo = new Node(objeto);
 		
@@ -125,7 +121,34 @@ public class ListaEnlazada2<E>{
 		
 	}
 	
-	public int indexOf(E objeto) {
+	public void add(int indice, Object objeto) {
+		
+		if(indice<0||indice>=numElementos) {
+			throw new IndexOutOfBoundsException("error");
+		}
+		
+		Node nuevo = new Node(objeto);
+		
+		if (indice==0) {
+			
+			nuevo.siguiente=this.primero;
+			this.primero=nuevo;
+			
+		}else {
+			
+			Node anterior = obtenerNodo(indice-1);
+			Node actual = anterior.siguiente;
+
+			anterior.siguiente=nuevo;
+			nuevo.siguiente=actual;
+			
+		}
+		
+		numElementos++;
+		
+	}
+	
+	public int indexOf(Object objeto) {
 		
 		Node actual = primero;
 		
@@ -155,6 +178,15 @@ public class ListaEnlazada2<E>{
 		
 	}
 	
+	public void removeAll(ListaEnlazada2 lista) {
+		
+		for (int i = 0; i < lista.size(); i++) {
+			
+			remove(lista.get(i));
+			
+		}
+		
+	}
 
 }
 
