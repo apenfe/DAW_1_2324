@@ -25,8 +25,19 @@ public class CompletoArray{
 	 * ** boolean remove(Object) 	- Elimina el elemento correspondiente.
 	 * ** Object remove(int) 		- Elimina el elemento de la posición indicada por índice.
 	 * ** int size() 			- Número de elementos de la estructura.
+	 * void removeAll(Object[])
 	 * 
 	 */
+	
+	public void removeAll(CompletoArray lista) {
+		
+		for (int i = 0; i < lista.size(); i++) {
+			
+			remove(lista.get(i));
+			
+		}
+		
+	}
 	
 	public Object remove(int indice) { // repasar he fallado
 		
