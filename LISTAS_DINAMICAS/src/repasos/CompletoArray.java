@@ -243,7 +243,7 @@ public class CompletoArray{
 	 * METODOS DE COLA / QUEUE
 	 * 
 	 * ** Object peekCola() 			- Obtiene el elemento de la cabeza de la cola sin quitarlo.
-	 * Object poll() 			- Extrae el elemento situado en la cabeza de la cola.
+	 * ** Object poll() 			- Extrae el elemento situado en la cabeza de la cola.
 	 * ** void offer(Object) 		- Añade un elemento al final de la cola.
 	 * 
 	 */
@@ -253,9 +253,12 @@ public class CompletoArray{
 		if(numElementos>0) {
 			
 			Object salida = arrayElementos[0];
-			int indice = 0;
-			System.arraycopy(arrayElementos, indice+1, arrayElementos, indice, numElementos - (indice+1)); // CUIDADO CON ESTA LINEA
-			//arrayElementos[numElementos-1]=null; CREO QUE NO HACE FALTA
+			
+			for (int i = 0; i < numElementos-1; i++) {
+				arrayElementos[i]=arrayElementos[i+1];
+			}
+			
+			arrayElementos[numElementos-1]=null;
 			numElementos--;
 			return salida;
 		}

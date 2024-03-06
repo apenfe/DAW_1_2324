@@ -251,26 +251,26 @@ public class ListaDobleEnlazada<E> {
 		for (int i = 0; i < indice; i++) {
 			actual = actual.siguiente;
 		}
-		/*
+		
 		if(indice<numElementos/2) {
-			System.out.println("buscando desde el primero\n");
+			//System.out.println("buscando desde el primero\n");
 			actual = primero;
 			
-			for (int i = 0; i <= indice; i++) {
+			for (int i = 0; i < indice; i++) {
 				actual = actual.siguiente;
 			}
 			
 		}else {
-			System.out.println("buscando desde el ultimo\n");
+			//System.out.println("buscando desde el ultimo\n");
 
 			actual = ultimo;
 			
-			for (int i = numElementos-1; i >= indice; i--) {
+			for (int i = numElementos-1; i > indice; i--) {
 				actual = actual.anterior;
 			}
 			
 		}
-		*/
+		
 		return actual;
 		
 	}

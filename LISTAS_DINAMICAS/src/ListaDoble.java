@@ -24,8 +24,7 @@ public class ListaDoble{
 		for (int i = 0; i < listaCompra.size(); i++) {
 			System.out.format("%s\n", listaCompra.get(i));
 		}
-		//System.out.format("¿Hay pan en la lista? %b", listaCompra.contains("Pan"));
-		}
 
+	}
 	
 }

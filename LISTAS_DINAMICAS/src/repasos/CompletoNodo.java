@@ -242,7 +242,6 @@ public class CompletoNodo{
 		
 	}
 	
-	
 	/*
 	 * METODOS DE COLA / QUEUE
 	 * 
@@ -252,4 +251,39 @@ public class CompletoNodo{
 	 * 
 	 */
 	
+	public Object peek() {
+		
+		if(numElementos>0) {
+			return primero.dato;
+		}
+		
+		return null;
+		
+	}
+	
+	public Object poll() {
+		
+		if(numElementos>0) {
+			
+			Node actual = primero;
+			
+			primero=actual.siguiente;
+			numElementos--;
+			
+			return actual.dato;
+		}
+		
+		return null;
+		
+	}
+	
+	public void offer(Object dato) {
+		
+		Node nuevo = new Node(dato);
+		Node ultimo = obtenerNodo(numElementos-1);
+		
+		ultimo.siguiente=nuevo;
+		numElementos++;
+		
+	}
 }
