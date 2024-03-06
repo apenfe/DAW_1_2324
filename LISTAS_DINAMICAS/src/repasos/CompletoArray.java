@@ -174,22 +174,101 @@ public class CompletoArray{
 	/*
 	 * METODOS DE PILA / STACK
 	 * 
-	 * Object[] toArray()- Devuelve un array con todos los elementos de la pila.
-	 * Object peek() 			- Obtiene el elemento de la cima de la pila sin quitarlo.
-	 * Object pop() 			- Extrae el elemento situado en la cima de la pila.
-	 * void push(Object) 		- Añade un elemento en la cima de la pila.
+	 * ** Object[] toArray()- Devuelve un array con todos los elementos de la pila.
+	 * ** Object peek() 			- Obtiene el elemento de la cima de la pila sin quitarlo.
+	 * ** Object pop() 			- Extrae el elemento situado en la cima de la pila.
+	 * ** void push(Object) 		- Añade un elemento en la cima de la pila.
 	 * 
 	 */
 	
+	public Object peek() {
+		
+		if(numElementos>0) {
+			return arrayElementos[numElementos-1];
+		}
+		
+		return null;
+		
+	}
 	
+	public Object pop() {
+		
+		if(numElementos>0) {
+			
+			Object salida = arrayElementos[numElementos-1];
+			arrayElementos[numElementos-1]=null;
+			numElementos--;
+			return salida;	
+			
+		}
+		
+		return null;
+		
+	}
+	
+	public void push(Object dato) {
+		
+		comprobarLlenado();
+		arrayElementos[numElementos]=dato;
+		numElementos++;	
+		
+	}
+	
+	public Object[] toArray() {
+		
+		Object[] salida = new Object[numElementos];
+		
+		for (int i = 0; i < numElementos; i++) {
+			
+			salida[i]=arrayElementos[i];
+			
+		}
+		
+		return salida;
+		
+	}
 	
 	/*
 	 * METODOS DE COLA / QUEUE
 	 * 
-	 * Object peek() 			- Obtiene el elemento de la cabeza de la cola sin quitarlo.
+	 * ** Object peekCola() 			- Obtiene el elemento de la cabeza de la cola sin quitarlo.
 	 * Object poll() 			- Extrae el elemento situado en la cabeza de la cola.
-	 * void offer(Object) 		- Añade un elemento al final de la cola.
+	 * ** void offer(Object) 		- Añade un elemento al final de la cola.
 	 * 
 	 */
+	
+	public Object poll() { // REPASAR
+		
+		if(numElementos>0) {
+			
+			Object salida = arrayElementos[0];
+			int indice = 0;
+			System.arraycopy(arrayElementos, indice+1, arrayElementos, indice, numElementos - (indice+1)); // CUIDADO CON ESTA LINEA
+			//arrayElementos[numElementos-1]=null; CREO QUE NO HACE FALTA
+			numElementos--;
+			return salida;
+		}
+		
+		return null;
+		
+	}
+	
+	public void offer(Object dato) {
+		
+		comprobarLlenado();
+		arrayElementos[numElementos]=dato;
+		numElementos++;
+		
+	}
+	
+	public Object peekCola() {
+		
+		if(numElementos>0) {
+			return arrayElementos[0];
+		}
+		
+		return null;
+		
+	}
 	
 }

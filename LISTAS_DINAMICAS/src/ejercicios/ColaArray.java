@@ -56,7 +56,7 @@ public class ColaArray<E>{
 			
 			Object cabeza = arrayElementos[0];
 			Object[] ampliado = new Object[numElementos];
-			System.arraycopy(arrayElementos, 1, ampliado, 0, numElementos);
+			System.arraycopy(arrayElementos, 1, ampliado, 0, numElementos-1);
 			arrayElementos=ampliado;
 			numElementos --;
 			return cabeza;
