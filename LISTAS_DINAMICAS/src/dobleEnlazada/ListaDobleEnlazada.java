@@ -56,6 +56,7 @@ public class ListaDobleEnlazada<E> {
 
 		siguiente.anterior = null;
 		this.primero = siguiente;
+		
 		this.numElementos--;
 		return actual.elemento;
 
@@ -246,14 +247,14 @@ public class ListaDobleEnlazada<E> {
 		
 		Nodo actual = null;
 		
-		actual = primero;
+	/*	actual = primero;
 		
 		for (int i = 0; i < indice; i++) {
 			actual = actual.siguiente;
-		}
+		}*/
 		
 		if(indice<numElementos/2) {
-			//System.out.println("buscando desde el primero\n");
+	
 			actual = primero;
 			
 			for (int i = 0; i < indice; i++) {
@@ -261,7 +262,6 @@ public class ListaDobleEnlazada<E> {
 			}
 			
 		}else {
-			//System.out.println("buscando desde el ultimo\n");
 
 			actual = ultimo;
 			
