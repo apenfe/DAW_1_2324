@@ -47,8 +47,8 @@ class EjemploCoordenadasPelota {
     }
 
     public void run(String[] args) {
-        String filenameFaceCascade = args.length > 2 ? args[0] : "../../data/haarcascades/haarcascade_frontalface_alt.xml";
-        String filenameEyesCascade = args.length > 2 ? args[1] : "../../data/haarcascades/haarcascade_eye_tree_eyeglasses.xml";
+        String filenameFaceCascade = args.length > 2 ? args[0] : "C:\\opencv\\sources\\samples\\winrt_universal\\VideoCaptureXAML\\video_capture_xaml\\video_capture_xaml.Windows\\Assets\\haarcascade_frontalface_alt.xml";
+        String filenameEyesCascade = args.length > 2 ? args[1] : "C:\\opencv\\sources\\data\\haarcascades_cuda\\haarcascade_eye_tree_eyeglasses.xml";
         int cameraDevice = args.length > 2 ? Integer.parseInt(args[2]) : 0;
 
         CascadeClassifier faceCascade = new CascadeClassifier();
