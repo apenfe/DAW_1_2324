@@ -25,8 +25,7 @@ class EjemploCoordenadasPelota {
         List<Rect> listOfFaces = faces.toList();
         for (Rect face : listOfFaces) {
             Point center = new Point(face.x + face.width / 2, face.y + face.height / 2);
-            Imgproc.ellipse(frame, center, new Size(face.width / 2, face.height / 2), 0, 0, 360,
-                    new Scalar(255, 0, 255));
+            Imgproc.ellipse(frame, center, new Size(face.width / 2, face.height / 2), 0, 0, 360,new Scalar(255, 0, 255));
 
             Mat faceROI = frameGray.submat(face);
 
