@@ -13,6 +13,7 @@ import org.opencv.objdetect.CascadeClassifier;
 import org.opencv.videoio.VideoCapture;
 
 class EjemploCoordenadasPelota {
+	
     public void detectAndDisplay(Mat frame, CascadeClassifier faceCascade, CascadeClassifier eyesCascade) {
         Mat frameGray = new Mat();
         Imgproc.cvtColor(frame, frameGray, Imgproc.COLOR_BGR2GRAY);
@@ -25,7 +26,7 @@ class EjemploCoordenadasPelota {
         List<Rect> listOfFaces = faces.toList();
         for (Rect face : listOfFaces) {
             Point center = new Point(face.x + face.width / 2, face.y + face.height / 2);
-            Imgproc.ellipse(frame, center, new Size(face.width / 2, face.height / 2), 0, 0, 360,new Scalar(255, 0, 255));
+            Imgproc.ellipse(frame, center, new Size(face.width / 2, face.height / 2), 0, 0, 360,new Scalar(0, 255, 255));
 
             Mat faceROI = frameGray.submat(face);
 
@@ -37,12 +38,11 @@ class EjemploCoordenadasPelota {
             for (Rect eye : listOfEyes) {
                 Point eyeCenter = new Point(face.x + eye.x + eye.width / 2, face.y + eye.y + eye.height / 2);
                 int radius = (int) Math.round((eye.width + eye.height) * 0.25);
-                Imgproc.circle(frame, eyeCenter, radius, new Scalar(255, 0, 0), 4);
+                Imgproc.circle(frame, eyeCenter, radius, new Scalar(255, 0, 255), 4);
             }
         }
 
-        //-- Show what you got
-        HighGui.imshow("Capture - Face detection", frame );
+        HighGui.imshow("Deteccion facil y ojos", frame );
     }
 
     public void run(String[] args) {
