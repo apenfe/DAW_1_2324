@@ -658,4 +658,160 @@ public class CompletoNodo{
 		numElementos++;
 		
 	}
+	
+	// --------------------------- Repaso 3 -------------------------------
+	
+		/*
+		 * ** void add(Object) 		- Añade un elemento al final de la lista.
+		 * ** void add(int, Object) 		- Inserta un elemento en la posición indicada por un índice.
+		 * ** Nodo obtenerNodo(int indice)
+		 * ** void clear() 			- Elimina todos los elementos de la lista.
+		 * ** boolean contains(Object) 	- Comprueba si el elemento está incluido en la lista.
+		 * ** Object get(int) 			- Obtiene el elemento de la posición indicada por índice.
+		 * ** int indexOf(Object) 		- Devuelve la posición del elemento.
+		 * ** boolean isEmpty() 		- Comprueba si la lista está vacía.
+		 * ** boolean remove(Object) 	- Elimina el elemento correspondiente.
+		 * ** Object remove(int) 		- Elimina el elemento de la posición indicada por índice.
+		 * ** Object removePrimero()
+		 * ** Object removeIntermedio(int)
+		 * ** int size() 			- Número de elementos de la estructura.
+		 * ** void removeAll(Object[])
+		 * 
+		 */
+		
+		public void removeAllV3(CompletoNodo lista) {
+			
+			
+		}
+		
+		public Object removeV3(int indice) { 
+			
+			
+		}
+		
+		public Object removePrimeroV3() { 
+			
+			
+		}
+		
+		public Object removeIntermedioV3(int indice) { 
+			
+			
+		}
+		
+		public boolean removeV3(Object dato) {
+			
+		
+		}
+		
+		public void addV3(int indice, Object dato) { 
+			
+			
+		}
+		
+		public void addV3(Object dato) {
+			
+			
+		}
+		
+		public Node obtenerNodoV3(int indice) {
+			
+			
+		}
+		
+		public int sizeV3() {
+			
+
+			
+		}
+		
+		public void clearV3() {
+			
+		
+			
+		}
+		
+		public boolean isEmptyV3() {
+			
+	
+			
+		}
+		
+		public int indexOfV3(Object dato) { // repasar esta forma
+			
+			
+		}
+		
+		public boolean containsV3(Object dato) {
+			
+	
+			
+		}
+		
+		public Object getV3(int indice) {
+			
+		
+			
+		}
+		
+		/*
+		 * METODOS DE PILA / STACK
+		 * 
+		 * ** Object[] toArray()- Devuelve un array con todos los elementos de la pila.
+		 * ** Object peek() 			- Obtiene el elemento de la cima de la pila sin quitarlo.
+		 * ** Object pop() 			- Extrae el elemento situado en la cima de la pila.
+		 * ** void push(Object) 		- Añade un elemento en la cima de la pila.
+		 * 
+		 */
+		
+		public Object[] toArrayV3() {
+			
+			
+			
+		}
+		
+		public Object peekV3() {
+			
+		
+			
+		}
+		
+		public Object popV3() {
+			
+			
+			
+		}
+		
+		public void pushV3(Object objeto) {
+			
+		
+		
+		}
+		
+		/*
+		 * METODOS DE COLA / QUEUE
+		 * 
+		 * ** Object peek() 			- Obtiene el elemento de la cabeza de la cola sin quitarlo.
+		 * ** Object poll() 			- Extrae el elemento situado en la cabeza de la cola.
+		 * ** void offer(Object) 		- Añade un elemento al final de la cola.
+		 * 
+		 */
+		
+		public Object peekCola3() {
+			
+			
+			
+		}
+		
+		public Object pollV3() {
+			
+			
+			
+		}
+		
+		public void offerV3(Object dato) {
+			
+		
+			
+		}
 }
