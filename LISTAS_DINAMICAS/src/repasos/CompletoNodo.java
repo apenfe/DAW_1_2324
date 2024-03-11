@@ -681,76 +681,215 @@ public class CompletoNodo{
 		
 		public void removeAllV3(CompletoNodo lista) {
 			
+			for (int i = 0; i < lista.size(); i++) {
+				remove(lista.get(i));
+			}
 			
 		}
 		
 		public Object removeV3(int indice) { 
 			
+			if(indice<0||indice>=numElementos) {
+				throw new IndexOutOfBoundsException("error");
+			}
+			
+			if(indice==0) {
+				
+				return removePrimeroV3();
+				
+			}
+			
+			if(indice>0) {
+				
+				return removeIntermedioV3(indice);
+				
+			}
+			
+			return null;
 			
 		}
 		
 		public Object removePrimeroV3() { 
 			
+			if(numElementos>0) {
+				
+				Node actual = primero;
+				
+				primero=actual.siguiente;
+				
+				numElementos--;
+				return actual.dato;
+				
+			}
+			
+			return null;
 			
 		}
 		
 		public Object removeIntermedioV3(int indice) { 
 			
+			if(indice<0||indice>=numElementos) {
+				throw new IndexOutOfBoundsException("error");
+			}
+				
+				Node ant = obtenerNodo(indice-1);
+				Node actual = ant.siguiente;
+				
+				ant.siguiente=actual.siguiente;
+				numElementos--;
+				
+				return actual.dato;
+				
 			
 		}
 		
 		public boolean removeV3(Object dato) {
 			
+			int indice = indexOf(dato);
+			
+			if(indice!=-1) {
+				remove(indice);
+				return true;
+			}
+			
+			return false;
 		
 		}
 		
 		public void addV3(int indice, Object dato) { 
+			
+			if(indice<0||indice>=numElementos) {
+				throw new IndexOutOfBoundsException("error");
+			}
+			
+			Node nuevo = new Node(dato);
+			
+			if(indice==0) {
+				
+				nuevo.siguiente=primero;
+				primero=nuevo;
+				numElementos++;
+				
+			}else if(indice==numElementos-1) {
+				
+				addV3(dato);
+				
+			}else {
+				
+				Node ant = obtenerNodo(indice-1);
+				Node actual = ant.siguiente;
+				
+				ant.siguiente=nuevo;
+				nuevo.siguiente=actual;
+				numElementos++;
+				
+			}
 			
 			
 		}
 		
 		public void addV3(Object dato) {
 			
+			Node nuevo = new Node(dato);
+			
+			if(numElementos==0) {
+				
+				primero=nuevo;
+				
+			}else {
+				
+				Node actual = obtenerNodo(numElementos-1);
+				actual.siguiente=nuevo;
+				
+			}
+			
+			numElementos++;
 			
 		}
 		
 		public Node obtenerNodoV3(int indice) {
 			
+			if(indice<0||indice>=numElementos) {
+				throw new IndexOutOfBoundsException("ERROR");
+			}
+			
+			Node actual = primero;
+			
+			for (int i = 0; i < indice; i++) {
+				actual=actual.siguiente;
+			}
+			
+			return actual;
 			
 		}
 		
+		
 		public int sizeV3() {
 			
-
+			return numElementos;
 			
 		}
 		
 		public void clearV3() {
 			
-		
+			primero=null;
+			numElementos=0;
 			
 		}
 		
 		public boolean isEmptyV3() {
 			
+			if(numElementos==0) {
+				return true;
+			}
 	
+			return false;
 			
 		}
 		
-		public int indexOfV3(Object dato) { // repasar esta forma
+		public int indexOfV3(Object dato) {
 			
+			Node actual= primero;
+			
+			for (int i = 0; actual != null; i++) {
+				
+				if((actual.dato!=null &&  actual.dato.equals(dato))||(actual.dato==dato)) {
+					
+					return i;
+					
+				}
+				
+			}
+			
+			return -1;
 			
 		}
 		
 		public boolean containsV3(Object dato) {
 			
+			int indice = indexOfV3(dato);
+			
+			if(indice!=-1) {
+				return true;
+			}
 	
+			return false;
 			
 		}
 		
 		public Object getV3(int indice) {
 			
-		
+			if(indice<0||indice>=numElementos) {
+				throw new IndexOutOfBoundsException("error");
+			}
+			
+			if(numElementos>0) {
+				
+				Node salida = obtenerNodoV3(indice);
+				return salida.dato;
+			}
+			
+			return null;
 			
 		}
 		
@@ -766,25 +905,78 @@ public class CompletoNodo{
 		
 		public Object[] toArrayV3() {
 			
+			Object[] salida = new Object[numElementos];
 			
+			Node actual = primero;
+			
+			for (int i = 0; i < numElementos; i++) {
+				salida[i]=actual.dato;
+				actual=actual.siguiente;
+			}
+			
+			return salida;
 			
 		}
 		
 		public Object peekV3() {
 			
-		
+			if(numElementos>0) {
+				
+				Node salida = obtenerNodo(numElementos-1);
+				
+				return salida.dato;
+			}
+			
+			return null;
+			
 			
 		}
 		
 		public Object popV3() {
 			
-			
+			if(numElementos==0) {
+				
+				return null;
+				
+			}else if(numElementos==1) {
+				
+				Node actual = primero;
+				numElementos = 0;
+				primero=null;
+				
+				return actual.dato;
+				
+			}else {
+				
+				Node ant = obtenerNodo(numElementos-2);
+				Node actual = ant.siguiente;
+				
+				ant.siguiente=null;
+		
+				
+				numElementos--;
+				return actual.dato;
+				
+			}
 			
 		}
 		
-		public void pushV3(Object objeto) {
+		public void pushV3(Object dato) {
 			
-		
+			Node nuevo = new Node(dato);
+			
+			if(numElementos==0) {
+				
+				primero=nuevo;
+				
+			}else {
+				
+				Node actual = obtenerNodo(numElementos-1);
+				actual.siguiente=nuevo;
+				
+			}
+			
+			numElementos++;
 		
 		}
 		
@@ -799,19 +991,53 @@ public class CompletoNodo{
 		
 		public Object peekCola3() {
 			
+			if(numElementos>0) {
+				return primero.dato;
+			}
 			
+			return null;
 			
 		}
 		
 		public Object pollV3() {
 			
-			
+			if(numElementos==0) {
+				return null;
+				
+			}else if(numElementos==1) {
+				
+				Node actual = primero;
+				primero=null;
+				numElementos--;
+				return actual.dato;
+				
+			}else {
+				
+				Node actual = primero;
+				primero=actual.siguiente;
+				numElementos--;
+				return actual.dato;
+				
+			}
 			
 		}
 		
 		public void offerV3(Object dato) {
 			
-		
+			Node nuevo = new Node(dato);
+			
+			if(numElementos==0) {
+				
+				primero=nuevo;
+				
+			}else {
+				
+				Node actual = obtenerNodo(numElementos-1);
+				actual.siguiente=nuevo;
+				
+			}
+			
+			numElementos++;
 			
 		}
 }

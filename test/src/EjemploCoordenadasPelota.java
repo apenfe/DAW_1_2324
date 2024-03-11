@@ -15,6 +15,7 @@ import org.opencv.videoio.VideoCapture;
 class EjemploCoordenadasPelota {
 	
     public void detectAndDisplay(Mat frame, CascadeClassifier faceCascade, CascadeClassifier eyesCascade) {
+    	
         Mat frameGray = new Mat();
         Imgproc.cvtColor(frame, frameGray, Imgproc.COLOR_BGR2GRAY);
         Imgproc.equalizeHist(frameGray, frameGray);
@@ -31,7 +32,7 @@ class EjemploCoordenadasPelota {
             Mat faceROI = frameGray.submat(face);
 
             // -- In each face, detect eyes
-            MatOfRect eyes = new MatOfRect();
+           MatOfRect eyes = new MatOfRect();
             eyesCascade.detectMultiScale(faceROI, eyes);
 
             List<Rect> listOfEyes = eyes.toList();
@@ -42,12 +43,13 @@ class EjemploCoordenadasPelota {
             }
         }
 
-        HighGui.imshow("Deteccion facil y ojos", frame );
+        HighGui.imshow("Deteccion cara y ojos", frame );
     }
 
     public void run(String[] args) {
         String filenameFaceCascade = args.length > 2 ? args[0] : "C:\\opencv\\sources\\samples\\winrt_universal\\VideoCaptureXAML\\video_capture_xaml\\video_capture_xaml.Windows\\Assets\\haarcascade_frontalface_alt.xml";
         String filenameEyesCascade = args.length > 2 ? args[1] : "C:\\opencv\\sources\\data\\haarcascades_cuda\\haarcascade_eye_tree_eyeglasses.xml";
+       
         int cameraDevice = args.length > 2 ? Integer.parseInt(args[2]) : 0;
 
         CascadeClassifier faceCascade = new CascadeClassifier();
@@ -76,6 +78,7 @@ class EjemploCoordenadasPelota {
             }
 
             //-- 3. Apply the classifier to the frame
+          //  detectAndDisplay(frame, faceCascade);
             detectAndDisplay(frame, faceCascade, eyesCascade);
 
             if (HighGui.waitKey(10) == 27) {
