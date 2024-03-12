@@ -1,5 +1,7 @@
 package repasos;
 
+import java.util.Iterator;
+
 import listasEnlazadas.Nodo;
 
 public class CompletoNodo{
@@ -1039,4 +1041,235 @@ public class CompletoNodo{
 			numElementos++;
 			
 		}
+		
+		// --------------------------- Repaso 4 -------------------------------
+		
+			/*
+			 * ** void add(Object) 		- Añade un elemento al final de la lista.
+			 * ** void add(int, Object) 		- Inserta un elemento en la posición indicada por un índice.
+			 * ** Nodo obtenerNodo(int indice)
+			 * ** void clear() 			- Elimina todos los elementos de la lista.
+			 * ** boolean contains(Object) 	- Comprueba si el elemento está incluido en la lista.
+			 * ** Object get(int) 			- Obtiene el elemento de la posición indicada por índice.
+			 * ** int indexOf(Object) 		- Devuelve la posición del elemento.
+			 * ** boolean isEmpty() 		- Comprueba si la lista está vacía.
+			 * ** boolean remove(Object) 	- Elimina el elemento correspondiente.
+			 * ** Object remove(int) 		- Elimina el elemento de la posición indicada por índice.
+			 * ** Object removePrimero()
+			 * ** Object removeIntermedio(int)
+			 * ** int size() 			- Número de elementos de la estructura.
+			 * ** void removeAll(Object[])
+			 * 
+			 */
+			
+			public void removeAllV4(CompletoNodo lista) {
+				
+				for (int i = 0; i < lista.size(); i++) {
+					remove(lista.get(i));
+				}
+				
+			}
+			
+			public Object removeV4(int indice) { 
+				
+				if(indice<0||indice>=numElementos) {
+					throw new IndexOutOfBoundsException("error");
+				}
+				
+				if(indice==0) {
+					return removePrimeroV4();
+				}
+				
+				if(indice>0) {
+					return removeIntermedioV4(indice);
+				}
+				
+				return null;
+				
+			}
+			
+			public Object removePrimeroV4() { 
+				
+				if(numElementos>0) {
+					
+					Node salida = primero;
+					
+					primero=salida.siguiente;
+					numElementos--;
+					
+					return salida.dato;
+					
+				}
+				
+				return null;
+				
+			}
+			
+			public Object removeIntermedioV4(int indice) { 
+					
+				if(indice<0||indice>=numElementos) {
+					throw new IndexOutOfBoundsException("error");
+				}
+					
+				Node ant = obtenerNodo(indice-1);
+				Node actual = ant.siguiente;
+					
+				ant.siguiente=actual.siguiente;
+				numElementos--;
+					
+				return actual.dato;
+				
+				
+			}
+			
+			public boolean removeV4(Object dato) {
+				
+				int indice = indexOf(dato);
+				
+				if(indice!=-1) {
+					remove(indice);
+					return true;
+				}
+				
+				return false;
+				
+			
+			}
+			
+			public void addV4(int indice, Object dato) { 
+				
+				if(indice<0||indice>=numElementos) {
+					throw new IndexOutOfBoundsException("error");
+				}
+				
+				Node nuevo = new Node(dato);
+				
+				if(indice==0) {
+					
+					nuevo.siguiente=primero;
+					primero=nuevo;
+					numElementos++;
+					
+				}else if(indice==numElementos-1) {
+					
+					addV3(dato);
+					
+				}else {
+					
+					Node ant = obtenerNodo(indice-1);
+					Node actual = ant.siguiente;
+					
+					ant.siguiente=nuevo;
+					nuevo.siguiente=actual;
+					numElementos++;
+					
+				}	
+				
+			}
+			
+			public void addV4(Object dato) {
+				
+				Node nuevo = new Node(dato);
+				
+				if(numElementos==0) {
+					
+					primero=nuevo;
+					
+				}else {
+					
+					Node ult = obtenerNodo(numElementos-1);
+					ult.siguiente=nuevo;
+					
+				}
+				
+				numElementos++;
+				
+			}
+			
+			public Node obtenerNodoV4(int indice) {
+				
+				if(indice<0||indice>=numElementos) {
+					throw new IndexOutOfBoundsException("error");
+				}
+				
+				Node actual = primero;
+				
+				for (int i = 0; i < indice; i++) {
+					
+					actual=actual.siguiente;
+					
+				}
+				
+				return actual;
+				
+			}
+			
+			public int sizeV4() {
+				
+				return numElementos;
+				
+			}
+			
+			public void clearV4() {
+				
+				numElementos=0;
+				primero=null;
+				
+			}
+			
+			public boolean isEmptyV4() {
+				
+				if(numElementos==0) {
+					return true;
+				}
+				
+				return false;
+				
+			}
+			
+			public int indexOfV4(Object dato) {
+				
+				Node actual = primero;
+				
+				for (int i = 0; actual!=null; i++) {
+					
+					if((actual.dato!=null&&actual.dato.equals(dato))||(dato==actual.dato)) {
+						return i;
+					}
+					actual=actual.siguiente;
+				}
+				
+				return -1;
+				
+			}
+			
+			public boolean containsV4(Object dato) {
+				
+				int indice = indexOf(dato);
+				
+				if(indice!=-1) {
+					return true;
+				}
+				
+				return false;
+				
+				
+			}
+			
+			public Object getV4(int indice) {
+				
+				if(indice<0||indice>=numElementos) {
+					throw new IndexOutOfBoundsException("error");
+				}
+				
+				if(numElementos>0) {
+					
+					Node actual = obtenerNodo(indice);
+					return actual.dato;
+					
+				}
+				
+				return null;
+				
+			}
 }
