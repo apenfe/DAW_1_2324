@@ -1072,6 +1072,549 @@ public class RepasoDobleEnlazada{
 			return actual;
 			
 		}
+		
+		// ----------------------- REPASO 5 ------------------------------------------------------
+		
+			public int removeV5(Object dato) {
+				
+				int indice = indexOfV5(dato);
+				
+				if(indice!=-1) {
+					remove(indice);
+				}
+				
+				return indice;
+				
+				
+			}
+			
+			public Object removeV5(int indice) {
+				
+				if(indice<0||indice>=numElementos) {
+					throw new IndexOutOfBoundsException("error");
+				}
+				
+				if(indice==0) {
+					
+					return removePrimeroV5();
+					
+				}else if(indice==numElementos-1) {
+					
+					return removeUltimoV5();
+					
+				}else {
+					
+					return removeIntermedioV5(indice);
+					
+				}	
+				
+			}
+
+			private Object removePrimeroV5() {
+				
+				NodoDoble actual = primero;
+				
+				if(primero.siguiente==null) {
+					
+					primero=null;
+					ultimo=null;
+					
+				}else {
+					
+					NodoDoble sig = actual.siguiente;
+					sig.anterior=null;
+					primero=sig;
+					
+				}
+				
+				numElementos--;
+				return actual.dato;
+
+			}
+
+			private Object removeUltimoV5() {
+				
+				NodoDoble actual = ultimo;
+				
+				if(ultimo.anterior==null) {
+					
+					primero=null;
+					ultimo=null;
+					
+				}else {
+					
+					NodoDoble ant = actual.anterior;
+					ant.siguiente=null;
+					ultimo=ant;
+					
+				}
+				
+				numElementos--;
+				return actual.dato;
+
+			}
+			
+			private Object removeIntermedioV5(int indice) {
+				
+				NodoDoble actual = obtenerNodo(indice);
+				NodoDoble ant = actual.anterior;
+				NodoDoble sig = actual.siguiente;
+				
+				ant.siguiente=sig;
+				sig.anterior=ant;
+				numElementos--;
+				
+				return actual.dato;
+				
+
+			}
+			
+			public int indexOfV5(Object dato) {
+				
+				NodoDoble actual = primero;
+				
+				for (int i = 0; actual!=null; i++) {
+					
+					if((actual.dato!=null&&actual.dato.equals(dato))||(actual.dato==dato)) {
+						
+						return i;
+						
+					}
+					
+					actual = actual.siguiente;
+					
+				}
+				
+				return -1;
+				
+			}
+			
+			public Object getV5(int indice) {
+				
+				if(indice<0||indice>=numElementos) {
+					throw new IndexOutOfBoundsException("error");
+				}
+				
+				if(numElementos>0) {
+					
+					NodoDoble actual = obtenerNodoV5(indice);
+					return actual.dato;
+					
+				}
+				
+				return null;
+					
+			}
+			
+			public void clearV5() {
+			
+				primero=null;
+				ultimo=null;
+				numElementos=0;
+				
+			}
+			
+			public int sizeV5() {
+				
+				return numElementos;
+			
+			}
+
+			public void addV5(Object dato) {
+				
+				insertarUltimoV5(dato);
+				
+			}
+
+			public void addV5(int indice, Object dato) {
+				
+				if(indice<0||indice>=numElementos) {
+					throw new IndexOutOfBoundsException("error");
+				}
+				
+				if(indice==0) {
+					
+					insertarPrimeroV5(dato);
+					
+				}else if(indice==numElementos-1) {
+					
+					insertarUltimoV5(dato);
+					
+				}else {
+					
+					insertarIntermedioV5(indice,dato);
+					
+				}	
+				
+			}
+
+			private void insertarIntermedioV5(int indice, Object dato) {
+				
+				if(indice<0||indice>=numElementos) {
+					throw new IndexOutOfBoundsException("ERROR");
+				}
+				
+				NodoDoble nuevo = new NodoDoble(dato);
+				
+				NodoDoble actual = obtenerNodoV4(indice);
+				NodoDoble ant = actual.anterior;
+				
+				ant.siguiente=nuevo;
+				actual.anterior=nuevo;
+				
+				nuevo.anterior=ant;
+				nuevo.siguiente=actual;
+				
+				numElementos++;
+				
+			}
+
+			private void insertarPrimeroV5(Object dato) {
+				
+				NodoDoble nuevo = new NodoDoble(dato);
+				
+				if(numElementos>0) {
+					
+					NodoDoble actual = primero;
+					actual.anterior=nuevo;
+					nuevo.siguiente=actual;
+					
+					primero=nuevo;
+					
+				}else {
+					
+					primero=nuevo;
+					ultimo=nuevo;
+					
+				}
+				
+				numElementos++;
+				
+			}
+
+			private void insertarUltimoV5(Object dato) {
+				
+				NodoDoble nuevo = new NodoDoble(dato);
+				
+				if(numElementos>0) {
+				
+					NodoDoble actual = ultimo;
+					actual.siguiente=nuevo;
+					nuevo.anterior=actual;
+					ultimo=nuevo;
+					
+				}else {
+					
+					primero=nuevo;
+					ultimo=nuevo;
+					
+				}
+				
+				numElementos++;
+				
+				
+			}
+
+			private NodoDoble obtenerNodoV5(int indice) {
+				
+				if(indice<0||indice>=numElementos) {
+					throw new IndexOutOfBoundsException("error");
+				}
+				
+				NodoDoble actual = null;
+				
+				if(indice<numElementos/2) {
+					
+					actual=primero;
+					
+					for (int i = 0; i < indice; i++) {
+						actual=actual.siguiente;
+					}
+					
+				}else {
+					
+					actual=ultimo;
+					
+					for (int i = numElementos-1; i > indice; i--) {
+						actual=actual.anterior;
+					}
+					
+				}
+				
+				return actual;
+				
+			}
+			
+			// ----------------------- REPASO 6 ------------------------------------------------------
+			
+				public int removeV6(Object dato) {
+					
+					int indice = indexOf(dato);
+					
+					if(indice!=-1) {
+						
+						remove(indice);
+						
+					}
+					
+					return indice;
+					
+				}
+				
+				public Object removeV6(int indice) {
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("error");
+					}
+					
+					if(indice==0) {
+						
+						return removePrimeroV6();
+						
+					}else if(indice==numElementos-1) {
+						
+						return removeUltimoV6();
+						
+					}else {
+						
+						return removeIntermedioV6(indice);
+						
+					}
+					
+				}
+
+				private Object removePrimeroV6() {
+					
+					NodoDoble actual = primero;
+					
+					if(primero.siguiente==null) {
+						
+						primero=null;
+						ultimo=null;
+						
+					}else {
+						
+						NodoDoble sig = actual.siguiente;
+						sig.anterior=null;
+						primero=sig;
+						
+					}
+					
+					numElementos--;
+					return actual.dato;
+
+				}
+
+				private Object removeUltimoV6() {
+					
+					NodoDoble actual = ultimo;
+					
+					if(ultimo.anterior==null) {
+						
+						primero=null;
+						ultimo=null;
+						
+					}else {
+						
+						NodoDoble ant = actual.anterior;
+						ant.siguiente=null;
+						ultimo=ant;
+						
+					}
+					
+					numElementos--;
+					return actual.dato;
+					
+
+				}
+				
+				private Object removeIntermedioV6(int indice) {
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("ERROR");
+					}
+					
+					NodoDoble actual = obtenerNodoV4(indice);
+					NodoDoble ant = actual.anterior;
+					NodoDoble sig = actual.siguiente;
+					
+					ant.siguiente=sig;
+					sig.anterior=ant;
+					
+					numElementos--;
+					
+					return actual.dato;
+					
+
+				}
+				
+				public int indexOfV6(Object dato) {
+					
+					NodoDoble actual = primero;
+					
+					for (int i = 0; actual != null; i++) {
+						
+						if((actual.dato!=null&&actual.dato.equals(dato))||(actual.dato==dato)) {
+							return i;
+						}
+						
+						actual=actual.siguiente;
+						
+					}
+					
+					return -1;
+					
+				}
+				
+				public Object getV6(int indice) {
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("error");
+					}
+					
+					if(numElementos>0) {
+						
+						return obtenerNodoV6(indice).dato;
+						
+					}
+					
+					return null;
+						
+				}
+				
+				public void clearV6() {
+				
+					primero=null;
+					ultimo=null;
+					numElementos=0;
+					
+				}
+				
+				public int sizeV6() {
+					
+					return numElementos;
+				
+				}
+
+				public void addV6(Object dato) {
+					
+					insertarUltimoV6(dato);
+					
+				}
+
+				public void addV6(int indice, Object dato) {
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("error");
+					}
+					
+					if(indice==0) {
+						
+						insertarPrimeroV6(dato);
+						
+					}else if(indice==numElementos-1) {
+						
+						insertarUltimoV6(dato);
+						
+					}else {
+						
+						insertarIntermedioV6(indice,dato);
+						
+					}
+					
+				}
+
+				private void insertarIntermedioV6(int indice, Object dato) {
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("ERROR");
+					}
+					
+					NodoDoble nuevo = new NodoDoble(dato);						
+					NodoDoble actual = obtenerNodoV4(indice);
+					NodoDoble ant = actual.anterior;
+					ant.siguiente=nuevo;
+					actual.anterior=nuevo;
+					nuevo.anterior=ant;
+					nuevo.siguiente=actual;
+					
+					numElementos++;
+					
+				}
+
+				private void insertarPrimeroV6(Object dato) {
+					
+					NodoDoble nuevo = new NodoDoble(dato);
+					
+					if(numElementos==0) {
+						
+						primero=nuevo;
+						ultimo=nuevo;
+						
+					}else {
+						
+						NodoDoble actual = primero;
+						actual.anterior=nuevo;
+						nuevo.siguiente=actual;
+						primero=nuevo;
+						
+					}
+					
+					numElementos++;
+					
+				}
+
+				private void insertarUltimoV6(Object dato) {
+					
+					NodoDoble nuevo = new NodoDoble(dato);
+					
+					if(numElementos==0) {
+						
+						primero=nuevo;
+						ultimo=nuevo;
+						
+					}else {
+						
+						NodoDoble actual = ultimo;
+						actual.siguiente=nuevo;
+						nuevo.anterior=actual;
+						ultimo=nuevo;
+						
+					}
+					
+					numElementos++;
+					
+				}
+
+				private NodoDoble obtenerNodoV6(int indice) {
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("error");
+					}
+					
+					NodoDoble actual = null;
+					
+					if(indice<numElementos/2) {
+						
+						actual=primero;
+						
+						for (int i = 0; i < indice; i++) {
+							actual=actual.siguiente;
+						}
+						
+					}else {
+						
+						actual=ultimo;
+						
+						for (int i = numElementos-1; i > indice; i--) {
+							actual=actual.anterior;
+						}
+						
+					}
+					
+					return actual;
+					
+				}
 
 }
 

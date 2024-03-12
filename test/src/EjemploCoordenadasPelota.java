@@ -28,6 +28,16 @@ class EjemploCoordenadasPelota {
         for (Rect face : listOfFaces) {
             Point center = new Point(face.x + face.width / 2, face.y + face.height / 2);
             Imgproc.ellipse(frame, center, new Size(face.width / 2, face.height / 2), 0, 0, 360,new Scalar(0, 255, 255));
+            
+            // Definir el texto a escribir en la imagen
+            String text = "X: "+center.x+", Y: "+center.y;
+            Point org = new Point(50, 50);
+            int fontFace = Imgproc.FONT_HERSHEY_PLAIN;
+            double fontScale = 2.0;
+            Scalar color = new Scalar(0, 255, 0); // Color en formato BGR (azul, verde, rojo)
+
+            // Escribir el texto en la imagen
+            Imgproc.putText(frame, text, org, fontFace, fontScale, color);
 
             Mat faceROI = frameGray.submat(face);
 

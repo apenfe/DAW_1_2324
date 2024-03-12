@@ -823,7 +823,6 @@ public class CompletoNodo{
 			
 		}
 		
-		
 		public int sizeV3() {
 			
 			return numElementos;
@@ -1004,7 +1003,7 @@ public class CompletoNodo{
 			if(numElementos==0) {
 				return null;
 				
-			}else if(numElementos==1) {
+			}else if(numElementos==1) { // realmente sobra
 				
 				Node actual = primero;
 				primero=null;
