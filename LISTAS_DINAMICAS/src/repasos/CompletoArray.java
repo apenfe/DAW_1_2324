@@ -1228,5 +1228,175 @@ public class CompletoArray{
 					return arrayElementos[indice];
 					
 				}
+				
+				// ------------------- REPASO 6 ----------------------------------------------------
+				
+				/*
+				 * ** void add(Object) 		- Añade un elemento al final de la lista.
+				 * ** void add(int, Object) 		- Inserta un elemento en la posición indicada por un índice.
+				 * ** void comprobarLlenado()
+				 * ** void clear() 			- Elimina todos los elementos de la lista.
+				 * ** boolean contains(Object) 	- Comprueba si el elemento está incluido en la lista.
+				 * ** Object get(int) 			- Obtiene el elemento de la posición indicada por índice.
+				 * ** int indexOf(Object) 		- Devuelve la posición del elemento.
+				 * ** boolean isEmpty() 		- Comprueba si la lista está vacía.
+				 * ** boolean remove(Object) 	- Elimina el elemento correspondiente.
+				 * ** Object remove(int) 		- Elimina el elemento de la posición indicada por índice.
+				 * ** int size() 			- Número de elementos de la estructura.
+				 * void removeAll(Object[])
+				 * 
+				 */
+				
+				public void removeAllV6(CompletoArray lista) {
+					
+					for (int i = 0; i < lista.size(); i++) {
+						remove(lista.get(i));
+					}
+					
+				}
+				
+				public Object removeV6(int indice) { // repasar he fallado
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("error");
+					}
+					
+					Object actual = arrayElementos[indice];
+					
+					System.arraycopy(arrayElementos, indice+1, arrayElementos, indice, numElementos-(indice+1));
+
+					arrayElementos[numElementos-1]=null;
+					numElementos--;
+					return actual;
+					
+				}
+				
+				public boolean removeV6(Object dato) {
+					
+					int indice = indexOf(dato);
+					
+					if(indice!=-1) {
+						remove(indice);
+						return true;
+					}
+					
+					return false;
+					
+				}
+				
+				public void addV6(int indice, Object dato) {
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("error");
+					}
+					
+					comprobarLlenadoV4();
+					
+					if(indice<numElementos) {
+						
+						System.arraycopy(arrayElementos, indice, arrayElementos, indice+1, numElementos-indice);
+						
+					}
+					
+					arrayElementos[indice]=dato;
+					numElementos++;
+					
+				}
+				
+				public void addV6(Object dato) {
+					
+					if(numElementos==0) {
+						arrayElementos[0]=dato;
+					}else {
+						comprobarLlenadoV6();
+						arrayElementos[numElementos]=dato;
+					}
+					
+					numElementos++;
+					
+				}
+				
+				private void comprobarLlenadoV6() {
+					
+					if(numElementos+1==arrayElementos.length) {
+						
+						Object[] ampliado = new Object[arrayElementos.length*2];
+						System.arraycopy(arrayElementos, 0, ampliado, 0, numElementos);
+						arrayElementos=ampliado;
+						
+					}
+					
+				}
+				
+				public int sizeV6() {
+					
+					return numElementos;
+									
+				}
+				
+				public void clearV6() {
+					
+					numElementos=0;
+					arrayElementos=new Object[NUM_INICIAL];	
+					
+				}
+				
+				public boolean isEmptyV6() {
+					
+					if(numElementos==0) {
+						return true;
+					}
+					
+					return false;
+					
+				}
+				
+				public int indexOfV6(Object dato) {
+					
+					if(dato==null) {
+						
+						for (int i = 0; i < numElementos; i++) {
+							
+							if(dato==arrayElementos[i]) {
+								return i;
+							}
+							
+						}
+						
+					}else {
+						
+						for (int i = 0; i < numElementos; i++) {
+							
+							if(dato.equals(arrayElementos[i])) {
+								return i;
+							}
+							
+						}
+						
+					}
+					
+					return -1;
+					
+				}
+				
+				public boolean containsV6(Object dato) {
+					
+					int indice = indexOf(dato);
+					
+					if(indice!=-1) {
+						return true;
+					}
+					return false;
+				}
+				
+				public Object getV6(int indice) {
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("ERROR");
+					}
+					
+					return arrayElementos[indice];
+					
+				}
 			
 }
