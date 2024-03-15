@@ -1398,5 +1398,480 @@ public class CompletoArray{
 					return arrayElementos[indice];
 					
 				}
-			
+				
+				
+// ------------------- REPASO 7 ----------------------------------------------------
+				
+				/*
+				 * ** void add(Object) 		- Añade un elemento al final de la lista.
+				 * ** void add(int, Object) 		- Inserta un elemento en la posición indicada por un índice.
+				 * ** void comprobarLlenado()
+				 * ** void clear() 			- Elimina todos los elementos de la lista.
+				 * ** boolean contains(Object) 	- Comprueba si el elemento está incluido en la lista.
+				 * ** Object get(int) 			- Obtiene el elemento de la posición indicada por índice.
+				 * ** int indexOf(Object) 		- Devuelve la posición del elemento.
+				 * ** boolean isEmpty() 		- Comprueba si la lista está vacía.
+				 * ** boolean remove(Object) 	- Elimina el elemento correspondiente.
+				 * ** Object remove(int) 		- Elimina el elemento de la posición indicada por índice.
+				 * ** int size() 			- Número de elementos de la estructura.
+				 * void removeAll(Object[])
+				 * 
+				 */
+				
+				public void removeAllV7(CompletoArray lista) {
+					
+					for (int i = 0; i < lista.size(); i++) {
+						remove(lista.get(i));
+					}
+					
+				}
+				
+				public Object removeV7(int indice) { // repasar he fallado
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("error");
+					}
+					
+					Object actual = arrayElementos[indice];
+					
+					System.arraycopy(arrayElementos, indice+1, arrayElementos, indice, numElementos-(indice+1));
+					arrayElementos[numElementos-1]=null;
+					numElementos--;
+					return actual;
+					
+				}
+				
+				public boolean removeV7(Object dato) {
+					
+					int indice = indexOf(dato);
+					
+					if(indice!=-1) {
+						remove(indice);
+						return true;
+					}
+					
+					return false;
+					
+					
+				}
+				
+				public void addV7(int indice, Object dato) {
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("error");
+					}
+					
+					comprobarLlenado();
+					
+					if(indice<numElementos) {
+						System.arraycopy(arrayElementos, indice, arrayElementos, indice+1, numElementos-indice);
+					}
+					
+					arrayElementos[indice]=dato;
+					numElementos++;
+					
+					
+				}
+				
+				public void addV7(Object dato) {
+					
+					if(numElementos==0) {
+						
+						arrayElementos[0]=dato;
+						
+					}else {
+						
+						comprobarLlenadoV7();
+						arrayElementos[numElementos]=dato;
+						
+					}
+					
+					numElementos++;
+					
+				}
+				
+				private void comprobarLlenadoV7() {
+					
+					if(numElementos+1==arrayElementos.length) {
+						
+						Object[] ampliado = new Object[arrayElementos.length*2];
+						System.arraycopy(arrayElementos, 0, ampliado, 0, numElementos);
+						arrayElementos=ampliado;
+						
+					}
+					
+				}
+				
+				public int sizeV7() {
+					
+					return numElementos;
+									
+				}
+				
+				public void clearV7() {
+					
+					numElementos=0;
+					arrayElementos=new Object[NUM_INICIAL];
+					
+				}
+				
+				public boolean isEmptyV7() {
+					
+					if(numElementos==0) {
+						return true;
+					}
+					
+					return false;
+					
+				}
+				
+				public int indexOfV7(Object dato) {
+					
+					if(dato==null) {
+						
+						for (int i = 0; i < numElementos; i++) {
+							
+							if(dato==arrayElementos[i]) {
+								return i;
+							}
+							
+						}
+						
+					}else {
+						
+						for (int i = 0; i < numElementos; i++) {
+							
+							if(dato.equals(arrayElementos[i])) {
+								return i;
+							}
+							
+						}
+						
+					}
+					
+					return -1;
+					
+				}
+				
+				public boolean containsV7(Object dato) {
+					
+					int indice = indexOf(dato);
+					
+					if(indice!=-1) {
+						return true;
+					}
+					
+					return false;
+					
+				}
+				
+				public Object getV7(int indice) {
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("error");
+					}
+					
+					return arrayElementos[indice];
+						
+				}
+				
+				// ------------------- REPASO 8 ----------------------------------------------------
+				
+				/*
+				 * ** void add(Object) 		- Añade un elemento al final de la lista.
+				 * ** void add(int, Object) 		- Inserta un elemento en la posición indicada por un índice.
+				 * ** void comprobarLlenado()
+				 * ** void clear() 			- Elimina todos los elementos de la lista.
+				 * ** boolean contains(Object) 	- Comprueba si el elemento está incluido en la lista.
+				 * ** Object get(int) 			- Obtiene el elemento de la posición indicada por índice.
+				 * ** int indexOf(Object) 		- Devuelve la posición del elemento.
+				 * ** boolean isEmpty() 		- Comprueba si la lista está vacía.
+				 * ** boolean remove(Object) 	- Elimina el elemento correspondiente.
+				 * ** Object remove(int) 		- Elimina el elemento de la posición indicada por índice.
+				 * ** int size() 			- Número de elementos de la estructura.
+				 * void removeAll(Object[])
+				 * 
+				 */
+				
+				public void removeAllV8(CompletoArray lista) {
+					
+					for (int i = 0; i < lista.size(); i++) {
+						
+						remove(lista.get(i));
+						
+					}
+					
+				}
+				
+				public Object removeV8(int indice) {
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("error");
+					}
+					
+					Object actual = arrayElementos[indice];
+					
+					System.arraycopy(arrayElementos, indice+1, arrayElementos, indice, numElementos-(indice+1));
+					arrayElementos[numElementos-1]=null;
+					numElementos--;
+					
+					return actual;
+					
+				}
+				
+				public boolean removeV8(Object dato) {
+					
+					int indice = indexOf(dato);
+					
+					if(indice!=-1) {
+						remove(indice);
+						return true;
+					}
+					
+					return false;
+					
+				}
+				
+				public void addV8(int indice, Object dato) { 
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("error");
+					}
+					
+					comprobarLlenado();
+					
+					if(indice<numElementos) {
+						System.arraycopy(arrayElementos, indice, arrayElementos, indice+1, numElementos-indice);
+					}
+					
+					arrayElementos[indice]=dato;
+					numElementos++;
+					
+				}
+				
+				public void addV8(Object dato) {
+					
+					if(numElementos==0) {
+						
+						arrayElementos[0]=dato;
+						
+					}else {
+						
+						comprobarLlenado();
+						arrayElementos[numElementos]=dato;
+						
+					}
+					
+					numElementos++;
+					
+				}
+				
+				private void comprobarLlenadoV8() {
+					
+					if(numElementos+1==arrayElementos.length) {
+						
+						Object[] ampliado = new Object[arrayElementos.length*2];
+						System.arraycopy(arrayElementos, 0, ampliado, 0, numElementos);
+						arrayElementos=ampliado;
+						
+					}
+					
+				}
+				
+				public int sizeV8() {
+					
+					return numElementos;
+					
+				}
+				
+				public void clearV8() {
+					
+					this.numElementos = 0;
+					this.arrayElementos = new Object[NUM_INICIAL];
+					
+				}
+				
+				public boolean isEmptyV8() {
+					
+					if(numElementos==0) {
+						
+						return true;
+						
+					}
+					
+					return false;
+					
+				}
+				
+				public int indexOfV8(Object dato) {
+					
+					if(dato==null) {
+						
+						for (int i = 0; i < numElementos; i++) {
+							
+							if(dato==arrayElementos[i]) {
+								
+								return i;
+								
+							}
+							
+						}
+						
+					}else {
+						
+						for (int i = 0; i < numElementos; i++) {
+							
+							if(dato.equals(arrayElementos[i])) {
+								
+								return i;
+								
+							}
+							
+						}
+						
+					}
+					
+					return -1;
+					
+				}
+				
+				public boolean containsV8(Object dato) {
+					
+					int indice = indexOfV3(dato);
+					
+					if(indice!=-1) {
+						return true;
+					}
+					return false;
+					
+				}
+				
+				public Object getV8(int indice) {
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("error");
+					}
+					
+					if(numElementos>0) {
+						return arrayElementos[indice];
+					}
+					return null;
+				}
+				
+				/*
+				 * METODOS DE PILA / STACK
+				 * 
+				 * ** Object[] toArray()- Devuelve un array con todos los elementos de la pila.
+				 * ** Object peek() 			- Obtiene el elemento de la cima de la pila sin quitarlo.
+				 * ** Object pop() 			- Extrae el elemento situado en la cima de la pila.
+				 * ** void push(Object) 		- Añade un elemento en la cima de la pila.
+				 * 
+				 */
+				
+				public Object peekV8() {
+					
+					if(numElementos>0) {
+						return arrayElementos[numElementos-1];
+					}
+					
+					return null;
+					
+				}
+				
+				public Object popV8() {
+					
+					if(numElementos>0) {
+						
+						Object salida = arrayElementos[numElementos-1];
+						arrayElementos[numElementos-1]=null;
+						numElementos--;
+						return salida;
+						
+					}
+					
+					return null;
+					
+				}
+				
+				public void pushV8(Object dato) {
+					
+					if(numElementos==0) {
+						
+						arrayElementos[0]=dato;
+						
+					}else {
+						
+						comprobarLlenado();
+						arrayElementos[numElementos]=dato;
+						
+					}
+					
+					numElementos++;
+						
+				}
+				
+				public Object[] toArrayV8() {
+					
+					Object[] salida = new Object[numElementos];
+					
+					for (int i = 0; i < numElementos; i++) {
+						salida[i]=arrayElementos[i];
+					}
+					
+					return salida;
+					
+				}
+				
+				/*
+				 * METODOS DE COLA / QUEUE
+				 * 
+				 * ** Object peekCola() 			- Obtiene el elemento de la cabeza de la cola sin quitarlo.
+				 * ** Object poll() 			- Extrae el elemento situado en la cabeza de la cola.
+				 * ** void offer(Object) 		- Añade un elemento al final de la cola.
+				 * 
+				 */
+				
+				public Object pollV8() { // REPASAR
+					
+					if(numElementos>0) {
+						Object salida = arrayElementos[0];
+						
+						System.arraycopy(arrayElementos, 1, arrayElementos, 0, numElementos-1);
+						arrayElementos[numElementos-1]=null;
+						numElementos--;
+						
+						return salida;
+					}
+					
+					
+					return null;
+					
+						
+				}
+				
+				public void offerV8(Object dato) {
+					
+					if(numElementos==0) {
+						
+						arrayElementos[0]=dato;
+						
+					}else {
+						
+						comprobarLlenado();
+						arrayElementos[numElementos]=dato;
+						
+					}
+					
+					numElementos++;
+					
+				}
+				
+				public Object peekColaV8() {
+					
+					if(numElementos>0) {
+						return arrayElementos[0];
+					}
+					return null;
+					
+				}
 }

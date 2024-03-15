@@ -1373,10 +1373,6 @@ public class CompletoNodo{
 						primero=nuevo;
 						numElementos++;
 						
-					}else if(indice==numElementos-1) { // CREO QUE SOBRA
-						
-						addV3(dato);
-						
 					}else {
 						
 						Node ant = obtenerNodo(indice-1);
@@ -1491,6 +1487,593 @@ public class CompletoNodo{
 					}
 					
 					return null;
+					
+				}
+	
+				// --------------------------- Repaso 6 -------------------------------
+				
+				/*
+				 * ** void add(Object) 		- Añade un elemento al final de la lista.
+				 * ** void add(int, Object) 		- Inserta un elemento en la posición indicada por un índice.
+				 * ** Nodo obtenerNodo(int indice)
+				 * ** void clear() 			- Elimina todos los elementos de la lista.
+				 * ** boolean contains(Object) 	- Comprueba si el elemento está incluido en la lista.
+				 * ** Object get(int) 			- Obtiene el elemento de la posición indicada por índice.
+				 * ** int indexOf(Object) 		- Devuelve la posición del elemento.
+				 * ** boolean isEmpty() 		- Comprueba si la lista está vacía.
+				 * ** boolean remove(Object) 	- Elimina el elemento correspondiente.
+				 * ** Object remove(int) 		- Elimina el elemento de la posición indicada por índice.
+				 * ** Object removePrimero()
+				 * ** Object removeIntermedio(int)
+				 * ** int size() 			- Número de elementos de la estructura.
+				 * ** void removeAll(Object[])
+				 * 
+				 */
+				
+				public void removeAllV6(CompletoNodo lista) {
+					
+					for (int i = 0; i < lista.size(); i++) {
+						
+						remove(lista.get(i));
+						
+					}
+					
+				}
+				
+				public Object removeV6(int indice) { 
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("error");
+					}
+					
+					if(indice==0) {
+						
+						return removePrimeroV3();
+						
+					}
+					
+					if(indice>0) {
+						
+						return removeIntermedioV3(indice);
+						
+					}
+					
+					return null;
+					
+				}
+				
+				public Object removePrimeroV6() { 
+					
+					Node actual = primero;
+					
+					primero=actual.siguiente;
+					
+					numElementos--;
+					return actual.dato;
+					
+				}
+				
+				public Object removeIntermedioV6(int indice) { 
+						
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("error");
+					}
+					
+					Node ant = obtenerNodo(indice-1);
+					Node actual = ant.siguiente;
+					
+					ant.siguiente=actual.siguiente;
+					numElementos--;
+					
+					return actual.dato;
+					
+				}
+				
+				public boolean removeV6(Object dato) {
+					
+					int indice = indexOf(dato);
+					
+					if(indice!=-1) {
+						remove(indice);
+						return true;
+					}
+					
+					return false;
+				
+				}
+				
+				public void addV6(int indice, Object dato) { 
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("error");
+					}
+					
+					Node nuevo = new Node(dato);
+					
+					if(indice==0) {
+						
+						nuevo.siguiente=primero;
+						primero=nuevo;
+						numElementos++;
+						
+					}else {
+						
+						Node ant = obtenerNodo(indice-1);
+						Node actual = ant.siguiente;
+						ant.siguiente=nuevo;
+						nuevo.siguiente=actual;
+						numElementos++;
+					}
+					
+					
+				
+				}
+				
+				public void addV6(Object dato) {
+					
+					Node nuevo = new Node(dato);
+					
+					if(numElementos==0) {
+						
+						primero=nuevo;
+						
+					}else {
+						
+						Node actual = obtenerNodo(numElementos-1);
+						actual.siguiente=nuevo;
+						
+					}
+					
+					numElementos++;
+					
+				}
+				
+				public Node obtenerNodoV6(int indice) {
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("error");
+					}
+					
+					Node actual = primero;
+					
+					for (int i = 0; i < indice; i++) {
+						
+						actual=actual.siguiente;
+						
+					}
+					
+					return actual;
+					
+				}
+				
+				public int sizeV6() {
+				
+					return numElementos;
+					
+				}
+				
+				public void clearV6() {
+					
+					numElementos=0;
+					primero=null;
+					
+				}
+				
+				public boolean isEmptyV6() {
+					
+					if(numElementos==0) {
+						return true;
+					}
+					
+					return false;
+					
+				}
+				
+				public int indexOfV6(Object dato) {
+					
+					Node actual = primero;
+					
+					for (int i = 0; actual!=null; i++) {
+						
+						if((actual.dato!=null&&actual.dato.equals(dato))||(dato==actual.dato)) {
+							
+							return i;
+							
+						}
+						
+						actual = actual.siguiente;
+						
+					}
+					
+					return -1;
+					
+				}
+				
+				public boolean containsV6(Object dato) {
+					
+					int indice = indexOf(dato);
+					
+					if(indice!=-1) {
+						return true;
+					}
+					
+					return false;
+					
+				}
+				
+				public Object getV6(int indice) {
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("error");
+					}
+					
+					if(numElementos>0) {
+						Node actual = obtenerNodo(indice);
+						
+						return actual.dato;
+					}
+					
+					
+					return null;
+					
+				}
+				
+				// --------------------------- Repaso 7 -------------------------------
+				
+				/*
+				 * ** void add(Object) 		- Añade un elemento al final de la lista.
+				 * ** void add(int, Object) 		- Inserta un elemento en la posición indicada por un índice.
+				 * ** Nodo obtenerNodo(int indice)
+				 * ** void clear() 			- Elimina todos los elementos de la lista.
+				 * ** boolean contains(Object) 	- Comprueba si el elemento está incluido en la lista.
+				 * ** Object get(int) 			- Obtiene el elemento de la posición indicada por índice.
+				 * ** int indexOf(Object) 		- Devuelve la posición del elemento.
+				 * ** boolean isEmpty() 		- Comprueba si la lista está vacía.
+				 * ** boolean remove(Object) 	- Elimina el elemento correspondiente.
+				 * ** Object remove(int) 		- Elimina el elemento de la posición indicada por índice.
+				 * ** Object removePrimero()
+				 * ** Object removeIntermedio(int)
+				 * ** int size() 			- Número de elementos de la estructura.
+				 * ** void removeAll(Object[])
+				 * 
+				 */
+				
+				public void removeAllV7(CompletoNodo lista) {
+					
+					for (int i = 0; i < lista.size(); i++) {
+						remove(lista.get(i));
+					}
+					
+				}
+				
+				public Object removeV7(int indice) { 
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("ERROR");
+					}
+					
+					if(indice==0) {
+						return removePrimero();
+					}
+					
+					if(indice>0) {
+						return removeIntermedio(indice);
+					}
+					
+					return null;
+					
+				}
+				
+				public Object removePrimeroV7() { 
+					
+					
+						Node actual = primero;
+						primero=actual.siguiente;
+						numElementos--;
+						return actual.dato;
+					
+					
+				}
+				
+				public Object removeIntermedioV7(int indice) { 
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("ERROR");
+					}
+					
+					Node ant = obtenerNodo(indice-1);
+					Node actual = ant.siguiente;
+					
+					ant.siguiente=actual.siguiente;
+					numElementos--;
+					return actual.dato;
+						
+					
+				}
+				
+				public boolean removeV7(Object dato) {
+					
+					int indice = indexOf(dato);
+					
+					if(indice!=-1) {
+						remove(indice);
+						return true;
+					}
+					
+					return false;
+				
+				}
+				
+				public void addV7(int indice, Object dato) { 
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("ERROR");
+					}
+					
+					Node nuevo = new Node(dato);
+					
+					if(indice==0) {
+						
+						nuevo.siguiente=primero;
+						primero=nuevo;
+						numElementos++;
+						
+					}else {
+						
+						Node ant = obtenerNodo(indice-1);
+						Node actual = ant.siguiente;
+						ant.siguiente=nuevo;
+						nuevo.siguiente=actual;
+						numElementos++;
+					}
+					
+					
+					
+				}
+				
+				public void addV7(Object dato) {
+					
+					Node nuevo = new Node(dato);
+					
+					if(numElementos==0) {
+						
+						primero=nuevo;
+						
+					}else {
+						
+						Node actual = obtenerNodo(numElementos-1);
+						actual.siguiente=nuevo;
+						
+					}
+					
+					numElementos++;
+					
+				}
+				
+				public Node obtenerNodoV7(int indice) {
+					
+					Node actual = primero;
+					
+					for (int i = 0; i < indice; i++) {
+						actual=actual.siguiente;
+					}
+					
+					return actual;
+					
+				}
+				
+				public int sizeV7() {
+					
+					return numElementos;
+					
+				}
+				
+				public void clearV7() {
+					
+					primero=null;
+					numElementos=0;
+					
+				}
+				
+				public boolean isEmptyV7() {
+					
+					if(numElementos==0) {
+						return true;
+					}
+			
+					return false;
+					
+				}
+				
+				public int indexOfV7(Object dato) {
+					
+					Node actual= primero;
+					
+					for (int i = 0; actual != null; i++) {
+						
+						if((actual.dato!=null &&  actual.dato.equals(dato))||(actual.dato==dato)) {
+							
+							return i;
+							
+						}
+						
+					}
+					
+					return -1;
+					
+				}
+				
+				public boolean containsV7(Object dato) {
+					
+					int indice = indexOfV3(dato);
+					
+					if(indice!=-1) {
+						return true;
+					}
+			
+					return false;
+					
+				}
+				
+				public Object getV7(int indice) {
+					
+					if(indice<0||indice>=numElementos) {
+						throw new IndexOutOfBoundsException("ERROR");
+					}
+					
+					if(numElementos>0) {
+						
+						Node actual = obtenerNodoV6(indice);
+						return actual.dato;
+						
+					}
+					
+					return null;
+					
+				}
+				
+				/*
+				 * METODOS DE PILA / STACK
+				 * 
+				 * ** Object[] toArray()- Devuelve un array con todos los elementos de la pila.
+				 * ** Object peek() 			- Obtiene el elemento de la cima de la pila sin quitarlo.
+				 * ** Object pop() 			- Extrae el elemento situado en la cima de la pila.
+				 * ** void push(Object) 		- Añade un elemento en la cima de la pila.
+				 * 
+				 */
+				
+				public Object[] toArrayV7() {
+					
+					Object[] salida = new Object[numElementos];
+					Node actual = primero;
+					
+					for (int i = 0; i < numElementos; i++) {
+						salida[i]=actual.dato;
+						actual=actual.siguiente;
+					}
+					
+					return salida;
+					
+				}
+				
+				public Object peekV7() {
+					
+					if(numElementos>0) {
+						
+						Node salida = obtenerNodo(numElementos-1);
+						return salida.dato;
+						
+					}
+					
+					return null;
+					
+				}
+				
+				public Object popV7() {
+					
+					if(numElementos==0) {
+						return null;
+					}else if(numElementos==1) {
+						
+						Node actual = primero;
+						
+						primero=null;
+						numElementos--;
+						return actual.dato;
+						
+					}else {
+						
+						Node anterior = obtenerNodo(numElementos-2);
+						Node actual = anterior.siguiente;
+						
+						anterior.siguiente=null;
+						numElementos--;
+						return actual.dato;
+						
+					}
+					
+				}
+				
+				public void pushV7(Object dato) {
+					
+					Node nuevo = new Node(dato);
+					
+					if(numElementos==0) {
+						
+						primero=nuevo;
+						
+					}else {
+						
+						Node actual = obtenerNodo(numElementos-1);
+						actual.siguiente=nuevo;
+						
+					}
+					
+					numElementos++;
+				
+				}
+				
+				/*
+				 * METODOS DE COLA / QUEUE
+				 * 
+				 * ** Object peek() 			- Obtiene el elemento de la cabeza de la cola sin quitarlo.
+				 * ** Object poll() 			- Extrae el elemento situado en la cabeza de la cola.
+				 * ** void offer(Object) 		- Añade un elemento al final de la cola.
+				 * 
+				 */
+				
+				public Object peekCola7() {
+					
+					if(numElementos>0) {
+						
+						return primero.dato;
+						
+					}
+					
+					return null;
+					
+				}
+				
+				public Object pollV7() {
+					
+					if(numElementos==0) {
+						return null;
+					}else if(numElementos==1) {
+						
+						Node actual = primero;
+						primero=null;
+						numElementos--;
+						return actual.dato;
+						
+					}else {
+						
+						Node actual = primero;
+						primero=actual.siguiente;
+						numElementos--;
+						return actual.dato;
+						
+					}
+					
+					
+				}
+				
+				public void offerV7(Object dato) {
+					
+					Node nuevo = new Node(dato);
+					
+					if(numElementos==0) {
+						
+						primero=nuevo;
+						
+					}else {
+						
+						Node actual = obtenerNodo(numElementos-1);
+						actual.siguiente=nuevo;
+						
+					}
+					
+					numElementos++;
+					
 					
 				}
 }
