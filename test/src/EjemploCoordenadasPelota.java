@@ -1,3 +1,4 @@
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 import org.opencv.core.Core;
@@ -74,7 +75,7 @@ class EjemploCoordenadasPelota {
             System.exit(0);
         }
 
-        VideoCapture capture = new VideoCapture(cameraDevice);
+        VideoCapture capture = new VideoCapture(cameraDevice); //1
         if (!capture.isOpened()) {
             System.err.println("--(!)Error opening video capture");
             System.exit(0);
@@ -91,8 +92,29 @@ class EjemploCoordenadasPelota {
           //  detectAndDisplay(frame, faceCascade);
             detectAndDisplay(frame, faceCascade, eyesCascade);
 
-            if (HighGui.waitKey(10) == 27) {
-                break;// escape
+          //  if (HighGui.waitKey(10) == 27) {
+            //    break;// escape
+          //  }
+            
+            int key = HighGui.waitKey(10);
+
+            // Comprobar si la tecla presionada es una de las teclas de flecha
+            switch (key) {
+                case KeyEvent.VK_UP:
+                    System.out.println("Tecla Arriba presionada");
+                    break;
+                case KeyEvent.VK_DOWN:
+                    System.out.println("Tecla Abajo presionada");
+                    break;
+                case KeyEvent.VK_LEFT:
+                    System.out.println("Tecla Izquierda presionada");
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    System.out.println("Tecla Derecha presionada");
+                    break;
+                case 27: // Tecla Escape
+                    System.out.println("Tecla Escape presionada. Saliendo del programa...");
+                    System.exit(0);
             }
         }
 
