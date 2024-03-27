@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 public class DAO{
 
@@ -35,6 +34,8 @@ public class DAO{
 	 */
 	
 	public User login(String username, String password) {
+		
+		String pass = Utils.encryptMd5(password);
 
 		try {
 
@@ -42,25 +43,22 @@ public class DAO{
 			Connection conn = DriverManager.getConnection(this.URL, this.USER, this.PASS);
 			Statement stmt = conn.createStatement();
 
-			String consulta = "SELECT * FROM user WHERE username="+username+"AND password="+pass+";";
-			
-			if(nombre.length()>0) {
-				consulta+= " WHERE p.nombre LIKE \"%"+nombre+"%\"";
-			}
-			
-			consulta+=";";
+			String consulta = "SELECT * FROM user WHERE username=" + username + "AND password=" + pass + ";";
 			ResultSet rs = stmt.executeQuery(consulta);
+			
+			User user = new User();
 
 			while (rs.next()) {
 
-				Profesor prof = new Profesor(rs.getString("p.nrp"),rs.getString("p.dni"),rs.getString("p.apellido1")+" "+rs.getString("p.apellido2"),rs.getString("p.nombre"),rs.getString("d.nombre"));
+				user = new User(rs.getString("id"),rs.getString("username"),rs.getString("name"),rs.getString("nif"),rs.getString("email"),rs.getString("addres"),rs.getString("birthdate"),rs.getString("role"));
 
-				lista.add(prof);
 			}
 
 			rs.close();
 			stmt.close();
 			conn.close();
+			
+			return user;
 
 		} catch (Exception e) {
 
@@ -73,20 +71,70 @@ public class DAO{
 	}
 	
 	public boolean checkUser(User user) {
-
 		
+		boolean check = false;
+		
+		try {
+
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn = DriverManager.getConnection(this.URL, this.USER, this.PASS);
+			Statement stmt = conn.createStatement();
+
+			String consulta = "SELECT * FROM user WHERE username=" + user.username + "AND nif=" + user.nif + " AND email="+user.email+";";
+			ResultSet rs = stmt.executeQuery(consulta);
+
+			while (rs.next()) {
+
+				check = true;
+
+			}
+
+			rs.close();
+			stmt.close();
+			conn.close();
+			
+			return check;
+
+		} catch (Exception e) {
+
+			System.out.println(e);
+
+		}
+		
+		return check;
 		
 	}
 	
-	public boolean signup(String username, String name, String nif, String email, String addres, String birthdate) {
+	public boolean signup(User u, String password) {
+		
+		if(!checkUser(u)) {
+			
+			String pass = Utils.encryptMd5(password);
+			
+			try {
 
-		
-		
-	}
-	
-	public boolean signup(String username, String name, String nif, String email, String addres, String birthdate, String role) {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection conn = DriverManager.getConnection(this.URL, this.USER, this.PASS);
+				Statement stmt = conn.createStatement();
 
+				String query = "INSERT INTO user (username, password, name, nif, email, address, birthdate, role) values ('"+u.username+"','"+pass+"','"+u.name+"','"+u.nif+"','"+u.email+"','"+u.addres+"','"+u.birthdate+"','user');";
+				
+				stmt.executeUpdate(query);
+				
+				stmt.close();
+				conn.close();
+				return true;
+
+			} catch (Exception e) {
+
+				System.out.println(e);
+				return false;
+				
+			}
+			
+		}
 		
+		return false;
 		
 	}
 	
