@@ -160,7 +160,7 @@ public class Session{
 					
 					/* EN CASO NEGATIVO PREGUNTA SI DESEA VOLVER A INTENTARLO */
 					
-					if(!Config.confirmExit("\n\t¿Desea volver a intentarlo? Si - s: ","s")) {
+					if(!Utils.confirmExit("\n\t¿Desea volver a intentarlo? Si - s: ","s")) {
 						follow=false;
 						break;
 					}
@@ -223,7 +223,7 @@ public class Session{
 		
 		System.out.println(Config.LOGOUT);
 		
-		if(Config.confirmExit("\n\t¿Seguro que desea cerrar la sesión? SI - s ","S")) { // PIDE CONFIRMACION ANTES DE CERRAR SESION
+		if(Utils.confirmExit("\n\t¿Seguro que desea cerrar la sesión? SI - s ","S")) { // PIDE CONFIRMACION ANTES DE CERRAR SESION
 			System.out.println("\n\tHasta la proxima " + currentUser.username + ".");
 			System.out.println("\tSESION CERRADA");
 			logged=false; // SE PONE A FALSE PARA VOLVER A MENU INICIAL

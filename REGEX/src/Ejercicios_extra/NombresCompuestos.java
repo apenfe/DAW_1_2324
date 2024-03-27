@@ -8,8 +8,6 @@ public class NombresCompuestos{
 	
 	public static void main(String[] args) {
 		
-		int x = 3;
-		
 		String[] validar = {"Juan Mateo De Los Montes toledanos","Mª Del Carmen Rosamentera","Adrián Peñalever Fernández"};
 		
 		//String regex = "^[A-Za-zÁÉÍÓÚáéíóúÑñª ]+$";

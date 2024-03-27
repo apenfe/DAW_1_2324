@@ -537,7 +537,7 @@ public class Maze{
 				
 				System.out.println("\r\tLas casillas de entrada y salida coinciden.");
 				
-				if(Config.confirmExit("\r\t¿Desea ingresar otra casilla de "+casilla+"? SI-S NO-N ", "N")) {
+				if(Utils.confirmExit("\r\t¿Desea ingresar otra casilla de "+casilla+"? SI-S NO-N ", "N")) {
 					deleteMaze(false); // SE RESETEAN ENTRADA Y SALIDA
 					return false;
 				}
@@ -552,7 +552,7 @@ public class Maze{
 					
 					System.out.println("\r\tLa casilla coincide con una pared.");
 					
-					if (Config.confirmExit("\r\t¿Desea ingresar otra casilla de " + casilla + "? SI-S NO-N ", "N")) {
+					if (Utils.confirmExit("\r\t¿Desea ingresar otra casilla de " + casilla + "? SI-S NO-N ", "N")) {
 						deleteMaze(false); // SE RESETEAN ENTRADA Y SALIDA
 						return false;
 					}

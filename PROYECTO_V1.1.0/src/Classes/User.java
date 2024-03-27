@@ -33,6 +33,7 @@ public class User{
 	
 	/* DECLARACIÓN DE LOS PARAMETROS */
 	
+	public int id;
 	public String username;
 	public String name;
 	public String nif;
@@ -66,8 +67,9 @@ public class User{
 	 * 
 	 */
 	
-	public User(String username, String name, String nif, String email, String addres, String birthdate, String role) {
+	public User(int id, String username, String name, String nif, String email, String addres, String birthdate, String role) {
 		
+		this.id=id;
 		this.username=username;
 		this.name=name;
 		this.nif=nif;
@@ -135,6 +137,10 @@ public class User{
 		this.role = role;
 	}
 	
+	public int getId() {
+		return id;
+	}
+	
 	/* METODO PUBLICO QUE DEVUELVE TODA LA INFORMACIÓN RELATIVA A UN USUARIO */
 	
 	/**
@@ -143,13 +149,14 @@ public class User{
 
 	public void info() {
 		
-		System.out.println("\n\t- Nombre de usuario: [" + username+"]");
-		System.out.println("\t- Nombre completo: [" + name+"]");
-		System.out.println("\t- NIF: [" + nif+"]");
-		System.out.println("\t- Dirección de correo electónico: [" + email+"]");
-		System.out.println("\t- Dirección postal: [" + addres+"]");
-		System.out.println("\t- Fecha de nacimiento: [" + birthdate+"]");
-		System.out.println("\t- Tipo de rol / permisos: [" + role+"]");
+		System.out.println("\n\t- ID usuario: [" + id + "]");
+		System.out.println("\t- Nombre de usuario: [" + username + "]");
+		System.out.println("\t- Nombre completo: [" + name + "]");
+		System.out.println("\t- NIF: [" + nif + "]");
+		System.out.println("\t- Dirección de correo electónico: [" + email + "]");
+		System.out.println("\t- Dirección postal: [" + addres + "]");
+		System.out.println("\t- Fecha de nacimiento: [" + birthdate + "]");
+		System.out.println("\t- Tipo de rol / permisos: [" + role + "]");
 	
 	}
 

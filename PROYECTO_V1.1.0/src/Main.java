@@ -2,90 +2,7 @@ import Classes.Config;
 import Classes.Input;
 import Classes.Maze;
 import Classes.Session;
-
-/*
- * Main.java
- * 
- * Es la clase que contiene el programa principal y se encarga de mostrar los menús
- * y solicitar la selección de opciones de dichos menús para, después, realizar las
- * acciones correspondientes.
- * 
- * Inicialmnete se crea un menu para usuarios no registrados.
- * Una vez registrado el usuario se abre el menú secundario.
- * 
- * El programa, en su primera iteración, es decir, para esta primera entrega, deberá
- * cumplir un funcionamiento que permita al usuario iniciar sesión de usuario y registrar
- * un nuevo usuario para poder iniciar sesión, mediante un menú para usuarios no identificados
- * que muestre las siguientes opciones:
- * 
- * 1 Iniciar sesión
- * 2 Registro
- * 0 Salir
- * 
- * Si se pulsa la opción 1, el programa solicitará un nombre de usuario y una contraseña para,
- * a continuación, leer desde un fichero los usuarios existentes y comprobar si coinciden usuario
- * y contraseña con alguno de los registros. Si coinciden, indicará que se ha iniciado sesión
- * correctamente, si no coincide, indicará que usuario y/o contraseña no son válidos.
- * 
- * Para la opción 2, el programa pedirá introducir los siguientes campos:
- * 
- * - Nombre de usuario
- * - Contraseña
- * - Nombre completo
- * - NIF
- * - Email
- * - Dirección
- * - Fecha de nacimiento
- * 
- * Una vez que el usuario inicia sesión, mostrará un menú de opciones solo disponible para 
- * cuando se ha iniciado sesión, el cual muestra las siguientes opciones:
- * 
- * 1 Cargar laberinto
- * 2 Ver laberinto actual
- * 3 Establecer casillas de entrada y salida
- * 4 Buscar caminos
- * 5 Ver usuario actual
- * 6 Cerrar sesión
- * 0 Salir
- * 
- * Para las opciones 1, 2, 3 y 4, ÚNICAMENTE mostrará el texto "Próximamente". 
- * 
- * Para la opción 5, deberá mostrar toda la información del usuario que tiene iniciada sesión actualmente.
- * 
- * Para la opción 6, deberá mostrar un mensaje indicando que se está cerrando sesión, quitar toda la
- * información del usuario guardada en la sesión y devolver al usuario al menú inicial para usuarios
- * sin sesión iniciada.
- * 
- * Para ambos menús, si se pulsa la opción 0, el programa deberá terminar. El programa solo puede
- * detenerse si en alguno de los menús se pulsa el 0. El programa nunca debe terminar en cualquier
- * otro caso, por lo que se considerará un fallo de programación si ocurre.
- * 
- * APF - 21.12.2023
- * version 0.1.0
- */
-
-/*
- * Main.java
- * 
- * A partir de lo realizado en la primera entrega del proyecto, en esta segunda entrega del proyecto de resolución
- * de laberintos, se debe implementar la funcionalidad de las opciones 1, 2 y 3 del menú para usuarios identificados
- * que se realizó en la entrega anterior:
- * 
- * 1 - Cargar laberinto
- * 2 - Ver laberinto actual
- * 3 - Establecer casillas de inicio y fin
- * 4 - Buscar caminos
- * 5 - Ver usuario actual
- * 6 - Cerrar sesión
- * 0 - Salir
- * 
- * Para ello se deberá crear una nueva clase llamada "Maze" de la cual se creará un objeto de este tipo de clase en el
- * programa principal, con el que se llamará a cada uno de los métodos que realicen las funciones del menú que se han indicado.
- * 
- * APF - 31.01.2024
- * version 0.2.0
- * 
- */
+import Classes.Utils;
 
 /*
  * Main.java
@@ -251,7 +168,7 @@ public class Main {
 			
 			System.out.println(Config.EXIT);
 			
-			if(!Config.confirmExit()) {
+			if(!Utils.confirmExit()) {
 				option=-1;
 			}
 			
@@ -338,7 +255,7 @@ public class Main {
 			
 			System.out.println(Config.EXIT);
 			
-			if(!Config.confirmExit()) {
+			if(!Utils.confirmExit()) {
 				option=-1;
 			}
 			
@@ -373,7 +290,7 @@ public class Main {
 			
 			if(option == 0) {
 				
-				if(Config.confirmExit()) {
+				if(Utils.confirmExit()) {
 					break;
 				}else {
 					option = -1;
