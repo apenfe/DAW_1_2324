@@ -119,6 +119,8 @@ public class Session{
 		userdata[1] = Input.getString("\tIntroduzca su contraseña: ");
 		System.out.println();
 		
+		userdata[1]= Utils.encryptMd5(userdata[1]);
+		
 		this.currentUser = db.login(userdata[0], userdata[1]);
 
 		if (currentUser!=null) { // BUSCA UNA COOINCIDENCIA EN LA BASE DE DATOS
@@ -127,6 +129,8 @@ public class Session{
 			this.logged=true;
 
 		} else {
+			
+			this.currentUser=new User();
 			System.out.println(Config.ROJO+"\t\tNombre de usuario y/o contraseña incorrectos."+Config.RESET);
 		}
 
@@ -152,19 +156,29 @@ public class Session{
 		if(checkData(userdata)) { // COMPRUEBA QUE SEAN VALORES VALIDOS
 				
 			/* EN CASO AFIRMATIVO */
-			System.out.println(Config.VERDE+"\tTodos los datos son correctos en la base de datos."+Config.RESET);
+			System.out.println(Config.VERDE+"\tTodos los datos son correctos."+Config.RESET);
 			
+			User newUser = new User("0",userdata[0],userdata[4],userdata[1],userdata[2],userdata[5],userdata[6],"user");
 				
-			if(db.checkUser(currentUser)) { // COMPRUEBA QUE SEAN UNICAS LAS PK
+			if(db.checkUser(newUser)) { // COMPRUEBA QUE SEAN UNICAS LAS PK
 					
-			
+				System.out.println(Config.ROJO+"\tLos datos no son unicos en la base de datos."+Config.RESET);
 					
 			}else {
 					
 				/* EN CASO NEGATIVO SE DA UN AVISO Y SE TERMINA */
+				System.out.println(Config.VERDE+"\tTodos los datos son únicos en la base de datos."+Config.RESET);
+				
+				if(db.signup(newUser, userdata[3])) {
 					
-				System.out.println(Config.VERDE+"\tTodos los datos son correctos y únicos en la base de datos."+Config.RESET);
-			
+					System.out.println(Config.VERDE+"\tUsuario añadido de forma correcta."+Config.RESET);
+
+				}else {
+					
+					System.out.println(Config.ROJO+"\tError al guardar usuario."+Config.RESET);
+
+				}
+				
 			}
 				
 		}
@@ -221,9 +235,9 @@ public class Session{
 	
 	private boolean checkData(String[] userdata) {
 				
-		String username = Input.getString("\n\n\tIntroduzca un nombre de usuario: ");
+		userdata[0] = Input.getString("\n\tIntroduzca un nombre de usuario: ");
 				
-		if(!Utils.validateName(username)) {
+		if(!Utils.validateUserName(userdata[0])) {
 					
 			System.out.println(Config.ROJO+"\t\tFormato de Nickname incorrecto."+Config.RESET);
 			System.out.println(Config.ROJO+"\tPor favor, corrija los campos indicados antes de continuar con el registro."+Config.RESET);
@@ -231,37 +245,37 @@ public class Session{
 			
 		}
 		
-		String nif = Input.getString("\n\n\tIntroduzca un NIF: ");
+		userdata[1] = Input.getString("\tIntroduzca un NIF: ");
 		
-		if(!Utils.validateNif(nif)) {
+		if(!Utils.validateNif(userdata[1])) {
 					
-			System.out.println(Config.ROJO+"\t\tFormato de Nickname incorrecto."+Config.RESET);
+			System.out.println(Config.ROJO+"\t\tFormato de NIF incorrecto."+Config.RESET);
 			System.out.println(Config.ROJO+"\tPor favor, corrija los campos indicados antes de continuar con el registro."+Config.RESET);
 			return false;
 
 		}
 		
-		String email = Input.getString("\n\n\tIntroduzca un email: ");
+		userdata[2] = Input.getString("\tIntroduzca un email: ");
 		
-		if(!Utils.validateEmail(email)) {
+		if(!Utils.validateEmail(userdata[2])) {
 					
-			System.out.println(Config.ROJO+"\t\tFormato de Nickname incorrecto."+Config.RESET);
+			System.out.println(Config.ROJO+"\t\tFormato de Email incorrecto."+Config.RESET);
 			System.out.println(Config.ROJO+"\tPor favor, corrija los campos indicados antes de continuar con el registro."+Config.RESET);
 			return false;
 
 		}
 		
-		userdata[1] = Input.getString("\tIntroduzca una contraseña: ");
-		if(!Utils.validatePassword(userdata[1])) {
+		userdata[3] = Input.getString("\tIntroduzca una contraseña: ");
+		if(!Utils.validatePassword(userdata[3])) {
 	
-			System.out.println(Config.ROJO+"\t\tContraseña demasiado larga. (MAX 25)"+Config.RESET);
+			System.out.println(Config.ROJO+"\t\tContraseña no valida."+Config.RESET);
 			System.out.println(Config.ROJO+"\n\tPor favor, corrija los campos indicados antes de continuar con el registro."+Config.RESET);
 			return false;
 				
 		}
 			
-		userdata[2] = Input.getString("\tIntroduzca su nombre completo: ");
-		if(!Utils.validateName(userdata[2])) {
+		userdata[4] = Input.getString("\tIntroduzca su nombre completo: ");
+		if(!Utils.validateName(userdata[4])) {
 				
 			System.out.println(Config.ROJO+"\t\tFormato de nombre no valido."+Config.RESET);
 			System.out.println(Config.ROJO+"\n\tPor favor, corrija los campos indicados antes de continuar con el registro."+Config.RESET);
@@ -281,6 +295,7 @@ public class Session{
 		}
 				
 		System.out.println("\n\tCreando usuario, por favor espere...");
+		System.out.println();
 		return true;
 		
 	}

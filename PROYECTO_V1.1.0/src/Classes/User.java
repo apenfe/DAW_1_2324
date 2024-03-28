@@ -75,6 +75,7 @@ public class User{
 		this.nif=nif;
 		this.email=email;
 		this.addres=addres;
+		//this.birthdate=birthdate;
 		this.birthdate=Utils.formatDateSQL(birthdate);
 		this.role=role;
 	}
@@ -149,14 +150,14 @@ public class User{
 
 	public void info() {
 		
-		System.out.println("\n\t- ID usuario: [" + id + "]");
-		System.out.println("\t- Nombre de usuario: [" + username + "]");
-		System.out.println("\t- Nombre completo: [" + name + "]");
-		System.out.println("\t- NIF: [" + nif + "]");
-		System.out.println("\t- Dirección de correo electónico: [" + email + "]");
-		System.out.println("\t- Dirección postal: [" + addres + "]");
+		System.out.println("\n\t- ID usuario: [" + this.id + "]");
+		System.out.println("\t- Nombre de usuario: [" + this.username + "]");
+		System.out.println("\t- Nombre completo: [" + this.name + "]");
+		System.out.println("\t- NIF: [" + this.nif + "]");
+		System.out.println("\t- Dirección de correo electónico: [" + this.email + "]");
+		System.out.println("\t- Dirección postal: [" + this.addres + "]");
 		System.out.println("\t- Fecha de nacimiento: [" + Utils.formatDateEU(birthdate) + "] ---> " + Utils.getAge(birthdate)+ " años.");
-		System.out.println("\t- Tipo de rol / permisos: [" + role + "]");
+		System.out.println("\t- Tipo de rol / permisos: [" + this.role + "]");
 	
 	}
 
