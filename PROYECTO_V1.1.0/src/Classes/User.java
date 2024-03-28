@@ -75,15 +75,15 @@ public class User{
 		this.nif=nif;
 		this.email=email;
 		this.addres=addres;
-		//this.birthdate=birthdate;
-		this.birthdate=Utils.formatDateSQL(birthdate);
+		this.birthdate=birthdate;
 		this.role=role;
+		
 	}
 	
 	/* METODOS SET Y GET DE LOS PARAMETROS */
 	
 	public String getUsername() {
-		return username;
+		return this.username;
 	}
 
 	public void setUsername(String username) {
@@ -91,7 +91,7 @@ public class User{
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {
@@ -99,7 +99,7 @@ public class User{
 	}
 
 	public String getNif() {
-		return nif;
+		return this.nif;
 	}
 
 	public void setNif(String nif) {
@@ -107,7 +107,7 @@ public class User{
 	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public void setEmail(String email) {
@@ -115,7 +115,7 @@ public class User{
 	}
 
 	public String getAddres() {
-		return addres;
+		return this.addres;
 	}
 
 	public void setAddres(String addres) {
@@ -123,7 +123,7 @@ public class User{
 	}
 
 	public String getBirthdate() {
-		return birthdate;
+		return this.birthdate;
 	}
 
 	public void setBirthdate(String birthdate) {
@@ -131,7 +131,7 @@ public class User{
 	}
 
 	public String getRole() {
-		return role;
+		return this.role;
 	}
 
 	public void setRole(String role) {
@@ -139,7 +139,7 @@ public class User{
 	}
 	
 	public int getId() {
-		return id;
+		return this.id;
 	}
 	
 	/* METODO PUBLICO QUE DEVUELVE TODA LA INFORMACIÓN RELATIVA A UN USUARIO */

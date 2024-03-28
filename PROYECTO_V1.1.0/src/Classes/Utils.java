@@ -7,7 +7,12 @@ import java.text.*;
 
 public class Utils{
 	
+	private static final String EU_FORMAT = "dd/MM/yyyy";
+	private static final String SQL_FORMAT = "yyyy-MM-dd";
+	
 	public static int getAge(String birthdate) {
+		
+		birthdate = formatDateEU(birthdate);
 		
 		if(validateDate(birthdate)) {
 			
@@ -17,7 +22,7 @@ public class Utils{
 			int day = Integer.parseInt(data[0]);
 			
 			Date date = new Date(System.currentTimeMillis());
-			String today = new SimpleDateFormat("dd/MM/yyyy").format(date);
+			String today = new SimpleDateFormat(EU_FORMAT).format(date);
 			
 			String[] todayData = today.split("/");
 			int actualYear = Integer.parseInt(todayData[2]);
@@ -41,8 +46,8 @@ public class Utils{
 
 	public static String formatDateSQL(String date) {
 
-		DateFormat sqlFormat = new SimpleDateFormat("yyyy-MM-dd");
-		DateFormat euFormat = new SimpleDateFormat("dd/MM/yyyy");
+		DateFormat sqlFormat = new SimpleDateFormat(SQL_FORMAT);
+		DateFormat euFormat = new SimpleDateFormat(EU_FORMAT);
 
 		try {
 
@@ -60,8 +65,8 @@ public class Utils{
 	
 	public static String formatDateEU(String sqlDate) {
 		
-        DateFormat sqlFormat = new SimpleDateFormat("yyyy-MM-dd");
-        DateFormat euFormat = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat sqlFormat = new SimpleDateFormat(SQL_FORMAT);
+        DateFormat euFormat = new SimpleDateFormat(EU_FORMAT);
         
         try {
             
@@ -167,36 +172,21 @@ public class Utils{
 		if (month >= 1 && month <= 12) {
 
 			if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
-
-				if (day <= 31) {
-					return true;
-				} else {
-					return false;
-				}
+				return day <= 31;	
 
 			} else if (month == 4 || month == 6 || month == 9 || month == 11) {
 
-				if (day <= 30) {
-					return true;
-				} else {
-					return false;
-				}
+				return day <= 30;
 
 			} else {
 
-				if (day <= 29 && bisiesto) {
-					return true;
-				} else if(day<=28 && !bisiesto){
-					return true;
-				}else {
-					return false;
-				}
+				return (day <= 29 && bisiesto)||(day<=28 && !bisiesto);	
 
 			}
 
-		} else {
-			return false;
 		}
+		
+		return false;
 	}
 	
 	/* METODO PARA COMPROBAR SI ES UN NOMBRE VÁLIDO */
@@ -210,7 +200,7 @@ public class Utils{
 	
 	public static boolean validateName(String name) {
 		
-		return name.matches("^([a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÜÈÌÙÒñÑ]{1}[a-záéíóúàèìòùñüç']+){1}( [a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÙÜÒñÑ]{1}[a-záéíóúàèìòùñüç']+(-[a-záéíóúàèìòùñüç']+)?){2}$");
+		return name.matches("^([a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÜÈÌÙÒñÑ][a-záéíóúàèìòùñüç']+)( [a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÙÜÒñÑ]{1}[a-záéíóúàèìòùñüç']+(-[a-záéíóúàèìòùñüç']+)?){2}$");
 		
 	}
 	
@@ -237,11 +227,8 @@ public class Utils{
 	
 	public static boolean confirmExit() {
 		
-		if(Input.getString("\n\t¿Está seguro que desea salir? SI -> s ").equalsIgnoreCase("S")) {
-			return true;
-		}else {
-			return false;
-		}
+		return Input.getString("\n\t¿Está seguro que desea salir? SI -> s ").equalsIgnoreCase("S");
+		
 	}
 	
 	/* METODO PARA CONFIRMAR UN MENSAJE CON UNA LETRA A ELEGIR */
@@ -256,11 +243,8 @@ public class Utils{
 	
 	public static boolean confirmExit(String enunciado, String respuesta) { 
 		
-		if(Input.getString(enunciado).equalsIgnoreCase(respuesta)) {
-			return true;
-		}else {
-			return false;
-		}
+		return Input.getString(enunciado).equalsIgnoreCase(respuesta);
+		
 	}
 	
 }

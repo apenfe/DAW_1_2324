@@ -84,6 +84,7 @@ public class Session{
 	 * boolean que nos permite conocer si el usuario se ha podido autenticar o no.
 	 */
 	private boolean logged;
+	private static final String ERROR = Config.ROJO+"\n\tPor favor, corrija los campos indicados antes de continuar con el registro."+Config.RESET;
 	
 	/* LISTADO DE MÉTODOS DE LA CLASE */
 	
@@ -240,7 +241,7 @@ public class Session{
 		if(!Utils.validateUserName(userdata[0])) {
 					
 			System.out.println(Config.ROJO+"\t\tFormato de Nickname incorrecto."+Config.RESET);
-			System.out.println(Config.ROJO+"\tPor favor, corrija los campos indicados antes de continuar con el registro."+Config.RESET);
+			System.out.println(ERROR);
 			return false;
 			
 		}
@@ -250,7 +251,7 @@ public class Session{
 		if(!Utils.validateNif(userdata[1])) {
 					
 			System.out.println(Config.ROJO+"\t\tFormato de NIF incorrecto."+Config.RESET);
-			System.out.println(Config.ROJO+"\tPor favor, corrija los campos indicados antes de continuar con el registro."+Config.RESET);
+			System.out.println(ERROR);
 			return false;
 
 		}
@@ -260,7 +261,7 @@ public class Session{
 		if(!Utils.validateEmail(userdata[2])) {
 					
 			System.out.println(Config.ROJO+"\t\tFormato de Email incorrecto."+Config.RESET);
-			System.out.println(Config.ROJO+"\tPor favor, corrija los campos indicados antes de continuar con el registro."+Config.RESET);
+			System.out.println(ERROR);
 			return false;
 
 		}
@@ -269,7 +270,7 @@ public class Session{
 		if(!Utils.validatePassword(userdata[3])) {
 	
 			System.out.println(Config.ROJO+"\t\tContraseña no valida."+Config.RESET);
-			System.out.println(Config.ROJO+"\n\tPor favor, corrija los campos indicados antes de continuar con el registro."+Config.RESET);
+			System.out.println(ERROR);
 			return false;
 				
 		}
@@ -278,7 +279,7 @@ public class Session{
 		if(!Utils.validateName(userdata[4])) {
 				
 			System.out.println(Config.ROJO+"\t\tFormato de nombre no valido."+Config.RESET);
-			System.out.println(Config.ROJO+"\n\tPor favor, corrija los campos indicados antes de continuar con el registro."+Config.RESET);
+			System.out.println(ERROR);
 			return false;
 				
 		}
@@ -289,9 +290,11 @@ public class Session{
 		if(!Utils.validateDate(userdata[6])) {
 				
 			System.out.println(Config.ROJO+"\t\tFormato de fecha no valido."+Config.RESET);
-			System.out.println(Config.ROJO+"\n\tPor favor, corrija los campos indicados antes de continuar con el registro."+Config.RESET);
+			System.out.println(ERROR);
 			return false;
 				
+		}else {
+			userdata[6]=Utils.formatDateSQL(userdata[6]);
 		}
 				
 		System.out.println("\n\tCreando usuario, por favor espere...");

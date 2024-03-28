@@ -7,12 +7,13 @@ import java.sql.Statement;
 
 public class DAO{
 
-	private final String SERVER = "127.0.0.1";
-	private final String PORT = "3306";
-	private final String DATABASE = "maze";
-	private final String URL = "jdbc:mysql://"+SERVER+":"+PORT+"/"+DATABASE;
-	private final String USER = "root";
-	private final String PASS = "1234";
+	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+	private static final String SERVER = "127.0.0.1";
+	private static final String PORT = "3306";
+	private static final String DATABASE = "maze";
+	private static final String URL = "jdbc:mysql://"+SERVER+":"+PORT+"/"+DATABASE;
+	private static final String USER = "root";
+	private static final String PASS = "1234";
 	
 	/*
 	 * Se debe crear una clase llamada "DAO" la cual contendrá una serie de métodos los cuales provean 
@@ -37,8 +38,8 @@ public class DAO{
 
 		try {
 
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn = DriverManager.getConnection(this.URL, this.USER, this.PASS);
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 
 			String consulta = "SELECT * FROM user WHERE username = '" + username + "' AND password = '" + password + "';";
@@ -49,7 +50,7 @@ public class DAO{
 			while (rs.next()) {
 
 				user = new User(rs.getString("id"),rs.getString("username"),rs.getString("name"),rs.getString("nif"),rs.getString("email"),rs.getString("address"),rs.getString("birthdate"),rs.getString("role"));
-				System.out.println(rs.getString("id")+", "+rs.getString("username")+", "+rs.getString("name")+", "+rs.getString("nif")+", "+rs.getString("email")+", "+rs.getString("address")+", "+rs.getString("birthdate")+", "+rs.getString("role"));
+				
 			}
 
 			rs.close();
@@ -72,8 +73,8 @@ public class DAO{
 		
 		try {
 
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn = DriverManager.getConnection(this.URL, this.USER, this.PASS);
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 
 			String consulta = "SELECT * FROM user WHERE username = " + user.username + " OR nif = '" + user.nif + "' OR email = '"+user.email+"';";
@@ -111,8 +112,8 @@ public class DAO{
 			
 		try {
 
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn = DriverManager.getConnection(this.URL, this.USER, this.PASS);
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 
 			String query = "INSERT INTO user (username, password, name, nif, email, address, birthdate, role) values ('"+u.username+"','"+pass+"','"+u.name+"','"+u.nif+"','"+u.email+"','"+u.addres+"','"+u.birthdate+"','user');";
