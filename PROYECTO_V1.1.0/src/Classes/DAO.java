@@ -48,8 +48,13 @@ public class DAO{
 			User user = new User();
 
 			while (rs.next()) {
-
-				user = new User(rs.getString("id"),rs.getString("username"),rs.getString("name"),rs.getString("nif"),rs.getString("email"),rs.getString("address"),rs.getString("birthdate"),rs.getString("role"));
+				
+				if(rs.getString("id")!=null) {
+					
+					user = new User(rs.getString("id"),rs.getString("username"),rs.getString("name"),rs.getString("nif"),rs.getString("email"),rs.getString("address"),rs.getString("birthdate"),rs.getString("role"));
+					return user;
+					
+				}
 				
 			}
 
@@ -57,13 +62,15 @@ public class DAO{
 			stmt.close();
 			conn.close();
 			
-			return user;
+			return null;
 
 		} catch (Exception e) {
 
 			return null;
 			
 		}
+		
+		return null;
 		
 	}
 	
