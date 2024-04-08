@@ -70,8 +70,6 @@ public class DAO{
 			
 		}
 		
-		return null;
-		
 	}
 	
 	public boolean checkUser(User user) {
