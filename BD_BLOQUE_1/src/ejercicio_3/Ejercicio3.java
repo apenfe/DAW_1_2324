@@ -1,4 +1,4 @@
-package ejercicio_2;
+package ejercicio_3;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,17 +7,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Ejercicio2{
+public class Ejercicio3{
 	
 	/*
-	 * Ejercicio 2
+	 * Ejercicio 3
 	 * 
-	 * Crea un programa siguiente el patrón de diseño DAO el cual pida al usuario un precio mínimo para 
-	 * obtener de base de datos el nombre, el precio y el fabricante de aquellos productos que tengan como 
-	 * mínimo el precio recibido por parámetro, ordenados de menor a mayor precio.
+	 * Crea un programa siguiente el patrón de diseño DAO el cual pida al usuario un texto al usuario para obtener 
+	 * de base de datos el nombre, el precio y el fabricante de aquellos productos que contengan el texto pasado 
+	 * por parámetro en el nombre del producto.
 	 * 
-	 * Los datos se deben recoger en un listado de objetos creado de acuerdo a lo que se va a obtener de base 
-	 * de datos para devolver dicho listado. El programa deberá mostrar el listado obtenido.
+	 * Los datos se deben recoger en un listado de objetos creado de acuerdo a lo que se va a obtener de base de 
+	 * datos para devolver dicho listado. El programa deberá mostrar el listado obtenido.
 	 * 
 	 */
 	
@@ -32,10 +32,10 @@ public class Ejercicio2{
 	
 	public static void main(String[] args) {
 		
-		System.out.print("Inserte el precio minimo: ");
-		String valor = teclado.nextLine().trim();
+		System.out.print("Inserte el nombre del producto: ");
+		String nombre = teclado.nextLine().trim();
 		
-		ArrayList<Producto> productos = leerProductos(valor);
+		ArrayList<Producto> productos = leerProductos(nombre);
 		
 		for (int i = 0; i < productos.size(); i++) {
 			
@@ -49,7 +49,7 @@ public class Ejercicio2{
 		
 	}
 	
-	public static ArrayList<Producto> leerProductos(String valor) {
+	public static ArrayList<Producto> leerProductos(String nombre) {
 		
 		ArrayList<Producto> productos = new ArrayList<Producto>();
 
@@ -59,8 +59,7 @@ public class Ejercicio2{
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 
-			String consulta = "SELECT p.nombre, precio, f.nombre as fabricante FROM producto p INNER JOIN fabricante f ON p.id_fabricante=f.id WHERE precio >= "+valor+" ORDER BY "
-					+ "precio ASC;";
+			String consulta = "SELECT p.nombre, precio, f.nombre as fabricante FROM producto p INNER JOIN fabricante f ON p.id_fabricante=f.id WHERE p.nombre like '%"+nombre+"%';";
 			ResultSet rs = stmt.executeQuery(consulta);
 
 			while (rs.next()) {

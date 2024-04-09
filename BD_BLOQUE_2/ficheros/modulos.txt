@@ -1,0 +1,9 @@
+1&Programación&1&230&David Munuera
+2&Sistemas Informáticos&1&230&Manuel Nicolás
+3&Bases de datos&1&180&Luz María Cano
+4&Entoncos de Desarrollo&1&110&David Munuera
+5&Lenguaje de Marcas&2&120&(Sin profesor)
+6&Programación en entorno servidor&2&230&Carlos Abrisqueta
+7&Programación en entorno cliente&2&180&(Sin profesor)
+8&Acceso a datos&2&180&Carlos Abrisqueta
+9&Despliegue de aplicaciones&2&230&Luz María Cano
