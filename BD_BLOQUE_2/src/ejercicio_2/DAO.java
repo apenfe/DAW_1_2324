@@ -36,7 +36,7 @@ public class DAO{
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 
-			String query = "INSERT INTO usuario (nombre, email, password) values ('"+u.nombre+"','"+u.email+"','"+u.password+"');";
+			String query = "INSERT INTO usuarioplus (nombre, apellidos, dni, email, direccion, telefono) values ('"+u.nombre+"','"+u.apellidos+"','"+u.dni+"','"+u.email+"','"+u.direccion+"','"+u.telefono+"');";
 				
 			stmt.executeUpdate(query);
 				
