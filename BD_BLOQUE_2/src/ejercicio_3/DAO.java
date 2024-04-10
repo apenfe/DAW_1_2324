@@ -8,18 +8,6 @@ import java.sql.Statement;
 
 public class DAO{
 	
-	/*
-	 * Ejercicio 1
-	 * 
-	 * Crea un programa siguiendo el patrón de diseño DAO el cual inserte en una base de datos nuevos usuarios pedidos por teclado.
-	 * 
-	 * El programa deberá pedir, al menos, nombre de usuario, contraseña e email. La contraseña deberá codificarse en MD5, ya sea desde 
-	 * Java o desde la función MD5() en SQL.
-	 * 
-	 * Deberán crearse las clases necesarias para que el programa funcione siguiendo el principio de programación orientada a objetos.
-	 * 
-	 */
-	
 	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 	private static final String SERVER = "127.0.0.1";
 	private static final String PORT = "3306";
@@ -36,7 +24,7 @@ public class DAO{
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 
-			String query = "INSERT INTO usuarioplus (nombre, apellidos, dni, email, direccion, telefono) values ('"+a.nombre+"','"+a.apellidos+"','"+a.dni+"','"+a.email+"','"+a.direccion+"','"+a.telefono+"');";
+			String query = "INSERT INTO alumno (id_alumno, nombre, apellidos, dni, email, direccion, telefono) values ('"+a.id_alumno+"','"+a.nombre+"','"+a.apellidos+"','"+a.dni+"','"+a.email+"','"+a.direccion+"','"+a.telefono+"');";
 				
 			stmt.executeUpdate(query);
 				
@@ -60,7 +48,7 @@ public class DAO{
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 
-			String query = "INSERT INTO usuarioplus (id, nombre, curso, horas, profesor) values ('"+m.id+"','"+m.nombre+"','"+m.curso+"','"+m.horas+"','"+m.profesor+"');";
+			String query = "INSERT INTO modulo (id_modulo, nombre, curso, horas, profesor) values ('"+m.id_modulo+"','"+m.nombre+"','"+m.curso+"','"+m.horas+"','"+m.profesor+"');";
 				
 			stmt.executeUpdate(query);
 				
@@ -86,7 +74,7 @@ public class DAO{
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 
-			String query = "INSERT INTO usuarioplus (nombre, apellidos, dni, email, direccion, telefono) values ('"+u.nombre+"','"+u.apellidos+"','"+u.dni+"','"+u.email+"','"+u.direccion+"','"+u.telefono+"');";
+			String query = "INSERT INTO modulo_alumno (id_alumno, id_modulo) values ('"+claves[1]+"','"+claves[0]+"');";
 				
 			stmt.executeUpdate(query);
 				
