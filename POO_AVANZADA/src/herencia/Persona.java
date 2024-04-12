@@ -1,6 +1,6 @@
 package herencia;
 
-public class Persona{
+public abstract class Persona{
 	
 	protected String nombre;
 	protected String apellidos;
@@ -48,6 +48,7 @@ public class Persona{
 		this.direccion = direccion;
 	}
 	
+	@Override
 	public String toString() {
 		
 		return this.getNombre()+" "+this.getApellidos()+" ---> ";

@@ -1,6 +1,6 @@
 package herencia;
 
-public class Profesor extends Persona{
+public abstract class Profesor extends Persona{
 	
 	private String nrp;
 
@@ -20,6 +20,7 @@ public class Profesor extends Persona{
 		this.nrp = nrp;
 	}
 	
+	@Override
 	public String toString() {
 		
 		return super.toString()+" "+this.nrp;

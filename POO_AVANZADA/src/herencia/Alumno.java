@@ -19,13 +19,11 @@ public class Alumno extends Persona{
 		this.nre = nre;
 	}
 	
-	
+	@Override
 	public String toString() {
 		
 		return super.toString()+" "+this.nre;
 		
 	}
-	
-	
 	
 }
