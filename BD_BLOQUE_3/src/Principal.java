@@ -37,23 +37,45 @@ public class Principal{
 				
 			}else if(opcion == 1) {
 				
+				System.err.println("\n\tEl total de empleados en la empresa es de: "+ JARDINERIA.consulta_1() +" trabajadores.\n");
+				
 			}else if(opcion == 2) {
+				
+				System.err.println("\n\t"+JARDINERIA.consulta_2()+"\n");
 				
 			}else if(opcion == 3) {
 				
+				System.out.print("Inserte el año: ");
+				int year = Integer.parseInt(TECLADO.nextLine().trim());
+				System.err.println("\n\t"+JARDINERIA.consulta_3(year)+"\n");
+				
 			}else if(opcion == 4) {
+				
+				System.err.println("\n\t"+JARDINERIA.consulta_4()+"\n");
 				
 			}else if(opcion == 5) {
 				
+				System.err.println("\n\t"+JARDINERIA.consulta_5()+"\n");
+				
 			}else if(opcion == 6) {
+				
+				System.err.println("\n\t"+JARDINERIA.consulta_6()+"\n");
 				
 			}else if(opcion == 7) {
 				
-			}else if(opcion == 8) {
+				System.out.print("Inserte una ciudad: ");
+				String ciudad = TECLADO.nextLine().trim();
+				System.err.println("\n\t"+JARDINERIA.consulta_7(ciudad)+"\n");
+				
+			}else if(opcion == 8) {  // ver
+				
+				//System.err.println("\n\t"+JARDINERIA.consulta_8()+"\n");
 				
 			}else if(opcion == 9) {
 				
 			}else if(opcion == 10) {
+				
+				System.err.println("\n\t"+JARDINERIA.consulta_10()+"\n");
 				
 			}else if(opcion == 11) {
 				
