@@ -5,6 +5,10 @@ public class Producto{
 	private double precio;
 	private int codBarras;
 	
+	public Producto() {
+		
+	}
+	
 	public Producto(double precio, int codBarras) {
 		
 		this.precio = precio;

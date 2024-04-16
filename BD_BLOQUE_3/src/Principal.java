@@ -67,9 +67,7 @@ public class Principal{
 				String ciudad = TECLADO.nextLine().trim();
 				System.err.println("\n\t"+JARDINERIA.consulta_7(ciudad)+"\n");
 				
-			}else if(opcion == 8) {  // ver
-				
-				//System.err.println("\n\t"+JARDINERIA.consulta_8()+"\n");
+			}else if(opcion == 8) {
 				
 			}else if(opcion == 9) {
 				
