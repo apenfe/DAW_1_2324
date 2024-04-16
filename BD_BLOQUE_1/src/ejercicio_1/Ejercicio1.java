@@ -21,16 +21,6 @@ public class Ejercicio1{
 	 * Nota: Actualmente, 1 euro equivale a 1,08 dólares.
 	 * 
 	 */
-	/*
-	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-	private static final String SERVER = "r2d2.iescierva.net";
-	private static final String PORT = "6033";
-	private static final String DATABASE = "tienda";
-	private static final String URL = "jdbc:mysql://"+SERVER+":"+PORT+"/"+DATABASE;
-	private static final String USER = "tienda";
-	private static final String PASS = "tienda";
-	*/
-	//
 	
 	private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
 	private static final String SERVER = "127.0.0.1";

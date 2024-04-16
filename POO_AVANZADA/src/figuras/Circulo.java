@@ -1,8 +1,16 @@
 package figuras;
 
-public class Circulo{ // en diagrama de clases, estos metodos y clases aparecen en cursiva
+public class Circulo extends Figura{ // en diagrama de clases, estos metodos y clases aparecen en cursiva
 	
+	// 
 	public int radio;
+	
+	public Circulo(int radio) {
+		
+		super.lados=0;
+		this.radio=radio;
+		
+	}
 	
 	public void area() {
 		
