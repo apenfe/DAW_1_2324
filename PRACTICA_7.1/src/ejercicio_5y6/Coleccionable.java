@@ -2,24 +2,32 @@ package ejercicio_5y6;
 
 public class Coleccionable{
 	
-	private String precio;
-	private int codBarras;
-	
+	private String tipo;
+
 	public Coleccionable() {
 		
 	}
 	
-	public Coleccionable(double precio, int codBarras) {
+	public Coleccionable(String tipo) {
 		
-		this.precio = precio;
-		this.codBarras = codBarras;
-		
+		this.tipo = tipo;
+	
+	}
+	
+	
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
 	@Override
 	public String toString() {
 		
-		String salida = "ID "+codBarras+" - Precio unitario: "+precio+" - ";
+		String salida = "TIPO "+tipo;
 		return salida;
 		
 	}
