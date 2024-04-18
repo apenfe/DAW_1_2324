@@ -236,7 +236,7 @@ public class Session{
 	
 	private boolean checkData(String[] userdata) {
 				
-		userdata[0] = Input.getString("\n\tIntroduzca un nombre de usuario: ");
+		userdata[0] = Input.getString("\n\tIntroduzca un nombre de usuario (@nombre): ");
 				
 		if(!Utils.validateUserName(userdata[0])) {
 					
@@ -246,7 +246,7 @@ public class Session{
 			
 		}
 		
-		userdata[1] = Input.getString("\tIntroduzca un NIF: ");
+		userdata[1] = Input.getString("\tIntroduzca un NIF (12345678X): ");
 		
 		if(!Utils.validateNif(userdata[1])) {
 					
@@ -275,7 +275,7 @@ public class Session{
 				
 		}
 			
-		userdata[4] = Input.getString("\tIntroduzca su nombre completo: ");
+		userdata[4] = Input.getString("\tIntroduzca su nombre completo (Nombre completo y dos apellidos, comenzando en mayúsculas): ");
 		if(!Utils.validateName(userdata[4])) {
 				
 			System.out.println(Config.ROJO+"\t\tFormato de nombre no valido."+Config.RESET);

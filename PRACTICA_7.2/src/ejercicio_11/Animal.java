@@ -6,7 +6,7 @@ public abstract class Animal{
 	private String nombre;
 	private String sexo;
 	
-	public abstract void sonidoCaracteristico();
+	public abstract String sonidoCaracteristico();
 	
 	public int getEdad() {
 		return edad;
