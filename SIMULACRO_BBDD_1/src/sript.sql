@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS restaurante;
+
+USE restaurante;
+
+CREATE TABLE comida(
+id INT PRIMARY KEY AUTO_INCREMENT,
+nombre VARCHAR(500) NOT NULL,
+precio decimal(10,2) NOT NULL,
+tamano VARCHAR(100) NOT NULL,
+local VARCHAR(500) NOT NULL
+);
