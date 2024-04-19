@@ -362,4 +362,78 @@ public class DAO{
 		
 	}
 	
+	public String consulta_11() { ///////////////////
+		
+		// 11 ---> Cantidad de productos diferentes en cada uno de los pedidos
+		
+		String salida = "";
+		
+		try {
+
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PASS);
+			Statement stmt = conn.createStatement();
+			
+			// SELECT p.fechapedido, p.estado, COUNT(dp.codigoproducto) AS productos FROM pedido p INNER JOIN detalle_pedido dp ON dp.codigopedido = p.codigopedido GROUP BY p.codigo_pedido;
+			String consulta = "SELECT p.fechapedido, p.estado, COUNT(dp.codigoproducto) AS productos FROM pedido p INNER JOIN detalle_pedido dp ON dp.codigopedido = p.codigopedido GROUP BY p.codigo_pedido;";
+
+			ResultSet rs = stmt.executeQuery(consulta);
+
+			while (rs.next()) {
+				
+				salida +="Cliente: "+ rs.getString("nombre_contacto")+". Primer pago en: "+rs.getString("primera")+" y ultimo pago en: "+rs.getString("ultima")+".\n";
+				
+			}
+
+			rs.close();
+			stmt.close();
+			conn.close();
+
+		} catch (Exception e) {
+
+			salida += "error en consulta";
+			
+		}
+		
+		return salida;
+		
+	}
+	
+	public String consulta_12() { ///////////////////
+		
+		// 12 ---> Mostrar información de cada pedido junto con el importe total
+		
+		String salida = "";
+		
+		try {
+
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PASS);
+			Statement stmt = conn.createStatement();
+			
+			// SELECT p.fechapedido, p.estado, COUNT(dp.codigoproducto) AS productos FROM pedido p INNER JOIN detalle_pedido dp ON dp.codigopedido = p.codigopedido GROUP BY p.codigo_pedido;
+			String consulta = "SELECT p.codigo_pedido, p.fecha_pedido, p.estado, COUNT(dp.codigo_producto) AS productos FROM pedido p INNER JOIN detalle_pedido dp ON dp.codigo_pedido = p.codigo_pedido GROUP BY p.codigo_pedido;";
+
+			ResultSet rs = stmt.executeQuery(consulta);
+
+			while (rs.next()) {
+				
+				salida +="Cliente: "+ rs.getString("nombre_contacto")+". Primer pago en: "+rs.getString("primera")+" y ultimo pago en: "+rs.getString("ultima")+".\n";
+				
+			}
+
+			rs.close();
+			stmt.close();
+			conn.close();
+
+		} catch (Exception e) {
+
+			salida += "error en consulta";
+			
+		}
+		
+		return salida;
+		
+	}
+	
 }
