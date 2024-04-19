@@ -23,7 +23,8 @@ public class DAO{
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 
-			String consulta = "SELECT codigo_empleado FROM empleado ORDER BY codigo_empleado DESC LIMIT 1;";
+			String consulta = "SELECT count(*) FROM empleado;";
+			//String consulta = "SELECT codigo_empleado FROM empleado ORDER BY codigo_empleado DESC LIMIT 1;";
 			ResultSet rs = stmt.executeQuery(consulta);
 
 			while (rs.next()) {
@@ -251,7 +252,7 @@ public class DAO{
 		
 	}
 	
-	public String consulta_8() {
+	public String consulta_8() { ///////////////////
 		
 		// 8- Mostrar todos los representantes con su cantidad de clientes
 		
@@ -262,14 +263,52 @@ public class DAO{
 			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
-
-			String consulta = "SELECT COUNT(*) as cuenta FROM cliente WHERE ciudad = '"+ciudad+"';";
+			
+			String consulta = "SELECT CONCAT(NOMBRE,\" \",APELLIDO1,\" \",APELLIDO2) AS NOMBREcompleto, COUNT(cliente.codigo_cliente) AS CANTIDAD COMPLETO FROM EMPLEADO INNER JOIN"
+					+ " CLIENTE ON empleado.CODIGO_EMPLEADO = cliente.CODIGO_EMPLEADO_REP_VENTAS WHERE empleado.puesto = 'representante ventas' GROUP BY empleado.codigo_empleado;";
 
 			ResultSet rs = stmt.executeQuery(consulta);
 
 			while (rs.next()) {
 				
-				salida +="El total de clientes en la ciudad de "+ciudad+" es: "+ rs.getString("cuenta")+".\n";
+				salida +="REPRESENTANTE: "+rs.getString("nombre")+". TOTAL CLIENTES: "+ rs.getString("cantidad")+".\n";
+				
+			}
+
+			rs.close();
+			stmt.close();
+			conn.close();
+
+		} catch (Exception e) {
+
+			salida += "error en consulta";
+			
+		}
+		
+		return salida;
+		
+	}
+	
+	public String consulta_9() { ///////////////////
+		
+		// 9- Mostrar cantidad de clientes sin representante de ventas
+		
+		String salida = "";
+		
+		try {
+
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PASS);
+			Statement stmt = conn.createStatement();
+			
+			String consulta = "SELECT COUNT(cliente.codigo_cliente) AS CANTIDAD COMPLETO FROM EMPLEADO INNER JOIN"
+					+ " CLIENTE ON empleado.CODIGO_EMPLEADO = cliente.CODIGO_EMPLEADO_REP_VENTAS WHERE empleado.puesto != 'representante ventas';";
+
+			ResultSet rs = stmt.executeQuery(consulta);
+
+			while (rs.next()) {
+				
+				salida +="REPRESENTANTE: "+rs.getString("nombre")+". TOTAL CLIENTES: "+ rs.getString("cantidad")+".\n";
 				
 			}
 
