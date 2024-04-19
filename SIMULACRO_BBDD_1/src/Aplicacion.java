@@ -8,6 +8,8 @@ public class Aplicacion{
 		
 		Comida[] lista = importarComida();
 		
+		insertarComida(lista);
+		
 	}
 	
 	public static Comida[] importarComida() {
@@ -36,6 +38,13 @@ public class Aplicacion{
 		}
 		
 		return lista.toArray(new Comida[0]);
+		
+	}
+	
+	public static void insertarComida(Comida[] lista) {
+		
+		DAO db = new DAO();
+		db.insertarListaComida(lista);
 		
 	}
 	

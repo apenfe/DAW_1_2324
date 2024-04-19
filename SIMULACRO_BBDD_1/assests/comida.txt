@@ -1,1 +1,3 @@
 kebab,12,grande,aquimismo
+pizza,13,enorme,europizza
+shisha,15,grnade,marruecos

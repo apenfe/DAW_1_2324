@@ -46,5 +46,10 @@ public class Comida{
 	public void setLocal(String local) {
 		this.local = local;
 	}
+
+	@Override
+	public String toString() {
+		return "Comida [nombre=" + nombre + ", precio=" + precio + ", tamano=" + tamano + ", local=" + local + "]";
+	}
 	
 }
