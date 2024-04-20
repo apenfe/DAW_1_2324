@@ -23,13 +23,12 @@ public class DAO{
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 
-			String consulta = "SELECT count(*) FROM empleado;";
-			//String consulta = "SELECT codigo_empleado FROM empleado ORDER BY codigo_empleado DESC LIMIT 1;";
+			String consulta = "SELECT count(*) as total FROM empleado;";
 			ResultSet rs = stmt.executeQuery(consulta);
 
 			while (rs.next()) {
 				
-				salida += rs.getString("codigo_empleado");
+				salida += rs.getString("total");
 				
 			}
 
@@ -252,7 +251,7 @@ public class DAO{
 		
 	}
 	
-	public String consulta_8() { ///////////////////
+	public String consulta_8() {
 		
 		// 8- Mostrar todos los representantes con su cantidad de clientes
 		
@@ -264,14 +263,15 @@ public class DAO{
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 			
-			String consulta = "SELECT CONCAT(NOMBRE,\" \",APELLIDO1,\" \",APELLIDO2) AS NOMBREcompleto, COUNT(cliente.codigo_cliente) AS CANTIDAD COMPLETO FROM EMPLEADO INNER JOIN"
-					+ " CLIENTE ON empleado.CODIGO_EMPLEADO = cliente.CODIGO_EMPLEADO_REP_VENTAS WHERE empleado.puesto = 'representante ventas' GROUP BY empleado.codigo_empleado;";
+			String consulta = "SELECT CONCAT(nombre,\" \",apellido1,\" \",apellido2) AS nombreCompleto, COUNT(cliente.codigo_cliente) AS cantidad"
+					+ " FROM empleado INNER JOIN cliente ON empleado.codigo_empleado = cliente.codigo_empleado_rep_ventas"
+					+ " WHERE empleado.puesto = 'representante ventas' GROUP BY empleado.codigo_empleado;";
 
 			ResultSet rs = stmt.executeQuery(consulta);
 
 			while (rs.next()) {
 				
-				salida +="REPRESENTANTE: "+rs.getString("nombre")+". TOTAL CLIENTES: "+ rs.getString("cantidad")+".\n";
+				salida +="REPRESENTANTE: "+rs.getString("nombreCompleto")+". TOTAL CLIENTES: "+ rs.getString("cantidad")+".\n";
 				
 			}
 
@@ -289,7 +289,7 @@ public class DAO{
 		
 	}
 	
-	public String consulta_9() { ///////////////////
+	public String consulta_9() {
 		
 		// 9- Mostrar cantidad de clientes sin representante de ventas
 		
@@ -301,14 +301,15 @@ public class DAO{
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 			
-			String consulta = "SELECT COUNT(cliente.codigo_cliente) AS CANTIDAD COMPLETO FROM EMPLEADO INNER JOIN"
-					+ " CLIENTE ON empleado.CODIGO_EMPLEADO = cliente.CODIGO_EMPLEADO_REP_VENTAS WHERE empleado.puesto != 'representante ventas';";
+			String consulta = "SELECT COUNT(cliente.codigo_cliente) AS cantidad "
+					+ "FROM empleado INNER JOIN cliente ON empleado.codigo_empleado = cliente.codigo_empleado_rep_ventas"
+					+ " WHERE empleado.puesto != 'representante ventas';";
 
 			ResultSet rs = stmt.executeQuery(consulta);
 
 			while (rs.next()) {
 				
-				salida +="REPRESENTANTE: "+rs.getString("nombre")+". TOTAL CLIENTES: "+ rs.getString("cantidad")+".\n";
+				salida +="TOTAL CLIENTES SIN REPRESENTANTES: "+ rs.getString("cantidad")+".\n";
 				
 			}
 
@@ -362,9 +363,9 @@ public class DAO{
 		
 	}
 	
-	public String consulta_11() { ///////////////////
+	public String consulta_11() {
 		
-		// 11 ---> Cantidad de productos diferentes en cada uno de los pedidos
+		// 11- Cantidad de productos diferentes en cada uno de los pedidos (mostrar también la información del pedido)
 		
 		String salida = "";
 		
@@ -374,14 +375,15 @@ public class DAO{
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 			
-			// SELECT p.fechapedido, p.estado, COUNT(dp.codigoproducto) AS productos FROM pedido p INNER JOIN detalle_pedido dp ON dp.codigopedido = p.codigopedido GROUP BY p.codigo_pedido;
-			String consulta = "SELECT p.fechapedido, p.estado, COUNT(dp.codigoproducto) AS productos FROM pedido p INNER JOIN detalle_pedido dp ON dp.codigopedido = p.codigopedido GROUP BY p.codigo_pedido;";
+			String consulta = "SELECT p.fecha_pedido, p.estado, COUNT(dp.codigo_producto) AS productos "
+					+ "FROM pedido p INNER JOIN detalle_pedido dp ON dp.codigo_pedido = p.codigo_pedido "
+					+ "GROUP BY p.codigo_pedido;";
 
 			ResultSet rs = stmt.executeQuery(consulta);
 
 			while (rs.next()) {
 				
-				salida +="Cliente: "+ rs.getString("nombre_contacto")+". Primer pago en: "+rs.getString("primera")+" y ultimo pago en: "+rs.getString("ultima")+".\n";
+				salida +="Fecha pedido: "+ rs.getString("p.fecha_pedido")+". Detalle: "+rs.getString("p.estado")+". Cantidad de productos diferentes: "+rs.getString("productos")+".\n";
 				
 			}
 
@@ -399,7 +401,7 @@ public class DAO{
 		
 	}
 	
-	public String consulta_12() { ///////////////////
+	public String consulta_12() {
 		
 		// 12 ---> Mostrar información de cada pedido junto con el importe total (sumar importes de cada uno de los productos del pedido)
 		
@@ -411,14 +413,15 @@ public class DAO{
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 			
-			String consulta = "SELECT p.codigo_pedido, p.fecha_pedido, p.estado, COUNT(dp.codigo_producto) AS productos, SUM(dp.cantidad*dp.precio_unidad) AS total"
-					+ " FROM pedido p INNER JOIN detalle_pedido dp ON dp.codigo_pedido = p.codigo_pedido GROUP BY p.codigo_pedido;";
+			String consulta = "SELECT p.codigo_pedido, p.fecha_pedido, p.estado, SUM(dp.cantidad*dp.precio_unidad) AS total"
+					+ " FROM pedido p INNER JOIN detalle_pedido dp ON dp.codigo_pedido = p.codigo_pedido"
+					+ " GROUP BY p.codigo_pedido;";
 
 			ResultSet rs = stmt.executeQuery(consulta);
 
 			while (rs.next()) {
 				
-				salida +="Cliente: "+ rs.getString("nombre_contacto")+". Primer pago en: "+rs.getString("primera")+" y ultimo pago en: "+rs.getString("ultima")+".\n";
+				salida +="Pedido: "+ rs.getString("p.codigo_pedido")+". Fecha: "+rs.getString("p.fecha_pedido")+". Estado ---> "+rs.getString("p.estado")+". Importe = "+rs.getString("total")+"\n";
 				
 			}
 
@@ -448,7 +451,7 @@ public class DAO{
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 			
-			String consulta = "SELECT p.codigo, p.nombre, SUM(dp.cantidad) AS cantidadVentas "
+			String consulta = "SELECT p.codigo_producto, p.nombre, SUM(dp.cantidad) AS cantidadVentas "
 					+ "FROM producto p INNER JOIN detalle_pedido dp ON dp.codigo_producto = p.codigo_producto "
 					+ "GROUP BY dp.codigo_producto ORDER BY cantidadVentas DESC LIMIT 20;";
 
@@ -456,7 +459,7 @@ public class DAO{
 
 			while (rs.next()) {
 				
-				salida +="Cliente: "+ rs.getString("nombre_contacto")+". Primer pago en: "+rs.getString("primera")+" y ultimo pago en: "+rs.getString("ultima")+".\n";
+				salida +="Producto codigo: "+ rs.getString("p.codigo_producto")+". Nombre: "+rs.getString("p.nombre")+" Cantidad de ventas ---> "+rs.getString("cantidadVentas")+".\n";
 				
 			}
 

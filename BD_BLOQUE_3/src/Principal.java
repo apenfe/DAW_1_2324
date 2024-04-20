@@ -69,7 +69,11 @@ public class Principal{
 				
 			}else if(opcion == 8) {
 				
+				System.err.println("\n\t"+JARDINERIA.consulta_8()+"\n");
+				
 			}else if(opcion == 9) {
+				
+				System.err.println("\n\t"+JARDINERIA.consulta_9()+"\n");
 				
 			}else if(opcion == 10) {
 				
@@ -77,9 +81,15 @@ public class Principal{
 				
 			}else if(opcion == 11) {
 				
+				System.err.println("\n\t"+JARDINERIA.consulta_11()+"\n");
+				
 			}else if(opcion == 12) {
 				
+				System.err.println("\n\t"+JARDINERIA.consulta_12()+"\n");
+				
 			}else if(opcion == 13) {
+				
+				System.err.println("\n\t"+JARDINERIA.consulta_13()+"\n");
 				
 			}else if(opcion == 14) {
 				
