@@ -439,7 +439,7 @@ public class DAO{
 		
 	}
 	
-	public String consulta_13() { ///////////////////
+	public String consulta_13() {
 		
 		// 13 ---> Los 20 productos más vendidos (mostrar el total de unidades vendidas y los resultados ordenados de mayor a menor unidades vendidas)
 		
@@ -500,6 +500,82 @@ public class DAO{
 			while (rs.next()) {
 				
 				salida +="Cliente: "+ rs.getString("nombre_contacto")+". Primer pago en: "+rs.getString("primera")+" y ultimo pago en: "+rs.getString("ultima")+".\n";
+				
+			}
+
+			rs.close();
+			stmt.close();
+			conn.close();
+
+		} catch (Exception e) {
+
+			salida += "error en consulta";
+			
+		}
+		
+		return salida;
+		
+	}
+	
+	public String consulta_15(double cantidad) {
+		
+		// 15- Ventas totales de los productos que facturen más de cierta cantidad (pedir cantidad por teclado. 
+		// Se mostrará el nombre, unidades vendidas, total facturado y total facturado con impuestos (21% IVA))
+		
+		String salida = "";
+		
+		try {
+
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PASS);
+			Statement stmt = conn.createStatement();
+			
+			String consulta = "SELECT p.nombre, COUNT(dp.cantidad) AS total, SUM(dp.cantidad*dp.precio_unidad) AS facturado, SUM(dp.cantidad*dp.precio_unidad)*1.21 AS facturado_impuestos "
+				    + "FROM producto p INNER JOIN detalle_pedido dp ON dp.codigo_producto = p.codigo_producto "
+				    + "GROUP BY dp.codigo_producto "
+				    + "HAVING SUM(dp.cantidad*dp.precio_unidad)*1.21 >= " + cantidad + ";";
+
+			ResultSet rs = stmt.executeQuery(consulta);
+
+			while (rs.next()) {
+				
+				salida +="Producto: "+ rs.getString("p.nombre")+". Unidades vendidas: "+rs.getString("total")+". Facturado: "+rs.getString("facturado")+"€, con impuestos: "+rs.getString("facturado_impuestos")+"€.\n";
+				
+			}
+
+			rs.close();
+			stmt.close();
+			conn.close();
+
+		} catch (Exception e) {
+
+			salida += "error en consulta: "+e;
+			
+		}
+		
+		return salida;
+		
+	}
+	
+	public String consulta_16() {
+		
+		// 16- Suma total de todos los pagos realizados agrupados por año.
+		
+		String salida = "";
+		
+		try {
+
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PASS);
+			Statement stmt = conn.createStatement();
+			
+			String consulta = "SELECT YEAR(fecha_pago) as year, SUM(total) AS total_pagos FROM pago GROUP BY YEAR(fecha_pago);";
+
+			ResultSet rs = stmt.executeQuery(consulta);
+
+			while (rs.next()) {
+				
+				salida +="Año: "+ rs.getString("year")+". total pagos ese año: "+rs.getString("total_pagos")+".\n";
 				
 			}
 

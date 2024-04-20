@@ -93,9 +93,17 @@ public class Principal{
 				
 			}else if(opcion == 14) {
 				
+				System.err.println("\n\t"+JARDINERIA.consulta_14()+"\n");
+				
 			}else if(opcion == 15) {
 				
+				System.out.print("Inserte una cantidad: ");
+				double cantidad = Double.parseDouble(TECLADO.nextLine().trim());
+				System.err.println("\n\t"+JARDINERIA.consulta_15(cantidad)+"\n");
+				
 			}else if(opcion == 16) {
+				
+				System.err.println("\n\t"+JARDINERIA.consulta_16()+"\n");
 				
 			}else {
 				
