@@ -401,7 +401,7 @@ public class DAO{
 	
 	public String consulta_12() { ///////////////////
 		
-		// 12 ---> Mostrar información de cada pedido junto con el importe total
+		// 12 ---> Mostrar información de cada pedido junto con el importe total (sumar importes de cada uno de los productos del pedido)
 		
 		String salida = "";
 		
@@ -411,8 +411,86 @@ public class DAO{
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 			
-			// SELECT p.fechapedido, p.estado, COUNT(dp.codigoproducto) AS productos FROM pedido p INNER JOIN detalle_pedido dp ON dp.codigopedido = p.codigopedido GROUP BY p.codigo_pedido;
-			String consulta = "SELECT p.codigo_pedido, p.fecha_pedido, p.estado, COUNT(dp.codigo_producto) AS productos FROM pedido p INNER JOIN detalle_pedido dp ON dp.codigo_pedido = p.codigo_pedido GROUP BY p.codigo_pedido;";
+			String consulta = "SELECT p.codigo_pedido, p.fecha_pedido, p.estado, COUNT(dp.codigo_producto) AS productos, SUM(dp.cantidad*dp.precio_unidad) AS total"
+					+ " FROM pedido p INNER JOIN detalle_pedido dp ON dp.codigo_pedido = p.codigo_pedido GROUP BY p.codigo_pedido;";
+
+			ResultSet rs = stmt.executeQuery(consulta);
+
+			while (rs.next()) {
+				
+				salida +="Cliente: "+ rs.getString("nombre_contacto")+". Primer pago en: "+rs.getString("primera")+" y ultimo pago en: "+rs.getString("ultima")+".\n";
+				
+			}
+
+			rs.close();
+			stmt.close();
+			conn.close();
+
+		} catch (Exception e) {
+
+			salida += "error en consulta";
+			
+		}
+		
+		return salida;
+		
+	}
+	
+	public String consulta_13() { ///////////////////
+		
+		// 13 ---> Los 20 productos más vendidos (mostrar el total de unidades vendidas y los resultados ordenados de mayor a menor unidades vendidas)
+		
+		String salida = "";
+		
+		try {
+
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PASS);
+			Statement stmt = conn.createStatement();
+			
+			String consulta = "SELECT p.codigo, p.nombre, SUM(dp.cantidad) AS cantidadVentas "
+					+ "FROM producto p INNER JOIN detalle_pedido dp ON dp.codigo_producto = p.codigo_producto "
+					+ "GROUP BY dp.codigo_producto ORDER BY cantidadVentas DESC LIMIT 20;";
+
+			ResultSet rs = stmt.executeQuery(consulta);
+
+			while (rs.next()) {
+				
+				salida +="Cliente: "+ rs.getString("nombre_contacto")+". Primer pago en: "+rs.getString("primera")+" y ultimo pago en: "+rs.getString("ultima")+".\n";
+				
+			}
+
+			rs.close();
+			stmt.close();
+			conn.close();
+
+		} catch (Exception e) {
+
+			salida += "error en consulta";
+			
+		}
+		
+		return salida;
+		
+	}
+	
+	public String consulta_14() { ///////////////////
+		
+		// 14- Facturación total de la empresa (mostrar la base imponible, el IVA y el total facturado. La base imponible se calcula sumando 
+		// el coste del producto por el número de unidades vendidas de la tabla detalle_pedido. El IVA es el 21 % de la base imponible, y el 
+		// total la suma de los dos campos anteriores)
+		
+		String salida = "";
+		
+		try {
+
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PASS);
+			Statement stmt = conn.createStatement();
+			
+			String consulta = "SELECT p.codigo, p.nombre, SUM(dp.cantidad) AS cantidadVentas "
+					+ "FROM producto p INNER JOIN detalle_pedido dp ON dp.codigo_producto = p.codigo_producto "
+					+ "GROUP BY dp.codigo_producto ORDER BY cantidadVentas DESC LIMIT 20;";
 
 			ResultSet rs = stmt.executeQuery(consulta);
 
