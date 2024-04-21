@@ -477,7 +477,7 @@ public class DAO{
 		
 	}
 	
-	public String consulta_14() { ///////////////////
+	public String consulta_14() {
 		
 		// 14- Facturación total de la empresa (mostrar la base imponible, el IVA y el total facturado. La base imponible se calcula sumando 
 		// el coste del producto por el número de unidades vendidas de la tabla detalle_pedido. El IVA es el 21 % de la base imponible, y el 
@@ -491,15 +491,14 @@ public class DAO{
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 			
-			String consulta = "SELECT p.codigo, p.nombre, SUM(dp.cantidad) AS cantidadVentas "
-					+ "FROM producto p INNER JOIN detalle_pedido dp ON dp.codigo_producto = p.codigo_producto "
-					+ "GROUP BY dp.codigo_producto ORDER BY cantidadVentas DESC LIMIT 20;";
+			String consulta = "SELECT SUM(dp.cantidad*dp.precio_unidad) AS facturado, SUM(dp.cantidad*dp.precio_unidad)*0.21 AS base, SUM(dp.cantidad*dp.precio_unidad)*1.21 AS facturado_impuestos "
+				    + "FROM producto p INNER JOIN detalle_pedido dp ON dp.codigo_producto = p.codigo_producto; ";
 
 			ResultSet rs = stmt.executeQuery(consulta);
 
 			while (rs.next()) {
 				
-				salida +="Cliente: "+ rs.getString("nombre_contacto")+". Primer pago en: "+rs.getString("primera")+" y ultimo pago en: "+rs.getString("ultima")+".\n";
+				salida +="Facturacion total de la empresa [ BASE IMPONIBLE: "+ rs.getString("facturado")+". IVA: "+rs.getString("base")+". TOTAL Facturado: "+rs.getString("facturado_impuestos")+"€ ]\n";
 				
 			}
 
