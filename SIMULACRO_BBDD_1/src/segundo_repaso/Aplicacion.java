@@ -46,6 +46,7 @@ public class Aplicacion{
 		DAO db = new DAO();
 		
 		db.insertarListaComida(lista);
+		db.consultar();
 		
 	}
 	

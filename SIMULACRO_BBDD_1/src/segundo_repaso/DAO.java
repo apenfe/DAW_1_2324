@@ -1,6 +1,7 @@
 package segundo_repaso;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class DAO{
@@ -33,6 +34,35 @@ public class DAO{
 			
 			st.close();
 			conn.close();
+			
+		} catch (Exception e) {
+			
+			System.err.println(e);		
+			
+		}
+		
+	}
+	
+	public void consultar() {
+		
+		try {
+			
+			Connection conn = DriverManager.getConnection(URL,USER,PASS);
+			Statement stmt = conn.createStatement();
+			
+			String consulta = "SELECT * FROM comida;";
+			
+			ResultSet rs = stmt.executeQuery(consulta);
+			
+			while(rs.next()) {
+				
+				System.out.println("NOMBRE: "+rs.getString("nombre")+". Precio: "+rs.getString("precio")+". Tamaño: "+rs.getString("tamano")+". pais: "+rs.getString("local"));
+				
+			}
+			
+			conn.close();
+			stmt.close();
+			rs.close();
 			
 		} catch (Exception e) {
 			
