@@ -534,16 +534,26 @@ public class DAO{
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 			
-			String consulta = "SELECT p.nombre, COUNT(dp.cantidad) AS total, SUM(dp.cantidad*dp.precio_unidad) AS facturado, SUM(dp.cantidad*dp.precio_unidad)*1.21 AS facturado_impuestos "
+			String consulta0 = "SELECT p.nombre, SUM(dp.cantidad) AS cantidad,"
+					+ " SUM(dp.cantidad*dp.precio_unidad) AS totalFacturado,"
+					+ " SUM(dp.cantidad*dp.precio_unidad)*1.21 AS totalFacturadoIva "
+				    + "FROM producto p INNER JOIN detalle_pedido dp ON dp.codigo_producto = p.codigo_producto "
+				    + "GROUP BY dp.codigo_producto "
+				    + "HAVING totalFacturadoIva > " + cantidad + ";";
+			/*
+			String consulta = "SELECT p.nombre, COUNT(dp.cantidad) AS total, "
+					+ "SUM(dp.cantidad*dp.precio_unidad) AS facturado, "
+					+ "SUM(dp.cantidad*dp.precio_unidad)*1.21 AS facturado_impuestos "
 				    + "FROM producto p INNER JOIN detalle_pedido dp ON dp.codigo_producto = p.codigo_producto "
 				    + "GROUP BY dp.codigo_producto "
 				    + "HAVING SUM(dp.cantidad*dp.precio_unidad)*1.21 >= " + cantidad + ";";
-
-			ResultSet rs = stmt.executeQuery(consulta);
+			 */
+			
+			ResultSet rs = stmt.executeQuery(consulta0);
 
 			while (rs.next()) {
 				
-				salida +="Producto: "+ rs.getString("p.nombre")+". Unidades vendidas: "+rs.getString("total")+". Facturado: "+rs.getString("facturado")+"€, con impuestos: "+rs.getString("facturado_impuestos")+"€.\n";
+				salida +="Producto: "+ rs.getString("p.nombre")+". Unidades vendidas: "+rs.getString("cantidad")+". Facturado: "+rs.getString("totalFacturado")+"€, con impuestos: "+rs.getString("totalFacturadoIva")+"€.\n";
 				
 			}
 
