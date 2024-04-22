@@ -260,6 +260,8 @@ public class DAO{
 		String salida = "";
 		
 		try {
+			
+			String consulta = "SELECT p.nombre, p.precio FROM producto p WHERE p.precio >= ALL(SELECT p2.precio FROM producto p2);";
 
 			
 
@@ -281,7 +283,7 @@ public class DAO{
 		
 		try {
 
-		
+			String consulta = "SELECT p.nombre, p.precio FROM producto p WHERE p.precio <= ALL(SELECT p2.precio FROM producto p2);";
 
 		} catch (Exception e) {
 
@@ -295,13 +297,13 @@ public class DAO{
 	
 	public String consulta_9() {
 		
-		// 9- Mostrar cantidad de clientes sin representante de ventas
+		// 9- Lista los nombres de los fabricantes que tienen productos asociados. (Utilizando ALL o ANY).
 		
 		String salida = "";
 		
 		try {
 
-			
+			String consulta = "select nombre from fabricante where id = ANY(select distinct(p.id_fabricante) from producto p)";
 
 		} catch (Exception e) {
 
@@ -321,8 +323,8 @@ public class DAO{
 		
 		try {
 
+			String consulta = "select nombre from fabricante where id != ALL(select distinct(p.id_fabricante) from producto p)";
 			
-
 		} catch (Exception e) {
 
 			salida += "error en consulta";
@@ -335,7 +337,7 @@ public class DAO{
 	
 	public String consulta_11() {
 		
-		// 11- Cantidad de productos diferentes en cada uno de los pedidos (mostrar también la información del pedido)
+		// 11- Lista los nombres de los fabricantes que tienen productos asociados. (Utilizando IN o NOT IN).
 		
 		String salida = "";
 		
@@ -355,7 +357,7 @@ public class DAO{
 	
 	public String consulta_12() {
 		
-		// 12 ---> Mostrar información de cada pedido junto con el importe total (sumar importes de cada uno de los productos del pedido)
+		// 12- Lista los nombres de los fabricantes que no tienen productos asociados. (Utilizando IN o NOT IN).
 		
 		String salida = "";
 		
