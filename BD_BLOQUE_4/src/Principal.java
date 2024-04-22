@@ -49,17 +49,21 @@ public class Principal{
 				
 			}else if(opcion == 1) {
 				
-				System.err.println("\n"+TIENDA.consulta_1()+"\n");
+				System.out.print("Inserte el nombre del fabricante: ");
+				String fabricante = TECLADO.nextLine().trim();
+				System.err.println("\n"+TIENDA.consulta_1(fabricante)+"\n");
 				
 			}else if(opcion == 2) {
 				
-				System.err.println("\n"+TIENDA.consulta_2()+"\n");
+				System.out.print("Inserte el nombre del fabricante: ");
+				String fabricante = TECLADO.nextLine().trim();
+				System.err.println("\n"+TIENDA.consulta_2(fabricante)+"\n");
 				
 			}else if(opcion == 3) {
 				
 				System.out.print("Inserte el año: ");
-				int year = Integer.parseInt(TECLADO.nextLine().trim());
-				System.err.println("\n"+TIENDA.consulta_3(year)+"\n");
+				String fabricante = TECLADO.nextLine().trim();
+				System.err.println("\n"+TIENDA.consulta_3(fabricante)+"\n");
 				
 			}else if(opcion == 4) {
 				

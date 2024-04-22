@@ -29,17 +29,19 @@ public class DAO{
 	 * 
 	 */
 	
-	public String consulta_1() {
+	public String consulta_1(String nombre) {
 		
 		String salida = "";
 		
 		try {
+			
+			// 1- Listar todos los productos de un fabricante indicado por teclado (Sin utilizar la intersección de tablas INNER JOIN)
 
 			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 
-			String consulta = "SELECT p.nombre, p.precio FROM producto p WHERE p.id_fabricante = (SELECT id FROM fabricante WHERE nombre = 'Lenovo');";
+			String consulta = "SELECT p.nombre, p.precio FROM producto p WHERE p.id_fabricante = (SELECT id FROM fabricante WHERE nombre = '"+nombre+"');";
 			ResultSet rs = stmt.executeQuery(consulta);
 
 			while (rs.next()) {
@@ -62,13 +64,37 @@ public class DAO{
 		
 	}
 	
-	public String consulta_2() {
+	public String consulta_2(String nombre) {
 		
 		String salida = "";
 		
 		try {
+			
+			// 2- Listar todos los datos, incluido el nombre del fabricante, de los productos que tienen el mismo precio que el producto más caro de un fabricante indicado por teclado.
+			
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PASS);
+			Statement stmt = conn.createStatement();
+			
+			String subconsulta = "(SELECT p2.nombre, MAX(p2.precio) "
+					+ "FROM producto p2 INNER JOIN fabricante f2 ON p2.id_fabricante = f2.id"
+					+ " WHERE f2.nombre = '"+nombre+"')";
+			
+			String consulta = "SELECT p.nombre, p.precio, f.nombre as fabricante "
+					+ "FROM producto p INNER JOIN fabricante f ON p.id_fabricante = f.id"
+					+ " WHERE p.precio = "+subconsulta+";";
+			
+			ResultSet rs = stmt.executeQuery(consulta);
 
-		
+			while (rs.next()) {
+				
+				salida += rs.getString("total");
+				
+			}
+
+			rs.close();
+			stmt.close();
+			conn.close();
 
 		} catch (Exception e) {
 
@@ -80,13 +106,37 @@ public class DAO{
 		
 	}
 	
-	public String consulta_3(int year) {
+	public String consulta_3(String nombre) {
 		
 		String salida = "";
 		
 		try {
-
 			
+			// 3- Lista el nombre del producto más caro de un fabricante indicado por teclado.
+			
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PASS);
+			Statement stmt = conn.createStatement();
+			
+			String subconsulta = "(SELECT p2.nombre, MAX(p2.precio) "
+					+ "FROM producto p2 INNER JOIN fabricante f2 ON p2.id_fabricante = f2.id"
+					+ " WHERE f2.nombre = '"+nombre+"')";
+			
+			String consulta = "SELECT p.nombre, p.precio, f.nombre as fabricante "
+					+ "FROM producto p INNER JOIN fabricante f ON p.id_fabricante = f.id"
+					+ " WHERE p.precio = "+subconsulta+";";
+			
+			ResultSet rs = stmt.executeQuery(consulta);
+
+			while (rs.next()) {
+				
+				salida += rs.getString("total");
+				
+			}
+
+			rs.close();
+			stmt.close();
+			conn.close();
 
 		} catch (Exception e) {
 
