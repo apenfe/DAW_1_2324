@@ -118,13 +118,14 @@ public class DAO{
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 			
-			String subconsulta = "(SELECT p2.nombre, MAX(p2.precio) "
+			String subconsulta = "(SELECT MAX(p2.precio) "
 					+ "FROM producto p2 INNER JOIN fabricante f2 ON p2.id_fabricante = f2.id"
 					+ " WHERE f2.nombre = '"+nombre+"')";
 			
-			String consulta = "SELECT p.nombre, p.precio, f.nombre as fabricante "
+			String consulta = "SELECT p.nombre "
 					+ "FROM producto p INNER JOIN fabricante f ON p.id_fabricante = f.id"
-					+ " WHERE p.precio = "+subconsulta+";";
+					+ " WHERE f.nombre = '"+nombre+"'"
+					+ " AND p.precio = "+subconsulta+";";
 			
 			ResultSet rs = stmt.executeQuery(consulta);
 
@@ -148,13 +149,38 @@ public class DAO{
 		
 	}
 	
-	public String consulta_4() {
+	public String consulta_4(String nombre) {
 		
 		String salida = "";
 		
 		try {
-
 			
+			// 4- Lista el nombre del producto más barato de un fabricante indicado por teclado.
+			
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PASS);
+			Statement stmt = conn.createStatement();
+			
+			String subconsulta = "(SELECT MIN(p2.precio) "
+					+ "FROM producto p2 INNER JOIN fabricante f2 ON p2.id_fabricante = f2.id"
+					+ " WHERE f2.nombre = '"+nombre+"')";
+			
+			String consulta = "SELECT p.nombre "
+					+ "FROM producto p INNER JOIN fabricante f ON p.id_fabricante = f.id"
+					+ " WHERE f.nombre = '"+nombre+"'"
+					+ " AND p.precio = "+subconsulta+";";
+			
+			ResultSet rs = stmt.executeQuery(consulta);
+
+			while (rs.next()) {
+				
+				salida += rs.getString("total");
+				
+			}
+
+			rs.close();
+			stmt.close();
+			conn.close();
 
 		} catch (Exception e) {
 
@@ -166,13 +192,38 @@ public class DAO{
 		
 	}
 	
-	public String consulta_5() {
+	public String consulta_5(String nombre) {
+		
+		// 5- Devuelve todos los productos de la base de datos que tienen un precio mayor o igual al producto más caro de un fabricante indicado por teclado.
 		
 		String salida = "";
 		
 		try {
-
 			
+			Class.forName(DRIVER);
+			Connection conn = DriverManager.getConnection(URL, USER, PASS);
+			Statement stmt = conn.createStatement();
+			
+			String subconsulta = "(SELECT MIN(p2.precio) "
+					+ "FROM producto p2 INNER JOIN fabricante f2 ON p2.id_fabricante = f2.id"
+					+ " WHERE f2.nombre = '"+nombre+"')";
+			
+			String consulta = "SELECT p.nombre "
+					+ "FROM producto p INNER JOIN fabricante f ON p.id_fabricante = f.id"
+					+ " WHERE f.nombre = '"+nombre+"'"
+					+ " AND p.precio = "+subconsulta+";";
+			
+			ResultSet rs = stmt.executeQuery(consulta);
+
+			while (rs.next()) {
+				
+				salida += rs.getString("total");
+				
+			}
+
+			rs.close();
+			stmt.close();
+			conn.close();
 
 		} catch (Exception e) {
 
