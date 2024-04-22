@@ -491,14 +491,19 @@ public class DAO{
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 			
+			String consulta0 = "SELECT SUM(dp.cantidad*dp.precio_unidad) AS baseImponible,"
+									+ " SUM(dp.cantidad*dp.precio_unidad)*0.21 AS iva,"
+									+ " SUM(dp.cantidad*dp.precio_unidad)*1.21 AS total "
+									+ "FROM detalle_pedido;";
+		/*	
 			String consulta = "SELECT SUM(dp.cantidad*dp.precio_unidad) AS facturado, SUM(dp.cantidad*dp.precio_unidad)*0.21 AS base, SUM(dp.cantidad*dp.precio_unidad)*1.21 AS facturado_impuestos "
 				    + "FROM producto p INNER JOIN detalle_pedido dp ON dp.codigo_producto = p.codigo_producto; ";
-
-			ResultSet rs = stmt.executeQuery(consulta);
+		*/
+			ResultSet rs = stmt.executeQuery(consulta0);
 
 			while (rs.next()) {
 				
-				salida +="Facturacion total de la empresa [ BASE IMPONIBLE: "+ rs.getString("facturado")+". IVA: "+rs.getString("base")+". TOTAL Facturado: "+rs.getString("facturado_impuestos")+"€ ]\n";
+				salida +="Facturacion total de la empresa [ BASE IMPONIBLE: "+ rs.getString("baseImponible")+". IVA: "+rs.getString("iva")+". TOTAL Facturado: "+rs.getString("total")+"€ ]\n";
 				
 			}
 
