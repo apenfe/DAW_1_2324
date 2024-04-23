@@ -343,7 +343,7 @@ public class DAO{
 		
 		try {
 
-		
+			String consulta = "select nombre from fabricante where id IN(select distinct(p.id_fabricante) from producto p)";
 
 		} catch (Exception e) {
 
@@ -363,6 +363,7 @@ public class DAO{
 		
 		try {
 
+			String consulta = "select nombre from fabricante where id NOT IN(select distinct(p.id_fabricante) from producto p)";
 
 		} catch (Exception e) {
 
