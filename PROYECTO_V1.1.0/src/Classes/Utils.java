@@ -241,9 +241,9 @@ public class Utils{
 	 *  @return boolean Confirmación de ununciado.
 	 */
 	
-	public static boolean confirmExit(String enunciado, String respuesta) { 
+	public static boolean confirmExit(String enun, String response) { 
 		
-		return Input.getString(enunciado).equalsIgnoreCase(respuesta);
+		return Input.getString(enun).equalsIgnoreCase(response);
 		
 	}
 	

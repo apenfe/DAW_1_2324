@@ -33,27 +33,27 @@ public class Config{
     /**
 	 * Color negro de texto en consola.
 	 */
-    public static final String NEGRO = "\033[0;30m";   // Negro
+    public static final String BLACK = "\033[0;30m";   // Negro
     /**
 	 * Color rojo de texto en consola.
 	 */
-    public static final String ROJO = "\033[0;31m";     // Rojo
+    public static final String RED = "\033[0;31m";     // Rojo
     /**
 	 * Color verde de texto en consola.
 	 */
-    public static final String VERDE = "\033[0;32m";   // Verde
+    public static final String GREEN = "\033[0;32m";   // Verde
     /**
 	 * Color amarillo de texto en consola.
 	 */
-    public static final String AMARILLO = "\033[0;33m";// Amarillo
+    public static final String YELLOW = "\033[0;33m";// Amarillo
     /**
 	 * Color azul de texto en consola.
 	 */
-    public static final String AZUL = "\033[0;34m";    // Azul
+    public static final String BLUE = "\033[0;34m";    // Azul
     /**
 	 * Color purpura de texto en consola.
 	 */
-    public static final String PURPURA = "\033[0;35m"; // Púrpura
+    public static final String PURPLE = "\033[0;35m"; // Púrpura
     /**
 	 * Color cian de texto en consola.
 	 */
@@ -61,13 +61,13 @@ public class Config{
     /**
 	 * Color blanco de texto en consola.
 	 */
-    public static final String BLANCO = "\033[0;37m";   // Blanco
+    public static final String WHITE = "\033[0;37m";   // Blanco
     
     /**
 	 * Campo estático que permite conocer la versión actual del software.
 	 */
 	
-	public static final String VERSION = AZUL+"✅ -- Version Estable: 1.1.0 --"+RESET;
+	public static final String VERSION = BLUE+"✅ -- Version Estable: 1.1.0 --"+RESET;
 	
 	/**
 	 * Campo estático que permite acceder al directorio donde se almacenan los laberintos.
@@ -119,7 +119,7 @@ public class Config{
 	/**
 	 * Campo estático que permite mostrar la cabecera del método login.
 	 */
-	public static final String LOGIN = AMARILLO+"  __        ______     _______  __  .__   __.\n"
+	public static final String LOGIN = YELLOW+"  __        ______     _______  __  .__   __.\n"
 									 + " |  |      /  __  \\   /  _____||  | |  \\ |  |\n"
 			                         + " |  |     |  |  |  | |  |  __  |  | |   \\|  |\n" 
 			                         + " |  |     |  |  |  | |  | |_ | |  | |  . `  |\n" 
@@ -129,7 +129,7 @@ public class Config{
 	/**
 	 * Campo estático que permite mostrar la cabecera del método signup.
 	 */
-	public static final String SIGNUP = AMARILLO+"      _______. __    _______ .__   __.  __    __  .______ \n"
+	public static final String SIGNUP = YELLOW+"      _______. __    _______ .__   __.  __    __  .______ \n"
 									  + "     /       ||  |  /  _____||  \\ |  | |  |  |  | |   _  \\ \n"
 						              + "    |   (----`|  | |  |  __  |   \\|  | |  |  |  | |  |_)  | \n" 
 						              + "     \\   \\    |  | |  | |_ | |  . `  | |  |  |  | |   ___/ \n" 
@@ -139,7 +139,7 @@ public class Config{
 	/**
 	 * Campo estático que permite mostrar la cabecera del método user.
 	 */
-	public static final String USER = AMARILLO+"  __    __       _______. _______ .______  \n"
+	public static final String USER = YELLOW+"  __    __       _______. _______ .______  \n"
 			                        + " |  |  |  |     /       ||   ____||   _  \\\n"
 						            + " |  |  |  |    |   (----`|  |__   |  |_)  |\n" 
 						            + " |  |  |  |     \\   \\    |   __|  |      / \n" 
@@ -149,7 +149,7 @@ public class Config{
 	/**
 	 * Campo estático que permite mostrar la cabecera del método logout.
 	 */
-	public static final String LOGOUT = AMARILLO+"  __        ______     _______   ______    __    __  .___________.\n"
+	public static final String LOGOUT = YELLOW+"  __        ______     _______   ______    __    __  .___________.\n"
 							          + " |  |      /  __  \\   /  _____| /  __  \\  |  |  |  | |           |\n"
 							          + " |  |     |  |  |  | |  |  __  |  |  |  | |  |  |  | `---|  |----`\n" 
 							          + " |  |     |  |  |  | |  | |_ | |  |  |  | |  |  |  |     |  |\n" 
@@ -159,7 +159,7 @@ public class Config{
 	/**
 	 * Campo estático que permite mostrar la cabecera del método exit.
 	 */
-	public static final String EXIT = AMARILLO+"  _______ ___   ___  __  .___________.\n"
+	public static final String EXIT = YELLOW+"  _______ ___   ___  __  .___________.\n"
 						            + " |   ____|\\  \\ /  / |  | |           |\n"
 						            + " |  |__    \\  V  /  |  | `---|  |----`\n" 
 						            + " |   __|    >   <   |  |     |  | \n" 
@@ -169,7 +169,7 @@ public class Config{
 	/**
 	 * Campo estático que permite mostrar la cabecera proximamente para secciones del programa en desarrollo.
 	 */
-	public static final String SOON = AMARILLO+" .______   .______        ______   ___   ___  __  .___  ___.      ___      .___  ___.  _______ .__   __. .___________. _______ \n"
+	public static final String SOON = YELLOW+" .______   .______        ______   ___   ___  __  .___  ___.      ___      .___  ___.  _______ .__   __. .___________. _______ \n"
 								            + " |   _  \\  |   _  \\      /  __  \\  \\  \\ /  / |  | |   \\/   |     /   \\     |   \\/   | |   ____||  \\ |  | |           ||   ____|\n"
 								            + " |  |_)  | |  |_)  |    |  |  |  |  \\  V  /  |  | |  \\  /  |    /  ^  \\    |  \\  /  | |  |__   |   \\|  | `---|  |----`|  |__   \n" 
 								            + " |   ___/  |      /     |  |  |  |   >   <   |  | |  |\\/|  |   /  /_\\  \\   |  |\\/|  | |   __|  |  . `  |     |  |     |   __| \n" 
@@ -179,7 +179,7 @@ public class Config{
 	/**
 	 * Campo estático que permite mostrar la cabecera del método cargar laberinto.
 	 */
-	public static final String LOAD_MAZE = AMARILLO+"\n  __        ______        ___       _______     .___  ___.      ___       ________   _______ \n"
+	public static final String LOAD_MAZE = YELLOW+"\n  __        ______        ___       _______     .___  ___.      ___       ________   _______ \n"
 			+ " |  |      /  __  \\      /   \\     |       \\    |   \\/   |     /   \\     |       /  |   ____|\n"
 			+ " |  |     |  |  |  |    /  ^  \\    |  .--.  |   |  \\  /  |    /  ^  \\    `---/  /   |  |__   \n"
 			+ " |  |     |  |  |  |   /  /_\\  \\   |  |  |  |   |  |\\/|  |   /  /_\\  \\      /  /    |   __|  \n"
@@ -189,7 +189,7 @@ public class Config{
 	/**
 	 * Campo estático que permite mostrar la cabecera del método showmaze.
 	 */
-	public static final String MAZE = AMARILLO+"\n .___  ___.      ___       ________   _______ \r\n"
+	public static final String MAZE = YELLOW+"\n .___  ___.      ___       ________   _______ \r\n"
 			+ " |   \\/   |     /   \\     |       /  |   ____|\r\n"
 			+ " |  \\  /  |    /  ^  \\    `---/  /   |  |__   \r\n"
 			+ " |  |\\/|  |   /  /_\\  \\      /  /    |   __|  \r\n"
@@ -199,7 +199,7 @@ public class Config{
 	/**
 	 * Campo estático que permite mostrar la cabecera del método establecer casillas de entrada y salida.
 	 */
-	public static final String SET_IN_OUT = AMARILLO+"\n      _______. _______ .___________.    __  .__   __.      ______    __    __  .___________.\r\n"
+	public static final String SET_IN_OUT = YELLOW+"\n      _______. _______ .___________.    __  .__   __.      ______    __    __  .___________.\r\n"
 			+ "     /       ||   ____||           |   |  | |  \\ |  |     /  __  \\  |  |  |  | |           |\r\n"
 			+ "    |   (----`|  |__   `---|  |----`   |  | |   \\|  |    |  |  |  | |  |  |  | `---|  |----`\r\n"
 			+ "     \\   \\    |   __|      |  |        |  | |  . `  |    |  |  |  | |  |  |  |     |  |     \r\n"
@@ -209,7 +209,7 @@ public class Config{
 	/**
 	 * Campo estático que permite mostrar la cabecera del método resolver laberinto.
 	 */
-	public static final String SOLVE_MAZE = AMARILLO+"\n      _______.  ______    __      ____    ____  _______    .___  ___.      ___       ________   _______ \r\n"
+	public static final String SOLVE_MAZE = YELLOW+"\n      _______.  ______    __      ____    ____  _______    .___  ___.      ___       ________   _______ \r\n"
 			+ "     /       | /  __  \\  |  |     \\   \\  /   / |   ____|   |   \\/   |     /   \\     |       /  |   ____|\r\n"
 			+ "    |   (----`|  |  |  | |  |      \\   \\/   /  |  |__      |  \\  /  |    /  ^  \\    `---/  /   |  |__   \r\n"
 			+ "     \\   \\    |  |  |  | |  |       \\      /   |   __|     |  |\\/|  |   /  /_\\  \\      /  /    |   __|  \r\n"

@@ -46,7 +46,7 @@ public class DAO{
 
 			while (rs.next()) {
 				
-				salida += rs.getString("total");
+				salida += "producto: "+rs.getString("p.nombre")+"y precio: "+rs.getString("p.precio")+"\n";
 				
 			}
 
@@ -70,25 +70,23 @@ public class DAO{
 		
 		try {
 			
-			// 2- Listar todos los datos, incluido el nombre del fabricante, de los productos que tienen el mismo precio que el producto más caro de un fabricante indicado por teclado.
+			// 2- Listar todos los datos, incluido el nombre del fabricante, de los productos que tienen el mismo precio o superior que el producto más caro de un fabricante indicado por teclado.
 			
 			Class.forName(DRIVER);
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 			
-			String subconsulta = "(SELECT p2.nombre, MAX(p2.precio) "
+			String subconsulta = "(SELECT MAX(p2.precio) "
 					+ "FROM producto p2 INNER JOIN fabricante f2 ON p2.id_fabricante = f2.id"
 					+ " WHERE f2.nombre = '"+nombre+"')";
 			
-			String consulta = "SELECT p.nombre, p.precio, f.nombre as fabricante "
-					+ "FROM producto p INNER JOIN fabricante f ON p.id_fabricante = f.id"
-					+ " WHERE p.precio = "+subconsulta+";";
+			String consulta = "SELECT p.nombre, p.precio, f.nombre as fab FROM producto p INNER JOIN fabricante f ON p.id_fabricante = f.id WHERE p.precio >= "+subconsulta+";";
 			
 			ResultSet rs = stmt.executeQuery(consulta);
 
 			while (rs.next()) {
 				
-				salida += rs.getString("total");
+				salida += "producto: "+rs.getString("p.nombre")+"y precio: "+rs.getString("p.precio")+". Fabricante: "+rs.getString("fab")+"\n";
 				
 			}
 
@@ -131,7 +129,7 @@ public class DAO{
 
 			while (rs.next()) {
 				
-				salida += rs.getString("total");
+				salida +="El producto mas caro de "+nombre+" es: "+ rs.getString("p.nombre");
 				
 			}
 

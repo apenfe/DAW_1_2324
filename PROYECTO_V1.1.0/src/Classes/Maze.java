@@ -198,7 +198,7 @@ public class Maze{
 				file+=mazeNames.get(num-1);
 				break;
 			}else {
-				System.out.println(Config.ROJO+"\tDebe Seleccionar una opcion entre [0-"+mazeNames.size()+"]: "+Config.RESET);
+				System.out.println(Config.RED+"\tDebe Seleccionar una opcion entre [0-"+mazeNames.size()+"]: "+Config.RESET);
 			}
 			
 		}while(true);
@@ -208,12 +208,12 @@ public class Maze{
 		}
 		
 		if(readMaze(Config.PATH+file)) { // SI EL LABERINTO SE LEE CORRECTAMENTE
-			System.out.println(Config.VERDE+"\n\tEL ARCHIVO "+file+" HA SIDO CARGADO EXITOSAMENTE."+Config.RESET);
+			System.out.println(Config.GREEN+"\n\tEL ARCHIVO "+file+" HA SIDO CARGADO EXITOSAMENTE."+Config.RESET);
 			this.fileName=file; // SE LE DA NOMBRE
 			this.loaded=true; // SE VUELVE A INDICAR QUE ESTÁ CARGADO
 			
 		}else {
-			System.out.println(Config.ROJO+"\n\tERROR AL LEER EL ARCHIVO "+file+Config.RESET);
+			System.out.println(Config.RED+"\n\tERROR AL LEER EL ARCHIVO "+file+Config.RESET);
 		}
 		
 	}
@@ -232,7 +232,7 @@ public class Maze{
 			
 		} catch (Exception e) {
 			
-			System.out.println(Config.ROJO+"\n\tERROR - CONTACTAR SERVICIO TECNICO."+Config.RESET);
+			System.out.println(Config.RED+"\n\tERROR - CONTACTAR SERVICIO TECNICO."+Config.RESET);
 		}
 
         if (files != null) {
@@ -267,7 +267,7 @@ public class Maze{
         	
         }catch(Exception e) {
         	
-        	System.out.println(Config.ROJO+"Error. Pongase en contacto con el soporte técnico."+Config.RESET);
+        	System.out.println(Config.RED+"Error. Pongase en contacto con el soporte técnico."+Config.RESET);
         	return false;
         }
         
@@ -313,10 +313,10 @@ public class Maze{
 				boolean check = true;
 
 				if ((i == startI && j == startJ) && (startI != 0 && startJ != 0)) {
-					System.out.print(Config.ROJO+"I "+Config.RESET);
+					System.out.print(Config.RED+"I "+Config.RESET);
 					check = false;
 				} else if ((i == endI && j == endJ) && (endI != 0 && endJ != 0)) {
-					System.out.print(Config.ROJO+"F "+Config.RESET);
+					System.out.print(Config.RED+"F "+Config.RESET);
 					check = false;
 				}
 
@@ -328,7 +328,7 @@ public class Maze{
 						
 						if(i==path.get(k).getX() && j==path.get(k).getY()) {
 							
-							System.out.print(Config.VERDE+path.get(k).getDirection()+" "+Config.RESET);
+							System.out.print(Config.GREEN+path.get(k).getDirection()+" "+Config.RESET);
 							camino=true;
 							
 						}
@@ -468,18 +468,18 @@ public class Maze{
 		showMaze();
 		
 		if(setIJ(true)) { // SI LA CASILLA DE ENTRADA SE ESTABLECE
-			System.out.println(Config.VERDE+"\r\tCASILLA DE ENTRADA FIJADA."+Config.RESET);
+			System.out.println(Config.GREEN+"\r\tCASILLA DE ENTRADA FIJADA."+Config.RESET);
 		}else { // EN OTRO CASO, SI EL USUARIO DESISTE SE TERMINA EL PROGRAMA.
-			System.out.println(Config.ROJO+"\r\tNO SE HA PODIDO FIJAR LA CASILLA DE ENTRADA."+Config.RESET);
+			System.out.println(Config.RED+"\r\tNO SE HA PODIDO FIJAR LA CASILLA DE ENTRADA."+Config.RESET);
 			return;
 		}
 		
 		showMaze();
 		
 		if(setIJ(false)) { // SI LA CASILLA DE SALIDA SE ESTABLECE
-			System.out.println(Config.VERDE+"\r\tCASILLA DE SALIDA FIJADA."+Config.RESET);
+			System.out.println(Config.GREEN+"\r\tCASILLA DE SALIDA FIJADA."+Config.RESET);
 		}else { // EN OTRO CASO, SI EL USUARIO DESISTE SE TERMINA EL PROGRAMA.
-			System.out.println(Config.ROJO+"\r\tNO SE HA PODIDO FIJAR LA CASILLA DE SALIDA."+Config.RESET);
+			System.out.println(Config.RED+"\r\tNO SE HA PODIDO FIJAR LA CASILLA DE SALIDA."+Config.RESET);
 		}
 		
 		showMaze();
@@ -488,12 +488,12 @@ public class Maze{
 	
 	/* METODO PARA ESTABLECER CASILLA */
 	
-	private boolean setIJ(boolean entrada) { // SI ES TRUE SE ESTABLECE ENTRADA, SI ES FALSE LA SALIDA
+	private boolean setIJ(boolean in) { // SI ES TRUE SE ESTABLECE ENTRADA, SI ES FALSE LA SALIDA
 		
 		int num = 0;
 		String casilla ="";
 		
-		if(entrada) {
+		if(in) {
 			casilla="entrada";
 		}else {
 			casilla="salida";
@@ -511,7 +511,7 @@ public class Maze{
 				
 			}while(num<0 || num>map.length-1);
 			
-			if(entrada) {
+			if(in) {
 				startI=num;
 			}else {
 				endI=num;
@@ -527,7 +527,7 @@ public class Maze{
 				
 			}while(num<0 || num>map[0].length-1);
 			
-			if(entrada) {
+			if(in) {
 				startJ=num;
 			}else {
 				endJ=num;
@@ -544,9 +544,9 @@ public class Maze{
 				
 			} else {
 
-				if (entrada && (map[startI][startJ] == ' ')) { // SI LA CASILLA ES VALIDA...
+				if (in && (map[startI][startJ] == ' ')) { // SI LA CASILLA ES VALIDA...
 					return true;
-				} else if (!entrada && (map[endI][endJ] == ' ')) { // SI LA CASILLA ES VALIDA...
+				} else if (!in && (map[endI][endJ] == ' ')) { // SI LA CASILLA ES VALIDA...
 					return true;
 				} else { // EN OTRO CASO...
 					
