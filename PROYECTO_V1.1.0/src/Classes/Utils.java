@@ -3,6 +3,7 @@ package Classes;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+
 import java.text.*;
 
 public class Utils{
@@ -227,7 +228,15 @@ public class Utils{
 	
 	public static boolean confirmExit() {
 		
-		return Input.getString("\n\t¿Está seguro que desea salir? SI -> s ").equalsIgnoreCase("S");
+		if(Input.getString("\n\t¿Está seguro que desea salir? SI -> s ").equalsIgnoreCase("S")) {
+			
+			return true;
+			
+		}else {
+			
+			return false;
+			
+		}
 		
 	}
 	
@@ -243,7 +252,17 @@ public class Utils{
 	
 	public static boolean confirmExit(String enun, String response) { 
 		
-		return Input.getString(enun).equalsIgnoreCase(response);
+		if(Input.getString(enun).equalsIgnoreCase(response)) {
+			
+			return true;
+			
+		}else {
+			
+			return false;
+			
+		}
+		
+		//return Input.getString(enun).equalsIgnoreCase(response);
 		
 	}
 	

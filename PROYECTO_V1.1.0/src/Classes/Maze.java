@@ -271,21 +271,30 @@ public class Maze{
         	return false;
         }
         
-        this.map = new char[lines.size()][lines.get(0).length()];
-        
-        for (int i = 0; i < lines.size(); i++) {
+    
+        try {
         	
-        	String currentLine = lines.get(i);
-        	
-        	for (int j = 0; j < lines.get(0).length(); j++) {
-        		
-        		this.map[i][j]=currentLine.charAt(j);
-    			
-    		}
-        	
+        	 this.map = new char[lines.size()][lines.get(0).length()];
+             
+             for (int i = 0; i < lines.size(); i++) {
+             	
+             	String currentLine = lines.get(i);
+             	
+             	for (int j = 0; j < lines.get(0).length(); j++) {
+             		
+             		this.map[i][j]=currentLine.charAt(j);
+         			
+         		}
+             	
+     		}
+             
+            return true;
+			
+		} catch (Exception e) {
+			
+			return false;
 		}
-
-        return true;
+        
     }
 	
 	/* METODO PARA VISUALIZAR EL LABERINTO */

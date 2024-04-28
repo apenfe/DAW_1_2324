@@ -126,25 +126,25 @@ public class Main {
 	 * Tras el loggin este método muestra el menu con las opciones correspondientes al inicio de sesión.
 	 */
 	
+	public static int option = -1;
+	
 	public static void main(String[] args) {
 		
 		System.out.println(Config.WELCOME + " " + Config.VERSION);
 		Input.toContinue();
 		
-		int option = -1;
-		
 		do { /* SE REPITE CONTINUAMENTE MIENTRAS NO SE PULSE 0 */
-			
 			
 			if(currentSession.isLogged()) { /* SI EL USUARIO SE HA LOGGEADO */
 				
 				option = Input.getInt(Config.LOGGED_MENU, false);
-				loggedOptions(option);
+				loggedOptions();
 
 			}else { /* SI EL USUARIO NO SE HA LOGGEADO */
 				
 				option = Input.getInt(Config.UNLOGGED_MENU, false); 
-				unloggedOptions(option);
+				unloggedOptions();
+		
 			}
 			
 		} while (option!=0);
@@ -162,7 +162,7 @@ public class Main {
 	 * @param option Entrada seleccionada por el usuario.
 	 */
 	
-	public static void loggedOptions(int option) {
+	public static void loggedOptions() {
 		
 		if(option==0) { // METODO EXIT
 			
@@ -249,7 +249,7 @@ public class Main {
 	 * @param option Entrada seleccionada por el usuario.
 	 */
 	
-	public static void unloggedOptions(int option) {
+	public static void unloggedOptions() {
 		
 		if(option==0) { // METODO SALIR
 			
