@@ -515,7 +515,7 @@ public class Maze{
 				num=Input.getInt("\r\tIntroduzca la fila de "+casilla+": ", true);
 				
 				if(num<0 || num>map.length-1) {
-					System.out.println("\r\tEl número debe de ser mayor o igual que 0 y menor que"+(map.length-1));
+					System.out.println(Config.RED+"\r\tEl número debe de ser mayor o igual que 0 y menor que "+(map.length-1)+Config.RESET);
 				}
 				
 			}while(num<0 || num>map.length-1);
@@ -531,7 +531,7 @@ public class Maze{
 				num=Input.getInt("\tIntroduzca la columna de "+casilla+": ", true);
 				
 				if(num<0 || num>map[0].length-1) {
-					System.out.println("\r\tEl número debe de ser mayor o igual que 0 y menor que"+(map[0].length-1));
+					System.out.println(Config.RED+"\r\tEl número debe de ser mayor o igual que 0 y menor que "+(map[0].length-1)+Config.RESET);
 				}
 				
 			}while(num<0 || num>map[0].length-1);
@@ -544,7 +544,7 @@ public class Maze{
 			
 			if(sameInOut()) { // SI LAS CASILLAS DE ENTRADA Y SALIDA SON LAS MISMAS
 				
-				System.out.println("\r\tLas casillas de entrada y salida coinciden.");
+				System.out.println(Config.RED+"\r\tLas casillas de entrada y salida coinciden."+Config.RESET);
 				
 				if(Utils.confirmExit("\r\t¿Desea ingresar otra casilla de "+casilla+"? SI-S NO-N ", "N")) {
 					deleteMaze(false); // SE RESETEAN ENTRADA Y SALIDA
@@ -559,7 +559,7 @@ public class Maze{
 					return true;
 				} else { // EN OTRO CASO...
 					
-					System.out.println("\r\tLa casilla coincide con una pared.");
+					System.out.println(Config.RED+"\r\tLa casilla coincide con una pared."+Config.RESET);
 					
 					if (Utils.confirmExit("\r\t¿Desea ingresar otra casilla de " + casilla + "? SI-S NO-N ", "N")) {
 						deleteMaze(false); // SE RESETEAN ENTRADA Y SALIDA
@@ -626,7 +626,7 @@ public class Maze{
 
 		} else {
 			
-			System.out.println("\n\tEl laberinto no tiene solución.");
+			System.out.println(Config.RED+"\n\tEl laberinto no tiene solución."+Config.RESET);
 			
 		}
 		
@@ -735,7 +735,7 @@ public class Maze{
 			showMaze();
 			
 		}else {
-			System.out.println("No hay ninguna solución posible.");
+			System.out.println(Config.RED+"\n\tNo hay ninguna solución posible."+Config.RESET);
 		}
 		
 		time(inicio);
