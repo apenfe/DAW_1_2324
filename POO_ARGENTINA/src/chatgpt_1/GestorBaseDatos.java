@@ -21,7 +21,7 @@ public class GestorBaseDatos implements BaseDatos{
 			
 			while(rs.next()) {
 				
-				System.out.println("empleado: "+rs.getString("nombre")+" ID: "+rs.getString("id")+" salario: "+rs.getString("salario")+" bono: "+rs.getString("bono")+"\n");
+				System.out.println("empleado: "+rs.getString("nombre")+" ID: "+rs.getString("id")+" salario: "+rs.getString("salario")+" bono: "+rs.getString("bono"));
 				
 			}
 			
