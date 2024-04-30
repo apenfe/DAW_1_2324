@@ -157,29 +157,18 @@ public class Session{
 		if(checkData(userdata)) { // COMPRUEBA QUE SEAN VALORES VALIDOS
 				
 			/* EN CASO AFIRMATIVO */
-			System.out.println(Config.GREEN+"\tTodos los datos son correctos."+Config.RESET);
+			System.out.println(Config.GREEN+"\t\tTodos los datos son correctos."+Config.RESET);
 			
 			User newUser = new User("0",userdata[0],userdata[4],userdata[1],userdata[2],userdata[5],userdata[6],"user");
 				
-			if(db.checkUser(newUser)) { // COMPRUEBA QUE SEAN UNICAS LAS PK
+			if(db.signup(newUser, userdata[3])) {
 					
-				System.out.println(Config.RED+"\tLos datos no son unicos en la base de datos."+Config.RESET);
-					
+				System.out.println(Config.GREEN+"\t\tUsuario añadido de forma correcta."+Config.RESET);
+
 			}else {
 					
-				/* EN CASO NEGATIVO SE DA UN AVISO Y SE TERMINA */
-				System.out.println(Config.GREEN+"\tTodos los datos son únicos en la base de datos."+Config.RESET);
-				
-				if(db.signup(newUser, userdata[3])) {
-					
-					System.out.println(Config.GREEN+"\tUsuario añadido de forma correcta."+Config.RESET);
+				System.out.println(Config.RED+"\t\tError al guardar usuario."+Config.RESET);
 
-				}else {
-					
-					System.out.println(Config.RED+"\tError al guardar usuario."+Config.RESET);
-
-				}
-				
 			}
 				
 		}
@@ -246,6 +235,27 @@ public class Session{
 			
 		}
 		
+		userdata[3] = Input.getString("\tIntroduzca una contraseña: ");
+		if(!Utils.validatePassword(userdata[3])) {
+	
+			System.out.println(Config.RED+"\t\tContraseña no valida."+Config.RESET);
+			System.out.println(ERROR);
+			return false;
+				
+		}else {
+			
+			String check = Input.getString("\tRepita la contraseña: ");
+			
+			if(!check.equals(userdata[3])) {
+				
+				System.out.println(Config.RED+"\t\tLa contraseña no es la misma."+Config.RESET);
+				System.out.println(ERROR);
+				return false;
+				
+			}
+			
+		}
+		
 		userdata[1] = Input.getString("\tIntroduzca un NIF (12345678X): ");
 		
 		if(!Utils.validateNif(userdata[1])) {
@@ -266,13 +276,15 @@ public class Session{
 
 		}
 		
-		userdata[3] = Input.getString("\tIntroduzca una contraseña: ");
-		if(!Utils.validatePassword(userdata[3])) {
-	
-			System.out.println(Config.RED+"\t\tContraseña no valida."+Config.RESET);
-			System.out.println(ERROR);
+		User test = new User();
+		test.setUsername(userdata[0]);
+		test.setNif(userdata[1]);
+		test.setEmail(userdata[2]);
+		
+		if(db.checkUser(test)) { // COMPRUEBA QUE SEAN UNICAS LAS PK
+			
+			System.out.println(Config.RED+"\n\t\tLos datos no son unicos en la base de datos."+Config.RESET);
 			return false;
-				
 		}
 			
 		userdata[4] = Input.getString("\tIntroduzca su nombre completo (Nombre completo y dos apellidos, comenzando en mayúsculas): ");

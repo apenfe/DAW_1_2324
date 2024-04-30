@@ -153,7 +153,7 @@ public class Utils{
 	
 	public static boolean validateDate(String date) {
         
-        if(!date.matches("^\\d{2}/\\d{2}/\\d{4}$")) {
+        if(!date.matches("^\\d{1,2}/\\d{1,2}/\\d{4}$")) {
         	
         	return false;
         	
@@ -201,7 +201,7 @@ public class Utils{
 	
 	public static boolean validateName(String name) {
 		
-		return name.matches("^([a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÜÈÌÙÒñÑ][a-záéíóúàèìòùñüç']+)( [a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÙÜÒñÑ]{1}[a-záéíóúàèìòùñüç']+(-[a-záéíóúàèìòùñüç']+)?){2}$");
+		return name.matches("^([a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÜÈÌÙÒñÑ][a-záéíóúàèìòùñüç']+)( [a-zA-ZáéíóúÁÉÍÓÚàèìòùÀÈÌÙÜÒñÑ]{1}[a-záéíóúàèìòùñüç']+(-[a-záéíóúàèìòùñüç']+)?){1,2}$");
 		
 	}
 	
