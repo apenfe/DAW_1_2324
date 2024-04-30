@@ -19,4 +19,8 @@ public interface RegistroMascotas{
 	
 	public void leerAlgo(String consulta);
 	
+	public void crearTablaAnimales();
+	
+	public void borrarTablaAnimales();
+	
 }

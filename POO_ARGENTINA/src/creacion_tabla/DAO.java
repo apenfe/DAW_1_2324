@@ -19,7 +19,7 @@ public class DAO{
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 
-			String consulta = "CREATE TABLE adrian ("
+			String consulta = "CREATE TABLE IF NOT EXISTS adrian ("
 					+ "id INT PRIMARY KEY AUTO_INCREMENT, "
 					+ "nombre varchar(500) NOT NULL, "
 					+ "apellidos varchar(500));";
@@ -47,7 +47,7 @@ public class DAO{
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 
-			String consulta = "DROP TABLE adrian;";
+			String consulta = "DROP TABLE IF EXISTS adrian;";
 			
 			stmt.executeUpdate(consulta);
 

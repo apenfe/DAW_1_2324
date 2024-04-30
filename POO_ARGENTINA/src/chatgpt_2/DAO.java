@@ -138,5 +138,17 @@ public class DAO implements RegistroMascotas{
 		}
 		
 	}
+
+	@Override
+	public void crearTablaAnimales() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void borrarTablaAnimales() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
