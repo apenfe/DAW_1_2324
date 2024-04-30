@@ -1,0 +1,3 @@
+4,piolina,2,pequeño,pajaro
+5,mandarin,23,grande,perro
+6,coco,20,macho,gato

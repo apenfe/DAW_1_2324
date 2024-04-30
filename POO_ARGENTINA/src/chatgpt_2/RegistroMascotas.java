@@ -17,7 +17,7 @@ public interface RegistroMascotas{
 	
 	public boolean cargarAnimal(Mascota m);
 	
-	public void leerAlgo(String consulta);
+	public void leerAlgo();
 	
 	public void crearTablaAnimales();
 	
