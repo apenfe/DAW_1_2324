@@ -65,13 +65,15 @@ GROUP BY p.codigo_producto ORDER by total desc limit 20;
 -- 14- Facturación total de la empresa (mostrar la base imponible, el IVA y el total facturado. La base imponible se calcula sumando el coste 
 -- del producto por el número de unidades vendidas de la tabla detalle_pedido. El IVA es el 21 % de la base imponible, y el total la suma de los dos campos anteriores)
 
-SELECT p.nombre as nombre, SUM(dp.cantidad) as total 
-FROM producto p INNER JOIN detalle_pedido dp ON p.codigo_producto = dp.codigo_producto 
-GROUP BY p.codigo_producto ORDER by total desc limit 20;
+SELECT SUM(dp.cantidad*dp.precio_unidad) AS baseImponible, SUM(dp.cantidad*dp.precio_unidad)*0.21 AS iva, SUM(dp.cantidad*dp.precio_unidad)*1.21 AS total 
+FROM detalle_pedido dp;
 
 -- 15- Ventas totales de los productos que facturen más de cierta cantidad (pedir cantidad por teclado. Se mostrará el nombre, unidades vendidas, 
 -- total facturado y total facturado con impuestos (21% IVA))
 
+SELECT p.nombre, SUM(dp.cantidad) AS cantidad, SUM(dp.cantidad*dp.precio_unidad) AS totalFacturado, SUM(dp.cantidad*dp.precio_unidad)*1.21 AS totalFacturadoIva 
+FROM producto p INNER JOIN detalle_pedido dp ON dp.codigo_producto = p.codigo_producto 
+GROUP BY dp.codigo_producto HAVING totalFacturadoIva > 1000;
 
 -- 16- Suma total de todos los pagos realizados agrupados por año.
 
