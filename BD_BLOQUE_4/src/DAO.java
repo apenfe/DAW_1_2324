@@ -202,14 +202,13 @@ public class DAO{
 			Connection conn = DriverManager.getConnection(URL, USER, PASS);
 			Statement stmt = conn.createStatement();
 			
-			String subconsulta = "(SELECT MIN(p2.precio) "
+			String subconsulta = "(SELECT MAX(p2.precio) "
 					+ "FROM producto p2 INNER JOIN fabricante f2 ON p2.id_fabricante = f2.id"
 					+ " WHERE f2.nombre = '"+nombre+"')";
 			
 			String consulta = "SELECT p.nombre "
-					+ "FROM producto p INNER JOIN fabricante f ON p.id_fabricante = f.id"
-					+ " WHERE f.nombre = '"+nombre+"'"
-					+ " AND p.precio = "+subconsulta+";";
+					+ "FROM producto"
+					+ " WHERE p.precio >= "+subconsulta+";";
 			
 			ResultSet rs = stmt.executeQuery(consulta);
 
@@ -235,6 +234,8 @@ public class DAO{
 	
 	public String consulta_6() {
 		
+		// 6- Lista todos los productos de un fabricante indicado por teclado que tienen un precio superior al precio medio de todos sus productos de ese mismo fabricante.
+		
 		String salida = "";
 		
 		try {
@@ -253,7 +254,7 @@ public class DAO{
 	
 	public String consulta_7(String ciudad) {
 		
-		// 7- Cantidad total de clientes de una determinada ciudad (pedir ciudad por teclado)
+		//7- Muestra el producto más caro que existe en la tabla producto sin hacer uso de MAX, ORDER BY ni LIMIT.
 		
 		String salida = "";
 		
@@ -275,7 +276,7 @@ public class DAO{
 	
 	public String consulta_8() {
 		
-		// 8- Mostrar todos los representantes con su cantidad de clientes
+		// 8- Muestra el producto más barato que existe en la tabla producto sin hacer uso de MIN, ORDER BY ni LIMIT.
 		
 		String salida = "";
 		
@@ -315,7 +316,7 @@ public class DAO{
 	
 	public String consulta_10() {
 		
-		// 10- Mostrar  nombre completo de clientes y las fechas de su primer y último pago realizado
+		// 10- Lista los nombres de los fabricantes que no tienen productos asociados. (Utilizando ALL o ANY).
 		
 		String salida = "";
 		
