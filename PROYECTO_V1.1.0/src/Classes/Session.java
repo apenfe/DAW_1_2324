@@ -298,7 +298,7 @@ public class Session{
 			
 		userdata[5] = Input.getString("\tIntroduzca una dirección postal: ");
 			
-		userdata[6] = Input.getString("\tIntroduzca su fecha de nacimiento (DD/MM/AA): "); 
+		userdata[6] = Input.getString("\tIntroduzca su fecha de nacimiento (DD/MM/AAAA): "); 
 		if(!Utils.validateDate(userdata[6])) {
 				
 			System.out.println(Config.RED+"\t\tFormato de fecha no valido."+Config.RESET);
