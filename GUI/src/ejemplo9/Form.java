@@ -9,14 +9,15 @@ import java.util.ArrayList;
 public class Form extends JFrame implements ActionListener{
 	
 	private Container contenedor;
-	private JLabel titulo, labelBusqueda, labelInfo;
+	private JLabel titulo, labelBusqueda, labelCantidad, labelInfo;
 	private JTextField campoBusqueda;
 	private JButton botonBuscar, botonLimpiar;
 	private JTable resultados;
 	private JScrollPane tableScroll;
 	private String[] columnas = {"Nombre","Dorsal","Fecha Nacimeinto","Nacionalidad","Equipo"};
 	private int x = 0, y = 0;
-	
+	private JSpinner cantidad;
+
 	public Form() {
 		
 		this.setTitle("ejemplo 9");
@@ -64,10 +65,26 @@ public class Form extends JFrame implements ActionListener{
 		
 		this.y += 30;
 		
+		// cantidad
+		this.labelCantidad = new JLabel("Cantidad resultados:");
+		this.labelCantidad.setFont(new Font("Arial", Font.PLAIN, 20));
+		this.labelCantidad.setBounds(x, y, 200, 20);
+		this.contenedor.add(this.labelCantidad);
+		this.y += 25;
+		
+		// -------------------------------------------------------------------
+		
+		SpinnerModel  model = new SpinnerNumberModel(5,1,30,1);
+		this.cantidad = new JSpinner(model);
+		this.cantidad.setBounds(x, y, 95, 25);
+		this.contenedor.add(this.cantidad);
+		
+		// -------------------------------------------------------------------
+		
 		// info
-		this.labelInfo = new JLabel("e");
+		this.labelInfo = new JLabel("");
 		this.labelInfo.setFont(new Font("Arial", Font.PLAIN, 15));
-		this.labelInfo.setBounds(x, y, 460, 30);
+		this.labelInfo.setBounds(x+100, y, 460, 30);
 		this.contenedor.add(this.labelInfo);
 		
 		this.y += 40;
@@ -126,14 +143,15 @@ public class Form extends JFrame implements ActionListener{
 	
 	private void enviar() {
 		
-		String texto = this.campoBusqueda.getText().trim();
+		String busqueda = this.campoBusqueda.getText().trim();
+		String limit = this.cantidad.getValue().toString();
 		
 		DAO db = new DAO();
-		ArrayList<Jugador> lista = db.buscarJugadores(texto);
+		ArrayList<Jugador> lista = db.buscarJugadores(busqueda, limit);
 		
-		if(lista.size()==0) {
+		if(lista.size() == 0) {
 			
-			this.labelInfo.setText("No se han encontrado resultados");
+			this.labelInfo.setText("No se han encontrado resultados.");
 			this.resultados.setModel(new DefaultTableModel(new String[0][0],this.columnas));
 			
 		}else {

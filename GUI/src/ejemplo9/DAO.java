@@ -15,7 +15,7 @@ public class DAO{
 			+ " FROM jugador j INNER JOIN pais p ON j.pais = p.codPais"
 			+ " INNER JOIN equipo e ON j.equipo = e.codEquipo WHERE 1=1 ";
 	
-	public ArrayList<Jugador> buscarJugadores(String busqueda){
+	public ArrayList<Jugador> buscarJugadores(String busqueda, String limit){
 		
 		ArrayList<Jugador> lista = new ArrayList<Jugador>();
 		
@@ -30,6 +30,8 @@ public class DAO{
 				
 				con +=" AND j.nombre LIKE '%"+busqueda+"%'";
 			}
+			
+			con+=" LIMIT "+limit;
 			
 			con+=";";
 			
@@ -55,39 +57,5 @@ public class DAO{
 		return lista;
 		
 	}
-	
-	public ArrayList<String> obtenerEquipos(){
-		
-		ArrayList<String> lista = new ArrayList<String>();
-		
-		try {
-			
-			Connection conn = DriverManager.getConnection(URL,USER,PASS);
-			Statement stmt = conn.createStatement();
-				
-			String con = "SELECT nombre FROM equipo ORDER BY nombre ASC;";
-			
-			ResultSet rs = stmt.executeQuery(con);
-			
-			while(rs.next()) {
-				
-				lista.add(rs.getString("nombre"));
-				
-			}
-			
-			conn.close();
-			stmt.close();
-			rs.close();
-			
-		} catch (Exception e) {
-			
-			System.err.println("Error: "+e);
-			
-		}
-		
-		return lista;
-		
-	}
-	
 	
 }
