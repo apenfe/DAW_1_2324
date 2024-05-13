@@ -760,6 +760,14 @@ public class Maze{
 	
 	private boolean goAheadAllWays(int i, int j, Stack<Coordinate> path2, char[][] maze ) {
 
+		if (path2.size()>path.size()) { 
+			return false; 
+		}
+		
+		if (maze[i][j] == '#' || checkPath(i,j,path2)) {
+			return false; 
+		}
+		
 		if (i == endI && j == endJ) {
 			
 			if(path2.size()<path.size()) {
@@ -770,14 +778,6 @@ public class Maze{
 			}
 			
 			return true;
-		}
-		
-		if (maze[i][j] == '#' || checkPath(i,j,path2)) {
-			return false; 
-		}
-		
-		if (path2.size()>path.size()) { 
-			return false; 
 		}
 		
 		path2.push(new Coordinate(i,j));
