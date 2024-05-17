@@ -152,8 +152,8 @@ public class Formulario extends JFrame implements ActionListener{
 	private void enviar() {
 		
 		String username = this.campoUserName.getText().trim();
-		String password = this.passwordField1.getText();
-		String password2 = this.passwordField2.getText();
+		String password = String.valueOf(this.passwordField1.getPassword());
+		String password2 = String.valueOf(this.passwordField2.getPassword());
 		String nombre = this.campoNombre.getText().trim();
 		
 		if(!password.equals(password2)) {
