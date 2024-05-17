@@ -28,7 +28,7 @@ public class DAO{
 			
 			if(busqueda.length()>0) {
 				
-				con +=" WHERE j.nombre LIKE '%"+busqueda+"%';";
+				con +=" WHERE j.nombre LIKE '%"+busqueda+"%' OR j.dorsal LIKE '%"+busqueda+"%' OR j.posicion LIKE '%"+busqueda+"%' OR p.gentilicio LIKE '%"+busqueda+"%' OR e.nombre LIKE '%"+busqueda+"%';";
 			}
 			
 			ResultSet rs = stmt.executeQuery(con);
