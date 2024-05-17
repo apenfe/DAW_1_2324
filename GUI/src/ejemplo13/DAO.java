@@ -1,4 +1,4 @@
-package ejemplo12;
+package ejemplo13;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,11 +13,13 @@ public class DAO{
 	private final String PASS = "champions";
 	private String GET = "SELECT j.*, p.gentilicio, e.nombre as nombreEquipo"
 			+ " FROM jugador j INNER JOIN pais p ON j.pais = p.codPais"
-			+ " INNER JOIN equipo e ON j.equipo = e.codEquipo";
+			+ " INNER JOIN equipo e ON j.equipo = e.codEquipo WHERE ";
 	
 	public ArrayList<Jugador> buscarJugadores(String busqueda){
 		
 		ArrayList<Jugador> lista = new ArrayList<Jugador>();
+		
+		String[] palabras = busqueda.split(" ");
 		
 		try {
 			
@@ -28,10 +30,21 @@ public class DAO{
 			
 			if(busqueda.length()>0) {
 				
-				con = buildWhere(con,busqueda);
 				
+				for (int i = 0; i < palabras.length; i++) {
+					
+					con += buildWhere(palabras[i]);
+					
+					if(i!=palabras.length-1) {
+						con +=" AND ";
+					}
+				
+				}
+				
+				con +=";";
 			}
 			
+			System.out.println(con);
 			ResultSet rs = stmt.executeQuery(con);
 			
 			while(rs.next()) {
@@ -55,16 +68,16 @@ public class DAO{
 		
 	}
 	
-	private String buildWhere(String consulta, String busqueda) {
+	private String buildWhere(String busqueda) {
 		
-		
-		consulta+=" WHERE j.nombre LIKE '%"+busqueda+"%'"
+		String salida = "";
+		salida+="(  j.nombre LIKE '%"+busqueda+"%'"
 				+ " OR j.dorsal LIKE '%"+busqueda+"%'"
 				+ " OR j.posicion LIKE '%"+busqueda+"%'"
 				+ " OR p.gentilicio LIKE '%"+busqueda+"%'"
-				+ " OR e.nombre LIKE '%"+busqueda+"%';";
+				+ " OR e.nombre LIKE '%"+busqueda+"%' )";
 
-		return consulta;
+		return salida;
 		
 	}
 	
