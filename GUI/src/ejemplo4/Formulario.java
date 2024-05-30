@@ -22,27 +22,24 @@ public class Formulario extends JFrame implements ActionListener{
 		// ALWAYS
 		this.contenedor=this.getContentPane();
 		this.contenedor.setLayout(null);
-		
+        this.contenedor.setBackground(Color.lightGray);
+        
 		// AQUI EMPIEZAN LOS ELEMENTOS GRAFICOS
 		
-		// titulo
-		this.titulo= new JLabel("<html>ejemplo 4 - Formulario</html>");
-		this.titulo.setFont(new Font("Arial",Font.PLAIN,24));
-		this.titulo.setBounds(50, 50, 500, 40);
-		this.contenedor.add(this.titulo);
+		this.titulo();
 		
-		// ---------------------  LABELS ----------------------------
-		labels();
+		this.labels();
 			
-		// ---------------------  BOTONES ----------------------------
-		botones();
+		this.botones();
 
+		this.setVisible(true);
+		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if(e.getSource()==this.enviar) {
+		if(e.getSource()==this.enviar||campoNombre==e.getSource()||campoEmail==e.getSource()||campoTelefono==e.getSource()) {
 			
 			System.out.println("enviar pulsado");
 			this.enviar();
@@ -53,6 +50,15 @@ public class Formulario extends JFrame implements ActionListener{
 			this.limpiarFormulario();
 
 		}
+		
+	}
+	
+	private void titulo() {
+		
+		this.titulo= new JLabel("<html>ejemplo 4 - Formulario</html>");
+		this.titulo.setFont(new Font("Arial",Font.PLAIN,24));
+		this.titulo.setBounds(50, 50, 500, 40);
+		this.contenedor.add(this.titulo);
 		
 	}
 	
@@ -85,6 +91,7 @@ public class Formulario extends JFrame implements ActionListener{
 		this.campoNombre = new JTextField();
 		this.campoNombre.setFont(new Font("Arial", Font.PLAIN, 16));
 		this.campoNombre.setBounds(50, 160, 200, 30);
+		this.campoNombre.addActionListener(this);
 		this.contenedor.add(this.campoNombre);
 
 		// telefono
@@ -99,6 +106,7 @@ public class Formulario extends JFrame implements ActionListener{
 		this.campoTelefono = new JTextField();
 		this.campoTelefono.setFont(new Font("Arial", Font.PLAIN, 16));
 		this.campoTelefono.setBounds(50, 220, 200, 30);
+		this.campoTelefono.addActionListener(this);
 		this.contenedor.add(this.campoTelefono);
 
 		// email
@@ -113,6 +121,7 @@ public class Formulario extends JFrame implements ActionListener{
 		this.campoEmail = new JTextField();
 		this.campoEmail.setFont(new Font("Arial", Font.PLAIN, 16));
 		this.campoEmail.setBounds(50, 280, 200, 30);
+		this.campoEmail.addActionListener(this);
 		this.contenedor.add(this.campoEmail);
 
 		// label info
@@ -129,7 +138,6 @@ public class Formulario extends JFrame implements ActionListener{
 		this.campoNombre.setText("");
 		this.campoEmail.setText("");
 		this.campoTelefono.setText("");
-		//this.labelInfo.setText("");
 
 	}
 	
@@ -140,10 +148,12 @@ public class Formulario extends JFrame implements ActionListener{
 		String telefono = this.campoTelefono.getText().trim();
 		
 		if(nombre.length()==0||email.length()==0||telefono.length()==0) {
+			
 			System.out.println("Todos los campos son obligatorios");
 			this.labelInfo.setText("Todos los campos son obligatorios");
 			this.labelInfo.setForeground(Color.RED);
 			return;
+			
 		}
 		
 		Contacto nuevo = new Contacto(nombre,email,telefono);
@@ -156,14 +166,12 @@ public class Formulario extends JFrame implements ActionListener{
 			
 			this.labelInfo.setText("Contacto insertado con exito en BBDD");
 			this.labelInfo.setForeground(Color.GREEN);
-			//this.labelInfo.setText("");
 			limpiarFormulario();
 			
 		}else {
 			
 			this.labelInfo.setText("No se ha podido insertar en BBDD");
 			this.labelInfo.setForeground(Color.RED);
-			//this.labelInfo.setText("");
 			limpiarFormulario();
 
 		}

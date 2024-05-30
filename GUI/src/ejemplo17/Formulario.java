@@ -20,18 +20,21 @@ public class Formulario extends JFrame implements ActionListener{
 		
 		this.contenedor=this.getContentPane();
 		this.contenedor.setLayout(null);
+		this.contenedor.setBackground(Color.LIGHT_GRAY);
 		
-		titulo();
-		labels();
-		botones();
-		password();
+		this.titulo();
+		this.labels();
+		this.botones();
+		this.password();
+		
+		this.setVisible(true);
 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if(e.getSource()==this.enviar) {
+		if(e.getSource()==this.enviar || e.getSource()==this.campoNombre || e.getSource()==this.campoUserName || e.getSource()==this.passwordField1 || e.getSource()==this.passwordField2) {
 			
 			this.enviar();
 			
@@ -56,10 +59,12 @@ public class Formulario extends JFrame implements ActionListener{
 		
 		this.passwordField1 = new JPasswordField();
 		this.passwordField1.setBounds(294, 288, 200, 31);
+		this.passwordField1.addActionListener(this);
 		this.contenedor.add(passwordField1);
 		
 		this.passwordField2 = new JPasswordField();
 		this.passwordField2.setBounds(50, 288, 200, 31);
+		this.passwordField2.addActionListener(this);
 		this.contenedor.add(passwordField2);
 		
 	}
@@ -93,6 +98,7 @@ public class Formulario extends JFrame implements ActionListener{
 		this.campoNombre = new JTextField();
 		this.campoNombre.setFont(new Font("Arial", Font.PLAIN, 16));
 		this.campoNombre.setBounds(50, 160, 200, 30);
+		this.campoNombre.addActionListener(this);
 		this.contenedor.add(this.campoNombre);
 
 		// telefono
@@ -107,6 +113,7 @@ public class Formulario extends JFrame implements ActionListener{
 		this.campoUserName = new JTextField();
 		this.campoUserName.setFont(new Font("Arial", Font.PLAIN, 16));
 		this.campoUserName.setBounds(50, 220, 200, 30);
+		this.campoUserName.addActionListener(this);
 		this.contenedor.add(this.campoUserName);
 
 		// email
@@ -157,22 +164,22 @@ public class Formulario extends JFrame implements ActionListener{
 		String nombre = this.campoNombre.getText().trim();
 		
 		if(!password.equals(password2)) {
-			System.out.println("Todos los campos son obligatorios");
+			
 			this.labelInfo.setText("Las contraseñas no son las mismas");
 			this.labelInfo.setForeground(Color.RED);
 			return;
+			
 		}
 		
 		if(username.length()==0||password.length()==0||nombre.length()==0) {
-			System.out.println("Todos los campos son obligatorios");
+			
 			this.labelInfo.setText("Todos los campos son obligatorios");
 			this.labelInfo.setForeground(Color.RED);
 			return;
+			
 		}
 		
 		Usuario nuevo = new Usuario(username,password,nombre);
-		System.out.println("nombre: "+nombre);
-		System.out.println("nombre usuario: "+username);
 		
 		DAO db = new DAO();
 		
@@ -180,14 +187,12 @@ public class Formulario extends JFrame implements ActionListener{
 			
 			this.labelInfo.setText("Contacto insertado con exito en BBDD");
 			this.labelInfo.setForeground(Color.GREEN);
-			//this.labelInfo.setText("");
 			limpiarFormulario(false);
 			
 		}else {
 			
 			this.labelInfo.setText("No se ha podido insertar en BBDD");
 			this.labelInfo.setForeground(Color.RED);
-			//this.labelInfo.setText("");
 			limpiarFormulario(false);
 
 		}

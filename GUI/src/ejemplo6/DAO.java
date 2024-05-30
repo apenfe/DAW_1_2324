@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class DAO{
 	
-	private final String URL = "jdbc:mysql://r2d2.iescierva.net:3306/champions";
+	private final String URL = "jdbc:mysql://r2d2.iescierva.net:6033/champions"; //3306 este es el puerto dentro del instituto
 	private final String USER = "champions";
 	private final String PASS = "champions";
 	private String GET = "SELECT j.nombre, dorsal, fechaNac, p.gentilicio, e.nombre as nombreEquipo"
@@ -24,11 +24,13 @@ public class DAO{
 			Connection conn = DriverManager.getConnection(URL,USER,PASS);
 			Statement stmt = conn.createStatement();
 			
-			String con ="";
+			String con =GET;
 			
 			if(busqueda.length()>0) {
 				
-				con += GET +" WHERE j.nombre LIKE '%"+busqueda+"%' ORDER BY "+ordenar+";";
+				con +=" WHERE j.nombre LIKE '%"+busqueda+"%' ORDER BY "+ordenar+";";
+			}else {
+				con +=" ORDER BY "+ordenar+";";
 			}
 			
 			ResultSet rs = stmt.executeQuery(con);

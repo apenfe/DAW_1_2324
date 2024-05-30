@@ -1,4 +1,4 @@
-package ejemplo16;
+package ejemplo18;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,7 +15,7 @@ public class DAO{
 			+ " FROM jugador j INNER JOIN pais p ON j.pais = p.codPais"
 			+ " INNER JOIN equipo e ON j.equipo = e.codEquipo WHERE ";
 	
-	public ArrayList<Jugador> buscarJugadores(String busqueda, boolean and){
+	public ArrayList<Jugador> buscarJugadores(String busqueda, boolean and, int offset){
 		
 		ArrayList<Jugador> lista = new ArrayList<Jugador>();
 		
@@ -43,9 +43,9 @@ public class DAO{
 				
 				}
 				
-				con +=";";
+				con +="LIMIT 10 OFFSET "+offset+";";
 			}else {
-				con+="1=1;";
+				con+="1=1 LIMIT 10 OFFSET "+offset+";";
 			}
 			
 			System.out.println(con);

@@ -6,7 +6,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Form extends JFrame implements ActionListener{
 	
@@ -26,12 +25,13 @@ public class Form extends JFrame implements ActionListener{
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.contenedor=this.getContentPane();
 		this.contenedor.setLayout(null);
+		this.contenedor.setBackground(Color.LIGHT_GRAY);
 	
-		titulo();
-		labels();
-		combo();
-		botones();
-		tabla();
+		this.titulo();
+		this.labels();
+		this.combo();
+		this.botones();
+		this.tabla();
 		
 		this.setVisible(true);
 
@@ -40,7 +40,7 @@ public class Form extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if(e.getSource()==this.enviar) {
+		if(e.getSource()==this.enviar||e.getSource()==this.campoBusqueda) {
 			
 			this.enviar();
 			
@@ -74,11 +74,11 @@ public class Form extends JFrame implements ActionListener{
 		this.selectorOrdenar.setFont(new Font("Arial", Font.PLAIN, 15));
 		this.selectorOrdenar.setBounds(100, 215, 200, 25);
 		
-		this.selectorOrdenar.addItem("nombre");
-		this.selectorOrdenar.addItem("dorsal");
-		this.selectorOrdenar.addItem("fechaNac");
-		this.selectorOrdenar.addItem("gentilicio");
-		this.selectorOrdenar.addItem("nombreEquipo");
+		this.selectorOrdenar.addItem("Nombre");
+		this.selectorOrdenar.addItem("Dorsal");
+		this.selectorOrdenar.addItem("Fecha Nacimiento");
+		this.selectorOrdenar.addItem("Gentilicio");
+		this.selectorOrdenar.addItem("Nombre Equipo");
 
 		this.contenedor.add(this.selectorOrdenar);
 		
@@ -116,6 +116,7 @@ public class Form extends JFrame implements ActionListener{
 		this.campoBusqueda = new JTextField();
 		this.campoBusqueda.setFont(new Font("Arial", Font.PLAIN, 15));
 		this.campoBusqueda.setBounds(100, 150, 200, 25);
+		this.campoBusqueda.addActionListener(this);
 		this.contenedor.add(this.campoBusqueda);
 		
 		this.labelOrdenar = new JLabel("Ordenar por");
@@ -144,6 +145,9 @@ public class Form extends JFrame implements ActionListener{
 		
 		String texto = this.campoBusqueda.getText().trim();
 		String ordenar = this.selectorOrdenar.getSelectedItem().toString();
+		
+		ordenar=cambiar(ordenar);
+		
 		DAO db = new DAO();
 		ArrayList<Jugador> lista = db.buscarJugadores(texto,ordenar);
 		
@@ -158,6 +162,26 @@ public class Form extends JFrame implements ActionListener{
 			this.rellenarTabla(lista);
 			
 		}
+
+	}
+	
+	private String cambiar(String texto) {
+		
+		String salida = "";
+		
+		if(texto.equals("Nombre")) {
+			salida+="nombre";
+		}else if(texto.equals("Dorsal")) {
+			salida+="dorsal";
+		}else if(texto.equals("Fecha Nacimiento")) {
+			salida+="fechaNac";
+		}else if(texto.equals("Gentilicio")) {
+			salida+="gentilicio";
+		}else if(texto.equals("Nombre Equipo")) {
+			salida+="nombreEquipo";
+		}
+	
+		return salida;
 
 	}
 	

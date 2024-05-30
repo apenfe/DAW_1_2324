@@ -14,6 +14,7 @@ public class Form extends JFrame implements ActionListener{
 	private JLabel titulo, labelBusqueda, labelInfo;
 	private JTextField campoBusqueda;
 	private JButton enviar, limpiar;
+	
 	private JTable resultados;
 	private JScrollPane tableScroll;
 	private String[] columnas = {"Nombre","Email","Teléfono"};
@@ -25,6 +26,7 @@ public class Form extends JFrame implements ActionListener{
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.contenedor=this.getContentPane();
 		this.contenedor.setLayout(null);
+		this.contenedor.setBackground(Color.LIGHT_GRAY);
 	
 		titulo();
 		labels();
@@ -38,7 +40,7 @@ public class Form extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if(e.getSource()==this.enviar) {
+		if(e.getSource()==this.enviar||e.getSource()==this.campoBusqueda) {
 			
 			this.enviar();
 			
@@ -98,11 +100,12 @@ public class Form extends JFrame implements ActionListener{
 		this.campoBusqueda = new JTextField("");
 		this.campoBusqueda.setFont(new Font("Arial", Font.PLAIN, 15));
 		this.campoBusqueda.setBounds(100, 160, 200, 25);
+		this.campoBusqueda.addActionListener(this);
 		this.contenedor.add(this.campoBusqueda);
 		
 		// info
 
-		this.labelInfo = new JLabel("aas");
+		this.labelInfo = new JLabel("");
 		this.labelInfo.setFont(new Font("Arial", Font.PLAIN, 25));
 		this.labelInfo.setBounds(100, 240, 450, 30);
 		this.contenedor.add(this.labelInfo);
@@ -121,6 +124,7 @@ public class Form extends JFrame implements ActionListener{
 		
 		String texto = this.campoBusqueda.getText();
 		DAO db = new DAO();
+		
 		ArrayList<Contacto> contactos = db.buscar(texto);
 		
 		if(contactos.size()==0) {

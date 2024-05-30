@@ -25,6 +25,7 @@ public class Form extends JFrame implements ActionListener{
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.contenedor=this.getContentPane();
 		this.contenedor.setLayout(null);
+		this.contenedor.setBackground(Color.LIGHT_GRAY);
 	
 		titulo();
 		labels();
@@ -39,7 +40,7 @@ public class Form extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if(e.getSource()==this.enviar) {
+		if(e.getSource()==this.enviar||e.getSource()==this.campoBusqueda||e.getSource()==this.selectorEquipo) {
 			
 			this.enviar();
 			
@@ -76,7 +77,8 @@ public class Form extends JFrame implements ActionListener{
 		this.selectorEquipo.setBounds(100, 215, 200, 25);
 		
 		this.rellenarSelector();
-
+		
+		this.selectorEquipo.addActionListener(this);
 		this.contenedor.add(this.selectorEquipo);
 		
 	}
@@ -128,6 +130,7 @@ public class Form extends JFrame implements ActionListener{
 		this.campoBusqueda = new JTextField();
 		this.campoBusqueda.setFont(new Font("Arial", Font.PLAIN, 15));
 		this.campoBusqueda.setBounds(100, 100, 200, 25);
+		this.campoBusqueda.addActionListener(this);
 		this.contenedor.add(this.campoBusqueda);
 		
 		this.labelOrdenar = new JLabel("Equipo");
@@ -136,7 +139,6 @@ public class Form extends JFrame implements ActionListener{
 		this.contenedor.add(this.labelOrdenar);
 		
 		// info
-
 		this.labelInfo = new JLabel("");
 		this.labelInfo.setFont(new Font("Arial", Font.PLAIN, 15));
 		this.labelInfo.setBounds(100, 165, 460, 30);

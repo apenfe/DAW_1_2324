@@ -22,16 +22,15 @@ public class Ventana extends JFrame{
 		JPanel panel = new JPanel();
 		
 		cp.add(panel);
-		panel.setBackground(Color.blue);
+		panel.setBackground(Color.black);
 		
 		// añadir controlador al listener del raton
-		
 		this.addMouseListener(new ControladorRaton());
 		
 		// listener de evento cierre de ventana que finaliza el programa
-		
 		this.addWindowListener(new WindowAdapter() {
 			
+			@Override
 			public void windowClosing(WindowEvent e) {
 				System.out.println("cerrando programa");
 				System.exit(0);
@@ -39,6 +38,7 @@ public class Ventana extends JFrame{
 			
 		});
 		
+		this.setVisible(true);		
 	}
 	
 }

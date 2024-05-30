@@ -6,8 +6,6 @@ public class Ejemplo15{
 		
 		new Form();
 		
-		
-		
 	}
 
 }

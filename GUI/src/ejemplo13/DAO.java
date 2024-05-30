@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class DAO{
 	
-	private final String URL = "jdbc:mysql://r2d2.iescierva.net:3306/champions";
+	private final String URL = "jdbc:mysql://r2d2.iescierva.net:6033/champions";
 	private final String USER = "champions";
 	private final String PASS = "champions";
 	private String GET = "SELECT j.*, p.gentilicio, e.nombre as nombreEquipo"

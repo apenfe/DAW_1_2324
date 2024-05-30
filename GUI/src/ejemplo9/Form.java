@@ -25,6 +25,8 @@ public class Form extends JFrame implements ActionListener{
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.contenedor=this.getContentPane();
 		this.contenedor.setLayout(null);
+		this.contenedor.setBackground(Color.LIGHT_GRAY);
+		
 		this.x=100;
 		this.y=50;
 	
@@ -61,6 +63,7 @@ public class Form extends JFrame implements ActionListener{
 		this.campoBusqueda = new JTextField();
 		this.campoBusqueda.setFont(new Font("Arial", Font.PLAIN, 15));
 		this.campoBusqueda.setBounds(x, y, 200, 25);
+		this.campoBusqueda.addActionListener(this);
 		this.contenedor.add(this.campoBusqueda);
 		
 		this.y += 30;
@@ -75,6 +78,13 @@ public class Form extends JFrame implements ActionListener{
 		// -------------------------------------------------------------------
 		
 		SpinnerModel  model = new SpinnerNumberModel(5,1,30,1);
+		
+		/*
+		 * 5: El valor inicial del JSpinner.
+		 * 1: El valor mínimo que puede tener el JSpinner.
+		 * 30: El valor máximo que puede tener el JSpinner.
+		 * 1: El incremento (o decremento) paso a paso cuando se usa el JSpinner.
+		 */
 		this.cantidad = new JSpinner(model);
 		this.cantidad.setBounds(x, y, 95, 25);
 		this.contenedor.add(this.cantidad);
@@ -121,7 +131,7 @@ public class Form extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if(e.getSource()==this.botonBuscar) {
+		if(e.getSource()==this.botonBuscar || e.getSource()==this.campoBusqueda) {
 			
 			this.enviar();
 			

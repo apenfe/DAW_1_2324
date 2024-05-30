@@ -10,17 +10,17 @@ public class Form extends JFrame{
 	private Container contenedor;
 	private JLabel[][] imagenes;
 	private char[][] caracteres= {{' ',' ',' ',' ',' ',' ','#'},
+			{' ','#',' ',' ','#',' ','#'},
 			{' ',' ',' ',' ',' ',' ','#'},
+			{'#',' ','#',' ','#',' ','#'},
 			{' ',' ',' ',' ',' ',' ','#'},
-			{' ',' ','#',' ',' ',' ','#'},
-			{' ',' ',' ',' ',' ',' ','#'},
-			{' ',' ',' ',' ',' ',' ','#'},
-			{' ',' ',' ','#',' ',' ','#'}};
+			{'#',' ',' ',' ','#',' ','#'},
+			{' ','#',' ','#',' ','#','#'}};
 
 	public Form() {
 		
 		this.setTitle("ejemplo 11 imagenes");
-		this.setBounds(300,100,500,500);
+		this.setBounds(300,100,300,300);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.contenedor=this.getContentPane();
 		this.contenedor.setLayout(null);

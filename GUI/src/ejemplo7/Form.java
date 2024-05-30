@@ -26,12 +26,14 @@ public class Form extends JFrame implements ActionListener{
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.contenedor=this.getContentPane();
 		this.contenedor.setLayout(null);
+		this.contenedor.setBackground(Color.LIGHT_GRAY);
 	
-		titulo();
-		labels();
-		combo();
-		botones();
-		tabla();
+		this.titulo();
+		this.labels();
+		this.combo();
+		this.botones();
+		this.radioButtons();
+		this.tabla();
 		
 		this.setVisible(true);
 
@@ -40,7 +42,7 @@ public class Form extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if(e.getSource()==this.enviar) {
+		if(e.getSource()==this.enviar || e.getSource()==this.campoBusqueda||e.getSource()==this.selectorOrdenar||e.getSource()==this.ascendente||e.getSource()==this.descendente) {
 			
 			this.enviar();
 			
@@ -56,17 +58,15 @@ public class Form extends JFrame implements ActionListener{
 		
 		this.enviar=new JButton("Enviar");
 		this.enviar.setFont(new Font("Arial", Font.PLAIN, 15));
-		this.enviar.setBounds(100,260,95,20);
+		this.enviar.setBounds(100,171,95,20);
 		this.enviar.addActionListener(this);
 		this.contenedor.add(this.enviar);
 		
 		this.limpiar=new JButton("Limpiar");
 		this.limpiar.setFont(new Font("Arial", Font.PLAIN, 15));
-		this.limpiar.setBounds(205,260,95,20);
+		this.limpiar.setBounds(205,171,95,20);
 		this.limpiar.addActionListener(this);
-		this.contenedor.add(this.limpiar);
-		
-		
+		this.contenedor.add(this.limpiar);	
 		
 	}
 	
@@ -74,31 +74,35 @@ public class Form extends JFrame implements ActionListener{
 		
 		this.selectorOrdenar=new JComboBox();
 		this.selectorOrdenar.setFont(new Font("Arial", Font.PLAIN, 15));
-		this.selectorOrdenar.setBounds(100, 215, 200, 25);
+		this.selectorOrdenar.setBounds(260, 136, 200, 25);
 		
 		this.selectorOrdenar.addItem("nombre");
 		this.selectorOrdenar.addItem("dorsal");
 		this.selectorOrdenar.addItem("fechaNac");
 		this.selectorOrdenar.addItem("gentilicio");
 		this.selectorOrdenar.addItem("nombreEquipo");
-
+		this.selectorOrdenar.addActionListener(this);
 		this.contenedor.add(this.selectorOrdenar);
 		
-		// -------------------  RADIO BOTONES
+	}
+	
+	private void radioButtons() {
 		
 		this.ascendente=new JRadioButton("Ascendente");
 		this.ascendente.setFont(new Font("Arial", Font.PLAIN, 15));
-		this.ascendente.setBounds(400, 195, 120, 25);
+		this.ascendente.setBounds(491, 122, 120, 25);
 		this.ascendente.setSelected(true);
-		
+		this.ascendente.addActionListener(this);
+				
 		this.descendente=new JRadioButton("Descendente");
 		this.descendente.setFont(new Font("Arial", Font.PLAIN, 15));
-		this.descendente.setBounds(400, 215, 120, 25);
-		
+		this.descendente.setBounds(491, 150, 120, 25);
+		this.descendente.addActionListener(this);
+				
 		ButtonGroup grupo = new ButtonGroup();
 		grupo.add(ascendente);
 		grupo.add(descendente);
-		
+				
 		this.contenedor.add(this.ascendente);
 		this.contenedor.add(this.descendente);
 		
@@ -108,7 +112,7 @@ public class Form extends JFrame implements ActionListener{
 		
 		this.resultados = new JTable(new String[0][0],this.columnas);
 		this.tableScroll=new JScrollPane(this.resultados);
-		this.tableScroll.setBounds(30,300,630,220);
+		this.tableScroll.setBounds(30,206,630,220);
 		this.contenedor.add(this.tableScroll);
 		
 	}
@@ -117,7 +121,7 @@ public class Form extends JFrame implements ActionListener{
 		
 		this.titulo= new JLabel("Ejemplo 7 - BUSCAR JUGADORES");
 		this.titulo.setFont(new Font("Arial",Font.PLAIN,30));
-		this.titulo.setBounds(100, 50, 500, 30);
+		this.titulo.setBounds(100, 29, 500, 30);
 		this.contenedor.add(this.titulo);
 		
 	}
@@ -136,6 +140,7 @@ public class Form extends JFrame implements ActionListener{
 		this.campoBusqueda = new JTextField();
 		this.campoBusqueda.setFont(new Font("Arial", Font.PLAIN, 15));
 		this.campoBusqueda.setBounds(100, 100, 200, 25);
+		this.campoBusqueda.addActionListener(this);
 		this.contenedor.add(this.campoBusqueda);
 		
 		this.labelOrdenar = new JLabel("Ordenar por");

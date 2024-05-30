@@ -6,7 +6,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Form extends JFrame implements ActionListener{
 	
@@ -27,12 +26,14 @@ public class Form extends JFrame implements ActionListener{
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.contenedor=this.getContentPane();
 		this.contenedor.setLayout(null);
+		this.contenedor.setBackground(Color.LIGHT_GRAY);
 	
-		titulo();
-		labels();
-		botones();
-		tabla();
-		checkBox();
+		this.titulo();
+		this.labels();
+		this.botones();
+		this.tabla();
+		this.checkBox();
+		this.radioBotones();
 		
 		this.setVisible(true);
 
@@ -41,7 +42,7 @@ public class Form extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if(e.getSource()==this.enviar) {
+		if(e.getSource()==this.enviar || e.getSource()==this.campoBusqueda) {
 			
 			this.enviar();
 			
@@ -53,19 +54,7 @@ public class Form extends JFrame implements ActionListener{
 		
 	}
 	
-	private void botones() {
-		
-		this.enviar=new JButton("Enviar");
-		this.enviar.setFont(new Font("Arial", Font.PLAIN, 15));
-		this.enviar.setBounds(100,147,95,20);
-		this.enviar.addActionListener(this);
-		this.contenedor.add(this.enviar);
-		
-		this.limpiar=new JButton("Limpiar");
-		this.limpiar.setFont(new Font("Arial", Font.PLAIN, 15));
-		this.limpiar.setBounds(205,147,95,20);
-		this.limpiar.addActionListener(this);
-		this.contenedor.add(this.limpiar);	
+	private void radioBotones() {
 		
 		this.and=new JRadioButton("AND");
 		this.and.setFont(new Font("Arial", Font.PLAIN, 15));
@@ -82,6 +71,22 @@ public class Form extends JFrame implements ActionListener{
 		
 		this.contenedor.add(this.and);
 		this.contenedor.add(this.or);
+		
+	}
+	
+	private void botones() {
+		
+		this.enviar=new JButton("Enviar");
+		this.enviar.setFont(new Font("Arial", Font.PLAIN, 15));
+		this.enviar.setBounds(100,147,95,20);
+		this.enviar.addActionListener(this);
+		this.contenedor.add(this.enviar);
+		
+		this.limpiar=new JButton("Limpiar");
+		this.limpiar.setFont(new Font("Arial", Font.PLAIN, 15));
+		this.limpiar.setBounds(205,147,95,20);
+		this.limpiar.addActionListener(this);
+		this.contenedor.add(this.limpiar);	
 		
 	}
 	
@@ -126,6 +131,7 @@ public class Form extends JFrame implements ActionListener{
 		this.campoBusqueda = new JTextField();
 		this.campoBusqueda.setFont(new Font("Arial", Font.PLAIN, 15));
 		this.campoBusqueda.setBounds(100, 101, 200, 25);
+		this.campoBusqueda.addActionListener(this);
 		this.contenedor.add(this.campoBusqueda);
 		
 		// info
@@ -154,7 +160,7 @@ public class Form extends JFrame implements ActionListener{
 	private void enviar() {
 		
 		String texto = this.campoBusqueda.getText().trim();
-		boolean chack = true;
+		boolean check = true;
 		boolean acepto = false;
 		
 		if(this.terminos.isSelected()) {
@@ -163,12 +169,12 @@ public class Form extends JFrame implements ActionListener{
 		
 		if(this.or.isSelected()) {
 			
-			chack = false;
+			check = false;
 			
 		}
 
 		DAO db = new DAO();
-		ArrayList<Jugador> lista = db.buscarJugadores(texto,chack);
+		ArrayList<Jugador> lista = db.buscarJugadores(texto,check);
 		
 		if(lista.size()==0 ||!acepto) {
 			
